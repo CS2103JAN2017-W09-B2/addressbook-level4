@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+		<id>1</id>
+		<name>Do homework</name>
+		<date>12312323</date>
+    </tasks>
+    <tags>
+        <name>Friends</name>
+    </tags>
+</taskmanager>
