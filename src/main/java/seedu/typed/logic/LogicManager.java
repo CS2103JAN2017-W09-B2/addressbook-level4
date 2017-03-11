@@ -10,6 +10,7 @@ import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.parser.Parser;
 import seedu.typed.model.Model;
+import seedu.typed.model.Session;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.storage.Storage;
 
@@ -21,17 +22,19 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final Session session;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, Session session) {
         this.model = model;
         this.parser = new Parser();
+        this.session = session;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model);
+        command.setData(model, session);
         return command.execute();
     }
 

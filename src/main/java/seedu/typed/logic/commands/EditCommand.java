@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.util.CollectionUtil;
+import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
@@ -66,6 +67,11 @@ public class EditCommand extends Command {
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
+            session.clearRedoStack();
+            TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("edit",
+                                                                                   editedTask,
+                                                                           (Task) taskToEdit);
+            session.pushUndoStack(toPush);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

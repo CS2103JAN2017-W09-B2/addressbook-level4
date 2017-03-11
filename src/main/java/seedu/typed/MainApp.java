@@ -23,6 +23,7 @@ import seedu.typed.logic.LogicManager;
 import seedu.typed.model.Model;
 import seedu.typed.model.ModelManager;
 import seedu.typed.model.ReadOnlyTaskManager;
+import seedu.typed.model.Session;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.UserPrefs;
 import seedu.typed.model.util.SampleDataUtil;
@@ -45,6 +46,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected Session session;
 
     @Override
     public void init() throws Exception {
@@ -60,7 +62,9 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        session = new Session();
+
+        logic = new LogicManager(model, storage, session);
 
         ui = new UiManager(logic, config, userPrefs);
 

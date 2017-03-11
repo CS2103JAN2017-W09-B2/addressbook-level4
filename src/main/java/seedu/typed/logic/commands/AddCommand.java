@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
@@ -20,7 +21,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME d/DATE  [t/TAG]...\n" + "Example: " + COMMAND_WORD
+            + "Parameters: NAME [d/DATE]  [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " buy 5 broccolis d/tomorrow t/survival t/grocery ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -47,6 +48,9 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            session.clearRedoStack();
+            TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("delete", toAdd, null);
+            session.pushUndoStack(toPush);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

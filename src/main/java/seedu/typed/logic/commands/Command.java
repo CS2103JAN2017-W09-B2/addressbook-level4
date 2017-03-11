@@ -3,6 +3,7 @@ package seedu.typed.logic.commands;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.Model;
+import seedu.typed.model.Session;
 
 /**
  * Represents a command with hidden internal logic and the ability to be
@@ -10,6 +11,7 @@ import seedu.typed.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected Session session;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a
@@ -37,7 +39,8 @@ public abstract class Command {
      * any of these should override this method to gain access to the
      * dependencies.
      */
-    public void setData(Model model) {
+    public void setData(Model model, Session session) {
         this.model = model;
+        this.session = session;
     }
 }
