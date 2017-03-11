@@ -1,5 +1,6 @@
 package seedu.typed.model;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Stack;
 
@@ -13,10 +14,12 @@ import seedu.typed.model.task.Task;
  */
 
 public class Session {
+    private ArrayList<String> history;
     private Stack<TripleUtil<String, Task, Task>> undoStack;
     private Stack<TripleUtil<String, Task, Task>> redoStack;
 
     public Session() {
+        this.history = new ArrayList<String>();
         this.undoStack = new Stack<TripleUtil<String, Task, Task>>();
         this.redoStack = new Stack<TripleUtil<String, Task, Task>>();
     }
@@ -58,5 +61,17 @@ public class Session {
 
     public Stack<TripleUtil<String, Task, Task>> getRedoStack() {
         return this.redoStack;
+    }
+
+    public ArrayList<String> getHistory() {
+        return this.history;
+    }
+
+    public void addHistory(String action) {
+        this.history.add(action);
+    }
+
+    public void clearHistory() {
+        this.history.clear();
     }
 }

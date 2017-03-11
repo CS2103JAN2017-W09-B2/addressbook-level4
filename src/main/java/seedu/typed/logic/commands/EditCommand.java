@@ -67,6 +67,7 @@ public class EditCommand extends Command {
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
+            session.addHistory("Edited Task: " + taskToEdit + " to Task: " + editedTask);
             session.clearRedoStack();
             TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("edit",
                                                                                    editedTask,

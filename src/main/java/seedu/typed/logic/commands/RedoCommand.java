@@ -47,6 +47,7 @@ public class RedoCommand extends Command {
 
             case "add":
                 model.addTask(firstTask);
+                session.addHistory("Redone deletion of Task: " + firstTask);
                 toPush.setFirst("delete");
                 toPush.setSecond(firstTask);
                 session.pushUndoStack(toPush);
@@ -54,6 +55,7 @@ public class RedoCommand extends Command {
 
             case "delete":
                 model.deleteTask((ReadOnlyTask) firstTask);
+                session.addHistory("Redone addition of Task: " + firstTask);
                 toPush.setFirst("add");
                 toPush.setSecond(firstTask);
                 session.pushUndoStack(toPush);
@@ -62,6 +64,7 @@ public class RedoCommand extends Command {
             case "edit":
                 model.deleteTask((ReadOnlyTask) firstTask);
                 model.addTask(secondTask);
+                session.addHistory("Redone edit of Task: " + secondTask);
                 toPush.setFirst("edit");
                 toPush.setSecond(secondTask);
                 toPush.setThird(firstTask);

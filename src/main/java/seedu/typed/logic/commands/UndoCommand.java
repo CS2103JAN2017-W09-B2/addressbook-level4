@@ -47,6 +47,7 @@ public class UndoCommand extends Command {
 
             case "add":
                 model.addTask(firstTask);
+                session.addHistory("Undone deletion of Task: " + firstTask);
                 toPush.setFirst("delete");
                 toPush.setSecond(firstTask);
                 session.pushRedoStack(toPush);
@@ -54,6 +55,7 @@ public class UndoCommand extends Command {
 
             case "delete":
                 model.deleteTask((ReadOnlyTask) firstTask);
+                session.addHistory("Undone addition of Task: " + firstTask);
                 toPush.setFirst("add");
                 toPush.setSecond(firstTask);
                 session.pushRedoStack(toPush);
@@ -62,6 +64,7 @@ public class UndoCommand extends Command {
             case "edit":
                 model.deleteTask((ReadOnlyTask) firstTask);
                 model.addTask(secondTask);
+                session.addHistory("Undone edit of Task: " + secondTask);
                 toPush.setFirst("edit");
                 toPush.setSecond(secondTask);
                 toPush.setThird(firstTask);

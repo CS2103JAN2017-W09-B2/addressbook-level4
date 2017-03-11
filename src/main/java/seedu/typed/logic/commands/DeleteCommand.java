@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
+            session.addHistory("Deleted Task: " + taskToDelete);
             session.clearRedoStack();
             TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("add",
                                                                          (Task) taskToDelete,

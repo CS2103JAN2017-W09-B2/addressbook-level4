@@ -23,6 +23,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
+        String keywordsString = String.join(",", keywords);
+        session.addHistory("Found task(s) with the keyword(s): " + keywordsString);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

@@ -14,6 +14,7 @@ import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.logic.commands.ExitCommand;
 import seedu.typed.logic.commands.FindCommand;
 import seedu.typed.logic.commands.HelpCommand;
+import seedu.typed.logic.commands.HistoryCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
@@ -73,6 +74,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

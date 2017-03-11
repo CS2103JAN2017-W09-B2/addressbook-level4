@@ -48,6 +48,7 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            session.addHistory("Added Task: " + toAdd);
             session.clearRedoStack();
             TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("delete", toAdd, null);
             session.pushUndoStack(toPush);

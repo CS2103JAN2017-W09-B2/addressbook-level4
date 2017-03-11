@@ -17,6 +17,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        session.addHistory("Requested for help");
         EventsCenter.getInstance().post(new ShowHelpRequestEvent());
         return new CommandResult(SHOWING_HELP_MESSAGE);
     }
