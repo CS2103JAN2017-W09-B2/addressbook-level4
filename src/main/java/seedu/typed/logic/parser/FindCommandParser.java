@@ -36,16 +36,25 @@ public class FindCommandParser {
         return new FindCommand(keywordSet);
     }
 
+    /**
+     * Checks if specified strings are similar.
+     */
     private boolean isFuzzyMatch(String str1, String str2) {
         return computeMinEditDistance(str1, str2) <= MAX_EDIT_DISTANCE;
     }
 
+    /**
+     * Computes the minimum edit distance between specified strings as measure of similarity.
+     */
     private int computeMinEditDistance(String str1, String str2) {
         int lenStr1 = str1.length();
         int lenStr2 = str2.length();
         return computeLevenshtein(initDistance(lenStr1, lenStr2), str1, str2);
     }
 
+    /**
+     * Initializes the minimum edit distance table.
+     */
     private int[][] initDistance(int len1, int len2) {
         int[][] editDistance = new int[len1 + 1][len2 + 2];
         for (int c = 0; c < len2 + 1; c++) {
@@ -57,6 +66,9 @@ public class FindCommandParser {
         return editDistance;
     }
 
+    /**
+     * Computes the edit distance of given indices using Levenshtein's operations.
+     */
     private int computeLevenshtein(int[][] distance, String str1, String str2) {
         int bestMin = POSITIVE_INFINITY;
         for (int i = 1; i < distance.length; i++) {
