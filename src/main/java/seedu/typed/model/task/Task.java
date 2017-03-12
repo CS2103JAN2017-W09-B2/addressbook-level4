@@ -126,7 +126,7 @@ public class Task implements ReadOnlyTask {
             this.tags = task.getTags();
         }
 
-        public TaskBuilder setName(String name) {
+        public TaskBuilder setName(String name) throws IllegalValueException {
             this.name = new Name(name);
             return this;
         }
