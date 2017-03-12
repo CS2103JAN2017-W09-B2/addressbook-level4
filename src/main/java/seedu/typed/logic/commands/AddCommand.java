@@ -1,14 +1,9 @@
 package seedu.typed.logic.commands;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.model.tag.Tag;
-import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
-import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList;
 
@@ -35,11 +30,11 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String name, String date, Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toAdd = new Task(new Name(name), new Date(date), new UniqueTagList(tagSet));
+        this.toAdd = new Task.TaskBuilder()
+                .setName(name)
+                .setDate(date)
+                .setTags(tags)
+                .build();
     }
 
     @Override
