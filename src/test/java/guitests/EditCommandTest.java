@@ -10,6 +10,7 @@ import seedu.typed.commons.core.Messages;
 import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.Date;
+import seedu.typed.model.task.Name;
 import seedu.typed.testutil.TaskBuilder;
 import seedu.typed.testutil.TestTask;
 
@@ -88,8 +89,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_invalidValues_failure() {
 
-        //commandBox.runCommand("edit 1 *&");
-        //assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
+        commandBox.runCommand("edit 1 *&");
+        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
         commandBox.runCommand("edit 1 d/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 

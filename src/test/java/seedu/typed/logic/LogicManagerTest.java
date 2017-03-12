@@ -197,17 +197,15 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        //@TODO Bad test case
-        //assertCommandFailure("add wrong args wrong args", expectedMessage);
-        //assertCommandFailure("add Valid Name 12/34/5678 t/validTagWithPrefix.butNoDatePrefix", expectedMessage);
-        //@TODO Revise test bad test
-        //assertCommandFailure("add Valid Name t/12/34/4556 t/invalidDatePrefix", Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add t/12/34/5678 name is in wrong order", expectedMessage);
+        assertCommandFailure("add t/validTag.butNoName", expectedMessage);
+        assertCommandFailure("add d/12/34/5678 t/12/34/4556 t/validDateAndTag.butNoName", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        //assertCommandFailure("add []\\[;] d/12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] d/12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add d/12/34/5678", expectedMessage);
         assertCommandFailure("add Valid Name d/not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12/34/5678 t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
