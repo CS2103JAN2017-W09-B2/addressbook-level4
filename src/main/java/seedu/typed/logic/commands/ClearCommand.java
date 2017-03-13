@@ -1,5 +1,6 @@
 package seedu.typed.logic.commands;
 
+import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.TaskManager;
 
 /**
@@ -14,7 +15,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         model.resetData(new TaskManager());
-        session.update("clear", null, null);
+        session.update(CommandTypeUtil.TYPE_CLEAR, null, null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

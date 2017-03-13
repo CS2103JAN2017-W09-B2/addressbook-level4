@@ -2,6 +2,7 @@ package seedu.typed.logic.commands;
 
 import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.events.ui.ExitAppRequestEvent;
+import seedu.typed.logic.commands.util.CommandTypeUtil;
 
 /**
  * Terminates the program.
@@ -15,7 +16,7 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
-        session.update("exit", null, null);
+        session.update(CommandTypeUtil.TYPE_EXIT, null, null);
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 

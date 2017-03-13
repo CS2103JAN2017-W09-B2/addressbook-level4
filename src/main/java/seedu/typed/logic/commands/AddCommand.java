@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            session.update("add Task", (Object) toAdd, null);
+            session.update(CommandTypeUtil.TYPE_ADD_TASK, (Object) toAdd, null);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

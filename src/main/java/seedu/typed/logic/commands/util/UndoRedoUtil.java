@@ -33,56 +33,56 @@ public class UndoRedoUtil {
                                                                                            second);
         switch(command) {
 
-        case "undo Task":
+        case CommandTypeUtil.TYPE_UNDO:
             toPush = (TripleUtil<String, Object, Object>) first;
             redoStack.push(toPush);
             break;
 
-        case "redo Task":
+        case CommandTypeUtil.TYPE_REDO:
             toPush = (TripleUtil<String, Object, Object>) first;
             undoStack.push(toPush);
             break;
 
-        case "add Task":
+        case CommandTypeUtil.TYPE_ADD_TASK:
             redoStack.clear();
-            toPush.setFirst("delete Task");
+            toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_ADD_TASK));
             undoStack.push(toPush);
             break;
 
-        case "delete Task":
+        case CommandTypeUtil.TYPE_DELETE_TASK:
             redoStack.clear();
-            toPush.setFirst("add Task");
+            toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_DELETE_TASK));
             undoStack.push(toPush);
             break;
 
-        case "edit Task":
+        case CommandTypeUtil.TYPE_EDIT_TASK:
             redoStack.clear();
             toPush.setSecond(second);
             toPush.setThird(first);
             undoStack.push(toPush);
             break;
 
-        case "clear":
+        case CommandTypeUtil.TYPE_CLEAR:
             redoStack.clear();
             undoStack.clear();
             break;
 
-        case "find Task":
+        case CommandTypeUtil.TYPE_FIND_TASK:
             break;
 
-        case "help":
+        case CommandTypeUtil.TYPE_HELP:
             break;
 
-        case "history":
+        case CommandTypeUtil.TYPE_HISTORY:
             break;
 
-        case "list Task":
+        case CommandTypeUtil.TYPE_LIST_TASK:
             break;
 
-        case "select Task":
+        case CommandTypeUtil.TYPE_SELECT_TASK:
             break;
 
-        case "exit":
+        case CommandTypeUtil.TYPE_EXIT:
             break;
 
         default:

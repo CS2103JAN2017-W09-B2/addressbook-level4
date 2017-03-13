@@ -2,6 +2,8 @@ package seedu.typed.logic.commands;
 
 import java.util.Set;
 
+import seedu.typed.logic.commands.util.CommandTypeUtil;
+
 /**
  * Finds and lists all tasks in task manager whose name contains any of the
  * argument keywords. Keyword matching is case sensitive.
@@ -24,7 +26,7 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
         String keywordsString = String.join(",", keywords);
-        session.update("find Task", (Object) keywordsString, null);
+        session.update(CommandTypeUtil.TYPE_FIND_TASK, (Object) keywordsString, null);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

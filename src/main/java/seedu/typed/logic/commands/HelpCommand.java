@@ -2,6 +2,7 @@ package seedu.typed.logic.commands;
 
 import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.events.ui.ShowHelpRequestEvent;
+import seedu.typed.logic.commands.util.CommandTypeUtil;
 
 /**
  * Format full help instructions for every command for display.
@@ -18,7 +19,7 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ShowHelpRequestEvent());
-        session.update("help", null, null);
+        session.update(CommandTypeUtil.TYPE_HELP, null, null);
         return new CommandResult(SHOWING_HELP_MESSAGE);
     }
 }

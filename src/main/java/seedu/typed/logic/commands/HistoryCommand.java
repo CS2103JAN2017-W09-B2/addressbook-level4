@@ -2,6 +2,8 @@ package seedu.typed.logic.commands;
 
 import java.util.ArrayList;
 
+import seedu.typed.logic.commands.util.CommandTypeUtil;
+
 /**
  * @author Le Yuan
  * Lists all past successful commands executed in the task manager in the current session to the user.
@@ -23,7 +25,7 @@ public class HistoryCommand extends Command {
             System.out.println(i + ") " + historyArrayList.get(i - 1));
         }
         //code to show history on GUI
-        session.update("history", null, null);
+        session.update(CommandTypeUtil.TYPE_HISTORY, null, null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

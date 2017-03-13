@@ -33,51 +33,51 @@ public class HistoryUtil {
 
         switch(command) {
 
-        case "clear":
+        case CommandTypeUtil.TYPE_CLEAR:
             toAdd = TEXT_CLEAR;
             break;
 
-        case "exit":
+        case CommandTypeUtil.TYPE_EXIT:
             toAdd = TEXT_EXIT;
             break;
 
-        case "find Task":
+        case CommandTypeUtil.TYPE_FIND_TASK:
             toAdd = TEXT_FIND_TASK + (String) firstObj;
             break;
 
-        case "help":
+        case CommandTypeUtil.TYPE_HELP:
             toAdd = TEXT_HELP;
             break;
 
-        case "list Task":
+        case CommandTypeUtil.TYPE_LIST_TASK:
             toAdd = TEXT_LIST_TASK;
             break;
 
-        case "select Task":
+        case CommandTypeUtil.TYPE_SELECT_TASK:
             toAdd = TEXT_SELECT_TASK + (Task) firstObj;
             break;
 
-        case "history":
+        case CommandTypeUtil.TYPE_HISTORY:
             toAdd = TEXT_HISTORY;
             break;
 
-        case "undo Task":
+        case CommandTypeUtil.TYPE_UNDO:
             toAdd = generateUndoHistoryString((TripleUtil<String, Object, Object>) firstObj);
             break;
 
-        case "redo Task":
+        case CommandTypeUtil.TYPE_REDO:
             toAdd = generateRedoHistoryString((TripleUtil<String, Object, Object>) firstObj);
             break;
 
-        case "add Task":
+        case CommandTypeUtil.TYPE_ADD_TASK:
             toAdd = TEXT_ADD_TASK + (Task) firstObj;
             break;
 
-        case "delete Task":
+        case CommandTypeUtil.TYPE_DELETE_TASK:
             toAdd = TEXT_DELETE_TASK + (Task) firstObj;
             break;
 
-        case "edit Task":
+        case CommandTypeUtil.TYPE_EDIT_TASK:
             toAdd = String.format(TEXT_EDIT_TASK, (Task) firstObj, (Task) secondObj);
             break;
 
@@ -97,13 +97,13 @@ public class HistoryUtil {
 
         switch(command) {
 
-        case "add Task":
+        case CommandTypeUtil.TYPE_ADD_TASK:
             return TEXT_REDO_DELETE_TASK + firstTask;
 
-        case "delete Task":
+        case CommandTypeUtil.TYPE_DELETE_TASK:
             return TEXT_REDO_ADD_TASK + firstTask;
 
-        case "edit Task":
+        case CommandTypeUtil.TYPE_EDIT_TASK:
             return TEXT_REDO_EDIT_TASK + secondTask;
 
         default:
@@ -118,13 +118,13 @@ public class HistoryUtil {
 
         switch(command) {
 
-        case "add Task":
+        case CommandTypeUtil.TYPE_ADD_TASK:
             return TEXT_UNDO_ADD_TASK + firstTask;
 
-        case "delete Task":
+        case CommandTypeUtil.TYPE_DELETE_TASK:
             return TEXT_UNDO_DELETE_TASK + firstTask;
 
-        case "edit Task":
+        case CommandTypeUtil.TYPE_EDIT_TASK:
             return TEXT_UNDO_EDIT_TASK + firstTask;
 
         default:

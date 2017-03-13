@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 
@@ -45,27 +46,27 @@ public class RedoCommand extends Command {
 
             switch(cmdString) {
 
-            case "add Task":
+            case CommandTypeUtil.TYPE_ADD_TASK:
                 model.addTask((Task) first);
-                toPush.setFirst("delete Task");
+                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_ADD_TASK));
                 toPush.setSecond(first);
-                session.update("redo Task", (Object) toPush, null);
+                session.update("redo", (Object) toPush, null);
                 break;
 
-            case "delete Task":
+            case CommandTypeUtil.TYPE_DELETE_TASK:
                 model.deleteTask((ReadOnlyTask) first);
-                toPush.setFirst("add Task");
+                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_DELETE_TASK));
                 toPush.setSecond(first);
-                session.update("redo Task", (Object) toPush, null);
+                session.update(CommandTypeUtil.TYPE_REDO, (Object) toPush, null);
                 break;
 
-            case "edit Task":
+            case CommandTypeUtil.TYPE_EDIT_TASK:
                 model.deleteTask((ReadOnlyTask) first);
                 model.addTask((Task) second);
-                toPush.setFirst("edit Task");
+                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_EDIT_TASK));
                 toPush.setSecond(second);
                 toPush.setThird(first);
-                session.update("redo Task", (Object) toPush, null);
+                session.update(CommandTypeUtil.TYPE_REDO, (Object) toPush, null);
                 break;
 
             default:
