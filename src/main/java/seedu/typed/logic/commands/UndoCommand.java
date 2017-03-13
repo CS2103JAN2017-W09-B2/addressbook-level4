@@ -30,50 +30,50 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        Optional<TripleUtil<String, Task, Task>> optionalCmd = session.popUndoStack();
+        Optional<TripleUtil<String, Object, Object>> optionalCmd = session.popUndoStack();
 
         if (optionalCmd.equals(Optional.empty())) {
             throw new CommandException(MESSAGE_NO_PREV_COMMAND);
         }
 
-        TripleUtil<String, Task, Task> cmd = optionalCmd.get();
+        TripleUtil<String, Object, Object> cmd = optionalCmd.get();
         String cmdString = cmd.getFirst();
-        Task firstTask = cmd.getSecond();
-        Task secondTask = cmd.getThird();
-        TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("", null, null);
+        Object first = cmd.getSecond();
+        Object second = cmd.getThird();
+        TripleUtil<String, Object, Object> toPush = new TripleUtil<String, Object, Object>("", null, null);
         try {
 
             switch(cmdString) {
 
-            case "add":
-                model.addTask(firstTask);
-                session.addHistory("Undone deletion of Task: " + firstTask);
-                toPush.setFirst("delete");
-                toPush.setSecond(firstTask);
-                session.pushRedoStack(toPush);
-                return new CommandResult(MESSAGE_SUCCESS);
+            case "add Task":
+                model.addTask((Task) first);
+                toPush.setFirst("delete Task");
+                toPush.setSecond(first);
+                session.update("undo Task", (Object) toPush, null);
+                break;
 
-            case "delete":
-                model.deleteTask((ReadOnlyTask) firstTask);
-                session.addHistory("Undone addition of Task: " + firstTask);
-                toPush.setFirst("add");
-                toPush.setSecond(firstTask);
-                session.pushRedoStack(toPush);
-                return new CommandResult(MESSAGE_SUCCESS);
+            case "delete Task":
+                model.deleteTask((ReadOnlyTask) first);
+                toPush.setFirst("add Task");
+                toPush.setSecond(first);
+                session.update("undo Task", (Object) toPush, null);
+                break;
 
-            case "edit":
-                model.deleteTask((ReadOnlyTask) firstTask);
-                model.addTask(secondTask);
-                session.addHistory("Undone edit of Task: " + secondTask);
-                toPush.setFirst("edit");
-                toPush.setSecond(secondTask);
-                toPush.setThird(firstTask);
-                session.pushRedoStack(toPush);
-                return new CommandResult(MESSAGE_SUCCESS);
+            case "edit Task":
+                model.deleteTask((ReadOnlyTask) first);
+                model.addTask((Task) second);
+                toPush.setFirst("edit Task");
+                toPush.setSecond(second);
+                toPush.setThird(first);
+                session.update("undo Task", (Object) toPush, null);
+                break;
 
             default:
                 throw new CommandException(MESSAGE_ERROR);
             }
+
+            return new CommandResult(MESSAGE_SUCCESS);
+
         } catch (Exception e) {
             throw new CommandException(MESSAGE_ERROR);
         }

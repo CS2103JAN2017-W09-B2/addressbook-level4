@@ -19,8 +19,11 @@ public class HistoryCommand extends Command {
     @Override
     public CommandResult execute() {
         ArrayList<String> historyArrayList = session.getHistory();
+        for (int i = 1; i <= historyArrayList.size(); i++) {
+            System.out.println(i + ") " + historyArrayList.get(i - 1));
+        }
         //code to show history on GUI
-        session.addHistory("Viewed history of past commands");
+        session.update("history", null, null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

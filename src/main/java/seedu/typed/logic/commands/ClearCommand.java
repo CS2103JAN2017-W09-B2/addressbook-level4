@@ -14,9 +14,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         model.resetData(new TaskManager());
-        session.addHistory("Cleared Task Manager");
-        session.clearRedoStack();
-        session.clearUndoStack();
+        session.update("clear", null, null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -15,6 +15,7 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
+        session.update("exit", null, null);
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 

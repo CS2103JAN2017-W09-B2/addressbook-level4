@@ -11,8 +11,8 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        session.addHistory("Viewed list of existing tasks");
         model.updateFilteredListToShowAll();
+        session.update("list Task", null, null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

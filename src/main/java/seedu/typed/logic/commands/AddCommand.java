@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
-import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
@@ -48,10 +47,7 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            session.addHistory("Added Task: " + toAdd);
-            session.clearRedoStack();
-            TripleUtil<String, Task, Task> toPush = new TripleUtil<String, Task, Task>("delete", toAdd, null);
-            session.pushUndoStack(toPush);
+            session.update("add Task", (Object) toAdd, null);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
