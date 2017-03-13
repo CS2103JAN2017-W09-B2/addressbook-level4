@@ -10,7 +10,7 @@ import seedu.typed.testutil.TestTask;
 public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
+    public void findNonEmptyList() {
         assertFindResult("find Mark"); // no results
         assertFindResult("find Meier", td.benson, td.daniel); // multiple
                                                               // results
@@ -21,13 +21,13 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_emptyList() {
+    public void findEmptyList() {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }
 
     @Test
-    public void find_invalidCommand_fail() {
+    public void findInvalidCommandFail() {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
