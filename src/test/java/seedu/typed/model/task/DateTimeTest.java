@@ -36,6 +36,11 @@ public class DateTimeTest {
     LocalDateTime monthAfterChristmas = LocalDateTime.of(2018, Month.JANUARY, 25, 0, 0);
     LocalDateTime monthAfterGoodfriday = LocalDateTime.of(2017, Month.MAY, 18, 0, 0);
 
+    // year after Holidays
+    LocalDateTime yearAfterAprilFool = LocalDateTime.of(2018, Month.APRIL, 1, 0, 0);
+    LocalDateTime yearAfterChristmas = LocalDateTime.of(2018, Month.DECEMBER, 25, 0, 0);
+    LocalDateTime yearAfterGoodfriday = LocalDateTime.of(2018, Month.APRIL, 18, 0, 0);
+
 
     DateTime christmasDay = new DateTime(christmas);
     DateTime goodFridayDay = new DateTime(goodFriday);
@@ -52,6 +57,10 @@ public class DateTimeTest {
     DateTime monthAfterAprilFoolDay = new DateTime(monthAfterAprilFool);
     DateTime monthAfterGoodFriday = new DateTime(monthAfterGoodfriday);
     DateTime monthAfterChristmasDay = new DateTime(monthAfterChristmas);
+
+    DateTime yearAfterAprilFoolDay = new DateTime(yearAfterAprilFool);
+    DateTime yearAfterGoodFriday = new DateTime(yearAfterGoodfriday);
+    DateTime yearAfterChristmasDay = new DateTime(yearAfterChristmas);
 
 
     @Test
@@ -74,6 +83,18 @@ public class DateTimeTest {
         assertFalse(aprilFoolDay.nextMonth().equals(dayBeforeAprilFoolDay));
         assertFalse(christmasDay.nextMonth().equals(dayBeforehristmasDay));
         assertFalse(goodFridayDay.nextMonth().equals(dayBeforeGoodFriday));
+
+    }
+
+    @Test
+    public void testDateTimeNextYear() {
+        assertTrue(aprilFoolDay.nextYear().equals(yearAfterAprilFoolDay));
+        assertTrue(christmasDay.nextYear().equals(yearAfterChristmasDay));
+        assertTrue(goodFridayDay.nextYear().equals(yearAfterGoodFriday));
+
+        assertFalse(aprilFoolDay.nextYear().equals(dayBeforeAprilFoolDay));
+        assertFalse(christmasDay.nextYear().equals(dayBeforehristmasDay));
+        assertFalse(goodFridayDay.nextYear().equals(dayBeforeGoodFriday));
 
     }
 
