@@ -197,14 +197,16 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12/34/5678 t/validTagWithPrefix.butNoDatePrefix", expectedMessage);
-        assertCommandFailure("add Valid Name t/12/34/4556 t/invalidDatePrefix", expectedMessage);
+        assertCommandFailure("add t/12/34/5678 name is in wrong order", expectedMessage);
+        assertCommandFailure("add t/validTag.butNoName", expectedMessage);
+        assertCommandFailure("add d/12/34/5678 t/12/34/4556 t/validDateAndTag.butNoName", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add []\\[;] d/12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add d/12/34/5678", expectedMessage);
         assertCommandFailure("add Valid Name d/not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12/34/5678 t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -424,13 +426,16 @@ public class LogicManagerTest {
          *
          * Assumes maximally 9 Tasks are generated. //TODO: extend support for >9 Tasks
          *
-         * @param seed
-         *            used to generate the task data field values
+         * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
             String seedDate = "00/00/000" + String.valueOf(seed);
-            return new Task(new Name("Task " + seed), new Date("" + seedDate),
-                    new UniqueTagList(new Tag("tag" + seed), new Tag("tag" + (seed + 1))));
+            return new Task.TaskBuilder()
+                    .setName("Task " + seed)
+                    .setDate("" + seedDate)
+                    .addTags("tag" + seed)
+                    .addTags("tag" + (seed + 1))
+                    .build();
         }
 
         /** Generates the correct add command based on the task given */
@@ -524,9 +529,14 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given name. Other fields will have some
          * dummy values.
+         * @author
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Date("11/11/1111"), new UniqueTagList(new Tag("tag")));
+            return new Task.TaskBuilder()
+                    .setName(name)
+                    .setDate("11/11/1111")
+                    .addTags("tag")
+                    .build();
         }
     }
 }

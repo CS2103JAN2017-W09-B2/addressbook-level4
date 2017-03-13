@@ -1,19 +1,41 @@
 package seedu.typed.model.task;
 
+import seedu.typed.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's name in the task manager. Guarantees: immutable;
  */
 public class Name {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Task name should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS =
+            "Task name should only contain alphanumeric characters and spaces, and should not be blank";
+    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     public final String value;
 
-    public Name(String name) {
+    /**
+     * Validates given name.
+     * @param date
+     * @throws IllegalValueException
+     *             if given name string is invalid.
+     */
+    public Name(String name) throws IllegalValueException {
         assert name != null;
+        String trimmedName = name.trim();
+        if (!isValidName(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        }
         this.value = name;
     }
 
+    /**
+    *
+    * @param test
+    * @return true if a given string is a valid task name.
+    */
+    public static boolean isValidName(String test) {
+        return test.matches(NAME_VALIDATION_REGEX);
+    }
 
     @Override
     public String toString() {
@@ -35,18 +57,6 @@ public class Name {
 
     public String getValue() {
         return this.value;
-    }
-
-    public static boolean isValidName(String name) {
-        if (name == null) {
-            return false;
-        }
-        String trimmedName = name.trim();
-        if (trimmedName.equals("")) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
 }
