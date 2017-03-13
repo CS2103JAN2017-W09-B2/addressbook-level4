@@ -1,4 +1,4 @@
-package seedu.typed.model;
+package seedu.typed.storage.temp;
 
 import java.util.ArrayList;
 import java.util.Optional;

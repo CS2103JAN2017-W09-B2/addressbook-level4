@@ -3,7 +3,7 @@ package seedu.typed.logic.commands;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.Model;
-import seedu.typed.model.Session;
+import seedu.typed.storage.temp.Session;
 
 /**
  * Represents a command with hidden internal logic and the ability to be

@@ -10,9 +10,9 @@ import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.parser.Parser;
 import seedu.typed.model.Model;
-import seedu.typed.model.Session;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.storage.Storage;
+import seedu.typed.storage.temp.Session;
 
 /**
  * The main LogicManager of the app.

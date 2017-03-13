@@ -23,12 +23,12 @@ import seedu.typed.logic.LogicManager;
 import seedu.typed.model.Model;
 import seedu.typed.model.ModelManager;
 import seedu.typed.model.ReadOnlyTaskManager;
-import seedu.typed.model.Session;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.UserPrefs;
 import seedu.typed.model.util.SampleDataUtil;
 import seedu.typed.storage.Storage;
 import seedu.typed.storage.StorageManager;
+import seedu.typed.storage.temp.Session;
 import seedu.typed.ui.Ui;
 import seedu.typed.ui.UiManager;
 
