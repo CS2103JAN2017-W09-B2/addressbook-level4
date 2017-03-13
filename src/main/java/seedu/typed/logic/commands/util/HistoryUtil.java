@@ -93,17 +93,18 @@ public class HistoryUtil {
 
         String command = state.getFirst();
         Task firstTask = (Task) state.getSecond();
+        Task secondTask = (Task) state.getThird();
 
         switch(command) {
 
         case "add Task":
-            return TEXT_REDO_ADD_TASK + firstTask;
-
-        case "delete Task":
             return TEXT_REDO_DELETE_TASK + firstTask;
 
+        case "delete Task":
+            return TEXT_REDO_ADD_TASK + firstTask;
+
         case "edit Task":
-            return TEXT_REDO_EDIT_TASK + firstTask;
+            return TEXT_REDO_EDIT_TASK + secondTask;
 
         default:
             return "";
