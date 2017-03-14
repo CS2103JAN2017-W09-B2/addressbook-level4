@@ -3,6 +3,7 @@ package seedu.typed.logic.commands;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -36,6 +37,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
+            session.update(CommandTypeUtil.TYPE_DELETE_TASK, (Object) taskToDelete, null);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
