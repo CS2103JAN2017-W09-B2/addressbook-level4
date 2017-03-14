@@ -1,3 +1,4 @@
+
 package seedu.typed.ui;
 
 import java.util.logging.Logger;
@@ -44,7 +45,7 @@ public class CommandBox extends UiPart<Region> {
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            commandTextField.setText("");
+            commandTextField.setText("" + commandResult.feedbackToUser);
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 

@@ -35,7 +35,7 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.textProperty().bind(displayed);
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
-        placeHolder.getChildren().add(mainPane);
+        // placeHolder.getChildren().add(mainPane);
         registerAsAnEventHandler(this);
     }
 
