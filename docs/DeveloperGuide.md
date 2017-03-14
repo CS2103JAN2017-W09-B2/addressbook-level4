@@ -464,104 +464,104 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `Typed` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: View history of actions ####
+#### Use Case: View history of actions ####
 
 **MSS**
 
-User keys in a series of command(s)
-User requests to view history of actions
-Typed displays the list of past actions
+User keys in a series of command(s) <br>
+User requests to view history of actions <br>
+Typed displays the list of past actions <br>
+Use case ends. <br>
+
+**Extensions**
+
+1a. Command is typed in wrongly <br>
+    | Systems indicate error and output a list of valid commands <br>
+2a. List is empty <br>
+	| System indicate History Command only <br>
+2b. List size is way too large <br>
+	| System shows the recent 10 commands <br>
+
+#### Use Case: Perform simple keyword query ####
+
+**MSS**
+
+User enters a keyword to find any matching to do in Typed. <br>
+Typed displays all the todos with matching keywords. <br>
+
+**Extensions**
+1a. Typed is empty <br>
+	| User search his todos using keywords <br>
+	| Typed displays that there are no todo with the any matching keywords. <br>
+	| Use case ends <br>
+
+#### Use Case: Undo previous action ####
+
+**MSS**
+
+User keys in a series of command(s) changing information stored in Typed. <br>
+User requests to undo the last action done. <br>
+Typed undoes the last action done. <br>
+Typed displays text informing user that the last action has been successfully undone. <br>
 Use case ends.
 
 **Extensions**
 
-1a. Command is typed in wrongly
-	| Systems indicate error and output a list of valid commands
-2a. List is empty
-	| System indicate History Command only
-2b. List size is way too large
-	| System shows the recent 10 commands
+1a. User does not key in any command at all <br>
+	| User requests to undo the last action done <br>
+	| Typed displays text informing user that there are no actions to be undone <br>
+	| Use case ends <br>
 
-#### Use case: Perform simple keyword query ####
+1b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+	| User requests to undo the last action done <br>
+	| Typed displays text informing user that there are no actions to be undone <br>
+	| Use case ends <br>
 
-**MSS**
+2a. User restarts the session <br>
+	| User requests to undo the last action done <br>
+	| Typed displays text informing user that there are no actions to be undone <br>
+	| Use case ends <br>
 
-User enters a keyword to find any matching to do in Typed.
-Typed displays all the todos with matching keywords.
-
-**Extensions**
-1a. Typed is empty
-	| User search his todos using keywords
-	| Typed displays that there are no todo with the any matching keywords.
-	| Use case ends
-
-#### Use case: Undo previous action ####
+#### Use Case: Redo previous undone action ####
 
 **MSS**
 
-User keys in a series of command(s) changing information stored in Typed.
-User requests to undo the last action done.
-Typed undoes the last action done.
-Typed displays text informing user that the last action has been successfully undone.
+User keys in a series of command(s) changing information stored in Typed. <br>
+User requests to undo the last action done. <br>
+User requests to redo the previously undone action. <br>
+Typed redoes the last action undone by Typed. <br>
+Typed displays text informing user that the last undone action has been successfully redone. <br>
 Use case ends.
 
 **Extensions**
 
-1a. User does not key in any command at all
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
+1a. User does not key in any command at all <br>
+	| User requests to undo the last action done <br>
+	| Typed displays text informing user that there are no actions to be undone <br>
+	| Use case ends <br>
 
-1b. User keys in a series of command(s) that do not change the information stored in Typed
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
+1b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+	| User requests to undo the last action done <br>
+	| Typed displays text informing user that there are no actions to be undone <br>
+	| Use case ends <br>
 
-2a. User restarts the session
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
+2a. User restarts the session <br>
+	| User requests to undo the last action done <br>
+	| Typed displays text informing user that there are no actions to be undone <br>
+	| Use case ends <br>
 
-#### Use case: Redo previous undone action ####
+3a. User keys in a command that changes the information stored in Typed <br>
+	| User requests to redo the last action done <br>
+	| Typed displays text informing user that there are no undone actions to be redone <br>
+	| Use case ends <br>
 
-**MSS**
+3b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+	| Use case continues from step 3 <br>
 
-User keys in a series of command(s) changing information stored in Typed.
-User requests to undo the last action done.
-User requests to redo the previously undone action.
-Typed redoes the last action undone by Typed.
-Typed displays text informing user that the last undone action has been successfully redone.
-Use case ends.
-
-**Extensions**
-
-1a. User does not key in any command at all
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
-
-1b. User keys in a series of command(s) that do not change the information stored in Typed
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
-
-2a. User restarts the session
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
-
-3a. User keys in a command that changes the information stored in Typed
-	| User requests to redo the last action done
-	| Typed displays text informing user that there are no undone actions to be redone
-	| Use case ends
-
-3b. User keys in a series of command(s) that do not change the information stored in Typed
-	| Use case continues from step 3
-
-3c. User restarts the session
-	| User requests to redo the last action done
-	| Typed displays text informing user that there are no undone actions to be redone
-	| Use case ends
+3c. User restarts the session <br>
+	| User requests to redo the last action done <br>
+	| Typed displays text informing user that there are no undone actions to be redone <br>
+	| Use case ends <br>
 
 
 ## Appendix C : Non Functional Requirements
@@ -570,6 +570,10 @@ Use case ends.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should minimise keystrokes required to enter a command.
+5. Should be stored as a local copy. 
+6. Code should be open-source.
+7. Should contain automated test cases. 
 
 ## Appendix D : Glossary
 
