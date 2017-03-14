@@ -9,7 +9,7 @@ Typed is a task manager application created for avid typers. It comes with a gra
 
 
 
-#### Site Map
+#### Site Map<br>
 * [User Guide](docs/UserGuide.md)
 * [Developer Guide](docs/DeveloperGuide.md)
 * [Learning Outcomes](docs/LearningOutcomes.md)
@@ -17,8 +17,7 @@ Typed is a task manager application created for avid typers. It comes with a gra
 * [Contact Us](docs/ContactUs.md)
 
 
-#### Acknowledgements
-
+#### Acknowledgements<br>
 * This application was developed from the educational sample 
   [Address Book Level 4](https://github.com/nus-cs2103-AY1617S1/addressbook-level4/) base code.
 * Some parts of the original base code were inspired by the excellent
