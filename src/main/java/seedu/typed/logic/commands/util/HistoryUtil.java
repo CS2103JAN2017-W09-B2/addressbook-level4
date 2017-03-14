@@ -3,7 +3,6 @@ package seedu.typed.logic.commands.util;
 import java.util.ArrayList;
 
 import seedu.typed.commons.util.TripleUtil;
-import seedu.typed.model.task.Task;
 
 public class HistoryUtil {
 
@@ -20,9 +19,11 @@ public class HistoryUtil {
     public static final String TEXT_UNDO_ADD_TASK = "Undone addition of Task: ";
     public static final String TEXT_UNDO_DELETE_TASK = "Undone deletion of Task: ";
     public static final String TEXT_UNDO_EDIT_TASK = "Undone edit of Task: ";
+    public static final String TEXT_UNDO_CLEAR = "Undone clearing of Task Manager";
     public static final String TEXT_REDO_ADD_TASK = "Redone addition of Task: ";
     public static final String TEXT_REDO_DELETE_TASK = "Redone deletion of Task: ";
     public static final String TEXT_REDO_EDIT_TASK = "Redone edit of Task: ";
+    public static final String TEXT_REDO_CLEAR = "Redone clearing of Task Manager";
     public static final String TEXT_INVALID_COMMAND = "Keyed in an invalid command";
 
     @SuppressWarnings("unchecked")
@@ -54,7 +55,7 @@ public class HistoryUtil {
             break;
 
         case CommandTypeUtil.TYPE_SELECT_TASK:
-            toAdd = TEXT_SELECT_TASK + (Task) firstObj;
+            toAdd = TEXT_SELECT_TASK + firstObj;
             break;
 
         case CommandTypeUtil.TYPE_HISTORY:
@@ -70,15 +71,15 @@ public class HistoryUtil {
             break;
 
         case CommandTypeUtil.TYPE_ADD_TASK:
-            toAdd = TEXT_ADD_TASK + (Task) firstObj;
+            toAdd = TEXT_ADD_TASK + firstObj;
             break;
 
         case CommandTypeUtil.TYPE_DELETE_TASK:
-            toAdd = TEXT_DELETE_TASK + (Task) firstObj;
+            toAdd = TEXT_DELETE_TASK + firstObj;
             break;
 
         case CommandTypeUtil.TYPE_EDIT_TASK:
-            toAdd = String.format(TEXT_EDIT_TASK, (Task) firstObj, (Task) secondObj);
+            toAdd = String.format(TEXT_EDIT_TASK, firstObj, secondObj);
             break;
 
         default:
@@ -92,19 +93,22 @@ public class HistoryUtil {
     private static String generateRedoHistoryString(TripleUtil<String, Object, Object> state) {
 
         String command = state.getFirst();
-        Task firstTask = (Task) state.getSecond();
-        Task secondTask = (Task) state.getThird();
+        Object first = state.getSecond();
+        Object second = state.getThird();
 
         switch(command) {
 
         case CommandTypeUtil.TYPE_ADD_TASK:
-            return TEXT_REDO_DELETE_TASK + firstTask;
+            return TEXT_REDO_DELETE_TASK + first;
 
         case CommandTypeUtil.TYPE_DELETE_TASK:
-            return TEXT_REDO_ADD_TASK + firstTask;
+            return TEXT_REDO_ADD_TASK + first;
 
         case CommandTypeUtil.TYPE_EDIT_TASK:
-            return TEXT_REDO_EDIT_TASK + secondTask;
+            return TEXT_REDO_EDIT_TASK + second;
+
+        case CommandTypeUtil.TYPE_CLEAR:
+            return TEXT_REDO_CLEAR;
 
         default:
             return "";
@@ -114,18 +118,21 @@ public class HistoryUtil {
     public static String generateUndoHistoryString(TripleUtil<String, Object, Object> state) {
 
         String command = state.getFirst();
-        Task firstTask = (Task) state.getSecond();
+        Object first = state.getSecond();
 
         switch(command) {
 
         case CommandTypeUtil.TYPE_ADD_TASK:
-            return TEXT_UNDO_ADD_TASK + firstTask;
+            return TEXT_UNDO_ADD_TASK + first;
 
         case CommandTypeUtil.TYPE_DELETE_TASK:
-            return TEXT_UNDO_DELETE_TASK + firstTask;
+            return TEXT_UNDO_DELETE_TASK + first;
 
         case CommandTypeUtil.TYPE_EDIT_TASK:
-            return TEXT_UNDO_EDIT_TASK + firstTask;
+            return TEXT_UNDO_EDIT_TASK + first;
+
+        case CommandTypeUtil.TYPE_CLEAR:
+            return TEXT_UNDO_CLEAR;
 
         default:
             return "";

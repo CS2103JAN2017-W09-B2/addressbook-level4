@@ -5,6 +5,8 @@ import java.util.Optional;
 import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
+import seedu.typed.model.ReadOnlyTaskManager;
+import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 
@@ -16,7 +18,7 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the previous add/delete/edit command"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the previous add/delete/edit/clear command"
             + "in the current session."
             + "Parameters: none" + "Example: " + COMMAND_WORD;
 
@@ -50,14 +52,14 @@ public class UndoCommand extends Command {
                 model.addTask((Task) first);
                 toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_ADD_TASK));
                 toPush.setSecond(first);
-                session.update("undo", (Object) toPush, null);
+                session.update(CommandTypeUtil.TYPE_UNDO, toPush, null);
                 break;
 
             case CommandTypeUtil.TYPE_DELETE_TASK:
                 model.deleteTask((ReadOnlyTask) first);
                 toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_DELETE_TASK));
                 toPush.setSecond(first);
-                session.update("undo", (Object) toPush, null);
+                session.update(CommandTypeUtil.TYPE_UNDO, toPush, null);
                 break;
 
             case CommandTypeUtil.TYPE_EDIT_TASK:
@@ -66,7 +68,18 @@ public class UndoCommand extends Command {
                 toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_EDIT_TASK));
                 toPush.setSecond(second);
                 toPush.setThird(first);
-                session.update("undo", (Object) toPush, null);
+                session.update(CommandTypeUtil.TYPE_UNDO, toPush, null);
+                break;
+
+            case CommandTypeUtil.TYPE_CLEAR: //problematic
+                ReadOnlyTaskManager firstTaskManager = (ReadOnlyTaskManager) first;
+                model.resetData(firstTaskManager);
+                TaskManager third = new TaskManager();
+                third.copyData(firstTaskManager);
+                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_CLEAR));
+                toPush.setSecond(second);
+                toPush.setThird(third);
+                session.update(CommandTypeUtil.TYPE_UNDO, toPush, null);
                 break;
 
             default:

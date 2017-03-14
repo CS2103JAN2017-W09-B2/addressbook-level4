@@ -64,7 +64,9 @@ public class UndoRedoUtil {
 
         case CommandTypeUtil.TYPE_CLEAR:
             redoStack.clear();
-            undoStack.clear();
+            toPush.setSecond(first); //supposed to be second
+            toPush.setThird(second); //supposed to be first
+            undoStack.push(toPush);
             break;
 
         case CommandTypeUtil.TYPE_FIND_TASK:

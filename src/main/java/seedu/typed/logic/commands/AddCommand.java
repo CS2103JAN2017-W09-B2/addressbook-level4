@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + "Parameters: NAME [d/DATE]  [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " buy 5 broccolis d/tomorrow t/survival t/grocery ";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "%1$s added: [Date] %2$s [Tags] %3$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
@@ -48,8 +48,11 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            session.update(CommandTypeUtil.TYPE_ADD_TASK, (Object) toAdd, null);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            String name = toAdd.getName().toString();
+            String date = toAdd.getDate().toString();
+            String tags = toAdd.getTags().toString();
+            session.update(CommandTypeUtil.TYPE_ADD_TASK, toAdd, null);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, name, date, tags));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

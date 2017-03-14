@@ -3,6 +3,7 @@ package seedu.typed.model;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -61,6 +62,31 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tags.setTags(tags);
     }
 
+    public void copyData(ReadOnlyTaskManager newData) {
+        assert newData != null;
+        try {
+            ObservableList<ReadOnlyTask> tasksToCopy = newData.getTaskList();
+            Iterator<ReadOnlyTask> iterator = tasksToCopy.iterator();
+            while (iterator.hasNext()) {
+                ReadOnlyTask toCopy = iterator.next();
+                this.addTask((Task) toCopy);
+            }
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            assert false : DUPLICATE_TASK_WARNING;
+        }
+        try {
+            ObservableList<Tag> tagsToCopy = newData.getTagList();
+            Iterator<Tag> iterator = tagsToCopy.iterator();
+            while (iterator.hasNext()) {
+                Tag toCopy = iterator.next();
+                this.addTag(toCopy);
+            }
+        } catch (UniqueTagList.DuplicateTagException e) {
+            assert false : DUPLICATE_TASK_WARNING;
+        }
+        syncMasterTagListWith(tasks);
+    }
+
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
@@ -88,7 +114,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        tasks.add(p);
+        this.tasks.add(p);
     }
 
     /**
@@ -195,4 +221,5 @@ public class TaskManager implements ReadOnlyTaskManager {
         // own
         return Objects.hash(tasks, tags);
     }
+
 }
