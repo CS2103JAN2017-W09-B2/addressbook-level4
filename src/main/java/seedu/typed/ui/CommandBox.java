@@ -44,8 +44,9 @@ public class CommandBox extends UiPart<Region> {
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            commandTextField.setText("");
+            commandTextField.clear();
             logger.info("Result: " + commandResult.feedbackToUser);
+            commandTextField.setPromptText(commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
