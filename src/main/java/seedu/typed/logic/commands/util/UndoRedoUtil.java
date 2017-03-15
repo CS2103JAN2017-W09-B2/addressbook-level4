@@ -64,8 +64,8 @@ public class UndoRedoUtil {
 
         case CommandTypeUtil.TYPE_CLEAR:
             redoStack.clear();
-            toPush.setSecond(first); //supposed to be second
-            toPush.setThird(second); //supposed to be first
+            toPush.setSecond(second);
+            toPush.setThird(first);
             undoStack.push(toPush);
             break;
 

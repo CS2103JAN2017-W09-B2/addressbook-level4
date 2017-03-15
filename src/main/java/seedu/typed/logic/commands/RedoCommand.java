@@ -71,15 +71,15 @@ public class RedoCommand extends Command {
                 session.update(CommandTypeUtil.TYPE_REDO, toPush, null);
                 break;
 
-            case CommandTypeUtil.TYPE_CLEAR: //problematic
-                ReadOnlyTaskManager firstTaskManager = (ReadOnlyTaskManager) first;
-                model.resetData(firstTaskManager);
+            case CommandTypeUtil.TYPE_CLEAR:
+                ReadOnlyTaskManager secondTaskManager = (ReadOnlyTaskManager) second;
+                model.resetData(secondTaskManager);
                 TaskManager third = new TaskManager();
-                third.copyData(firstTaskManager);
+                third.copyData(secondTaskManager);
                 toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_CLEAR));
-                toPush.setSecond(second);
-                toPush.setThird(third);
-                session.update(CommandTypeUtil.TYPE_UNDO, toPush, null);
+                toPush.setSecond(third);
+                toPush.setThird(first);
+                session.update(CommandTypeUtil.TYPE_REDO, toPush, null);
                 break;
 
             default:
