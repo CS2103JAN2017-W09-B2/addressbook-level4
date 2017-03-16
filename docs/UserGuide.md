@@ -4,13 +4,17 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 
 ---
 
-Too much to do, too little time to plan? Tired of listing down on a piece of paper just to re-write when you lose that paper? Well, worry not! *Typed* is here to solve your headaches!<br>
-<br>
-A personal task manager that keeps your tasks in the way you want it. It lets you know what needs to be done on a particular day or the coming week. Have a recurring task? No worries. *Typed* have you covered!<br>
-<br>
-Unlike other complicated task managers, *Typed* is simply just simple. Gone are the days of navigating unfriendly interfaces. Just type and *Typed* will do the rest. How simple is that?<br>
-<br>
-Ready to start? Here we go! :muscle:<br>
+## About Me
+
+Hello, my name is *Typed*. <br> 
+
+Do you feel overwhelmed with deliverables and looming deadlines? Are you tired of writing your to-dos and schedule on a paper only to misplace that paper? Put your papers and worries away, for I am here to help you! <br>
+
+I will be your personal task manager, storing thousands of tasks with no additional weight. You will be greeted with the more urgent tasks daily, to help you prioritise the day better. You may choose to pull up a calendar view of upcoming events, or sort your tasks by deadline, priority or type. Not sure if you saved the task under *Cara* or *Sara*? I have you covered! Search with either term and I will find what you are looking for. You can even dress me in the theme that pleases you most, should you dislike the way I look. <br>
+
+Unlike other high-maintenance task managers, I am simply simple. Gone are the days of getting frustrated from navigating unfriendly and unintuitive interfaces. With me, there is no need to reach for the mouse anymore. Continue typing on your favourite keyboard, and I will address your commands accordingly. <br>
+
+Ready to be productive? Here we go! :muscle:<br>
 
 1. [Getting Started](#getting-started)
 2. [Returning to *Typed*](#returning-to-typed)
@@ -18,7 +22,7 @@ Ready to start? Here we go! :muscle:<br>
 4. [Command Summary](#command-summary)
 5. [FAQ](#faq)
 
-## 1. Getting Started
+## 1. Getting Started 
 We all have many tasks to handle everyday. With the never-ending tasks stacking up, you might have difficulties keeping track of the tasks that are important and urgent.<br>
 <br>
 Enter *Typed*, the simplest task manager made for you in mind. See at a glance of the tasks that are nearing their deadlines, or by type. *Typed* manages the mess for you so that you can focus on the things that matter.<br>
