@@ -4,6 +4,14 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 
 ---
 
+Too much to do, too little time to plan? Tired of listing down on a piece of paper just to re-write when you lose that paper? Well, worry not! *Typed* is here to solve your headaches!<br>
+<br>
+A personal task manager that keeps your tasks in the way you want it! It lets you know what needs to be done on a particular day or the coming week. Have a recurring task? No worries! *Typed* have you covered!<br>
+<br>
+Unlike other complicated task managers, *Typed* is simply just simple. Gone are the days of navigating unfriendly interfaces. Just type and *Typed* will do the rest. How simple is that?<br>
+<br>
+Ready to start? Let's do it! :muscle:<br>
+
 1. [Getting Started](#getting-started)
 2. [Returning to *Typed*](#returning-to-typed)
 3. [Features](#features)
