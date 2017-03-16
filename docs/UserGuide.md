@@ -21,7 +21,7 @@ Ready to start? Here we go! :muscle:<br>
 ## 1. Getting Started
 We all have many tasks to handle everyday. With the never-ending tasks stacking up, you might have difficulties keeping track of the tasks that are important and urgent.<br>
 <br>
-Enter *Typed*, the simpliest task manager made for you in mind. See at a glance of the tasks that are nearing their deadlines, or by type. *Typed* manages the mess for you so that you can focus on the things that matter.<br>
+Enter *Typed*, the simplest task manager made for you in mind. See at a glance of the tasks that are nearing their deadlines, or by type. *Typed* manages the mess for you so that you can focus on the things that matter.<br>
 <br>
 Before you setup *Typed*, you should have Java version `1.8.0_60` or later installed. <br>
 
