@@ -86,7 +86,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/typed/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -100,8 +100,8 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`UI`**](#ui-component) : Manages the look of *Typed*.
+* [**`Logic`**](#logic-component) : Executes the command.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
@@ -139,19 +139,17 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
-
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/typed/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/typed/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -161,8 +159,6 @@ The `UI` component,
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 ### 2.3. Logic component
-
-Author: Bernard Choo
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -181,8 +177,6 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
-
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
@@ -197,8 +191,6 @@ The `Model`,
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
-
-Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -464,104 +456,104 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `Typed` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: View history of actions ####
+#### Use Case: View history of actions ####
 
 **MSS**
 
-User keys in a series of command(s)
-User requests to view history of actions
-Typed displays the list of past actions
+User keys in a series of command(s) <br>
+User requests to view history of actions <br>
+Typed displays the list of past actions <br>
+Use case ends. <br>
+
+**Extensions**
+
+1a. Command is typed in wrongly <br>
+  > Systems indicate error and output a list of valid commands <br>
+2a. List is empty <br>
+  > System indicate History Command only <br>
+2b. List size is way too large <br>
+  > System shows the recent 10 commands <br>
+
+#### Use Case: Perform simple keyword query ####
+
+**MSS**
+
+User enters a keyword to find any matching to do in Typed. <br>
+Typed displays all the todos with matching keywords. <br>
+
+**Extensions**
+1a. Typed is empty <br>
+  > User search his todos using keywords <br>
+  > Typed displays that there are no todo with the any matching keywords. <br>
+  > Use case ends <br>
+
+#### Use Case: Undo previous action ####
+
+**MSS**
+
+User keys in a series of command(s) changing information stored in Typed. <br>
+User requests to undo the last action done. <br>
+Typed undoes the last action done. <br>
+Typed displays text informing user that the last action has been successfully undone. <br>
 Use case ends.
 
 **Extensions**
 
-1a. Command is typed in wrongly
-	| Systems indicate error and output a list of valid commands
-2a. List is empty
-	| System indicate History Command only
-2b. List size is way too large
-	| System shows the recent 10 commands
+1a. User does not key in any command at all <br>
+  > User requests to undo the last action done <br>
+  > Typed displays text informing user that there are no actions to be undone <br>
+  > Use case ends <br>
 
-#### Use case: Perform simple keyword query ####
+1b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+  > User requests to undo the last action done <br>
+  > Typed displays text informing user that there are no actions to be undone <br>
+  > Use case ends <br>
 
-**MSS**
+2a. User restarts the session <br>
+  > User requests to undo the last action done <br>
+  > Typed displays text informing user that there are no actions to be undone <br>
+  > Use case ends <br>
 
-User enters a keyword to find any matching to do in Typed.
-Typed displays all the todos with matching keywords.
-
-**Extensions**
-1a. Typed is empty
-	| User search his todos using keywords
-	| Typed displays that there are no todo with the any matching keywords.
-	| Use case ends
-
-#### Use case: Undo previous action ####
+#### Use Case: Redo previous undone action ####
 
 **MSS**
 
-User keys in a series of command(s) changing information stored in Typed.
-User requests to undo the last action done.
-Typed undoes the last action done.
-Typed displays text informing user that the last action has been successfully undone.
+User keys in a series of command(s) changing information stored in Typed. <br>
+User requests to undo the last action done. <br>
+User requests to redo the previously undone action. <br>
+Typed redoes the last action undone by Typed. <br>
+Typed displays text informing user that the last undone action has been successfully redone. <br>
 Use case ends.
 
 **Extensions**
 
-1a. User does not key in any command at all
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
+1a. User does not key in any command at all <br>
+  > User requests to undo the last action done <br>
+  > Typed displays text informing user that there are no actions to be undone <br>
+  > Use case ends <br>
 
-1b. User keys in a series of command(s) that do not change the information stored in Typed
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
+1b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+  > User requests to undo the last action done <br>
+  > Typed displays text informing user that there are no actions to be undone <br>
+  > Use case ends <br>
 
-2a. User restarts the session
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
+2a. User restarts the session <br>
+  > User requests to undo the last action done <br>
+  > Typed displays text informing user that there are no actions to be undone <br>
+  > Use case ends <br>
 
-#### Use case: Redo previous undone action ####
+3a. User keys in a command that changes the information stored in Typed <br>
+  > User requests to redo the last action done <br>
+  > Typed displays text informing user that there are no undone actions to be redone <br>
+  > Use case ends <br>
 
-**MSS**
+3b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+  > Use case continues from step 3 <br>
 
-User keys in a series of command(s) changing information stored in Typed.
-User requests to undo the last action done.
-User requests to redo the previously undone action.
-Typed redoes the last action undone by Typed.
-Typed displays text informing user that the last undone action has been successfully redone.
-Use case ends.
-
-**Extensions**
-
-1a. User does not key in any command at all
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
-
-1b. User keys in a series of command(s) that do not change the information stored in Typed
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
-
-2a. User restarts the session
-	| User requests to undo the last action done
-	| Typed displays text informing user that there are no actions to be undone
-	| Use case ends
-
-3a. User keys in a command that changes the information stored in Typed
-	| User requests to redo the last action done
-	| Typed displays text informing user that there are no undone actions to be redone
-	| Use case ends
-
-3b. User keys in a series of command(s) that do not change the information stored in Typed
-	| Use case continues from step 3
-
-3c. User restarts the session
-	| User requests to redo the last action done
-	| Typed displays text informing user that there are no undone actions to be redone
-	| Use case ends
+3c. User restarts the session <br>
+  > User requests to redo the last action done <br>
+  > Typed displays text informing user that there are no undone actions to be redone <br>
+  > Use case ends <br>
 
 
 ## Appendix C : Non Functional Requirements
@@ -570,6 +562,10 @@ Use case ends.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should minimise keystrokes required to enter a command.
+5. Should be stored as a local copy. 
+6. Code should be open-source.
+7. Should contain automated test cases. 
 
 ## Appendix D : Glossary
 

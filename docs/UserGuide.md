@@ -4,33 +4,51 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 
 ---
 
+## About Me
+
+Hello, my name is *Typed*. <br> 
+
+Do you feel overwhelmed with deliverables and looming deadlines? Are you tired of writing your to-dos and schedule on a paper only to misplace that paper? Put your papers and worries away, for I am here to help you! <br>
+
+I will be your personal task manager, storing thousands of tasks with no additional weight. You will be greeted with the more urgent tasks daily, to help you prioritise the day better. You may choose to pull up a calendar view of upcoming events, or sort your tasks by deadline, priority or type. Not sure if you saved the task under *Cara* or *Sara*? I have you covered! Search with either term and I will find what you are looking for. You can even dress me in the theme that pleases you most, should you dislike the way I look. <br>
+
+Unlike other high-maintenance task managers, I am simply simple. Gone are the days of getting frustrated from navigating unfriendly and unintuitive interfaces. With me, there is no need to reach for the mouse anymore. Continue typing on your favourite keyboard, and I will address your commands accordingly. <br>
+
+Ready to be productive? Here we go! :muscle:<br>
+
 1. [Getting Started](#getting-started)
 2. [Returning to *Typed*](#returning-to-typed)
 3. [Features](#features)
 4. [Command Summary](#command-summary)
 5. [FAQ](#faq)
 
-## 1. Getting Started
+## 1. Getting Started 
 
-Before you setup *Typed*, you should have Java version `1.8.0_60` or later installed. <br>
+With seemingly never-ending work and errands, it is easy to lose track of what is coming up next. With me, you will not forget another deadline or miss another event. I know it can be difficult to organise and prioritise tons of accumulated tasks. Leave the mess for me to handle, and focus on getting work done instead.  <br>
+
+Before you get started with me, you should have Java version `1.8.0_60` or later installed. <br>
 
 1. Download the latest `typed.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as *Typed*'s new home.
-3. Press the Ctrl+Shift+T key to launch the app. *Typed* will welcome you in a few seconds.
-    <img src="images/startOfUi.png" width="600"> <br>
-4. Walk through the tutorial to try out basic features, or experiment with **[Features](#features)** below.
+2. Copy the file to the folder you want to use as my new home.
+3. Press the Ctrl+Shift+T key to launch me. I will welcome you in just a few seconds.
+4. Walk through the tutorial to try out basic features, or experiment with **[3. Features](#features)** below.
 
 ## 2. Returning to *Typed*
 
-*Typed* is always happy to see you again. <br>
+I am always happy to see you again! Forget the tutorial you saw the first time, and get ready for a productive day. <br>
 
-1. Forget the tutorial, *Typed* is ready for a productive day! You will be greeted with a view of today's focus. This view includes events happening today, overdue tasks and tasks due today.<br>
+1. You will be greeted with a view of today's focus. This view includes events happening today, tasks due today, as well as your overdue tasks. <br>
+
     <img src="images/TodayScreen.png" width="600"> <br>
-2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>.
-3. This will bring you to the default view.<br>
+    
+2. Let me know when you are done viewing today's focus by pressing <kbd>Enter</kbd>. 
+3. This brings you to the default view, with all your undone tasks sorted by priority.<br>
+
     <img src="images/DefaultUi.png" width="600"> <br>
 
-## 2. Features
+4. Start typing any command and press <kbd>Enter</kbd> to execute it. 
+
+## 3. Features
 
 > **Command Format**
 >
@@ -40,14 +58,14 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 > * Items with `|` indicates either or field.
 > * Items with `...` after them can have multiple instances.
 
-### 2.1. Viewing help : `help`
+### 3.1. Viewing help : `help`
 
 Format: `help [COMMAND]`
 
 > `help COMMAND` shows a more detailed explanation of the command e.g. `help add` <br>
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task or event: `add`
+### 3.2. Adding a task or event: `add`
 
 Adds a task or event to *Typed*. This action can be undone. <br>
 Format: `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG]...`
@@ -61,7 +79,7 @@ Examples:
 * `add read the little prince`
 * `add training camp from 2 May to 5 May`
 
-### 2.3. Listing all tasks and events : `list`
+### 3.3. Listing all tasks and events : `list`
 
 Shows a list of the tasks and events in *Typed*.<br>
 Format: `list [TYPE]`
@@ -76,7 +94,7 @@ Examples:
   List all the undone tasks. <br>
 
 
-### 2.4. Editing a task or event : `edit`
+### 3.4. Editing a task or event : `edit`
 
 Edits an task or event in *Typed*.<br>
 Format: `edit INDEX [DESCRIPTION] [by DATE | TIME] [ #TAG | -#TAG ]`
@@ -96,7 +114,7 @@ Examples:
 * `edit 5 #work`<br>
   Adds a tag #work to index 5 of the shown list on the screen.<br>
 
-### 2.5. Finding all tasks and events containing any keyword in their name : `find`
+### 3.5. Finding all tasks and events containing any keyword in their name : `find`
 
 Finds tasks and events whose names contain any or close to the given keywords.<br>
 Format: `find KEYWORD|#TAGS [MORE_KEYWORDS | #MORE_TAGS]`
@@ -115,7 +133,7 @@ Examples:
 * `find boss #work`<br>
   Returns any tasks or events with similar words to boss or contains similar tagging to work.
 
-### 2.6. Deleting a task or event : `delete`
+### 3.6. Deleting a task or event : `delete`
 
 Deletes the specified task or event from *Typed*. This action can be undone. <br>
 Format: `delete [all]|INDEX [ to | ,] [INDEX] ...`
@@ -133,7 +151,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task or event in the results of the `find` command.
 
-### 2.7. Showing history : `history`
+### 3.7. Showing history : `history`
 
 Shows a list of the past commands used in that session.<br>
 Format: `history`
@@ -142,7 +160,7 @@ Examples:
 
 * `history`<br>
 
-### 2.8. Undo : `undo`
+### 3.8. Undo : `undo`
 
 Undo the last mutable command e.g. `add`, `delete`, `edit`.<br>
 Format: `undo [INDEX | all]`
@@ -161,7 +179,7 @@ Examples:
   `undo 2`<br>
   Undo the previous 2 command, leaving only `add read the little prince` as the only task.<br>
 
-### 2.9. Redo : `redo`
+### 3.9. Redo : `redo`
 
 Redo the last undo.<br>
 Format: `redo [INDEX | all]`
@@ -185,7 +203,7 @@ Examples:
   `redo 2`<br>
   Redo 2 undos i.e. push git commit and write blog post is added back to *Typed*.
 
-### 2.10. Saving the data : `save`
+### 3.10. Saving the data : `save`
 
 *Typed* data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually, unless you would like to save to a new file.
@@ -198,7 +216,7 @@ Examples:
 * `save newTyped.txt`<br>
   Saves data to the new file with file name newTyped.txt.
 
-### 2.11. Quiting the program : `quit`
+### 3.11. Quiting the program : `quit`
 
 Exits *Typed* <br>
 
@@ -208,7 +226,7 @@ Examples:
 
 * `quit`<br>
 
-### 2.12. Completing the task : `complete`
+### 3.12. Completing the task : `complete`
 
 Marks the task(s) as completed in *Typed*<br>
 
@@ -225,7 +243,7 @@ Examples:
 * `complete 2 to 5`<br>
   Marks multiple tasks from index 2 to 5 as completed. Remove from the list of tasks shown.
 
-## 3. Command Summary
+## 4. Command Summary
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
   e.g. `add read the little prince` <br>
@@ -295,7 +313,7 @@ Examples:
   e.g.`undo 5` <br>
   e.g.`undo all` <br>
 
-## 4. FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with

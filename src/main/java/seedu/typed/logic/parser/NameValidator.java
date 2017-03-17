@@ -11,8 +11,10 @@ import java.util.Optional;
 public class NameValidator extends ArgumentValidator {
 
     public NameValidator(Optional<String> name) {
-        this.validationRegex = "[\\p{Alnum}][\\p{Alnum} ]*";
-        this.messageConstraints = "A task name should only contain alphanumeric characters.";
+        this.validationRegex = "\\s*\\S+\\s*";
+        //this.validationRegex = "[\\p{Alnum}]+";
+        //this.messageConstraints = "A task name should only contain alphanumeric characters.";
+        this.messageConstraints = "A task name should not be blank.";
         this.arg = name;
     }
 

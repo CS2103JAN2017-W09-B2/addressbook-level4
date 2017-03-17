@@ -5,7 +5,6 @@ import java.util.Optional;
 import seedu.typed.commons.exceptions.IllegalValueException;
 
 /**
- * Validates format of parsed date. Empty dates are considered valid.
  * @author Peixuan
  *
  */
@@ -35,11 +34,11 @@ public abstract class ArgumentValidator {
         if (!arg.matches(validationRegex)) {
             throw new IllegalValueException(messageConstraints);
         }
-        validArg = arg;
+        this.validArg = arg;
     }
 
     public String getValidArg() {
-        return validArg;
+        return this.validArg;
     }
 
 }
