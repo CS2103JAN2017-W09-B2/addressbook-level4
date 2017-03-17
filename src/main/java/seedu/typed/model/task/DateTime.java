@@ -17,10 +17,8 @@ import java.time.LocalTime;
 public class DateTime {
 
     private LocalDateTime localDateTime;
-    private static Clock defaultClock = Clock.systemDefaultZone();
-
+    
     public DateTime(LocalDateTime localDateTime) {
-        super();
         this.localDateTime = localDateTime;
     }
 
@@ -64,21 +62,21 @@ public class DateTime {
     }
 
     public static DateTime getTomorrow() {
-        LocalDateTime nextDay = LocalDateTime.now(defaultClock).plusDays((long) 1.0);
+        LocalDateTime nextDay = LocalDateTime.now().plusDays((long) 1.0);
         return new DateTime(nextDay);
     }
     public static DateTime getNextWeek() {
-        LocalDateTime nextWeek = LocalDateTime.now(defaultClock).plusWeeks((long) 1.0);
+        LocalDateTime nextWeek = LocalDateTime.now().plusWeeks((long) 1.0);
         return new DateTime(nextWeek);
     }
 
     public static DateTime getNextMonth() {
-        LocalDateTime nextMonth = LocalDateTime.now(defaultClock).plusMonths((long) 1.0);
+        LocalDateTime nextMonth = LocalDateTime.now().plusMonths((long) 1.0);
         return new DateTime(nextMonth);
     }
 
     public static DateTime getNextYear() {
-        LocalDateTime nextYear = LocalDateTime.now(defaultClock).plusYears((long) 1.0);
+        LocalDateTime nextYear = LocalDateTime.now().plusYears((long) 1.0);
         return new DateTime(nextYear);
     }
 
@@ -111,6 +109,14 @@ public class DateTime {
 
     public String toLocalTimeString() {
         return localDateTime.toLocalTime().toString();
+    }
+    
+    public static class DateTimeBuilder {
+        LocalDateTime localDateTime;
+        
+        public DateTimeBuilder() {
+            this.localDateTime = LocalDateTime.now();
+        }
     }
 
 }
