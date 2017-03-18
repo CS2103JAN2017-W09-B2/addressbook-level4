@@ -19,6 +19,7 @@ import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
 import seedu.typed.logic.commands.SelectCommand;
+import seedu.typed.logic.commands.SortCommand;
 import seedu.typed.logic.commands.UndoCommand;
 
 /**
@@ -77,6 +78,9 @@ public class Parser {
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
+            
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
