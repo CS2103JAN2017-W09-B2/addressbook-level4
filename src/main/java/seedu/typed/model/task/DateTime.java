@@ -4,6 +4,7 @@ import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 
 /**
  * DateTime represents our Date and Time in TaskManager using Java's LocalDateTime
@@ -101,6 +102,10 @@ public class DateTime {
     public DateTime nextYear() {
         LocalDateTime nextYear = this.localDateTime.plusYears(LONG_ONE);
         return new DateTime(nextYear);
+    }
+
+    public static DateTime getDateTime(int year, Month month, int day, int hr, int min) {
+        return new DateTime(LocalDateTime.of(year, month, day, hr, min));
     }
     @Override
     public String toString() {
