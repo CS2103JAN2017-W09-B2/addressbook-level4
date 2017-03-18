@@ -14,6 +14,7 @@ public class CommandTypeUtil {
     public static final String TYPE_HISTORY = "history";
     public static final String TYPE_LIST_TASK = "list Task";
     public static final String TYPE_SELECT_TASK = "select Task";
+    public static final String TYPE_SORT_TASK = "sort Task";
 
     public static String opposite(String commandType) {
 
