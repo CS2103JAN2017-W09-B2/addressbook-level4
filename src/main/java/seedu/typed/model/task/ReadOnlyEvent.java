@@ -17,7 +17,7 @@ public interface ReadOnlyEvent {
     
     boolean isRecurring();
 
-    String getDescription();
+    String getDetails();
     
 
     /**

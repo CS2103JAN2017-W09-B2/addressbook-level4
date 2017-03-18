@@ -9,17 +9,17 @@ public class Event implements ReadOnlyEvent{
     private DateTime endDate;
     private UniqueTagList tags;
     private boolean isRecurring;
-    private String description;
+    private String details;
     
-    public Event(Name name, DateTime startDate, DateTime endDate, UniqueTagList tags, boolean isRecurring,
-            String description) {
+    public Event(Name name, DateTime startDate, DateTime endDate, boolean isRecurring,
+            String details, UniqueTagList tags) {
         super();
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.tags = tags;
         this.isRecurring = isRecurring;
-        this.description = description;
+        this.details = details;
     }
 
     public Name getName() {
@@ -42,8 +42,8 @@ public class Event implements ReadOnlyEvent{
         return isRecurring;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDetails() {
+        return details;
     }
     
 
