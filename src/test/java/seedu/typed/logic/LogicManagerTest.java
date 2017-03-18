@@ -45,6 +45,7 @@ import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.storage.StorageManager;
 import seedu.typed.storage.temp.Session;
 
@@ -431,7 +432,7 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             String seedDate = "00/00/000" + String.valueOf(seed);
-            return new Task.TaskBuilder()
+            return new TaskBuilder()
                     .setName("Task " + seed)
                     .setDate("" + seedDate)
                     .addTags("tag" + seed)
@@ -533,7 +534,7 @@ public class LogicManagerTest {
          * @author
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task.TaskBuilder()
+            return new TaskBuilder()
                     .setName(name)
                     .setDate("11/11/1111")
                     .addTags("tag")

@@ -9,16 +9,16 @@ import seedu.typed.model.tag.UniqueTagList;
  * @author YIM CHIA HUI
  */
 public interface ReadOnlyEvent {
-    
+
 
     Name getName();
     DateTime getStartDate();
     DateTime getEndDate();
-    
+
     boolean isRecurring();
 
     String getDetails();
-    
+
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -33,11 +33,11 @@ public interface ReadOnlyEvent {
     default boolean isSameStateAs(ReadOnlyEvent other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()) // state
-                                                                  // checks here
-                                                                  // onwards
-                        && other.getStartDate().equals(this.getStartDate())
-                        && other.getEndDate().equals(this.getEndDate()));
+                && other.getName().equals(this.getName()) // state
+                // checks here
+                // onwards
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate()));
     }
 
     /**
@@ -50,8 +50,7 @@ public interface ReadOnlyEvent {
         .append(" Start Date: ")
         .append(getStartDate())
         .append(" End Date: ")
-        .append(getEndDate())
-        .append(" Tags: ");
+        .append(getEndDate()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

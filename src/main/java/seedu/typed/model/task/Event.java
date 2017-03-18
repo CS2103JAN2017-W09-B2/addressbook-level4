@@ -2,15 +2,15 @@ package seedu.typed.model.task;
 
 import seedu.typed.model.tag.UniqueTagList;
 
-public class Event implements ReadOnlyEvent{
-    
+public class Event implements ReadOnlyEvent {
+
     private Name name;
     private DateTime startDate;
     private DateTime endDate;
     private UniqueTagList tags;
     private boolean isRecurring;
     private String details;
-    
+
     public Event(Name name, DateTime startDate, DateTime endDate, boolean isRecurring,
             String details, UniqueTagList tags) {
         super();
@@ -45,13 +45,18 @@ public class Event implements ReadOnlyEvent{
     public String getDetails() {
         return details;
     }
-    
+
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyEvent// instanceof handles nulls
                         && this.isSameStateAs((ReadOnlyEvent) other));
+    }
+
+    @Override
+    public String toString() {
+        return this.getAsText();
     }
 
 }

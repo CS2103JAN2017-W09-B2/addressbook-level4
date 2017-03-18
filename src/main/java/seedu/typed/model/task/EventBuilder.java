@@ -13,6 +13,8 @@ import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
  * EventBuilder faciliates the builder of Event objects
  * By default, tags and description are empty and isRecurring is false
  * name, startDate and endDate are required
+ * @param ReadOnlyEvent
+ * @return Event
  * @author YIM CHIA HUI
  */
 public class EventBuilder {
@@ -48,12 +50,12 @@ public class EventBuilder {
         this.name = name;
         return this;
     }
-    
+
     public EventBuilder startDate(DateTime startDate) {
         this.startDate = startDate;
         return this;
     }
-    
+
     public EventBuilder endDate(DateTime endDate) {
         this.endDate = endDate;
         return this;
@@ -64,17 +66,17 @@ public class EventBuilder {
         this.endDate = endDate;
         return this;
     }
-    
+
     public EventBuilder isRecurring(boolean isRecurring) {
         this.isRecurring = isRecurring;
         return this;
     }
-    
+
     public EventBuilder setDetails(String details) {
         this.details = details;
         return this;
     }
-    
+
     public EventBuilder addTags(String tag) throws DuplicateTagException, IllegalValueException {
         this.tags.add(new Tag(tag));
         return this;
