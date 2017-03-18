@@ -18,7 +18,6 @@ import seedu.typed.logic.commands.IncorrectCommand;
 public class FindCommandParser {
 
     private static final int MAX_EDIT_DISTANCE = 2;
-    private static final int POSITIVE_INFINITY = Integer.MAX_VALUE;
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -39,14 +38,14 @@ public class FindCommandParser {
     /**
      * Checks if specified strings are similar.
      */
-    private boolean isFuzzyMatch(String str1, String str2) {
+    public static boolean isFuzzyMatch(String str1, String str2) {
         return computeMinEditDistance(str1, str2) <= MAX_EDIT_DISTANCE;
     }
 
     /**
      * Computes the minimum edit distance between specified strings as measure of similarity.
      */
-    private int computeMinEditDistance(String str1, String str2) {
+    private static int computeMinEditDistance(String str1, String str2) {
         int lenStr1 = str1.length();
         int lenStr2 = str2.length();
         return computeLevenshtein(initDistance(lenStr1, lenStr2), str1, str2);
@@ -55,8 +54,8 @@ public class FindCommandParser {
     /**
      * Initializes the minimum edit distance table.
      */
-    private int[][] initDistance(int len1, int len2) {
-        int[][] editDistance = new int[len1 + 1][len2 + 2];
+    private static int[][] initDistance(int len1, int len2) {
+        int[][] editDistance = new int[len1 + 1][len2 + 1];
         for (int c = 0; c < len2 + 1; c++) {
             editDistance[0][c] = c;
         }
@@ -69,20 +68,19 @@ public class FindCommandParser {
     /**
      * Computes the edit distance of given indices using Levenshtein's operations.
      */
-    private int computeLevenshtein(int[][] distance, String str1, String str2) {
-        int bestMin = POSITIVE_INFINITY;
+    private static int computeLevenshtein(int[][] distance, String str1, String str2) {
         for (int i = 1; i < distance.length; i++) {
             for (int j = 1; j < distance[0].length; j++) {
                 int a = distance[i - 1][j] + 1;
                 int b = distance[i][j - 1] + 1;
                 int c = distance[i - 1][j - 1];
-                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                if (str1.charAt(i - 1) != str2.charAt(j - 1)) {
                     c += 1;
                 }
-                bestMin = Math.min(bestMin, Math.min(a, Math.min(b, c)));
+                distance[i][j] = Math.min(a, Math.min(b, c));
             }
         }
-        return bestMin;
+        return distance[distance.length - 1][distance[0].length - 1];
     }
 
 }

@@ -3,6 +3,8 @@ package seedu.typed.commons.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import seedu.typed.logic.parser.FindCommandParser;
+
 /**
  * Helper functions for handling strings.
  */
@@ -13,14 +15,15 @@ public class StringUtil {
     private static final String UNSIGNED_INTEGER_VALIDATION_REGEX = "^0*[1-9]\\d*$";
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}. Ignores
-     * case, but a full word match is required. <br>
+     * Returns true if the {@code sentence} contains the {@code word} or a similar {@code word}.
+     * Ignores case, and both full word match or similar word match are allowed. <br>
      * examples:
      *
      * <pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsFuzzyWordIgnoreCase("ABc def", "abc") == true // a full word match
+     *       containsFuzzyWordIgnoreCase("ABc def", "DEF") == true // a full word match
+     *       containsFuzzyWordIgnoreCase("ABc def", "dfg") == true // a similar match
+     *       containsFuzzyWordIgnoreCase("ABc def", "zzz") == false //not a full word match and not a similar match
      * </pre>
      *
      * @param sentence
@@ -28,7 +31,7 @@ public class StringUtil {
      * @param word
      *            cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsFuzzyWordIgnoreCase(String sentence, String word) {
         assert word != null : "Word parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
 
@@ -40,7 +43,9 @@ public class StringUtil {
         String[] wordsInPreppedSentence = preppedSentence.split(WHITESPACE_DELIMITER);
 
         for (String wordInSentence : wordsInPreppedSentence) {
-            if (wordInSentence.equalsIgnoreCase(preppedWord)) {
+            wordInSentence = wordInSentence.toLowerCase();
+            preppedWord = preppedWord.toLowerCase();
+            if (FindCommandParser.isFuzzyMatch(wordInSentence, preppedWord)) {
                 return true;
             }
         }
