@@ -61,28 +61,28 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_nullWord_exceptionThrown() {
+    public void containsFuzzyWordIgnoreCase_nullWord_exceptionThrown() {
         assertExceptionThrown("typical sentence", null, "Word parameter cannot be null");
     }
 
     private void assertExceptionThrown(String sentence, String word, String errorMessage) {
         thrown.expect(AssertionError.class);
         thrown.expectMessage(errorMessage);
-        StringUtil.containsWordIgnoreCase(sentence, word);
+        StringUtil.containsFuzzyWordIgnoreCase(sentence, word);
     }
 
     @Test
-    public void containsWordIgnoreCase_emptyWord_exceptionThrown() {
+    public void containsFuzzyWordIgnoreCase_emptyWord_exceptionThrown() {
         assertExceptionThrown("typical sentence", "  ", "Word parameter cannot be empty");
     }
 
     @Test
-    public void containsWordIgnoreCase_multipleWords_exceptionThrown() {
+    public void containsFuzzyWordIgnoreCase_multipleWords_exceptionThrown() {
         assertExceptionThrown("typical sentence", "aaa BBB", "Word parameter should be a single word");
     }
 
     @Test
-    public void containsWordIgnoreCase_nullSentence_exceptionThrown() {
+    public void containsFuzzyWordIgnoreCase_nullSentence_exceptionThrown() {
         assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
     }
 
@@ -96,7 +96,7 @@ public class StringUtilTest {
      * Possible scenarios returning true: - matches first word in sentence -
      * last word in sentence - middle word in sentence - matches multiple words
      *
-     * Possible scenarios returning false: - query word matches part of a
+     * Possible scenarios returning true: - query word matches part of a
      * sentence word - sentence word matches part of the query word
      *
      * The test method below tries to verify all above with a reasonably low
@@ -104,21 +104,24 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_validInputs_correctResult() {
+    public void containsFuzzyWordIgnoreCase_validInputs_correctResult() {
 
         // Empty sentence
-        assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary
+        assertFalse(StringUtil.containsFuzzyWordIgnoreCase("", "abc")); // Boundary
                                                                    // case
-        assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
+        assertFalse(StringUtil.containsFuzzyWordIgnoreCase("    ", "123"));
 
-        // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence
+        // Matches an exact word
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("aaa bbb ccc", "aaa"));
+
+        // Matches a partial word
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence
                                                                              // word
                                                                              // bigger
                                                                              // than
                                                                              // query
                                                                              // word
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query
                                                                                // word
                                                                                // bigger
                                                                                // than
@@ -126,28 +129,28 @@ public class StringUtilTest {
                                                                                // word
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("aaa bBb ccc", "Bbb")); // First
                                                                              // word
                                                                              // (boundary
                                                                              // case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("aaa bBb Ccc13", "cCc12")); // Last
                                                                                  // word
                                                                                  // (boundary
                                                                                  // case)
-        assertTrue(StringUtil.containsWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence
                                                                                      // has
                                                                                      // extra
                                                                                      // spaces
-        assertTrue(StringUtil.containsWordIgnoreCase("Aaa", "aaa")); // Only one
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("Aaa", "aaa")); // Only one
                                                                      // word in
                                                                      // sentence
                                                                      // (boundary
                                                                      // case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing
                                                                                  // spaces
 
         // Matches multiple words in sentence
-        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+        assertTrue(StringUtil.containsFuzzyWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
     // ---------------- Tests for getDetails
