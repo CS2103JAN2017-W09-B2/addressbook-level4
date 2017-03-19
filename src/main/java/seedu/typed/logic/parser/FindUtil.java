@@ -15,7 +15,7 @@ public class FindUtil {
      * @param word non-null, non-empty string that contains a single word
      * @return isFuzzyMatch boolean indicating if str and word are a fuzzy match, i.e. similar
      */
-    public static boolean isFuzzyMatchIgnoreCase(String str, String word) {
+    public static boolean isFuzzyWordMatchIgnoreCase(String str, String word) {
         assert str != null : "str cannot be null";
         assert word != null : "word cannot be null";
         assert !word.isEmpty() : "word cannot be empty";

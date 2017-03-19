@@ -31,7 +31,7 @@ public class StringUtil {
      * @param query
      *            cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsFuzzyWordIgnoreCase(String sentence, String query) {
+    public static boolean isFuzzyKeywordSearchIgnoreCase(String sentence, String query) {
         assert query != null : "Query parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
 
@@ -42,7 +42,7 @@ public class StringUtil {
         String[] wordsInSentence = sentence.split(WHITESPACE_DELIMITER);
 
         for (String word : wordsInSentence) {
-            if (FindUtil.isFuzzyMatchIgnoreCase(word, trimmedQuery)) {
+            if (FindUtil.isFuzzyWordMatchIgnoreCase(word, trimmedQuery)) {
                 return true;
             }
         }

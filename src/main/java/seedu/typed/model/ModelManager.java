@@ -150,7 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil
-                    .containsFuzzyWordIgnoreCase(task.getName().getValue(), keyword))
+                    .isFuzzyKeywordSearchIgnoreCase(task.getName().getValue(), keyword))
                     .findAny().isPresent();
         }
 
