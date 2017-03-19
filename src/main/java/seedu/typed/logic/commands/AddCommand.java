@@ -19,7 +19,7 @@ public class AddCommand extends Command {
             + "Parameters: NAME [d/DATE]  [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " buy 5 broccolis d/tomorrow t/survival t/grocery ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s added: [Date] %2$s [Tags] %3$s";
+    public static final String MESSAGE_SUCCESS = "%1$s added";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
