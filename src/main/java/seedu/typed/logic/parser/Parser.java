@@ -78,7 +78,7 @@ public class Parser {
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
-            
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
