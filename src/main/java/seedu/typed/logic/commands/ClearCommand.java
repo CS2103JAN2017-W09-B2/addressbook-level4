@@ -22,4 +22,5 @@ public class ClearCommand extends Command {
         session.update(CommandTypeUtil.TYPE_CLEAR, oldTaskManager, newTaskManager);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
 }

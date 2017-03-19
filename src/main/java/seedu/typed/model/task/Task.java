@@ -18,7 +18,6 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Date date;
-
     private UniqueTagList tags;
 
     /**
