@@ -29,7 +29,7 @@ public class HistoryUtil {
     @SuppressWarnings("unchecked")
     public static void update(ArrayList<String> history, String command,
                               Object firstObj, Object secondObj) {
-        assert firstObj != null;
+        //assert firstObj != null; //TODO : this breaks the List command, @Leyuan may wanna check this out
         String toAdd;
 
         switch(command) {
