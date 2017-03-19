@@ -3,7 +3,7 @@ package seedu.typed.commons.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import seedu.typed.logic.parser.FindCommandParser;
+import seedu.typed.logic.parser.FindUtil;
 
 /**
  * Helper functions for handling strings.
@@ -15,7 +15,7 @@ public class StringUtil {
     private static final String UNSIGNED_INTEGER_VALIDATION_REGEX = "^0*[1-9]\\d*$";
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word} or a similar {@code word}.
+     * Returns true if the {@code sentence} contains the {@code query} or a similar {@code query}.
      * Ignores case, and both full word match or similar word match are allowed. <br>
      * examples:
      *
@@ -28,24 +28,21 @@ public class StringUtil {
      *
      * @param sentence
      *            cannot be null
-     * @param word
+     * @param query
      *            cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsFuzzyWordIgnoreCase(String sentence, String word) {
-        assert word != null : "Word parameter cannot be null";
+    public static boolean containsFuzzyWordIgnoreCase(String sentence, String query) {
+        assert query != null : "Query parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
 
-        String preppedWord = word.trim();
-        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
-        assert preppedWord.split(WHITESPACE_DELIMITER).length == 1 : "Word parameter should be a single word";
+        String trimmedQuery = query.trim();
+        assert !trimmedQuery.isEmpty() : "Query parameter cannot be empty";
+        assert trimmedQuery.split(WHITESPACE_DELIMITER).length == 1 : "Query parameter should be a single word";
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split(WHITESPACE_DELIMITER);
+        String[] wordsInSentence = sentence.split(WHITESPACE_DELIMITER);
 
-        for (String wordInSentence : wordsInPreppedSentence) {
-            wordInSentence = wordInSentence.toLowerCase();
-            preppedWord = preppedWord.toLowerCase();
-            if (FindCommandParser.isFuzzyMatch(wordInSentence, preppedWord)) {
+        for (String word : wordsInSentence) {
+            if (FindUtil.isFuzzyMatchIgnoreCase(word, trimmedQuery)) {
                 return true;
             }
         }
