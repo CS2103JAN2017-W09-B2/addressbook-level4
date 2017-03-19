@@ -63,7 +63,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task taskToEditCopy = new Task(taskToEdit.getName(), taskToEdit.getDate(), taskToEdit.getTags());
+        Task taskToEditCopy = new Task.TaskBuilder(taskToEdit).build();
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {

@@ -4,6 +4,7 @@ import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 
 /**
  * DateTime represents our Date and Time in TaskManager using Java's LocalDateTime
@@ -15,6 +16,8 @@ import java.time.LocalTime;
  *
  */
 public class DateTime {
+
+    private static final long LONG_ONE = (long) 1.0;
 
     private LocalDateTime localDateTime;
     private static Clock defaultClock = Clock.systemDefaultZone();
@@ -64,24 +67,46 @@ public class DateTime {
     }
 
     public static DateTime getTomorrow() {
-        LocalDateTime nextDay = LocalDateTime.now(defaultClock).plusDays((long) 1.0);
+        LocalDateTime nextDay = LocalDateTime.now(defaultClock).plusDays(LONG_ONE);
         return new DateTime(nextDay);
     }
     public static DateTime getNextWeek() {
-        LocalDateTime nextWeek = LocalDateTime.now(defaultClock).plusWeeks((long) 1.0);
+        LocalDateTime nextWeek = LocalDateTime.now(defaultClock).plusWeeks(LONG_ONE);
         return new DateTime(nextWeek);
     }
 
     public static DateTime getNextMonth() {
-        LocalDateTime nextMonth = LocalDateTime.now(defaultClock).plusMonths((long) 1.0);
+        LocalDateTime nextMonth = LocalDateTime.now(defaultClock).plusMonths(LONG_ONE);
         return new DateTime(nextMonth);
     }
 
     public static DateTime getNextYear() {
-        LocalDateTime nextYear = LocalDateTime.now(defaultClock).plusYears((long) 1.0);
+        LocalDateTime nextYear = LocalDateTime.now(defaultClock).plusYears(LONG_ONE);
         return new DateTime(nextYear);
     }
 
+    public DateTime tomorrow() {
+        LocalDateTime nextDay = this.localDateTime.plusDays(LONG_ONE);
+        return new DateTime(nextDay);
+    }
+    public DateTime nextWeek() {
+        LocalDateTime nextWeek = this.localDateTime.plusWeeks(LONG_ONE);
+        return new DateTime(nextWeek);
+    }
+
+    public DateTime nextMonth() {
+        LocalDateTime nextMonth = this.localDateTime.plusMonths(LONG_ONE);
+        return new DateTime(nextMonth);
+    }
+
+    public DateTime nextYear() {
+        LocalDateTime nextYear = this.localDateTime.plusYears(LONG_ONE);
+        return new DateTime(nextYear);
+    }
+
+    public static DateTime getDateTime(int year, Month month, int day, int hr, int min) {
+        return new DateTime(LocalDateTime.of(year, month, day, hr, min));
+    }
     @Override
     public String toString() {
         return localDateTime.toString();
