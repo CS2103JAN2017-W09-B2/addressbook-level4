@@ -12,6 +12,7 @@ import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList;
 
 /**
@@ -87,7 +88,7 @@ public class EditCommand extends Command {
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task.TaskBuilder()
+        return new TaskBuilder()
                 .setName(updatedName)
                 .setDate(updatedDate)
                 .setTags(updatedTags)
