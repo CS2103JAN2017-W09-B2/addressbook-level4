@@ -72,7 +72,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 this.addTask((Task) toCopy);
             }
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : DUPLICATE_TASK_WARNING;
+            ;
         }
         try {
             ObservableList<Tag> tagsToCopy = newData.getTagList();
@@ -82,7 +82,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 this.addTag(toCopy);
             }
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : DUPLICATE_TASK_WARNING;
+            ;
         }
         syncMasterTagListWith(tasks);
     }

@@ -11,7 +11,6 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.parser.Parser;
 import seedu.typed.model.Model;
 import seedu.typed.model.task.ReadOnlyTask;
-import seedu.typed.storage.Storage;
 import seedu.typed.storage.temp.Session;
 
 /**
@@ -24,7 +23,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Parser parser;
     private final Session session;
 
-    public LogicManager(Model model, Storage storage, Session session) {
+    public LogicManager(Model model, Session session) {
         this.model = model;
         this.parser = new Parser();
         this.session = session;

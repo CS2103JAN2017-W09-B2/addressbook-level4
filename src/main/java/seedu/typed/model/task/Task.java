@@ -29,8 +29,8 @@ public class Task implements ReadOnlyTask {
         this.name = name;
         this.date = date;
         this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes
-                                             // in the arg list
+        // changes
+        // in the arg list
     }
 
     /**

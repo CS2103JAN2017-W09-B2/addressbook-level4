@@ -51,103 +51,136 @@ public class StringUtilTest {
         assertTrue(StringUtil.isUnsignedInteger("10"));
     }
 
-    // ---------------- Tests for containsWordIgnoreCase
+    // ---------------- Tests for isFuzzyKeywordSearchIgnoreCase
     // --------------------------------------
 
     /*
      * Invalid equivalence partitions for word: null, empty, multiple words
-     * Invalid equivalence partitions for sentence: null The four test cases
-     * below test one invalid input at a time.
+     * Invalid equivalence partitions for sentence: null
      */
 
     @Test
-    public void containsWordIgnoreCase_nullWord_exceptionThrown() {
-        assertExceptionThrown("typical sentence", null, "Word parameter cannot be null");
+    public void isFuzzyKeywordSearchIgnoreCase_invalidNullWord_exceptionThrown() {
+        assertExceptionThrown("typical sentence", null, "Query parameter cannot be null");
+    }
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_invalidEmptyWord_exceptionThrown() {
+        assertExceptionThrown("typical sentence", "  ", "Query parameter cannot be empty");
+    }
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_invalidMultipleWords_exceptionThrown() {
+        assertExceptionThrown("typical sentence", "aaa BBB", "Query parameter should be a single word");
+    }
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_invalidNullSentence_exceptionThrown() {
+        assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
     }
 
     private void assertExceptionThrown(String sentence, String word, String errorMessage) {
         thrown.expect(AssertionError.class);
         thrown.expectMessage(errorMessage);
-        StringUtil.containsWordIgnoreCase(sentence, word);
-    }
-
-    @Test
-    public void containsWordIgnoreCase_emptyWord_exceptionThrown() {
-        assertExceptionThrown("typical sentence", "  ", "Word parameter cannot be empty");
-    }
-
-    @Test
-    public void containsWordIgnoreCase_multipleWords_exceptionThrown() {
-        assertExceptionThrown("typical sentence", "aaa BBB", "Word parameter should be a single word");
-    }
-
-    @Test
-    public void containsWordIgnoreCase_nullSentence_exceptionThrown() {
-        assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
+        StringUtil.isFuzzyKeywordSearchIgnoreCase(sentence, word);
     }
 
     /*
-     * Valid equivalence partitions for word: - any word - word containing
-     * symbols/numbers - word with leading/trailing spaces
-     *
-     * Valid equivalence partitions for sentence: - empty string - one word -
-     * multiple words - sentence with extra spaces
-     *
-     * Possible scenarios returning true: - matches first word in sentence -
-     * last word in sentence - middle word in sentence - matches multiple words
-     *
-     * Possible scenarios returning false: - query word matches part of a
-     * sentence word - sentence word matches part of the query word
-     *
-     * The test method below tries to verify all above with a reasonably low
-     * number of test cases.
+     * Valid equivalence partitions returning false: empty sentence, whitespace only sentence,
+     * minimum edit distance of above two i.e. regarded as not similar in our implementation
      */
 
     @Test
-    public void containsWordIgnoreCase_validInputs_correctResult() {
+    public void isFuzzyKeywordSearchIgnoreCase_validEmptySentence_falseReturned() {
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("", "abc"));
+    }
 
-        // Empty sentence
-        assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary
-                                                                   // case
-        assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validWhitespaceOnlySentence_falseReturned() {
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("    ", "123"));
+    }
 
-        // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence
-                                                                             // word
-                                                                             // bigger
-                                                                             // than
-                                                                             // query
-                                                                             // word
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query
-                                                                               // word
-                                                                               // bigger
-                                                                               // than
-                                                                               // sentence
-                                                                               // word
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfAboveTwo_falseReturned() {
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "z"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "xyZ"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "123"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "h124heu71"));
+    }
 
-        // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First
-                                                                             // word
-                                                                             // (boundary
-                                                                             // case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last
-                                                                                 // word
-                                                                                 // (boundary
-                                                                                 // case)
-        assertTrue(StringUtil.containsWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence
-                                                                                     // has
-                                                                                     // extra
-                                                                                     // spaces
-        assertTrue(StringUtil.containsWordIgnoreCase("Aaa", "aaa")); // Only one
-                                                                     // word in
-                                                                     // sentence
-                                                                     // (boundary
-                                                                     // case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing
-                                                                                 // spaces
+    /*
+     * Valid equivalence partitions returning true
+     */
 
-        // Matches multiple words in sentence
-        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+    // Some base tests for sentence format: single word in sentence, extra whitespace in sentence,
+    // sentence contains alphanumeric words
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validSingleWordInSentence_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa", "Aaa"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validSentenceWithExtraWhitespace_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa   bbb cccc", "aaa"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("      aaa bBb cccc", "Bbb"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bBb cccc             ", "cCc"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validSentenceWithAlphanumericWords_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bBb Ccc13", "cCc12"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bBb 134", "133"));
+    }
+
+    // Tests for exact matches: same case, different case; single keyword match, multiple keyword match
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validExactMatchSameCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "aaa"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validExactMatchDifferentCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "AAA"));
+    }
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validMultipleExactMatchSameCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc aaa", "aaa"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validMultipleExactMatchDifferentCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc aaa", "aAA"));
+    }
+
+    // Tests for partial matches: same case, different case; minimum edit distance of 1, minimum
+    // edit distance of 2
+
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfOneSameCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "bb"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "bbbb"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "aab"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "abb"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfOneDifferentCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "Bb"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "BbBB"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "AAB"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ABB"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfTwoSameCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "b"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "bbbbb"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "abc"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ccde"));
+    }
+    @Test
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfTwoDifferentCase_trueReturned() {
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "B"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "BBBBB"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ABC"));
+        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "CCDE"));
     }
 
     // ---------------- Tests for getDetails

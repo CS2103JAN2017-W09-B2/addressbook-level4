@@ -64,7 +64,7 @@ public class MainApp extends Application {
 
         session = new Session();
 
-        logic = new LogicManager(model, storage, session);
+        logic = new LogicManager(model, session);
 
         ui = new UiManager(logic, config, userPrefs);
 
