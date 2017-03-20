@@ -102,6 +102,6 @@ public class CompleteCommand extends Command {
             throw new CommandException(MESSAGE_NOT_COMPLETED);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, tasksToCompleteList.get(0)));
     }
 }

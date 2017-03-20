@@ -18,9 +18,9 @@ public class CompleteCommandParser {
 
     public Command parse(String args) {
         assert args != null;
-        startIndex = 0;
-        endIndex = 0;
-        String type = args;
+        startIndex = 1;
+        endIndex = 1;
+        String type = INDEX;
 
         switch (type) {
         case ALL:
