@@ -1,7 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
-import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.typed.TestApp;
 
@@ -27,7 +27,7 @@ public class ResultDisplayHandle extends GuiHandle {
         return getResultDisplay().getText();
     }
 
-    private TextArea getResultDisplay() {
+    private Text getResultDisplay() {
         return getNode(RESULT_DISPLAY_ID);
     }
 }

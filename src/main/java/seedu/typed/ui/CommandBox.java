@@ -40,7 +40,8 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandInputChanged() {
         try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
+            String commandInput = commandTextField.getText();
+            CommandResult commandResult = logic.execute(commandInput);
 
             // process result of the command
             setStyleToIndicateCommandSuccess();

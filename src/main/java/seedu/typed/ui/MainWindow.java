@@ -16,7 +16,6 @@ import seedu.typed.commons.events.ui.ExitAppRequestEvent;
 import seedu.typed.commons.util.FxViewUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.model.UserPrefs;
-import seedu.typed.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -24,7 +23,7 @@ import seedu.typed.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/task_manager_32.png";
+    private static final String ICON = "/images/Typed.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
@@ -33,12 +32,17 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    // private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
 
+    /*
     @FXML
     private AnchorPane browserPlaceholder;
+
+    @FXML
+    private AnchorPane statusbarPlaceholder;
+    */
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -51,9 +55,6 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
-
-    @FXML
-    private AnchorPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -115,19 +116,15 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        // browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        // new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
-    }
-
-    private AnchorPane getStatusbarPlaceholder() {
-        return statusbarPlaceholder;
     }
 
     private AnchorPane getResultDisplayPlaceholder() {
@@ -203,6 +200,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    /*
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
@@ -210,5 +208,10 @@ public class MainWindow extends UiPart<Region> {
     void releaseResources() {
         browserPanel.freeResources();
     }
+
+    private AnchorPane getStatusbarPlaceholder() {
+        return statusbarPlaceholder;
+    }
+    */
 
 }
