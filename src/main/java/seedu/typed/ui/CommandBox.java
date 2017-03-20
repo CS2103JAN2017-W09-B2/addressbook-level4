@@ -1,10 +1,12 @@
 package seedu.typed.ui;
 
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.typed.commons.core.LogsCenter;
@@ -23,6 +25,9 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
+
+    private Stack<String> historyCommand = new Stack<String>();
+    private Stack<String> nextCommand = new Stack<String>();
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
@@ -47,6 +52,7 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
+            historyCommand.push(commandInput);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
@@ -54,6 +60,24 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
+        }
+    }
+
+    @FXML
+    void handleKeyPressed(KeyEvent event) {
+        if ((event.getCode().toString().equals("UP")) && (!historyCommand.isEmpty())) {
+            String commandToShow = historyCommand.pop();
+            // save the command to the nextCommand stack
+            nextCommand.push(commandToShow);
+
+            commandTextField.setText(commandToShow);
+        }
+        if ((event.getCode().toString().equals("DOWN")) && (!nextCommand.isEmpty())) {
+            String commandToShow = nextCommand.pop();
+            // save the command to historyCommand stack
+            historyCommand.push(commandToShow);
+
+            commandTextField.setText(commandToShow);
         }
     }
 
