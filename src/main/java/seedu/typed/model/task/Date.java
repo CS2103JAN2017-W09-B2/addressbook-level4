@@ -24,7 +24,7 @@ public class Date {
             this.value = "";
         } else {
             String trimmedDate = date.trim();
-            if (!isValidDate(trimmedDate)) {
+            if (!trimmedDate.isEmpty() && !isValidDate(trimmedDate)) {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
             this.value = trimmedDate;
