@@ -59,6 +59,13 @@ public class CompleteCommand extends Command {
         this.endIndex = size - 1;
     }
 
+    /**
+     * Search through the filtered task list to get the list of tasks that should be completed
+     * @param startIndex
+     * @param endIndex
+     * @return A List<ReadOnlyTask> which contains the list of tasks to be completed
+     * @throws CommandException
+     */
     private List<ReadOnlyTask> getAffectedTasks(int startIndex, int endIndex) throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         List<ReadOnlyTask> tasksToCompleteList = new ArrayList<>();
@@ -72,6 +79,11 @@ public class CompleteCommand extends Command {
         return tasksToCompleteList;
     }
 
+    /**
+     * Updates the model and session of the completed tasks
+     * @param tasksList
+     * @throws DuplicateTaskException
+     */
     private void updateCompletedTasks(List<ReadOnlyTask> tasksList) throws DuplicateTaskException {
         for (int i = 0; i < tasksList.size(); i++) {
             Task taskToCompleteCopy = new TaskBuilder(tasksList.get(i)).build();
