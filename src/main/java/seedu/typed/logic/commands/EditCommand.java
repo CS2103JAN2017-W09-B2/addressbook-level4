@@ -54,21 +54,22 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (this.filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (this.filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(this.filteredTaskListIndex);
         Task taskToEditCopy = new Task.TaskBuilder(taskToEdit).build();
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, this.editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-            session.update(CommandTypeUtil.TYPE_EDIT_TASK, (Object) taskToEditCopy, (Object) editedTask);
+            this.model.updateTask(this.filteredTaskListIndex, editedTask);
+            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, taskToEditCopy, editedTask);
+            this.session.updateValidCommandsHistory(this.commandText);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

@@ -40,13 +40,14 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        assert this.model != null;
         try {
-            model.addTask(toAdd);
-            String name = toAdd.getName().toString();
-            String date = toAdd.getDate().toString();
-            String tags = toAdd.getTags().toString();
-            session.update(CommandTypeUtil.TYPE_ADD_TASK, toAdd, null);
+            this.model.addTask(this.toAdd);
+            String name = this.toAdd.getName().toString();
+            String date = this.toAdd.getDate().toString();
+            String tags = this.toAdd.getTags().toString();
+            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, this.toAdd, null);
+            this.session.updateValidCommandsHistory(this.commandText);
             return new CommandResult(String.format(MESSAGE_SUCCESS, name, date, tags));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

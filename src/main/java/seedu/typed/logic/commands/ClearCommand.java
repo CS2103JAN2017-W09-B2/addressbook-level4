@@ -14,12 +14,13 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        assert model != null;
+        assert this.model != null;
         TaskManager oldTaskManager = new TaskManager();
-        oldTaskManager.copyData(model.getTaskManager());
-        model.resetData(new TaskManager());
+        oldTaskManager.copyData(this.model.getTaskManager());
+        this.model.resetData(new TaskManager());
         ReadOnlyTaskManager newTaskManager = new TaskManager();
-        session.update(CommandTypeUtil.TYPE_CLEAR, oldTaskManager, newTaskManager);
+        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_CLEAR, oldTaskManager, newTaskManager);
+        this.session.updateValidCommandsHistory(this.commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

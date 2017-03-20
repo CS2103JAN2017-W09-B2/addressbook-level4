@@ -12,6 +12,7 @@ import seedu.typed.storage.temp.Session;
 public abstract class Command {
     protected Model model;
     protected Session session;
+    protected String commandText;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a
@@ -39,8 +40,9 @@ public abstract class Command {
      * any of these should override this method to gain access to the
      * dependencies.
      */
-    public void setData(Model model, Session session) {
+    public void setData(Model model, Session session, String commandText) {
         this.model = model;
         this.session = session;
+        this.commandText = commandText;
     }
 }
