@@ -18,26 +18,42 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Date date;
+    
+    private boolean isCompleted;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Date date, UniqueTagList tags) {
+    public Task(Name name, Date date, UniqueTagList tags, boolean isCompleted) {
         assert !CollectionUtil.isAnyNull(name, date, tags);
         this.name = name;
         this.date = date;
         this.tags = new UniqueTagList(tags); // protect internal tags from
+        this.isCompleted = isCompleted;
         // changes
         // in the arg list
+    }
+    /**
+     * Alternative Constructor with isCompleted false as default
+     * @param name
+     * @param date
+     * @param tags
+     */
+    public Task(Name name, Date date, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, date, tags);
+        this.name = name;
+        this.date = date;
+        this.tags = new UniqueTagList(tags);
+        this.isCompleted = false;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDate(), source.getTags());
+        this(source.getName(), source.getDate(), source.getTags(), source.getIsCompleted());
     }
 
     public void setName(Name name) {
@@ -71,6 +87,14 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
+    
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+    
+    public boolean getIsCompleted() {
+        return this.isCompleted;
+    }
 
     /**
      * Updates this task with the details of {@code replacement}.
@@ -81,6 +105,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
         this.setTags(replacement.getTags());
+        this.setIsCompleted(replacement.getIsCompleted());
     }
 
     @Override
@@ -95,7 +120,7 @@ public class Task implements ReadOnlyTask {
         // use this method for custom fields hashing instead of implementing
         // your
         // own
-        return Objects.hash(name, date, tags);
+        return Objects.hash(name, date, tags, isCompleted);
     }
 
     @Override

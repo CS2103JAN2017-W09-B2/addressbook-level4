@@ -18,6 +18,8 @@ public interface ReadOnlyTask {
      * the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
+    
+    boolean getIsCompleted();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override
@@ -37,7 +39,10 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Name: ").append(getName()).append(" Date: ").append(getDate().toString()).append(" Tags: ");
+        builder.append(" Name: ").append(getName())
+        .append(" Date: ").append(getDate().toString())
+        .append(" Completed: ").append(getIsCompleted())
+        .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
