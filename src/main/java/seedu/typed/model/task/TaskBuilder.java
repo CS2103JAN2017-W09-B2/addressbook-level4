@@ -24,6 +24,7 @@ public class TaskBuilder {
     private Name name;
     private Date date;
     private UniqueTagList tags;
+    private boolean isCompleted;
 
     public TaskBuilder() {
         this.tags = new UniqueTagList();
@@ -33,6 +34,7 @@ public class TaskBuilder {
         this.name = task.getName();
         this.date = task.getDate();
         this.tags = task.getTags();
+        this.isCompleted = task.getIsCompleted();
     }
 
     public TaskBuilder setName(String name) throws IllegalValueException {
@@ -52,6 +54,11 @@ public class TaskBuilder {
 
     public TaskBuilder setDate(Date date) {
         this.date = date;
+        return this;
+    }
+
+    public TaskBuilder isCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
         return this;
     }
 
@@ -75,7 +82,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(this.name, this.date, this.tags);
+        return new Task(this.name, this.date, this.tags, this.isCompleted);
     }
 
 }

@@ -18,7 +18,7 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Date date;
-    
+
     private boolean isCompleted;
 
     private UniqueTagList tags;
@@ -87,11 +87,11 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
+
     public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
-    
+
     public boolean getIsCompleted() {
         return this.isCompleted;
     }

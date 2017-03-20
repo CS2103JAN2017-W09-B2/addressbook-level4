@@ -7,7 +7,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
-import seedu.typed.model.task.Task.TaskBuilder;
+import seedu.typed.model.task.TaskBuilder;
 
 public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "finish";

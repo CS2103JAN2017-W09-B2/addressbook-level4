@@ -18,7 +18,7 @@ public interface ReadOnlyTask {
      * the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
-    
+
     boolean getIsCompleted();
 
     /**
@@ -28,10 +28,10 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()) // state
-                                                                  // checks here
-                                                                  // onwards
-                        && other.getDate().equals(this.getDate()));
+                && other.getName().equals(this.getName()) // state
+                // checks here
+                // onwards
+                && other.getDate().equals(this.getDate()));
     }
 
     /**
