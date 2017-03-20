@@ -1,6 +1,7 @@
 package seedu.typed.model.task;
 
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);
+        internalList.add(0, toAdd);
     }
 
     /**
