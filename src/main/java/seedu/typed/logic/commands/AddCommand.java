@@ -6,6 +6,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList;
 
 /**
@@ -31,7 +32,7 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String name, String date, Set<String> tags) throws IllegalValueException {
-        this.toAdd = new Task.TaskBuilder()
+        this.toAdd = new TaskBuilder()
                 .setName(name)
                 .setDate(date)
                 .setTags(tags)
