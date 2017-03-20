@@ -33,6 +33,7 @@ import seedu.typed.model.TaskManager;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.storage.XmlSerializableTaskManager;
 
 /**
@@ -76,7 +77,7 @@ public class TestUtil {
             String[] dates = new String[] {"30/01/2018", "31/01/2018", "03/01/2018", "04/01/2018", "05/01/2018", "06/01/2018",
                 "07/01/2018", "08/01/2018", "09/01/2018"};
             for (int i = 0; i < taskNumber; i++) {
-                tasks[i] = new Task.TaskBuilder()
+                tasks[i] = new TaskBuilder()
                         .setName(names[i])
                         .setDate(dates[i])
                         .build();

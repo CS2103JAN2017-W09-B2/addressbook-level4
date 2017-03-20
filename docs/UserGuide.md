@@ -58,61 +58,132 @@ I am always happy to see you again! Forget the tutorial you saw the first time, 
 > * Items with `|` indicates either or field.
 > * Items with `...` after them can have multiple instances.
 
-### 3.1. Viewing help : `help`
+### 3.1. Getting Some Help
 
-Format: `help [COMMAND]`
+#### 3.1.1. Help for All Commands : `help`
 
-> `help COMMAND` shows a more detailed explanation of the command e.g. `help add` <br>
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+Format: `help` <br>
+> `help` shows you an overview of all the commands and their usage information. <br>
 
-### 3.2. Adding a task or event: `add`
+*e.g. help* <br>
 
-Adds a task or event to *Typed*. This action can be undone. <br>
-Format: `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG]...`
+#### 3.1.2. Help for Specific Command : `help COMMAND`
 
-> * Adds the task with specified deadline.
-> * `RECURRENT` accepts 'daily', 'weekly', 'monthly', and 'yearly'.
-    The day of entry will be taken as the recurring day.
+Format: `help COMMAND` <br>
+> `help COMMAND` shows you a detailed explanation of the command's usage information.<br>
 
-Examples:
+### 3.2. Adding a Task or Event
 
-* `add read the little prince`
-* `add training camp from 2 May to 5 May`
+#### 3.2.1. Adding a Task or Event by Title Only: `add TITLE`
 
-### 3.3. Listing all tasks and events : `list`
+Format: `add TITLE`
 
-Shows a list of the tasks and events in *Typed*.<br>
-Format: `list [TYPE]`
+> `add TITLE` adds your task or event described by TITLE with no additional information. <br>
+> Your choice of TITLE should contain only alphanumeric characters.
 
-> * Valid formats for `TYPE` include events, done, undone and all.
+*e.g. add read 1984 george orwell* <br>
 
-Examples:
+#### 3.2.1. Adding a Task with Deadline: `add TITLE by DATE`
 
-* `list`<br>
-  List the tasks and events, in a similar way as the default screen.<br>
-* `list undone`<br>
-  List all the undone tasks. <br>
+Format: `add TITLE by DATE`
+
+> `add TITLE by DATE` adds your task along with its due date. <br>
+> DATE takes the format DD/MM/YYYY.
+
+*e.g. add lose 10 kg by 14/02/2014* <br>
+
+#### 3.2.3. Adding a Recurring Task or Event: `add TITLE every FREQUENCY`
+
+Format: `add TITLE every FREQUENCY`
+
+> `add TITLE every FREQUENCY` adds an automatically recurring task or event according to the specified FREQUENCY. <br>
+> You may indicate either `daily`, `monthly` or `yearly` when specifying FREQUENCY. <br>
+> The recurrence will be calculated beginning from the day you enter the task.
+
+*e.g. add boss' birthday every year* <br>
+
+#### 3.2.4. Adding an Event with a Duration: `add TITLE from DATE to DATE`
+
+Format: `add TITLE from DATE to DATE`
+
+> `add TITLE from DATE to DATE` adds your event that is happening over days.
+
+*e.g. add company retreat in Malaysia from 01/01/2017 to 05/01/2017* <br>
+
+#### 3.2.5. Adding a Task or Event with Tags: `add TITLE #TAG ..`
+
+Format: `add TITLE #TAG ..`
+
+> `add TITLE #TAG ..` adds your task or event with one or more tags that allow for easy categorisation and retrieval. <br>
+> #TAG must contain only alphanumeric characters. <br>
+> Tagging is compatible with all the other `add` commands. 
+
+*e.g. add plank for 2 minutes #fit* <br>
+*e.g. add write minutes by 25/12/2017 #work #urgent #bosssays* <br>
 
 
-### 3.4. Editing a task or event : `edit`
+### 3.3. Listing Tasks and Events
 
-Edits an task or event in *Typed*.<br>
-Format: `edit INDEX [DESCRIPTION] [by DATE | TIME] [ #TAG | -#TAG ]`
+#### 3.3.1. Listing a Task or Event : `list`
 
-> * Edits the task or event at the specified `INDEX`.
-    The index refers to the index number shown on the screen.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values except tags.
-> * When editing tags, the user can only remove or add tags.
-> * You can remove all tags by typing `#` without specifying any tags after it.
+Format: `list`
 
-Examples:
+> `list` shows you your tasks and events in a similar manner as the default page. <br>
 
-* `edit 1 by following Sunday`<br>
-  Edits the deadline of the task to the following Sunday.<br>
-* `edit 5 #work`<br>
-  Adds a tag #work to index 5 of the shown list on the screen.<br>
+*e.g. list* <br>
+
+#### 3.2.2. Listing a Task or Event : `list TYPE`
+
+Format: `list TYPE`
+
+> `list TYPE` shows you your tasks and events sorted by TYPE. <br>
+> Valid formats for TYPE include events, done, undone and all.
+
+*e.g. list done* <br>
+
+### 3.4. Editing a Task or Event
+
+#### 3.4.1. Editing Title of a Task or Event : `edit INDEX NEW_TITLE`
+
+Format: `edit INDEX NEW_TITLE `
+
+> `edit INDEX NEW_TITLE` changes the title of the task or event specified by INDEX. <br>
+> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+
+*e.g. edit 1 buy green apples* <br>
+
+#### 3.4.2. Editing Deadline of a Task or Event : `edit INDEX by [DATE]`
+
+Format: `edit INDEX by [DATE] `
+
+> `edit INDEX by [DATE]` changes the deadline of the task or event specified by INDEX. <br> 
+> If you would like to remove a deadline from a task or event, simply enter `edit INDEX by `. <br>
+
+*e.g. edit 1 by 05/05/2017* <br>
+*e.g. edit 1 by* <br>
+
+#### 3.4.3. Editing Tags of a Task or Event : `edit INDEX #[TAG] .. `
+
+Format: `edit INDEX #[TAG] .. `
+
+> `edit INDEX by #[TAG]` replaces the original tags of the task or event specified by INDEX with the new tags given in the command. <br> 
+> If you would like to remove all associated tags in a task or event, use `edit INDEX # `. <br>
+
+*e.g. edit 1 #i #can #add #anything #i #want* <br>
+*e.g. edit 1 #* <br>
+
+#### 3.4.4. Editing Multiple Fields of a Task or Event : `edit INDEX [TITLE] [DATE] #[TAG] .. `
+
+Format: `edit INDEX [TITLE] [DATE] #[TAG] .. `
+
+> `edit INDEX [TITLE] [DATE] #[TAG] .. ` updates the specified fields with new values, if any. <br> 
+> You should provide minimally one of the optional fields when using this command format. <br>
+
+*e.g. edit 1 buy groceries by 05/05/2017* <br>
+*e.g. edit 1 buy groceries by* <br>
+
+
+//TODO continue rewriting from here onwards.
 
 ### 3.5. Finding all tasks and events containing any keyword in their name : `find`
 
