@@ -1,12 +1,17 @@
 package seedu.typed.model.task;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDateTime;
 import java.time.Month;
 
 import org.junit.Test;
 
 public class DateTimeTest {
+
+    private DateTime today = new DateTime();
+    private DateTime tomorrow = today.tomorrow();
 
     private DateTime aprilFoolDay = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
     private DateTime christmasDay = DateTime.getDateTime(2017, Month.DECEMBER, 25, 0, 0);
@@ -15,6 +20,8 @@ public class DateTimeTest {
     private DateTime dayAfterAprilFoolDay = DateTime.getDateTime(2017, Month.APRIL, 2, 0, 0);
     private DateTime dayAfterChristmasDay = DateTime.getDateTime(2017, Month.DECEMBER, 26, 0, 0);
     private DateTime dayAfterGoodFridayDay = DateTime.getDateTime(2017, Month.APRIL, 19, 0, 0);
+
+    private DateTime weekAfterAprilFool = DateTime.getDateTime(2017, Month.APRIL, 8, 0, 0);
 
     private DateTime monthAfterAprilFoolDay = DateTime.getDateTime(2017, Month.MAY, 1, 0, 0);
     private DateTime monthAfterChristmasDay = DateTime.getDateTime(2018, Month.JANUARY, 25, 0, 0);
@@ -64,5 +71,43 @@ public class DateTimeTest {
     public void dateTimeNextYear_goodFridayDay_returnTrue() {
         assertTrue(goodFridayDay.nextYear().equals(yearAfterGoodFridayDay));
     }
+
+    @Test
+    public void isToday_notToday_returnFalse() {
+        assertFalse(tomorrow.isToday());
+    }
+
+    @Test
+    public void isToday_today_returnTrue() {
+        assertTrue(today.isToday());
+    }
+
+    @Test
+    public void isAfter_todayAfterTomorrow_returnFalse() {
+        assertFalse(today.isAfter(tomorrow));
+    }
+
+    @Test
+    public void isAfter_TomorrowAfterToday_returnTrue() {
+        assertTrue(tomorrow.isAfter(today));
+    }
+
+    @Test
+    public void nextWeek_AprilFool_Success() {
+        assertTrue(weekAfterAprilFool.equals(aprilFoolDay.nextWeek()));
+    }
+
+    @Test
+    public void setLocalDateTime_valid_true() {
+        DateTime testDate = new DateTime();
+        testDate.setLocalDateTime(LocalDateTime.of(2017, Month.APRIL, 1, 0, 0));
+        assertTrue(aprilFoolDay.equals(testDate));
+    }
+
+    @Test
+    public void toString_AprilFool_success() {
+        assertTrue((aprilFoolDay.toString()).equals("2017-04-01"));
+    }
+
 
 }

@@ -121,25 +121,4 @@ public class AddCommandTest {
             e.printStackTrace();
         }
     }
-
-    /*@Test
-    public void execute_dateTagNulls_success() {
-
-    }
-    @Test
-    public void execute_dateNull_success() {
-
-    }
-    @Test
-    public void execute_tagNull_success() {
-
-    }
-    @Test
-    public void execute_nameNull_fail() {
-
-    }
-    @Test
-    public void execute_allNull_fail() {
-
-    }*/
 }
