@@ -1,5 +1,6 @@
 package seedu.typed.logic.parser;
 
+import static seedu.typed.commons.core.Messages.MESSAGE_EMPTY_COMMAND;
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.typed.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -22,43 +23,62 @@ import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.UndoCommand;
 
 /**
- * Parses user input.
+ * Parses user input into a Command if input is valid.
  */
 public class Parser {
 
     /**
      * Used for initial separation of command word and arguments.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<args>.*)");
 
     /**
-     * Parses user input into command for execution.
+     * Parses a raw user input and returns the corresponding Command if input is valid.
      *
-     * @param userInput
+     * @param input
      *            full user input string
      * @return the command based on the user input
+     *          or IncorrectCommand if input is invalid
      */
-    public Command parseCommand(String userInput) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+    public Command parseCommand(String input) {
+        assert input != null;
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+
+        if (!isEmptyUserInput(input)) {
+            return new IncorrectCommand(getEmptyUserInputMessage());
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        if (!isValidUserInput(matcher, input)) {
+            return new IncorrectCommand(getInvalidUserInputMessage());
+        }
+        final String command = matcher.group("command");
+        final String args = matcher.group("args");
+
+        return parseValidUserInput(command, args);
+    }
+
+    /**
+     * Parses a valid user input into its corresponding Command.
+     * @param commandWord
+     * @param args
+     * @return
+     */
+    private Command parseValidUserInput(final String commandWord, final String args) {
+        assert commandWord != null;
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(args);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(args);
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            return new SelectCommandParser().parse(args);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(args);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
@@ -70,7 +90,7 @@ public class Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new FindCommandParser().parse(args);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -88,5 +108,23 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
+    private String getEmptyUserInputMessage() {
+        return MESSAGE_EMPTY_COMMAND;
+    }
+
+    private String getInvalidUserInputMessage() {
+        return String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
+    }
+
+    private boolean isEmptyUserInput(String input) {
+        assert input != null;
+        return input.isEmpty();
+    }
+
+    private boolean isValidUserInput(Matcher matcher, String input) {
+        return matcher.matches();
+    }
+
 
 }
