@@ -19,14 +19,14 @@ import seedu.typed.logic.commands.exceptions.CommandException;
  *
  */
 public class AddCommandTest {
-    TestAddCommand testCommand1;
-    TestAddCommand testCommand2;
-    TestAddCommand allPresent;
-    TestAddCommand allNulls;
-    TestAddCommand dateNull;
-    TestAddCommand tagsNull;
-    TestAddCommand nameNull;
-    TestAddCommand dateTagNulls;
+    private TestAddCommand testCommand1;
+    private TestAddCommand testCommand2;
+    private TestAddCommand allPresent;
+    //private TestAddCommand allNulls;
+    //private TestAddCommand dateNull;
+    //private TestAddCommand tagsNull;
+    //private TestAddCommand nameNull;
+    //private TestAddCommand dateTagNulls;
     // TODO The AddCommand still does not tolerate null values for date, tags
 
 
@@ -34,14 +34,14 @@ public class AddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Before
-    public void setup() {
+    public void setUp() {
         try {
             testCommand1 = new TestAddCommand("Meet Joe", "05/04/2017", new HashSet<String>());
             testCommand2 = new TestAddCommand("Meet Joe", "05/04/2017", new HashSet<String>());
             allPresent = new TestAddCommand("Meet Moo", "12/12/2017", new HashSet<String>());
             //dateTagNulls = new TestAddCommand("Meet John", null , null);
             //allNulls = new TestAddCommand(null, null, null);
-            dateNull = new TestAddCommand("Meet John", null, new HashSet<String>());
+            //dateNull = new TestAddCommand("Meet John", null, new HashSet<String>());
             //tagsNull = new TestAddCommand("Meet John", "12/12/2012", null);
             //nameNull = new TestAddCommand(null, "12/12/12", new HashSet<String>());
         } catch (Exception e) {
@@ -81,7 +81,7 @@ public class AddCommandTest {
         }
     }
 
-    @Test
+    /*@Test
     public void execute_dateTagNulls_success() {
 
     }
@@ -100,5 +100,5 @@ public class AddCommandTest {
     @Test
     public void execute_allNull_fail() {
 
-    }
+    }*/
 }

@@ -15,11 +15,11 @@ import seedu.typed.logic.commands.CommandResult;
  *
  */
 public class ClearCommandTest {
-    TestClearCommand dirtyClear;
-    TestClearCommand cleanClear;
+    private TestClearCommand dirtyClear;
+    private TestClearCommand cleanClear;
 
     @Before
-    public void setup() {
+    public void setUp() {
         ModelStub dirtyModel = new ModelStub();
         dirtyModel.addTestTask();
         ModelStub cleanModel = new ModelStub();

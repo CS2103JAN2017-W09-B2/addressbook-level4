@@ -14,7 +14,7 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class ModelStub extends ModelManager {
 
-    TaskManager taskManager;
+    private TaskManager taskManager;
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
