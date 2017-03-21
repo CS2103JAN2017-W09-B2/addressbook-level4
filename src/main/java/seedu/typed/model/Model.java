@@ -7,6 +7,7 @@ import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -53,6 +54,10 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+
+    void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException;
+
+    void updateCompletedTasksToShowAll();
 
 
 }

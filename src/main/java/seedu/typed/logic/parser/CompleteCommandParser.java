@@ -28,7 +28,7 @@ public class CompleteCommandParser {
         case RANGE:
             return new CompleteCommand(startIndex, endIndex);
         case INDEX:
-            return new CompleteCommand(startIndex);
+            return new CompleteCommand(Integer.valueOf(args.trim()));
         default:
             return new IncorrectCommand(CompleteCommand.MESSAGE_NOT_COMPLETED);
         }

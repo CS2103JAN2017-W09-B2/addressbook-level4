@@ -10,6 +10,7 @@ import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "finish";
@@ -83,12 +84,15 @@ public class CompleteCommand extends Command {
      * Updates the model and session of the completed tasks
      * @param tasksList
      * @throws DuplicateTaskException
+     * @throws TaskNotFoundException
      */
-    private void updateCompletedTasks(List<ReadOnlyTask> tasksList) throws DuplicateTaskException {
+    private void updateCompletedTasks(List<ReadOnlyTask> tasksList) throws DuplicateTaskException,
+        TaskNotFoundException {
         for (int i = 0; i < tasksList.size(); i++) {
             Task taskToCompleteCopy = new TaskBuilder(tasksList.get(i)).build();
             Task completedTask = new TaskBuilder(taskToCompleteCopy).isCompleted(true).build();
             model.updateTask(startIndex + i, completedTask);
+            model.completeTask(completedTask);
             session.update(CommandTypeUtil.TYPE_EDIT_TASK, taskToCompleteCopy, completedTask);
         }
     }
