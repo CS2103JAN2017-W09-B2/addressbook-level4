@@ -1,5 +1,6 @@
 package seedu.typed.model.task;
 
+
 import seedu.typed.model.tag.UniqueTagList;
 
 /**
@@ -11,27 +12,47 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Date date;
 
+    private boolean isCompleted;
+
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Date date, UniqueTagList tags) {
+    public Task(Name name, Date date, UniqueTagList tags, boolean isCompleted) {
         // commented this out!! allow date tags be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
+
         this.name = name;
         this.date = date;
         this.tags = new UniqueTagList(tags); // protect internal tags from
+        this.isCompleted = isCompleted;
         // changes
         // in the arg list
+    }
+    /**
+     * Alternative Constructor with isCompleted false as default
+     * @param name
+     * @param date
+     * @param tags
+     */
+    public Task(Name name, Date date, UniqueTagList tags) {
+        // commented this out, allow date tags to be null
+        //assert !CollectionUtil.isAnyNull(name, date, tags);
+        assert name != null;
+
+        this.name = name;
+        this.date = date;
+        this.tags = new UniqueTagList(tags);
+        this.isCompleted = false;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDate(), source.getTags());
+        this(source.getName(), source.getDate(), source.getTags(), source.getIsCompleted());
     }
 
     public void setName(Name name) {
@@ -66,6 +87,14 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+
+    public boolean getIsCompleted() {
+        return this.isCompleted;
+    }
+
     /**
      * Updates this task with the details of {@code replacement}.
      */
@@ -75,6 +104,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
         this.setTags(replacement.getTags());
+        this.setIsCompleted(replacement.getIsCompleted());
     }
 
     @Override

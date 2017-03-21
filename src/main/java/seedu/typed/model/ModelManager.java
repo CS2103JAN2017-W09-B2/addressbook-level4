@@ -13,6 +13,7 @@ import seedu.typed.commons.util.StringUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList;
+import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -24,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyTask> completedTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -36,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        completedTasks = new FilteredList<>(this.taskManager.getCompletedTasks());
     }
 
     public ModelManager() {
@@ -72,6 +75,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException {
+        taskManager.completeTask(task);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
@@ -80,6 +90,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
+
+    // Completed Task List accessors
+
+    @Override
+    public void updateCompletedTasksToShowAll() {
+        completedTasks.setPredicate(null);
+    }
+
 
     // =========== Filtered Task List Accessors
     // =============================================================
@@ -150,7 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil
-                    .isFuzzyKeywordSearchIgnoreCase(task.getName().getValue(), keyword))
+                            .isFuzzyKeywordSearchIgnoreCase(task.getName().getValue(), keyword))
                     .findAny().isPresent();
         }
 
