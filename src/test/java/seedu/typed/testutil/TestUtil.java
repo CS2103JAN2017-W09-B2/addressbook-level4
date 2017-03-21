@@ -325,12 +325,26 @@ public class TestUtil {
      * @param tasks
      *            A array of tasks.
      * @param tasksToAdd
-     *            The tasks that are to be appended behind the original array.
+     *            The tasks that are to be appended at the front of the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
-        listOfTasks.addAll(asList(tasksToAdd));
+        System.out.println("Printing pre-list");
+        for (int j = 0; j < listOfTasks.size(); j++) {
+            System.out.println(listOfTasks.get(j));
+        }
+        for (TestTask t : tasksToAdd ) {
+            listOfTasks.add(0, t);
+        }
+        System.out.println("Now printing taskToAdd");
+        for (int i = 0; i < tasksToAdd.length; i++) {
+            System.out.println(tasksToAdd[i]);
+        }
+        System.out.println("Now printing the list");
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            System.out.println(listOfTasks.get(i));
+        }
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 

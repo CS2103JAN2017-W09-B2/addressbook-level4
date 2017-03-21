@@ -15,6 +15,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
@@ -144,7 +145,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task.TaskBuilder(editedReadOnlyTask).build();
+        Task editedTask = new TaskBuilder(editedReadOnlyTask).build();
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.

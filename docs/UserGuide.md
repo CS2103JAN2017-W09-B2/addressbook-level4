@@ -182,137 +182,189 @@ Format: `edit INDEX [TITLE] [DATE] #[TAG] .. `
 *e.g. edit 1 buy groceries by 05/05/2017* <br>
 *e.g. edit 1 buy groceries by* <br>
 
+### 3.5. Finding Tasks and Events
 
-//TODO continue rewriting from here onwards.
+#### 3.5.1. Find a Task or Event by Title : `find KEYWORD ..`
 
-### 3.5. Finding all tasks and events containing any keyword in their name : `find`
+Format: `find KEYWORD ..`
 
-Finds tasks and events whose names contain any or close to the given keywords.<br>
-Format: `find KEYWORD|#TAGS [MORE_KEYWORDS | #MORE_TAGS]`
+> `find KEYWORD ..` finds all your tasks and events containing KEYWORD in their title. <br>
+> Fuzzy find is used to include similar words, e.g. `Sara` will match `Cara`. <br>
+> The search is not case sensitive, e.g `boss` will match `Boss`. <br>
+> The order of the keywords does not matter, e.g. `Hans Bo` will match `Bo Hans`. <br>
+> Tasks or events matching at least one keyword will be returned (i.e. `OR` search), e.g. `Expo` will match `IT Expo`. <br>
 
-> * The search is not case sensitive. e.g `boss` will match `Boss`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name of the tasks and events is searched.
-> * Fuzzy find is used e.g. `bss` will match `boss`
-> * Tasks or events matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Expo` will match `IT Expo`
+*e.g. find Jonny finance* <br>
 
-Examples:
+#### 3.5.2. Find a Task or Event by Tag : `find #TAG ..`
 
-* `find johnny depp`<br>
-  Returns any tasks and events that names have close to the keywords, johnny and depp
-* `find boss #work`<br>
-  Returns any tasks or events with similar words to boss or contains similar tagging to work.
+Format: `find #TAG ..`
 
-### 3.6. Deleting a task or event : `delete`
+> `find #TAG ..` finds all your tasks and events tagged with #TAG. <br>
+> Fuzzy find is used to include similar words, e.g. `#work` will match `#werk`. <br>
+> The search is not case sensitive, e.g `#boss` will match `#Boss`. <br>
+> The order of the tags does not matter, e.g. `#work #urgent` will return the same results as `#urgent #work`. <br>
+> Tasks or events matching at least one tag will be returned (i.e. `OR` search), e.g. `#work` will match a task that is tagged with `#work #it`. <br>
 
-Deletes the specified task or event from *Typed*. This action can be undone. <br>
-Format: `delete [all]|INDEX [ to | ,] [INDEX] ...`
+*e.g. find #dope #chill #urgent* <br>
 
-> Deletes the task at the specified `INDEX` or range of `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+### 3.6. Deleting Tasks and Events
 
-Examples:
+#### 3.6.1. Deleting One Task or Event : `delete INDEX `
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the task or event labelled as index 2 on the screen on *Typed*.
-* `find boss`<br>
-  `delete 1`<br>
-  Deletes the 1st task or event in the results of the `find` command.
+Format: `delete INDEX`
 
-### 3.7. Showing history : `history`
+> `delete INDEX` removes a task or event identified by INDEX. <br>
+> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
-Shows a list of the past commands used in that session.<br>
+*e.g. delete 2* <br>
+
+#### 3.6.2. Deleting Multiple Tasks or Events : `delete INDEX to INDEX `
+
+Format: `delete INDEX to INDEX`
+
+> `delete INDEX to INDEX` removes a range of tasks or events identified by INDEX. <br>
+> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+
+*e.g. delete 2 to 8* <br>
+
+#### 3.6.3. Deleting All Tasks or Events : `delete all `
+
+Format: `delete all` 
+
+> `delete all` removes all stored tasks and events. <br>
+
+*e.g. delete all* <br>
+
+### 3.7. Undoing Actions
+
+#### 3.7.1. Undoing One Action : `undo`
+
+Format: `undo`
+
+> `undo` restores *Typed* to its state before the last action was performed. <br>
+> Only mutable commands, e.g. `add`, `edit`, `delete` can be undone. <br>
+> `undo` supports only actions performed within the same session. 
+> > Each time you launch *Typed*, a new session is started. When you exit or quit *Typed*, this session ends and is not carried forward to your next launch. <br>
+
+*e.g. undo* <br>
+
+#### 3.7.2. Undoing Multiple Actions : `undo NUMBER`
+
+Format: `undo NUMBER`
+
+> `undo NUMBER` restores *Typed* to its state before the last NUMBER actions were performed. <br>
+
+*e.g. undo 5* <br>
+
+#### 3.7.3. Undoing All Actions : `undo all`
+
+Format: `undo all`
+
+> `undo all` restores *Typed* to its state before all actions were performed. <br>
+
+*e.g. undo 5* <br>
+
+### 3.8. Redoing Actions
+
+#### 3.8.1. Redoing One Action : `redo`
+
+Format: `redo`
+
+> `redo` restores *Typed* to its state before the last `undo` action was performed. <br>
+> Only an `undo` action can be redone. <br>
+> `redo` supports only `undo` actions performed within the same session. <br>
+> > Each time you launch *Typed*, a new session is started. When you exit or quit *Typed*, this session ends and is not carried forward to your next launch. <br>
+
+> If a mutable command, e.g. `add`, `edit`, `delete` is executed after an `undo`, `redo` will no longer be available. <br>
+
+*e.g. redo*
+
+#### 3.8.2. Redoing Multiple Actions : `redo NUMBER`
+
+Format: `undo NUMBER`
+
+> `redo NUMBER` restores *Typed* to its state before the last NUMBER `undo` actions were performed. <br>
+
+*e.g. redo 3* <br>
+
+#### 3.8.3. Redoing All Actions : `redo all`
+
+Format: `redo all`
+
+> `redo all` restores *Typed* to its state before all `undo` actions were performed. <br>
+> You can only `redo` as many times as you `undo`.
+
+*e.g. redo all* <br>
+
+
+### 3.9. Completing Tasks
+
+#### 3.9.1. Completing One Task : `complete INDEX `
+
+Format: `complete INDEX`
+
+> `complete INDEX` marks a task identified by INDEX as completed. <br>
+> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+
+*e.g. complete 2* <br>
+
+#### 3.9.2. Completing Multiple Tasks : `complete INDEX to INDEX `
+
+Format: `complete INDEX to INDEX`
+
+> `complete INDEX to INDEX` marks a range of tasks identified by INDEX as done. <br>
+> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+
+*e.g. complete 2 to 8* <br>
+
+#### 3.9.3. Completing All Tasks : `complete all `
+
+Format: `complete all` 
+
+> `complete all` marks all undone tasks as complete. <br>
+
+*e.g. complete all* <br>
+
+
+### 3.10. Showing History
+
+#### 3.10.1. Showing History : `history`
+
 Format: `history`
 
-Examples:
+> `history` shows you a list of all executed actions in the current session.
 
-* `history`<br>
+*e.g. history* <br>
 
-### 3.8. Undo : `undo`
 
-Undo the last mutable command e.g. `add`, `delete`, `edit`.<br>
-Format: `undo [INDEX | all]`
+### 3.11. Saving Your Data
 
-> There must be commands that mutate the data before `undo` is called. <br>
-> Undo only works for if mutable commands are used in the **same** session. <br>
+#### 3.11.1. Saving Your Data to the Current File: 
 
-Examples:
+> Good news! Your data is automatically saved.
 
-* `add read the little prince`<br>
-  `undo`<br>
-  Undo the previous add command.<br>
-* `add read the little prince`<br>
-  `add push git commit by next wednesday`<br>
-  `add write blog post`<br>
-  `undo 2`<br>
-  Undo the previous 2 command, leaving only `add read the little prince` as the only task.<br>
+#### 3.11.2. Saving Your Data to Another File : `save FILENAME`
 
-### 3.9. Redo : `redo`
-
-Redo the last undo.<br>
-Format: `redo [INDEX | all]`
-
-> There must be undo(s) before `redo` is called. <br>
-> `redo` only works for if `undo` commands are used in the **same** session. <br>
-> If a mutable command (e.g. `add`, `delete`, `undo`) is used after `undo`, `redo` have no effect.<br>
-
-Examples:
-
-* `add read the little prince`<br>
-  `undo`<br>
-  Undo the previous add command.<br>
-  'redo'<br>
-  Redo the undo command i.e. read the little prince is added back to *Typed*.
-* `add read the little prince`<br>
-  `add push git commit by next wednesday` <br>
-  `add write blog post`<br>
-  `undo 3`<br>
-  Undo the previous 2 command, leaving only read the little prince as the only task.<br>
-  `redo 2`<br>
-  Redo 2 undos i.e. push git commit and write blog post is added back to *Typed*.
-
-### 3.10. Saving the data : `save`
-
-*Typed* data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually, unless you would like to save to a new file.
-
-Saves the data in a new file.<br>
 Format: `save FILENAME`
 
-Examples:
+> `save FILENAME` saves all your data to a new file specified by FILENAME. <br>
+> FILENAME must contain a .xml extension to be valid.
 
-* `save newTyped.txt`<br>
-  Saves data to the new file with file name newTyped.txt.
+*e.g. save mynewtasks.xml* <br>
 
-### 3.11. Quiting the program : `quit`
 
-Exits *Typed* <br>
+### 3.12. Exiting *Typed*
 
-Format: `quit`
+#### 3.12.1. Exiting *Typed* : `exit `
 
-Examples:
+Format: `exit`
 
-* `quit`<br>
+> `exit` closes *Typed*. <br>
+> Once again, your data is automatically saved upon exiting the program!
 
-### 3.12. Completing the task : `complete`
+*e.g. exit* <br>
 
-Marks the task(s) as completed in *Typed*<br>
-
-Format: `complete [all]|INDEX [ to | ,] [INDEX] ...`
-
-> Marks the task at the specified `INDEX` or range of `INDEX` as completed. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...<br>
-
-Examples:
-
-* `complete 2`<br>
-  Marks the task at index 2 of the listing shown as completed. Removes from the list of tasks shown.
-* `complete 2 to 5`<br>
-  Marks multiple tasks from index 2 to 5 as completed. Remove from the list of tasks shown.
 
 ## 4. Command Summary
 

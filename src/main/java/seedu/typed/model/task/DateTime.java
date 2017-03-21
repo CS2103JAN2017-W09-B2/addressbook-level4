@@ -1,9 +1,7 @@
 package seedu.typed.model.task;
 
-import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
 
 /**
@@ -20,11 +18,14 @@ public class DateTime {
     private static final long LONG_ONE = (long) 1.0;
 
     private LocalDateTime localDateTime;
-    private static Clock defaultClock = Clock.systemDefaultZone();
 
     public DateTime(LocalDateTime localDateTime) {
         super();
         this.localDateTime = localDateTime;
+    }
+
+    public DateTime() {
+        this.localDateTime = LocalDateTime.now();
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -35,21 +36,16 @@ public class DateTime {
         this.localDateTime = localDateTime;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((localDateTime == null) ? 0 : localDateTime.hashCode());
-        return result;
-    }
-
     public boolean equals(DateTime other) {
-        return this.localDateTime.equals(other.getLocalDateTime());
+        LocalDateTime self = this.localDateTime;
+        LocalDateTime others = other.localDateTime;
+        return (self.getDayOfMonth() == others.getDayOfMonth())
+                && (self.getMonth() == others.getMonth())
+                && (self.getYear() == others.getYear())
+                && (self.getHour() == others.getHour())
+                && (self.getMinute() == others.getMinute())
+                && (self.getSecond() == others.getSecond());
 
-    }
-
-    public boolean isBefore(DateTime other) {
-        return this.localDateTime.isBefore(other.getLocalDateTime());
     }
 
     public boolean isAfter(DateTime other) {
@@ -61,11 +57,7 @@ public class DateTime {
         return this.localDateTime.toLocalDate().equals(today);
     }
 
-    public boolean isNow() {
-        LocalTime currentTime = LocalTime.now();
-        return this.localDateTime.toLocalTime().equals(currentTime);
-    }
-
+    /*
     public static DateTime getTomorrow() {
         LocalDateTime nextDay = LocalDateTime.now(defaultClock).plusDays(LONG_ONE);
         return new DateTime(nextDay);
@@ -84,6 +76,7 @@ public class DateTime {
         LocalDateTime nextYear = LocalDateTime.now(defaultClock).plusYears(LONG_ONE);
         return new DateTime(nextYear);
     }
+     */
 
     public DateTime tomorrow() {
         LocalDateTime nextDay = this.localDateTime.plusDays(LONG_ONE);
@@ -109,15 +102,7 @@ public class DateTime {
     }
     @Override
     public String toString() {
-        return localDateTime.toString();
-    }
-
-    public String toLocalDateString() {
         return localDateTime.toLocalDate().toString();
-    }
-
-    public String toLocalTimeString() {
-        return localDateTime.toLocalTime().toString();
     }
 
 }
