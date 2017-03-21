@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Meet Alex Yeoh</name>
+        <date>20/01/2017</date>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet Bernice Yu</name>
+        <date>21/01/2017</date>
+        <tagged>colleagues</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet Charlotte Oliveiro</name>
+        <date>22/01/2017</date>
+        <tagged>neighbours</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet David Li</name>
+        <date>23/01/2017</date>
+        <tagged>family</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet Irfan Ibrahim</name>
+        <date>24/01/2017</date>
+        <tagged>classmates</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet Roy Balakrishnan</name>
+        <date>25/01/2017</date>
+        <tagged>colleagues</tagged>
+    </tasks>
+    <tags>friends</tags>
+    <tags>colleagues</tags>
+    <tags>neighbours</tags>
+    <tags>family</tags>
+    <tags>classmates</tags>
+    <tags>hello</tags>
+</taskmanager>
