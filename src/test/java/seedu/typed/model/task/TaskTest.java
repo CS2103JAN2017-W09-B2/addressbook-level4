@@ -13,7 +13,11 @@ import org.junit.rules.ExpectedException;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
-
+/**
+ * Unit testing for Task class 98.3%
+ * @author YIM CHIA HUI
+ *
+ */
 public class TaskTest {
     Name nullName;
     Name name;

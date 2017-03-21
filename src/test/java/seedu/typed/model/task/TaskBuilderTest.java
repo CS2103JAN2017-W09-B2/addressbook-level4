@@ -1,6 +1,7 @@
 package seedu.typed.model.task;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -14,7 +15,10 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
-
+/*
+ * Unit testing for TaskBuilder 100%
+ * @author YIM CHIA HUI
+ */
 public class TaskBuilderTest {
     TaskBuilder testBuilder1 = new TaskBuilder();
     TaskBuilder testBuilder2 = new TaskBuilder();
