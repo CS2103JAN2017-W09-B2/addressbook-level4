@@ -43,6 +43,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
+        assert session != null;
         try {
             model.addTask(toAdd);
             session.update(CommandTypeUtil.TYPE_ADD_TASK, toAdd, null);
