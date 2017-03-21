@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.typed.logic.commands.ClearCommand;
+
 public class ClearCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -11,7 +13,7 @@ public class ClearCommandTest extends TaskManagerGuiTest {
 
         // verify a non-empty list can be cleared
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
-        assertClearCommandSuccess();
+        assertClearSuccess();
 
         // verify other commands can work after a clear command
         commandBox.runCommand(td.hoon.getAddCommand());
@@ -20,12 +22,12 @@ public class ClearCommandTest extends TaskManagerGuiTest {
         assertListSize(0);
 
         // verify clear command works when the list is empty
-        assertClearCommandSuccess();
+        assertClearSuccess();
     }
 
-    private void assertClearCommandSuccess() {
+    private void assertClearSuccess() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertResultMessage("Task manager has been cleared!");
+        assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
     }
 }
