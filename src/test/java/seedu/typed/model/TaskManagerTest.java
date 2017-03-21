@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -49,8 +50,8 @@ public class TaskManagerTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task.TaskBuilder(td.alice).build(),
-                new Task.TaskBuilder(td.alice).build());
+        List<Task> newTasks = Arrays.asList(new TaskBuilder(td.alice).build(),
+                new TaskBuilder(td.alice).build());
         List<Tag> newTags = td.alice.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
