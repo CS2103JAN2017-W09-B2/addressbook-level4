@@ -41,7 +41,7 @@ public class Task implements ReadOnlyTask {
         // commented this out, allow date tags to be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
-        
+
         this.name = name;
         this.date = date;
         this.tags = new UniqueTagList(tags);
