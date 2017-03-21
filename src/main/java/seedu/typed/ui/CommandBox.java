@@ -72,12 +72,16 @@ public class CommandBox extends UiPart<Region> {
 
             commandTextField.setText(commandToShow);
         }
-        if ((event.getCode().toString().equals("DOWN")) && (!nextCommand.isEmpty())) {
-            String commandToShow = nextCommand.pop();
-            // save the command to historyCommand stack
-            historyCommand.push(commandToShow);
+        if (event.getCode().toString().equals("DOWN")) {
+            if (!nextCommand.isEmpty()) {
+                String commandToShow = nextCommand.pop();
+                // save the command to historyCommand stack
+                historyCommand.push(commandToShow);
 
-            commandTextField.setText(commandToShow);
+                commandTextField.setText(commandToShow);
+            } else {
+                commandTextField.clear();
+            }
         }
     }
 
