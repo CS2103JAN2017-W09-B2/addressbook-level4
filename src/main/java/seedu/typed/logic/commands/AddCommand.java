@@ -6,6 +6,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList;
 
 /**
@@ -19,7 +20,8 @@ public class AddCommand extends Command {
             + "Parameters: NAME [d/DATE]  [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " buy 5 broccolis d/tomorrow t/survival t/grocery ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s added";
+    //public static final String MESSAGE_SUCCESS = "%1$s added";
+    public static final String MESSAGE_SUCCESS = "Task Added!";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
@@ -31,7 +33,7 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String name, String date, Set<String> tags) throws IllegalValueException {
-        this.toAdd = new Task.TaskBuilder()
+        this.toAdd = new TaskBuilder()
                 .setName(name)
                 .setDate(date)
                 .setTags(tags)
@@ -41,13 +43,11 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
+        assert session != null;
         try {
             model.addTask(toAdd);
-            String name = toAdd.getName().toString();
-            String date = toAdd.getDate().toString();
-            String tags = toAdd.getTags().toString();
             session.update(CommandTypeUtil.TYPE_ADD_TASK, toAdd, null);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, name, date, tags));
+            return new CommandResult(String.format(MESSAGE_SUCCESS));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

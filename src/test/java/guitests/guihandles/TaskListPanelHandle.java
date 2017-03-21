@@ -13,7 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.typed.TestApp;
 import seedu.typed.model.task.ReadOnlyTask;
-import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.testutil.TestUtil;
 
 /**
@@ -155,7 +155,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task.TaskBuilder(getListView().getItems().get(index))
+        return getTaskCardHandle(new TaskBuilder(getListView().getItems().get(index))
                 .build());
     }
 
