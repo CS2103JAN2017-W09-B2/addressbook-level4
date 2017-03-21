@@ -26,6 +26,8 @@ public class TaskTest {
     private Tag tag2;
     private Date nullDate;
     private Date date;
+    private boolean isCompleted;
+    private boolean isCompleted2;
     private Task test;
     private UniqueTagList tagList;
     private UniqueTagList tagList2;
@@ -42,6 +44,8 @@ public class TaskTest {
             name = new Name("Meet John");
             name2 = new Name("Meet Honey");
             date = new Date("12/12/2017");
+            isCompleted = false;
+            isCompleted2 = false;
             test = new Task(name, date, new UniqueTagList());
             tagList = new UniqueTagList();
             tagList2 = new UniqueTagList();
@@ -127,6 +131,6 @@ public class TaskTest {
     }
     @Test
     public void toString_valid_success() {
-        assertEquals(test.toString(), " Name: Meet John Date: 12/12/2017 Tags: ");
+        assertEquals(test.toString(), " Name: Meet John Date: 12/12/2017 Completed: false Tags: ");
     }
 }
