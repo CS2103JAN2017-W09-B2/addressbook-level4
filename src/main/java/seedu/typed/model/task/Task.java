@@ -1,5 +1,6 @@
 package seedu.typed.model.task;
 
+
 import seedu.typed.model.tag.UniqueTagList;
 
 /**
@@ -111,14 +112,6 @@ public class Task implements ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
                         && this.isSameStateAs((ReadOnlyTask) other));
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing
-        // your
-        // own
-        return Objects.hash(name, date, tags, isCompleted);
     }
 
     @Override
