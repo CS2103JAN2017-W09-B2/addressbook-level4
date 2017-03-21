@@ -35,6 +35,7 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
+                System.out.println(task.getName());
                 tm.addTask(new Task.TaskBuilder(task)
                         .build());
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -47,9 +48,18 @@ public class TypicalTestTasks {
         return new TestTask[] { alice, benson, carl, daniel, elle, fiona, george };
     }
 
+    public TestTask[] getTypicalTasksReverse() {
+        return new TestTask[] { george, fiona, elle, daniel, carl, benson, alice };
+    }
+
+    public TestTask[] getEmpty() {
+        return new TestTask[] {};
+    }
+
     public TaskManager getTypicalTaskManager() {
         TaskManager tm = new TaskManager();
         loadTaskManagerWithSampleData(tm);
         return tm;
     }
+
 }
