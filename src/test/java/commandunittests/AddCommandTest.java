@@ -11,6 +11,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.model.task.TaskBuilder;
+import seedu.typed.model.task.UniqueTaskList;
 
 /**
  * Unit Testing for AddCommand
@@ -21,7 +23,9 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 public class AddCommandTest {
     private TestAddCommand testCommand1;
     private TestAddCommand testCommand2;
+    private TestAddCommand testCommand3;
     private TestAddCommand allPresent;
+    private ModelStub testModel;
     //private TestAddCommand allNulls;
     //private TestAddCommand dateNull;
     //private TestAddCommand tagsNull;
@@ -38,7 +42,12 @@ public class AddCommandTest {
         try {
             testCommand1 = new TestAddCommand("Meet Joe", "05/04/2017", new HashSet<String>());
             testCommand2 = new TestAddCommand("Meet Joe", "05/04/2017", new HashSet<String>());
+            testCommand3 = new TestAddCommand("Meet Joe", "05/04/2017", new HashSet<String>());
             allPresent = new TestAddCommand("Meet Moo", "12/12/2017", new HashSet<String>());
+            testModel = new ModelStub();
+            testModel.addTask(new TaskBuilder().setName("Meet Joe")
+                    .setDate("05/04/2017")
+                    .build());
             //dateTagNulls = new TestAddCommand("Meet John", null , null);
             //allNulls = new TestAddCommand(null, null, null);
             //dateNull = new TestAddCommand("Meet John", null, new HashSet<String>());
@@ -66,6 +75,38 @@ public class AddCommandTest {
         thrown.expect(AssertionError.class);
         try {
             testCommand2.execute();
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void execute_sessionModelNull_assertError() {
+        testCommand1.setModel(null);
+        testCommand1.setSession(null);
+        thrown.expect(AssertionError.class);
+        try {
+            testCommand1.execute();
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void execute_sessionModelPresent_assertSuccess() {
+        try {
+            allPresent.execute();
+        } catch (CommandException e) {
+
+        }
+    }
+
+    @Test
+    public void execute_duplicateTasks_exception() {
+        try {
+            testCommand3.setModel(testModel);
+            testCommand3.execute();
+            thrown.expect(UniqueTaskList.DuplicateTaskException.class);
         } catch (CommandException e) {
             e.printStackTrace();
         }
