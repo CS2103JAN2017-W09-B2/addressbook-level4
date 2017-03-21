@@ -23,7 +23,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Meet Bobby d/19/03/2017 t/husband";
+        String detailsToEdit = "Meet Bobby d/19/03/2017 #husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
@@ -34,7 +34,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "#sweetie #bestie";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -45,7 +45,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "#";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -94,13 +94,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 d/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Meet Alice Pauline d/01/01/2018 t/friends");
+        commandBox.runCommand("edit 3 Meet Alice Pauline d/01/01/2018 #friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

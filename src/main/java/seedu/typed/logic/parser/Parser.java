@@ -40,18 +40,18 @@ public class Parser {
      * @return the command based on the user input
      *          or IncorrectCommand if input is invalid
      */
-    public Command parseCommand(String input) {
+    public Command parseInput(String input) {
         assert input != null;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
 
-        if (!isEmptyUserInput(input)) {
+        if (isEmptyUserInput(input)) {
             return new IncorrectCommand(getEmptyUserInputMessage());
         }
 
         if (!isValidUserInput(matcher, input)) {
             return new IncorrectCommand(getInvalidUserInputMessage());
         }
-        final String command = matcher.group("command");
+        final String command = matcher.group("commandWord");
         final String args = matcher.group("args");
 
         return parseValidUserInput(command, args);

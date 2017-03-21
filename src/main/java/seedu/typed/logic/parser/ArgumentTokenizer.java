@@ -174,8 +174,8 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * A prefix that marks the beginning of an argument. e.g. '/t' in 'add watch
-     * netflix /t chill'
+     * A prefix that marks the beginning of an argument. e.g. '#' in 'add watch
+     * netflix #chill'
      */
     public static class Prefix {
         final String prefix;
