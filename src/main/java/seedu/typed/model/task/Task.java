@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
-import seedu.typed.commons.util.CollectionUtil;
+//import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
@@ -25,7 +25,8 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Name name, Date date, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, date, tags);
+        //assert !CollectionUtil.isAnyNull(name, date, tags);
+        assert name != null;
         this.name = name;
         this.date = date;
         this.tags = new UniqueTagList(tags); // protect internal tags from
