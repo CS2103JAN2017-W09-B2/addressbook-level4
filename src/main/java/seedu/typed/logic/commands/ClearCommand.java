@@ -19,8 +19,8 @@ public class ClearCommand extends Command {
         assert model != null;
         TaskManager oldTaskManager = new TaskManager();
         oldTaskManager.copyData(model.getTaskManager());
+        model.resetData(new TaskManager());
         ReadOnlyTaskManager newTaskManager = new TaskManager();
-        model.resetData(newTaskManager);
         session.update(CommandTypeUtil.TYPE_CLEAR, oldTaskManager, newTaskManager);
         return new CommandResult(MESSAGE_SUCCESS);
     }
