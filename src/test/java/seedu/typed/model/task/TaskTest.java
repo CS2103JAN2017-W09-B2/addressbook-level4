@@ -19,18 +19,16 @@ import seedu.typed.model.tag.UniqueTagList;
  *
  */
 public class TaskTest {
-    Name nullName;
-    Name name;
-    Name name2;
-    Tag tag;
-    Tag tag2;
-    Tag nullTag;
-    Date nullDate;
-    Date date;
-    Task test;
-    UniqueTagList tagList;
-    UniqueTagList tagList2;
-    UniqueTagList nullTagList;
+    private Name nullName;
+    private Name name;
+    private Name name2;
+    private Tag tag;
+    private Tag tag2;
+    private Date nullDate;
+    private Date date;
+    private Task test;
+    private UniqueTagList tagList;
+    private UniqueTagList tagList2;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -39,8 +37,6 @@ public class TaskTest {
         try {
             nullName = null;
             nullDate = null;
-            nullTag = null;
-            nullTagList = null;
             tag = new Tag("work");
             tag2 = new Tag("friends");
             name = new Name("Meet John");

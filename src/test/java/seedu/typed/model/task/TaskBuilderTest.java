@@ -20,13 +20,12 @@ import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
  * @author YIM CHIA HUI
  */
 public class TaskBuilderTest {
-    TaskBuilder testBuilder1 = new TaskBuilder();
-    TaskBuilder testBuilder2 = new TaskBuilder();
-    Name name;
-    Date date;
-    UniqueTagList tags, tagTest;
-    Set<String> tagSet;
-    Task testTask;
+    private TaskBuilder testBuilder1 = new TaskBuilder();
+    private Name name;
+    private Date date;
+    private UniqueTagList tags, tagTest;
+    private Set<String> tagSet;
+    private Task testTask;
     @Before
     public void setUp() {
         try {
