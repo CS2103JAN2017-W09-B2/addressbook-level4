@@ -142,7 +142,7 @@ Format: `list TYPE`
 
 ### 3.4. Editing a Task or Event
 
-#### 3.4.1. Editing Title of a Task or Event : `edit INDEX NEW_TITLE`
+#### <a name="editName"></a>3.4.1. Editing Title of a Task or Event : `edit INDEX NEW_TITLE`
 
 Format: `edit INDEX NEW_TITLE `
 
@@ -151,7 +151,7 @@ Format: `edit INDEX NEW_TITLE `
 
 *e.g. edit 1 buy green apples* <br>
 
-#### 3.4.2. Editing Deadline of a Task or Event : `edit INDEX by DATE`
+#### <a name="editDate"></a>3.4.2. Editing Deadline of a Task or Event : `edit INDEX by DATE`
 
 Format: `edit INDEX by DATE `
 
@@ -161,7 +161,7 @@ Format: `edit INDEX by DATE `
 *e.g. edit 1 by 05/05/2017* <br>
 *e.g. edit 1 by* <br>
 
-#### 3.4.3. Editing Tags of a Task or Event : `edit INDEX #TAG .. `
+#### <a name="editTag"></a>3.4.3. Editing Tags of a Task or Event : `edit INDEX #TAG .. `
 
 Format: `edit INDEX #TAG .. `
 
@@ -171,7 +171,7 @@ Format: `edit INDEX #TAG .. `
 *e.g. edit 1 #i #can #add #anything #i #want* <br>
 *e.g. edit 1 #* <br>
 
-#### 3.4.4. Editing Multiple Fields of a Task or Event : `edit INDEX [TITLE] [DATE] [#TAG] .. `
+#### <a name="editMultiple"></a>3.4.4. Editing Multiple Fields of a Task or Event : `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
 Format: `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
@@ -372,7 +372,7 @@ Command | Format |
 `help` | [help](#help) <br> [help COMMAND](#specificHelp)|
 `add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration) <br> [add TASK #TAG ..](#addTaskTag)|
 `list` | [list](#list) <br> [list TYPE](#listType)|
-
+`edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
   e.g. `add read the little prince` <br>
