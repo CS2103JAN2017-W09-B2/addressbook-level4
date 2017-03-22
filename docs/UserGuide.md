@@ -328,7 +328,7 @@ Format: `complete all`
 
 ### 3.10. Showing History
 
-#### 3.10.1. Showing History : `history`
+#### <a name="history"></a>3.10.1. Showing History : `history`
 
 Format: `history`
 
@@ -343,7 +343,7 @@ Format: `history`
 
 > Good news! Your data is automatically saved.
 
-#### 3.11.2. Saving Your Data to Another File : `save FILENAME`
+#### <a name="saveFilename"></a>3.11.2. Saving Your Data to Another File : `save FILENAME`
 
 Format: `save FILENAME`
 
@@ -355,7 +355,7 @@ Format: `save FILENAME`
 
 ### 3.12. Exiting *Typed*
 
-#### 3.12.1. Exiting *Typed* : `exit `
+#### <a name="exit"></a>3.12.1. Exiting *Typed* : `exit`
 
 Format: `exit`
 
@@ -377,7 +377,10 @@ Command | Format |
 `delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
 `undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
 `redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
-`complete` | [complete INDEX](#completeOne) <br> [complete INDEX to INDEX](#completeRange) <br> [complete all](#completeAll) | 
+`complete` | [complete INDEX](#completeOne) <br> [complete INDEX to INDEX](#completeRange) <br> [complete all](#completeAll) |
+`history` | [history](#history) |
+`save` | [save FILENAME](#saveFilename) |
+`exit` | [exit](#exit) |
 
 ## 5. FAQ
 
