@@ -16,11 +16,11 @@ Unlike other high-maintenance task managers, I am simply simple. Gone are the da
 
 Ready to be productive? Here we go! :muscle:<br>
 
-1. [Getting Started](#getting-started)
-2. [Returning to *Typed*](#returning-to-typed)
-3. [Features](#features)
-4. [Command Summary](#command-summary)
-5. [FAQ](#faq)
+1. [Getting Started](#1-getting-started)
+2. [Returning to *Typed*](#2-returning-to-typed)
+3. [Features](#3-features)
+4. [Command Summary](#4-command-summary)
+5. [FAQ](#5-faq)
 
 ## 1. Getting Started 
 
@@ -28,10 +28,10 @@ With seemingly never-ending work and errands, it is easy to lose track of what i
 
 Before you get started with me, you should have Java version `1.8.0_60` or later installed. <br>
 
-1. Download the latest `typed.jar` from the [releases](../../../releases) tab.
+1. Download the latest `typed.jar` from the **[releases](../../../releases)** tab.
 2. Copy the file to the folder you want to use as my new home.
 3. Press the Ctrl+Shift+T key to launch me. I will welcome you in just a few seconds.
-4. Walk through the tutorial to try out basic features, or experiment with **[3. Features](#features)** below.
+4. Walk through the tutorial to try out basic features, or experiment with **[3. Features](#3-features)** below.
 
 ## 2. Returning to *Typed*
 
@@ -50,13 +50,12 @@ I am always happy to see you again! Forget the tutorial you saw the first time, 
 
 ## 3. Features
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Words in `lower_case` are the exact strings.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `|` indicates either or field.
-> * Items with `...` after them can have multiple instances.
+**Command Format** <br>
+
+Words in `UPPER_CASE` are the parameters. <br>
+Words in `lower_case` are the exact strings. <br>
+Items in `SQUARE_BRACKETS` are optional. <br>
+Items with `...` after them can have multiple instances. <br>
 
 ### 3.1. Getting Some Help
 
@@ -152,31 +151,31 @@ Format: `edit INDEX NEW_TITLE `
 
 *e.g. edit 1 buy green apples* <br>
 
-#### 3.4.2. Editing Deadline of a Task or Event : `edit INDEX by [DATE]`
+#### 3.4.2. Editing Deadline of a Task or Event : `edit INDEX by DATE`
 
-Format: `edit INDEX by [DATE] `
+Format: `edit INDEX by DATE `
 
-> `edit INDEX by [DATE]` changes the deadline of the task or event specified by INDEX. <br> 
+> `edit INDEX by DATE` changes the deadline of the task or event specified by INDEX. <br> 
 > If you would like to remove a deadline from a task or event, simply enter `edit INDEX by `. <br>
 
 *e.g. edit 1 by 05/05/2017* <br>
 *e.g. edit 1 by* <br>
 
-#### 3.4.3. Editing Tags of a Task or Event : `edit INDEX #[TAG] .. `
+#### 3.4.3. Editing Tags of a Task or Event : `edit INDEX #TAG .. `
 
-Format: `edit INDEX #[TAG] .. `
+Format: `edit INDEX #TAG .. `
 
-> `edit INDEX by #[TAG]` replaces the original tags of the task or event specified by INDEX with the new tags given in the command. <br> 
+> `edit INDEX by #TAG` replaces the original tags of the task or event specified by INDEX with the new tags given in the command. <br> 
 > If you would like to remove all associated tags in a task or event, use `edit INDEX # `. <br>
 
 *e.g. edit 1 #i #can #add #anything #i #want* <br>
 *e.g. edit 1 #* <br>
 
-#### 3.4.4. Editing Multiple Fields of a Task or Event : `edit INDEX [TITLE] [DATE] #[TAG] .. `
+#### 3.4.4. Editing Multiple Fields of a Task or Event : `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
-Format: `edit INDEX [TITLE] [DATE] #[TAG] .. `
+Format: `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
-> `edit INDEX [TITLE] [DATE] #[TAG] .. ` updates the specified fields with new values, if any. <br> 
+> `edit INDEX [TITLE] [DATE] [#TAG] .. ` updates the specified fields with new values, if any. <br> 
 > You should provide minimally one of the optional fields when using this command format. <br>
 
 *e.g. edit 1 buy groceries by 05/05/2017* <br>
@@ -367,6 +366,9 @@ Format: `exit`
 
 
 ## 4. Command Summary
+
+
+
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
   e.g. `add read the little prince` <br>
