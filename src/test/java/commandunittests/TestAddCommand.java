@@ -9,7 +9,7 @@ public class TestAddCommand extends AddCommand {
 
     public TestAddCommand(String name, String date, Set<String> tags) throws IllegalValueException {
         super(name, date, tags);
-        this.setData(new ModelStub(), new SessionStub(), "");//TODO Change String
+        this.setData(new ModelStub(), new SessionStub(), ""); //TODO Change String
     }
 
     public void setModel(ModelStub model) {

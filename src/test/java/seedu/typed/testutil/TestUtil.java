@@ -334,7 +334,7 @@ public class TestUtil {
         for (int j = 0; j < listOfTasks.size(); j++) {
             System.out.println(listOfTasks.get(j));
         }
-        for (TestTask t : tasksToAdd ) {
+        for (TestTask t : tasksToAdd) {
             listOfTasks.add(0, t);
         }
         System.out.println("Now printing taskToAdd");
