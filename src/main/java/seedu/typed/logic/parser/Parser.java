@@ -49,7 +49,7 @@ public class Parser {
             return new IncorrectCommand(getEmptyUserInputMessage());
         }
 
-        if (!isValidUserInput(matcher, input)) {
+        if (!isValidUserInput(matcher)) {
             return new IncorrectCommand(getInvalidUserInputMessage());
         }
         final String command = matcher.group("commandWord");
@@ -73,7 +73,7 @@ public class Parser {
             return new AddCommandParser().parse(args);
 
         case CompleteCommand.COMMAND_WORD:
-            return new CompleteCommandParser().parse(arguments);
+            return new CompleteCommandParser().parse(args);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(args);
