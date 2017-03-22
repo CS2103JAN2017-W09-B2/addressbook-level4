@@ -123,7 +123,7 @@ Format: `add TITLE #TAG ..`
 
 ### 3.3. Listing Tasks and Events
 
-#### 3.3.1. Listing a Task or Event : `list`
+#### <a name="list"></a>3.3.1. Listing a Task or Event : `list`
 
 Format: `list`
 
@@ -131,7 +131,7 @@ Format: `list`
 
 *e.g. list* <br>
 
-#### 3.2.2. Listing a Task or Event : `list TYPE`
+#### <a name="listType"></a>3.2.2. Listing a Task or Event : `list TYPE`
 
 Format: `list TYPE`
 
@@ -371,6 +371,7 @@ Command | Format |
 -------- | :-------- |
 `help` | [help](#help) <br> [help COMMAND](#specificHelp)|
 `add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration) <br> [add TASK #TAG ..](#addTaskTag)|
+`list` | [list](#list) <br> [list TYPE](#listType)|
 
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
