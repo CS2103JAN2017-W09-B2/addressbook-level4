@@ -468,8 +468,10 @@ Priority | As a ... | I want to ... | So that I can...
 
 1a. Command is typed in wrongly <br>
   > Systems indicate error and output a list of valid commands <br>
+
 2a. List is empty <br>
   > System indicate History Command only <br>
+  
 2b. List size is way too large <br>
   > System shows the recent 10 commands <br>
 
