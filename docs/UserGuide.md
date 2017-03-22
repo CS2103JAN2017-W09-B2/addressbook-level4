@@ -66,14 +66,14 @@ Format: `help` <br>
 
 *e.g. help* <br>
 
-#### 3.1.2. Help for Specific Command : `help COMMAND`
+#### <a name="specificHelp"></a>3.1.2. Help for Specific Command : `help COMMAND`
 
 Format: `help COMMAND` <br>
 > `help COMMAND` shows you a detailed explanation of the command's usage information.<br>
 
 ### 3.2. Adding a Task or Event
 
-#### 3.2.1. Adding a Task or Event by Title Only: `add TITLE`
+#### <a name="addTitle"></a>3.2.1. Adding a Task or Event by Title Only: `add TITLE`
 
 Format: `add TITLE`
 
@@ -82,7 +82,7 @@ Format: `add TITLE`
 
 *e.g. add read 1984 george orwell* <br>
 
-#### 3.2.1. Adding a Task with Deadline: `add TITLE by DATE`
+#### <a name="addTitleDate"></a>3.2.1. Adding a Task with Deadline: `add TITLE by DATE`
 
 Format: `add TITLE by DATE`
 
@@ -91,7 +91,7 @@ Format: `add TITLE by DATE`
 
 *e.g. add lose 10 kg by 14/02/2014* <br>
 
-#### 3.2.3. Adding a Recurring Task or Event: `add TITLE every FREQUENCY`
+#### <a name="addRecurring"></a>3.2.3. Adding a Recurring Task or Event: `add TITLE every FREQUENCY`
 
 Format: `add TITLE every FREQUENCY`
 
@@ -101,7 +101,7 @@ Format: `add TITLE every FREQUENCY`
 
 *e.g. add boss' birthday every year* <br>
 
-#### 3.2.4. Adding an Event with a Duration: `add TITLE from DATE to DATE`
+#### <a name="addEventDuration"></a>3.2.4. Adding an Event with a Duration: `add TITLE from DATE to DATE`
 
 Format: `add TITLE from DATE to DATE`
 
@@ -109,7 +109,7 @@ Format: `add TITLE from DATE to DATE`
 
 *e.g. add company retreat in Malaysia from 01/01/2017 to 05/01/2017* <br>
 
-#### 3.2.5. Adding a Task or Event with Tags: `add TITLE #TAG ..`
+#### <a name="addTaskTag"></a>3.2.5. Adding a Task or Event with Tags: `add TITLE #TAG ..`
 
 Format: `add TITLE #TAG ..`
 
@@ -367,9 +367,23 @@ Format: `exit`
 
 ## 4. Command Summary
 
+### 4.1 Getting some help
+
 Command | Format |
 -------- | :-------- |
 `help` | [help](#help) |
+| | [help COMMAND](#specificHelp)|
+
+### 4.2 Adding a Task or Event
+
+Command | Format |
+-------- | :-------- |
+`add` | [add TITLE](#addTitle) |
+| | [add TITLE by DATE](#addTitleDate)|
+| | [add TITLE every FREQUENCY](#addRecurring)|
+| | [add TITLE from DATE to DATE](#addEventDuration)|
+<br>
+
 
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
