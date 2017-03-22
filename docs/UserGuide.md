@@ -183,7 +183,7 @@ Format: `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
 ### 3.5. Finding Tasks and Events
 
-#### 3.5.1. Find a Task or Event by Title : `find KEYWORD ..`
+#### <a name="findKeyword"></a>3.5.1. Find a Task or Event by Title : `find KEYWORD ..`
 
 Format: `find KEYWORD ..`
 
@@ -195,7 +195,7 @@ Format: `find KEYWORD ..`
 
 *e.g. find Jonny finance* <br>
 
-#### 3.5.2. Find a Task or Event by Tag : `find #TAG ..`
+#### <a name="findTag"></a>3.5.2. Find a Task or Event by Tag : `find #TAG ..`
 
 Format: `find #TAG ..`
 
@@ -209,7 +209,7 @@ Format: `find #TAG ..`
 
 ### 3.6. Deleting Tasks and Events
 
-#### 3.6.1. Deleting One Task or Event : `delete INDEX `
+#### <a name="deleteIndex"></a>3.6.1. Deleting One Task or Event : `delete INDEX `
 
 Format: `delete INDEX`
 
@@ -218,7 +218,7 @@ Format: `delete INDEX`
 
 *e.g. delete 2* <br>
 
-#### 3.6.2. Deleting Multiple Tasks or Events : `delete INDEX to INDEX `
+#### <a name="deleteRange"></a>3.6.2. Deleting Multiple Tasks or Events : `delete INDEX to INDEX `
 
 Format: `delete INDEX to INDEX`
 
@@ -227,7 +227,7 @@ Format: `delete INDEX to INDEX`
 
 *e.g. delete 2 to 8* <br>
 
-#### 3.6.3. Deleting All Tasks or Events : `delete all `
+#### <a name="deleteAll"></a>3.6.3. Deleting All Tasks or Events : `delete all `
 
 Format: `delete all` 
 
@@ -373,6 +373,8 @@ Command | Format |
 `add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration) <br> [add TASK #TAG ..](#addTaskTag)|
 `list` | [list](#list) <br> [list TYPE](#listType)|
 `edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
+`find` | [find KEYWORD ..](#findKeyword) <br> [find #TAG ..](#findTag) |
+`delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
   e.g. `add read the little prince` <br>
