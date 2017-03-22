@@ -279,7 +279,7 @@ Format: `redo`
 
 *e.g. redo*
 
-#### <a name="redoMultiple>"></a>3.8.2. Redoing Multiple Actions : `redo NUMBER`
+#### <a name="redoMultiple"></a>3.8.2. Redoing Multiple Actions : `redo NUMBER`
 
 Format: `redo NUMBER`
 
