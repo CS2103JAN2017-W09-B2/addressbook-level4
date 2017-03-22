@@ -336,7 +336,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 ### Our User Stories
 
-### Add Functions<br>
+### Add Functions
+
 Priority | As a ... | I want to ... | So that I can... |
 -------- | :-------- | :--------- | :----------- |
 `* * *` | user | add a new task with a specified deadline | track when it is due |
