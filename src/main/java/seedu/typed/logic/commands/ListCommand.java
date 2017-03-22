@@ -13,8 +13,9 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();
-        session.update(CommandTypeUtil.TYPE_LIST_TASK, null, null);
+        this.model.updateFilteredListToShowAll();
+        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_LIST_TASK, null, null);
+        this.session.updateValidCommandsHistory(this.commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -12,7 +12,6 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -54,8 +53,8 @@ public abstract class TaskManagerGuiTest {
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
     private Stage stage;
+
 
     @BeforeClass
     public static void setupSpec() {
@@ -70,21 +69,22 @@ public abstract class TaskManagerGuiTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.setupStage((stage) -> {
-            mainGui = new MainGuiHandle(new GuiRobot(), stage);
-            mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getTaskListPanel();
-            resultDisplay = mainGui.getResultDisplay();
-            commandBox = mainGui.getCommandBox();
-            browserPanel = mainGui.getBrowserPanel();
+
+            this.mainGui = new MainGuiHandle(new GuiRobot(), stage);
+            this.mainMenu = this.mainGui.getMainMenu();
+            this.taskListPanel = this.mainGui.getTaskListPanel();
+            this.resultDisplay = this.mainGui.getResultDisplay();
+            this.commandBox = this.mainGui.getCommandBox();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
-        testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
+        this.testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData,
+                                                                                    getDataFileLocation()));
         FxToolkit.showStage();
-        while (!stage.isShowing()) {
+        while (!this.stage.isShowing()) {
             ;
         }
-        mainGui.focusOnMainApp();
+        this.mainGui.focusOnMainApp();
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class TaskManagerGuiTest {
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfTask();
+        int numberOfPeople = this.taskListPanel.getNumberOfTask();
         assertEquals(size, numberOfPeople);
     }
 
@@ -129,7 +129,7 @@ public abstract class TaskManagerGuiTest {
      * string.
      */
     protected void assertResultMessage(String expected) {
-        assertEquals(expected, resultDisplay.getText());
+        assertEquals(expected, this.resultDisplay.getText());
     }
 
     public void raise(BaseEvent e) {

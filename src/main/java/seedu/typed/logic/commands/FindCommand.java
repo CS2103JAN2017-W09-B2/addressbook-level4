@@ -24,10 +24,11 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
-        String keywordsString = String.join(",", keywords);
-        session.update(CommandTypeUtil.TYPE_FIND_TASK, (Object) keywordsString, null);
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        this.model.updateFilteredTaskList(this.keywords);
+        String keywordsString = String.join(",", this.keywords);
+        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_FIND_TASK, keywordsString, null);
+        this.session.updateValidCommandsHistory(this.commandText);
+        return new CommandResult(getMessageForTaskListShownSummary(this.model.getFilteredTaskList().size()));
     }
 
 }

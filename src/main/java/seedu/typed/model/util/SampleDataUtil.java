@@ -4,6 +4,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.ReadOnlyTaskManager;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
@@ -18,7 +19,7 @@ public class SampleDataUtil {
             String[] tags = new String[] {"friends", "colleagues", "neighbours", "family", "classmates",
                 "colleagues"};
             for (int i = 0; i < taskNumber; i++) {
-                tasks[i] = new Task.TaskBuilder()
+                tasks[i] = new TaskBuilder()
                         .setName(names[i])
                         .setDate(dates[i])
                         .addTags(tags[i])

@@ -36,8 +36,9 @@ public class DeleteCommand extends Command {
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deleteTask(taskToDelete);
-            session.update(CommandTypeUtil.TYPE_DELETE_TASK, (Object) taskToDelete, null);
+            this.model.deleteTask(taskToDelete);
+            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, taskToDelete, null);
+            this.session.updateValidCommandsHistory(this.commandText);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }

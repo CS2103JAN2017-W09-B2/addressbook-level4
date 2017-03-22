@@ -10,6 +10,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 
 /**
  * JAXB-friendly version of the Task.
@@ -61,7 +62,7 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task.TaskBuilder()
+        return new TaskBuilder()
                 .setName(this.name)
                 .setDate(this.date)
                 .setTags(tags)

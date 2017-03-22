@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.AddCommand;
 import seedu.typed.testutil.TestTask;
 import seedu.typed.testutil.TestUtil;
@@ -13,7 +14,7 @@ import seedu.typed.testutil.TestUtil;
 public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void add() {
+    public void add() throws IllegalValueException {
         // add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;

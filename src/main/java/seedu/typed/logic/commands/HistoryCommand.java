@@ -1,7 +1,5 @@
 package seedu.typed.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 
 /**
@@ -20,12 +18,10 @@ public class HistoryCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        ArrayList<String> historyArrayList = session.getHistory();
-        for (int i = 1; i <= historyArrayList.size(); i++) {
-            System.out.println(i + ") " + historyArrayList.get(i - 1));
-        }
+        this.session.listValidCommandsHistory();
         //code to show history on GUI
-        session.update(CommandTypeUtil.TYPE_HISTORY, null, null);
+        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_HISTORY, null, null);
+        this.session.updateValidCommandsHistory(this.commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

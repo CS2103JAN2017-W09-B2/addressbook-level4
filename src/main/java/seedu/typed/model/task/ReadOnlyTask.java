@@ -19,6 +19,8 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    boolean getIsCompleted();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)
@@ -26,10 +28,10 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()) // state
-                                                                  // checks here
-                                                                  // onwards
-                        && other.getDate().equals(this.getDate()));
+                && other.getName().equals(this.getName()) // state
+                // checks here
+                // onwards
+                && other.getDate().equals(this.getDate()));
     }
 
     /**
@@ -37,7 +39,10 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Name: ").append(getName()).append(" Date: ").append(getDate().toString()).append(" Tags: ");
+        builder.append(" Name: ").append(getName())
+        .append(" Date: ").append(getDate().toString())
+        .append(" Completed: ").append(getIsCompleted())
+        .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
