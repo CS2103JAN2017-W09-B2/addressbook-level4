@@ -144,8 +144,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/typed/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -195,7 +194,7 @@ The `Model`,
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/typed/storage/Storage.java)
 
 The `Storage` component,
 
@@ -204,7 +203,7 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.taskmanager.commons` package.
+Classes used by multiple components are in the `seedu.typed.commons` package.
 
 ## 3. Implementation
 
@@ -460,10 +459,10 @@ Priority | As a ... | I want to ... | So that I can...
 
 **MSS**
 
-User keys in a series of command(s) <br>
-User requests to view history of actions <br>
-Typed displays the list of past actions <br>
-Use case ends. <br>
+1. User keys in a series of command(s) <br>
+2. User requests to view history of actions <br>
+3. Typed displays the list of past actions <br>
+4. Use case ends. <br>
 
 **Extensions**
 
@@ -478,8 +477,8 @@ Use case ends. <br>
 
 **MSS**
 
-User enters a keyword to find any matching to do in Typed. <br>
-Typed displays all the todos with matching keywords. <br>
+1. User enters a keyword to find any matching to do in Typed. <br>
+2. Typed displays all the todos with matching keywords. <br>
 
 **Extensions**
 1a. Typed is empty <br>
@@ -491,11 +490,11 @@ Typed displays all the todos with matching keywords. <br>
 
 **MSS**
 
-User keys in a series of command(s) changing information stored in Typed. <br>
-User requests to undo the last action done. <br>
-Typed undoes the last action done. <br>
-Typed displays text informing user that the last action has been successfully undone. <br>
-Use case ends.
+1. User keys in a series of command(s) changing information stored in Typed. <br>
+2. User requests to undo the last action done. <br>
+3. Typed undoes the last action done. <br>
+4. Typed displays text informing user that the last action has been successfully undone. <br>
+5. Use case ends.
 
 **Extensions**
 
@@ -518,12 +517,12 @@ Use case ends.
 
 **MSS**
 
-User keys in a series of command(s) changing information stored in Typed. <br>
-User requests to undo the last action done. <br>
-User requests to redo the previously undone action. <br>
-Typed redoes the last action undone by Typed. <br>
-Typed displays text informing user that the last undone action has been successfully redone. <br>
-Use case ends.
+1. User keys in a series of command(s) changing information stored in Typed. <br>
+2. User requests to undo the last action done. <br>
+3. User requests to redo the previously undone action. <br>
+4. Typed redoes the last action undone by Typed. <br>
+5. Typed displays text informing user that the last undone action has been successfully redone. <br>
+6. Use case ends.
 
 **Extensions**
 
