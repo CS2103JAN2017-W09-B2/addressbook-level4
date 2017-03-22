@@ -482,7 +482,8 @@ Priority | As a ... | I want to ... | So that I can...
 1. User enters a keyword to find any matching to do in Typed. <br>
 2. Typed displays all the todos with matching keywords. <br>
 
-**Extensions**
+**Extensions**<br>
+
 1a. Typed is empty <br>
   > User search his todos using keywords <br>
   > Typed displays that there are no todo with the any matching keywords. <br>
