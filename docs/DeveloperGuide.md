@@ -337,8 +337,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 ### Our User Stories
 
 ### Add Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | add a new task with a specified deadline | track when it is due <br>
 `* * *` | user | add a new task without specifying deadline | do it sometime later <br>
 `* * *` | user | add a new event | reserve that time <br>
@@ -353,8 +353,8 @@ Priority | As a ... | I want to ... | So that I can...
 
 
 ### Find Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | find tasks with upcoming deadlines | prioritise these tasks <br>
 `* * *` | user | find my upcoming events | be aware of my upcoming schedule <br>
 `* * *` | user | find a task by name | easily view more about it <br>
@@ -363,8 +363,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | do power searching | find tasks whose exact names I have forgotten <br>
 
 ### Sort Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* *` | user | task type filter | view tasks by their types <br>
 `* *` | user | sort the tasks based on tags | view tasks by tags <br>
 `* *` | user | sort tasks by name | locate a task easily <br>
@@ -372,8 +372,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | sort tasks by priority | attend to the more important tasks first <br>
 
 ### Edit Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | mark a task as done | remove it from my to-dos  <br>
 `* * *` | user | delete a task | remove it completely from storage <br>
 `* * *` | user | edit a task | modify and update its details  <br>
@@ -385,8 +385,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | archive a done task | track what I have completed <br>
 
 ### View Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | see my overdue tasks | finish them right away <br>
 `* * *` | user | view my tasks by day | know what my tasks and schedule are for a certain day <br>
 `* *` | user | weekly overview of what is due this week | plan my time in advance <br>
@@ -396,23 +396,23 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | view a confirmation that my command has been processed | be assured  <br>
 
 ### Help Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | view information about a particular command | learn to use it <br>
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App <br>
 `* *` | user | have the option of having a tutorial | be taught to use the task manager <br>
 `* *` | user | see command formats as I type | refer to it if I am unsure of the format <br>
 
 ### Advanced Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | advanced user | enter commands with the use of flags | specify the perimeters of the command more clearly <br>
 `* * *` | advanced user | use shorter versions of commands | type each command faster <br>
 `* *` | advanced user | create new shortcuts | speed up my workflow <br>
 
 ### Integration Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* *` | user | have integration with text notifications | receive text alerts on important tasks that are due when I am away from my task manager <br>
 `* *` | user | access my email alongside the task manager | do not need to switch screens in order to add tasks <br>
 `* *` | user | my task manager to link to the necessary resources such as email or IVLE exact pages | I do not have to open a browser to do such things <br>
@@ -422,8 +422,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | import calendars' schedule into the task manager | I can look at my calendar <br>
 
 ### Design/UIUX Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | have a few colour themes I can choose between | select colours I am more comfortable with <br>
 `* * *` | user | a simple user interface | be less distracted and more productive <br>
 `* *` | user | change font, font size, colour of words | personalise my task manager to my preference <br>
@@ -434,8 +434,8 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | some sort of punishment when I fail to complete a task | find motivation to do my tasks <br>
 
 ### Unique Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | commands to be highlighted | know they are valid commands <br>
 `* *` | user | have a daily progress check-in function | know I have worked on a task today even if I cannot complete it <br>
 `* *` | user | have some sort of points or incentive system | accomplish more and be more motivated to be productive <br>
@@ -444,8 +444,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | a reminder function | get notified when deadlines or events are nearer <br>
 
 ### Basic Functions<br>
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+Priority | As a ... | I want to ... | So that I can...<br>
+-------- | :-------- | :--------- | :-----------<br>
 `* * *` | user | be able to do everything through typing | it is convenient for me <br>
 `* * *` | user | have each command processed within a second | be more efficient and productive in managing my tasks <br>
 `* *` | user | enable backup | have a backup copy in case the storage fails or crashes <br>
