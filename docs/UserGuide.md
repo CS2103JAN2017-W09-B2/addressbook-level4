@@ -59,7 +59,7 @@ Items with `...` after them can have multiple instances. <br>
 
 ### 3.1. Getting Some Help
 
-#### 3.1.1. Help for All Commands : `help`
+#### <a name="help"></a>3.1.1. Help for All Commands : `help`
 
 Format: `help` <br>
 > `help` shows you an overview of all the commands and their usage information. <br>
@@ -367,7 +367,9 @@ Format: `exit`
 
 ## 4. Command Summary
 
-
+Command | Format |
+-------- | :-------- |
+`help` | [help](#help) |
 
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
