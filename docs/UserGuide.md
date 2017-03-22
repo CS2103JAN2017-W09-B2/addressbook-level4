@@ -299,7 +299,7 @@ Format: `redo all`
 
 ### 3.9. Completing Tasks
 
-#### 3.9.1. Completing One Task : `complete INDEX `
+#### <a name="completeOne"></a>3.9.1. Completing One Task : `complete INDEX `
 
 Format: `complete INDEX`
 
@@ -308,7 +308,7 @@ Format: `complete INDEX`
 
 *e.g. complete 2* <br>
 
-#### 3.9.2. Completing Multiple Tasks : `complete INDEX to INDEX `
+#### <a name="completeRange"></a>3.9.2. Completing Multiple Tasks : `complete INDEX to INDEX `
 
 Format: `complete INDEX to INDEX`
 
@@ -317,7 +317,7 @@ Format: `complete INDEX to INDEX`
 
 *e.g. complete 2 to 8* <br>
 
-#### 3.9.3. Completing All Tasks : `complete all `
+#### <a name="completeAll"></a>3.9.3. Completing All Tasks : `complete all `
 
 Format: `complete all` 
 
@@ -377,6 +377,7 @@ Command | Format |
 `delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
 `undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
 `redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
+`complete` | [complete INDEX](#completeOne) <br> [complete INDEX to INDEX](#completeRange) <br> [complete all](#completeAll) | 
 
 ## 5. FAQ
 
