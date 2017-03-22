@@ -14,7 +14,7 @@ I will be your personal task manager, storing thousands of tasks with no additio
 
 Unlike other high-maintenance task managers, I am simply simple. Gone are the days of getting frustrated from navigating unfriendly and unintuitive interfaces. With me, there is no need to reach for the mouse anymore. Continue typing on your favourite keyboard, and I will address your commands accordingly. <br>
 
-Ready to be productive? Here we go! :muscle:<br>
+Ready to be productive? Here we go! 💪<br>
 
 1. [Getting Started](#1-getting-started)
 2. [Returning to *Typed*](#2-returning-to-typed)
