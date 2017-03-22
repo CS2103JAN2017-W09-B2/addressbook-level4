@@ -237,7 +237,7 @@ Format: `delete all`
 
 ### 3.7. Undoing Actions
 
-#### 3.7.1. Undoing One Action : `undo`
+#### <a name="undoOne"></a>3.7.1. Undoing One Action : `undo`
 
 Format: `undo`
 
@@ -248,7 +248,7 @@ Format: `undo`
 
 *e.g. undo* <br>
 
-#### 3.7.2. Undoing Multiple Actions : `undo NUMBER`
+#### <a name="undoMultiple"></a>3.7.2. Undoing Multiple Actions : `undo NUMBER`
 
 Format: `undo NUMBER`
 
@@ -256,7 +256,7 @@ Format: `undo NUMBER`
 
 *e.g. undo 5* <br>
 
-#### 3.7.3. Undoing All Actions : `undo all`
+#### <a name="undoAll"></a>3.7.3. Undoing All Actions : `undo all`
 
 Format: `undo all`
 
@@ -266,7 +266,7 @@ Format: `undo all`
 
 ### 3.8. Redoing Actions
 
-#### 3.8.1. Redoing One Action : `redo`
+#### <a name="redoOne"></a>3.8.1. Redoing One Action : `redo`
 
 Format: `redo`
 
@@ -279,15 +279,15 @@ Format: `redo`
 
 *e.g. redo*
 
-#### 3.8.2. Redoing Multiple Actions : `redo NUMBER`
+#### <a name="redoMultiple>"></a>3.8.2. Redoing Multiple Actions : `redo NUMBER`
 
-Format: `undo NUMBER`
+Format: `redo NUMBER`
 
 > `redo NUMBER` restores *Typed* to its state before the last NUMBER `undo` actions were performed. <br>
 
 *e.g. redo 3* <br>
 
-#### 3.8.3. Redoing All Actions : `redo all`
+#### <a name="redoAll"></a>3.8.3. Redoing All Actions : `redo all`
 
 Format: `redo all`
 
@@ -375,74 +375,8 @@ Command | Format |
 `edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
 `find` | [find KEYWORD ..](#findKeyword) <br> [find #TAG ..](#findTag) |
 `delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
-
-* **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
-  e.g. `add read the little prince` <br>
-  e.g. `add push git commit by next wednesday` <br>
-  e.g. `add write blog post every day #/hobby` <br>
-  e.g. `add meet boss every monday` <br>
-  e.g. `add release paycheck every month` <br>
-  e.g. `add my birthday every year` <br>
-  e.g. `add training camp from 2 May to 5 May` <br>
-  e.g. `add drinks with client tomorrow from 1PM to 2PM` <br>
-  e.g. `add clean room on Sunday` <br>
-
-* **Complete**  `complete [all]|INDEX [ to | ,] [INDEX] ...` <br>
-  e.g. `complete 2` <br>
-  e.g. `complete 2 to 10` <br>
-  e.g. `complete 1,3,5` <br>
-  e.g. `complete 1, 3, 5 to 10` <br>
-  e.g. `complete all` <br>
-
-* **Delete** : `delete [all]|INDEX [ to | ,] [INDEX] ...` <br>
-  e.g. `delete 2` <br>
-  e.g. `delete 2 to 10` <br>
-  e.g. `delete 1,3,5` <br>
-  e.g. `delete 1, 3, 5 to 10` <br>
-  e.g. `delete all` <br>
-
-* **Edit** : `edit INDEX [DESCRIPTION] [by DATE | TIME] [ #TAG | -#TAG ]` <br>
-  e.g. `edit 1 by following Saturday` <br>
-  e.g. `edit 2 on 2 May` <br>
-  e.g. `edit 4 from 13:00 to 5pm` <br>
-  e.g. `edit 3 every Wednesday` <br>
-  e.g. `edit 7 play mousehunt` <br>
-  e.g. `edit 5 +#work` <br>
-  e.g. `edit 6 -#supplier` <br>
-
-* **Find** : `find KEYWORD|#TAGS [MORE_KEYWORDS | #MORE_TAGS]...` <br>
-  e.g. `find johnny depp` <br>
-  e.g. `find boss #work` <br>
-  e.g. `find #forever #alone` <br>
-
-* **Help** : `help` <br>
-  e.g. help <br>
-
-* **History** : `history` <br>
-  e.g. `history` <br>
-
-* **List** : `list TYPE` <br>
-  e.g. `list` <br>
-  e.g. `list all` <br>
-  e.g. `list undone` <br>
-  e.g. `list done` <br>
-  e.g. `list events` <br>
-
-* **Redo** : `redo [INDEX|all]` <br>
-  e.g.`redo` <br>
-  e.g.`redo 5` <br>
-  e.g.`redo all` <br>
-
-* **Save** : `save FILENAME` <br>
-  e.g.`save newfile.txt` <br>
-
-* **Quit** : `quit` <br>
-  e.g.`quit` <br>
-
-* **Undo** : `undo [INDEX|all]` <br>
-  e.g.`undo` <br>
-  e.g.`undo 5` <br>
-  e.g.`undo all` <br>
+`undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
+`redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
 
 ## 5. FAQ
 
