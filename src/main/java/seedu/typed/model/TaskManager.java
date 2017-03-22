@@ -15,8 +15,10 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the task-manager level. Duplicates are not allowed (by
@@ -26,6 +28,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     private static final String DUPLICATE_TASK_WARNING = "Task Manager should not have duplicate tasks";
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
+    private final UniqueTaskList completedTasks;
 
     /*
      * The 'unusual' code block below is an non-static initialization block,
@@ -37,10 +40,15 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     {
         tasks = new UniqueTaskList();
+        completedTasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
     public TaskManager() {
+    }
+
+    public UnmodifiableObservableList<ReadOnlyTask> getCompletedTasks() {
+        return new UnmodifiableObservableList<>(completedTasks.asObservableList());
     }
 
     /**
@@ -117,6 +125,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tasks.add(p);
     }
 
+    public void completeTask(Task p) throws TaskNotFoundException, DuplicateTaskException {
+        this.tasks.remove(p);
+        this.completedTasks.add(p);
+    }
+
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
@@ -132,7 +145,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task.TaskBuilder(editedReadOnlyTask).build();
+        Task editedTask = new TaskBuilder(editedReadOnlyTask).build();
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.

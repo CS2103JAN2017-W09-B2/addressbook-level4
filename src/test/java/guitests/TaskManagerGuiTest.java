@@ -12,7 +12,6 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -54,7 +53,6 @@ public abstract class TaskManagerGuiTest {
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
     private Stage stage;
 
 
@@ -71,12 +69,12 @@ public abstract class TaskManagerGuiTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.setupStage((stage) -> {
+
             this.mainGui = new MainGuiHandle(new GuiRobot(), stage);
             this.mainMenu = this.mainGui.getMainMenu();
             this.taskListPanel = this.mainGui.getTaskListPanel();
             this.resultDisplay = this.mainGui.getResultDisplay();
             this.commandBox = this.mainGui.getCommandBox();
-            this.browserPanel = this.mainGui.getBrowserPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
