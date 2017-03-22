@@ -126,7 +126,7 @@ public class Parser {
         return input.isEmpty();
     }
 
-    private boolean isValidUserInput(Matcher matcher, String input) {
+    private boolean isValidUserInput(Matcher matcher) { //include String input?
         return matcher.matches();
     }
 
