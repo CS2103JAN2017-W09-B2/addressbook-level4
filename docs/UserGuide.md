@@ -370,7 +370,7 @@ Format: `exit`
 Command | Format |
 -------- | :-------- |
 `help` | [help](#help) <br> [help COMMAND](#specificHelp)|
-`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration)|
+`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration) <br> [add TASK #TAG ..](#addTaskTag)|
 
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
