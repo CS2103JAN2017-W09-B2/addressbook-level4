@@ -367,23 +367,10 @@ Format: `exit`
 
 ## 4. Command Summary
 
-### 4.1 Getting some help
-
 Command | Format |
 -------- | :-------- |
-`help` | [help](#help) |
-| | [help COMMAND](#specificHelp)|
-
-### 4.2 Adding a Task or Event
-
-Command | Format |
--------- | :-------- |
-`add` | [add TITLE](#addTitle) |
-| | [add TITLE by DATE](#addTitleDate)|
-| | [add TITLE every FREQUENCY](#addRecurring)|
-| | [add TITLE from DATE to DATE](#addEventDuration)|
-<br>
-
+`help` | [help](#help) <br> [help COMMAND](#specificHelp)|
+`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration)|
 
 
 * **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br>
