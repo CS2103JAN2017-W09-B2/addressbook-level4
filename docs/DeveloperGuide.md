@@ -336,12 +336,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 ### Our User Stories
 
-### Add Functions
-
+### Add Functions<br>
 Priority | As a ... | I want to ... | So that I can... |
 -------- | :-------- | :--------- | :----------- |
 `* * *` | user | add a new task with a specified deadline | track when it is due |
-`* * *` | user | add a new task without specifying deadline | do it sometime later |
+`* * *` | user | add a new task without specifying deadline | do it sometime later | 
 `* * *` | user | add a new event | reserve that time |
 `* * *` | user | add a tentative event | hold my schedule until confirmation |
 `* * *` | user | add recurring tasks | add all at once |
