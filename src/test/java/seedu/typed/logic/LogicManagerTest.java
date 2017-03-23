@@ -204,18 +204,18 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add t/12/34/5678 name is in wrong order", expectedMessage);
-        assertCommandFailure("add t/validTag.butNoName", expectedMessage);
-        assertCommandFailure("add d/12/34/5678 t/12/34/4556 t/validDateAndTag.butNoName", expectedMessage);
+        assertCommandFailure("add by 12/34/5678 name is in wrong order", expectedMessage);
+        assertCommandFailure("add #validTag.butNoName", expectedMessage);
+        assertCommandFailure("add by 12/34/5678 #12/34/4556 #validDateAndTag.butNoName", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add []\\[;] d/12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add d/12/34/5678", expectedMessage);
-        assertCommandFailure("add Valid Name d/not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12/34/5678 t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] by 12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add by 12/34/5678", expectedMessage);
+        assertCommandFailure("add Valid Name by not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name by 12/34/5678 #invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -420,11 +420,11 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
-            Date privateDate = new Date("11/11/1111");
+            Date date = new Date("11/11/1111");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateDate, tags);
+            return new TaskBuilder().setName(name).setDate(date).setTags(tags).build();
         }
 
         /**
@@ -453,11 +453,11 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(task.getName().toString());
-            cmd.append(" d/").append(task.getDate());
+            cmd.append(" by ").append(task.getDate());
 
             UniqueTagList tags = task.getTags();
             for (Tag t : tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" #").append(t.tagName);
             }
 
             return cmd.toString();
