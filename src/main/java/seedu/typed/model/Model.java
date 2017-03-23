@@ -44,7 +44,7 @@ public interface Model {
      *             filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws DuplicateTaskException,IllegalValueException;
+            throws DuplicateTaskException, IllegalValueException;
 
     //@@author A0143853A
     /** TODO Change comments
