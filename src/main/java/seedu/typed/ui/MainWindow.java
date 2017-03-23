@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Region> {
     // private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
+    private ProgressBar progressBar;
 
     /*
     @FXML
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
+    
+    @FXML
+    private AnchorPane progressBarPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -121,6 +125,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         // new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        progressBar = new ProgressBar(progressBarPlaceholder, logic);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
