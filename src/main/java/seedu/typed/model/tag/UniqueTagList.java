@@ -102,7 +102,7 @@ public class UniqueTagList implements Iterable<Tag> {
         if (!CollectionUtil.elementsAreUnique(tags)) {
             throw new DuplicateTagException();
         }
-        internalList.setAll(tags);
+        this.internalList.setAll(tags);
     }
 
     /**

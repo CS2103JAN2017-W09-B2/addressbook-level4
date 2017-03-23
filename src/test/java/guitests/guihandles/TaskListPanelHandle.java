@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.typed.TestApp;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.testutil.TestUtil;
@@ -45,8 +46,11 @@ public class TaskListPanelHandle extends GuiHandle {
      *
      * @param tasks
      *            A list of task in the correct order.
+     * @throws IllegalValueException
+     * @throws IllegalArgumentException
      */
-    public boolean isListMatching(ReadOnlyTask... tasks) {
+    public boolean isListMatching(ReadOnlyTask... tasks)
+            throws IllegalArgumentException, IllegalValueException {
         return this.isListMatching(0, tasks);
     }
 
@@ -58,8 +62,10 @@ public class TaskListPanelHandle extends GuiHandle {
      *            The starting position of the sub list.
      * @param tasks
      *            A list of task in the correct order.
+     * @throws IllegalValueException
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
+            throws IllegalArgumentException, IllegalValueException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException(
                     "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks");
@@ -154,7 +160,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public TaskCardHandle getTaskCardHandle(int index) {
+    public TaskCardHandle getTaskCardHandle(int index) throws IllegalValueException {
         return getTaskCardHandle(new TaskBuilder(getListView().getItems().get(index))
                 .build());
     }

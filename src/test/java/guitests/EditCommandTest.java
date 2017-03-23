@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.Date;
@@ -116,9 +117,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
      *            details to edit the task with as input to the edit command
      * @param editedTask
      *            the expected task after editing the task's details
+     * @throws IllegalValueException
+     * @throws IllegalArgumentException
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit,
-            TestTask editedTask) {
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit, TestTask editedTask)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data

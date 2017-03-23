@@ -40,7 +40,8 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         // confirm the new card contains the right data

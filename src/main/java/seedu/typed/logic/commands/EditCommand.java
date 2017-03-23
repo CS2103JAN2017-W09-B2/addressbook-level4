@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
@@ -13,7 +14,8 @@ import seedu.typed.model.task.Name;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
-import seedu.typed.model.task.UniqueTaskList;
+import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -31,6 +33,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
+
+    private static final String MESSAGE_TASK_NOT_FOUND = "File to edit not found.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -63,16 +68,26 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(this.filteredTaskListIndex);
-        Task taskToEditCopy = new TaskBuilder(taskToEdit).build();
-        Task editedTask = createEditedTask(taskToEdit, this.editTaskDescriptor);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task taskToEditCopy;
+        try {
+            taskToEditCopy = new TaskBuilder(taskToEdit).build();
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_EDIT_TASK_FAILURE);
+        }
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            this.model.updateTask(this.filteredTaskListIndex, editedTask);
-            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, taskToEditCopy, editedTask);
-            this.session.updateValidCommandsHistory(this.commandText);
-        } catch (UniqueTaskList.DuplicateTaskException dte) {
+            int index = model.getIndexOfTask(taskToEditCopy);
+            model.updateTask(filteredTaskListIndex, editedTask);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, index, taskToEditCopy);
+            session.updateValidCommandsHistory(commandText);
+        } catch (DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException tnfe) {
+            throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(MESSAGE_EDIT_TASK_FAILURE);
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));

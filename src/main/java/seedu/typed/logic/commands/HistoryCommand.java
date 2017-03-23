@@ -18,10 +18,10 @@ public class HistoryCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        this.session.listValidCommandsHistory();
+        session.listValidCommandsHistory();
         //code to show history on GUI
-        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_HISTORY, null, null);
-        this.session.updateValidCommandsHistory(this.commandText);
+        session.updateUndoRedoStacks(CommandTypeUtil.TYPE_HISTORY, -1, null);
+        session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

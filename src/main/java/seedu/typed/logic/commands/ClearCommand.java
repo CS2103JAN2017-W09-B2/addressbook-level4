@@ -1,7 +1,8 @@
 package seedu.typed.logic.commands;
 
+import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
-import seedu.typed.model.ReadOnlyTaskManager;
 import seedu.typed.model.TaskManager;
 
 /**
@@ -11,21 +12,25 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Task manager has been cleared!";
+    public static final String MESSAGE_FAILURE = "Task manager cannot be cleared!";
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
 
-        assert this.model != null;
+        assert model != null;
 
         // is this the good way of "clearing" the manager by just creating a new one
         // it's not really just clearing what is required (lists) but remaking everything
 
         TaskManager oldTaskManager = new TaskManager();
-        oldTaskManager.copyData(this.model.getTaskManager());
-        this.model.resetData(new TaskManager());
-        ReadOnlyTaskManager newTaskManager = new TaskManager();
-        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_CLEAR, oldTaskManager, newTaskManager);
-        this.session.updateValidCommandsHistory(this.commandText);
+        oldTaskManager.copyData(model.getTaskManager());
+        try {
+            model.resetData(new TaskManager());
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
+        session.updateUndoRedoStacks(CommandTypeUtil.TYPE_CLEAR, -1, oldTaskManager);
+        session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -4,12 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.ClearCommand;
 
 public class ClearCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void clear() {
+    public void clear() throws IllegalArgumentException, IllegalValueException {
 
         // verify a non-empty list can be cleared
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));

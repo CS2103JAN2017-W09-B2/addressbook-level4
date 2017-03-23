@@ -24,6 +24,7 @@ import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.commons.events.ui.JumpToListRequestEvent;
 import seedu.typed.commons.events.ui.ShowHelpRequestEvent;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.AddCommand;
 import seedu.typed.logic.commands.ClearCommand;
 import seedu.typed.logic.commands.Command;
@@ -65,7 +66,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent tmce) {
+    private void handleLocalModelChangedEvent(TaskManagerChangedEvent tmce) throws IllegalValueException {
         latestSavedTaskManager = new TaskManager(tmce.data);
     }
 
@@ -80,7 +81,7 @@ public class LogicManagerTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IllegalValueException {
         model = new ModelManager();
         //String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         //String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
@@ -106,7 +107,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() {
+    public void execute_invalid() throws IllegalValueException {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
@@ -128,11 +129,13 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that
      * the result message is correct. Both the 'task manager' and the 'last
      * shown list' are verified to be unchanged.
+     * @throws IllegalValueException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) {
+    private void assertCommandFailure(String inputCommand, String expectedMessage)
+            throws IllegalValueException {
         TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
@@ -174,7 +177,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() {
+    public void execute_unknownCommandWord() throws IllegalValueException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
@@ -202,7 +205,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidArgsFormat() {
+    public void execute_add_invalidArgsFormat() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add by 12/34/5678 name is in wrong order", expectedMessage);
         assertCommandFailure("add #validTag.butNoName", expectedMessage);
@@ -210,7 +213,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidTaskData() {
+    public void execute_add_invalidTaskData() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add []\\[;] by 12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add by 12/34/5678", expectedMessage);
@@ -357,7 +360,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_invalidArgsFormat() {
+    public void execute_find_invalidArgsFormat() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }

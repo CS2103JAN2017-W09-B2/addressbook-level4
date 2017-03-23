@@ -1,6 +1,7 @@
 package seedu.typed.model.task;
 
 
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.UniqueTagList;
 
 /**
@@ -55,9 +56,9 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getDate(), source.getTags(), source.getIsCompleted());
     }
 
-    public void setName(Name name) {
+    public void setName(Name name) throws IllegalValueException {
         assert name != null;
-        this.name = name;
+        this.name = new Name(name.getValue());
     }
 
     @Override
@@ -65,9 +66,9 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Date date) throws IllegalValueException {
         assert date != null;
-        this.date = date;
+        this.date = new Date(date.getValue());
     }
 
     @Override
@@ -91,14 +92,16 @@ public class Task implements ReadOnlyTask {
         this.isCompleted = isCompleted;
     }
 
+    @Override
     public boolean getIsCompleted() {
-        return this.isCompleted;
+        return isCompleted;
     }
 
     /**
      * Updates this task with the details of {@code replacement}.
+     * @throws IllegalValueException
      */
-    public void resetData(ReadOnlyTask replacement) {
+    public void resetData(ReadOnlyTask replacement) throws IllegalValueException {
         assert replacement != null;
 
         this.setName(replacement.getName());

@@ -1,7 +1,6 @@
 package seedu.typed.model.task;
 
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -95,7 +94,7 @@ public class TaskBuilderTest {
         }
     }
     @Test
-    public void taskBuilder_Task_Success() {
+    public void taskBuilder_Task_Success() throws IllegalValueException {
         TaskBuilder builder = new TaskBuilder(testTask);
         assertTrue(builder.build().equals(testTask));
     }

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.ClearCommand;
 import seedu.typed.logic.commands.DeleteCommand;
 import seedu.typed.logic.commands.EditCommand;
@@ -20,7 +21,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
-    public void undo_addCommand_success() {
+    public void undo_addCommand_success() throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
         assertAddSuccess(taskToAdd, currentList);
@@ -28,7 +29,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void undo_deleteCommand_success() {
+    public void undo_deleteCommand_success() throws IllegalArgumentException, IllegalValueException {
 
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
@@ -55,7 +56,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void undo_noPreviousValidCommand_failure() {
+    public void undo_noPreviousValidCommand_failure() throws IllegalArgumentException, IllegalValueException {
         assertUndoFailure();
     }
 
@@ -66,13 +67,14 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
 
-    private void assertUndoFailure() {
+    private void assertUndoFailure() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("undo");
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(UndoCommand.MESSAGE_NO_PREV_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         // confirm the new card contains the right data
@@ -84,7 +86,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList)
+            throws IllegalArgumentException, IllegalValueException {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
                                                                         // array
                                                                         // uses
@@ -102,8 +105,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit,
-            TestTask editedTask) {
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit, TestTask editedTask)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data

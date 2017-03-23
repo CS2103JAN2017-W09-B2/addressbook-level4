@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.ClearCommand;
 import seedu.typed.logic.commands.DeleteCommand;
 import seedu.typed.logic.commands.EditCommand;
@@ -21,7 +22,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     TestTask[] expectedUndoTasksList = td.getTypicalTasks();
 
     @Test
-    public void redo_undoneAddCommand_success() {
+    public void redo_undoneAddCommand_success()
+            throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
         assertAddSuccess(taskToAdd, currentList);
@@ -31,7 +33,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void redo_undoneDeleteCommand_success() {
+    public void redo_undoneDeleteCommand_success()
+            throws IllegalArgumentException, IllegalValueException {
 
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
@@ -68,7 +71,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void redo_noPreviousValidCommand_failure() {
+    public void redo_noPreviousValidCommand_failure()
+            throws IllegalArgumentException, IllegalValueException {
 
         TestTask[] expectedList = td.getTypicalTasks();
         assertRedoFailure(expectedList);
@@ -80,7 +84,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
     }
 
-    private void assertRedoFailure(TestTask[] tasksList) {
+    private void assertRedoFailure(TestTask[] tasksList)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("redo");
         assertTrue(taskListPanel.isListMatching(tasksList));
         assertResultMessage(RedoCommand.MESSAGE_NO_COMMAND_TO_REDO);
@@ -92,7 +97,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         // confirm the new card contains the right data
@@ -104,7 +110,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList)
+            throws IllegalArgumentException, IllegalValueException {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
                                                                         // array
                                                                         // uses
@@ -122,8 +129,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit,
-            TestTask editedTask) {
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit, TestTask editedTask)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data

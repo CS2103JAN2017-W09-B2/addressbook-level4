@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.DuplicateDataException;
+import seedu.typed.commons.exceptions.IllegalValueException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -27,6 +28,21 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
+    //@@author A0143853A
+    public int indexOf(Task task) throws TaskNotFoundException {
+        int index = internalList.indexOf(task);
+        if (index == -1) {
+            throw new TaskNotFoundException();
+        } else {
+            return index;
+        }
+    }
+
+    //@@author A0143853A
+    public Task getTaskAt(int index) {
+        return internalList.get(index);
+    }
+
     /**
      * Adds a task to the list.
      *
@@ -35,24 +51,29 @@ public class UniqueTaskList implements Iterable<Task> {
      *             list.
      */
     public void add(Task toAdd) throws DuplicateTaskException {
+        add(0, toAdd);
+    }
+
+    // @@author A0143853A
+    public void add(int index, Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
+
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(0, toAdd);
+
+        internalList.add(index, toAdd);
     }
 
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
+     * @throws IllegalValueException
      *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) throws IllegalValueException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
@@ -86,10 +107,11 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     public void setTasks(UniqueTaskList replacement) {
-        this.internalList.setAll(replacement.internalList);
+        internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws DuplicateTaskException, IllegalValueException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new TaskBuilder(task).build());

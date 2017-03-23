@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
@@ -82,16 +83,16 @@ public class CompleteCommand extends Command {
     /**
      * Updates the model and session of the completed tasks
      * @param tasksList
-     * @throws DuplicateTaskException
      * @throws TaskNotFoundException
+     * @throws IllegalValueException, DuplicateTaskException
      */
-    private void updateCompletedTasks(List<ReadOnlyTask> tasksList) throws DuplicateTaskException,
-        TaskNotFoundException {
+    private void updateCompletedTasks(List<ReadOnlyTask> tasksList)
+            throws TaskNotFoundException, IllegalValueException, DuplicateTaskException {
         for (int i = 0; i < tasksList.size(); i++) {
             Task taskToCompleteCopy = new TaskBuilder(tasksList.get(i)).build();
             Task completedTask = new TaskBuilder(taskToCompleteCopy).isCompleted(true).build();
-            this.model.updateTask(startIndex + i, completedTask);
-            this.model.completeTask(completedTask);
+            model.updateTask(startIndex + i, completedTask);
+            model.completeTask(completedTask);
             //session.update(CommandTypeUtil.TYPE_EDIT_TASK, taskToCompleteCopy, completedTask);
         }
     }

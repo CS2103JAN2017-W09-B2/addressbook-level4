@@ -45,9 +45,9 @@ public class AddCommand extends Command {
         assert model != null;
         assert session != null;
         try {
-            this.model.addTask(this.toAdd);
-            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, this.toAdd, null);
-            this.session.updateValidCommandsHistory(this.commandText);
+            this.model.addTask(toAdd);
+            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
+            this.session.updateValidCommandsHistory(commandText);
             return new CommandResult(String.format(MESSAGE_SUCCESS));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
