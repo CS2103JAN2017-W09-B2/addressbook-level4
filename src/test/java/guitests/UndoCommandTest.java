@@ -105,7 +105,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit, TestTask editedTask)
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
+            String detailsToEdit, TestTask editedTask)
             throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
