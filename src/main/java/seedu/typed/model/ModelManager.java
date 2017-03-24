@@ -64,6 +64,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0143853A
+    @Override
+    public void copyData(ReadOnlyTaskManager newData) throws IllegalValueException {
+        taskManager.copyData(newData);
+        indicateTaskManagerChanged();
+    }
+
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;

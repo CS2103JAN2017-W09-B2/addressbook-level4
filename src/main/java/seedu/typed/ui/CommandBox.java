@@ -15,6 +15,7 @@ import seedu.typed.commons.util.FxViewUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.storage.temp.Session;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -25,11 +26,12 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
+    private Session session;
 
     private Stack<String> historyCommand = new Stack<String>();
     private Stack<String> nextCommand = new Stack<String>();
 
-    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
+    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, Session session) {
         super(FXML);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
@@ -38,6 +40,7 @@ public class CommandBox extends UiPart<Region> {
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         placeHolderPane.getChildren().add(commandTextField);
+        commandTextField.requestFocus();
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
@@ -53,12 +56,14 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             historyCommand.push(commandInput);
+            commandTextField.requestFocus();
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
+            commandTextField.requestFocus();
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }

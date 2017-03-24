@@ -19,6 +19,9 @@ public interface Model {
      */
     void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
+    //@@author A0143853A
+    void copyData(ReadOnlyTaskManager newData) throws IllegalValueException;
+
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 

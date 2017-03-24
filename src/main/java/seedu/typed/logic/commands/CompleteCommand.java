@@ -17,8 +17,8 @@ public class CompleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a Task as completed "
             + "by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD
-            + " 1";
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: %1$s";
     public static final String MESSAGE_NOT_COMPLETED = "Task does not exists in the task manager";
