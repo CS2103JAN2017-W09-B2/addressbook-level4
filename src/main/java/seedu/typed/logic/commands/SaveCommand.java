@@ -25,7 +25,7 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Saves the task manager to the location specified, or as a new name.\n"
             + "Parameters: fileName | NEW_STORAGE_LOCATION\n"
-            + "Example: " + COMMAND_WORD + "Desktop/typed.xml";
+            + "Example: " + COMMAND_WORD + " Desktop/typed.xml";
 
     private final String fileName;
 

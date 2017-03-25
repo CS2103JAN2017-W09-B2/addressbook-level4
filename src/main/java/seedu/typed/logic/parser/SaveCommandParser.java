@@ -27,7 +27,31 @@ public class SaveCommandParser {
 
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
-        return new SaveCommand(keywords[0]);
+
+        String fileName = keywords[0];
+
+//        if (hasXML(fileName)) {
+//            return new SaveCommand(fileName);
+//        } else {
+//            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+//        }
+        return new SaveCommand(createProperExtension(fileName));
     }
 
+    /*
+     * Returns the correct extension (xml) no matter the input.
+     */
+    private String createProperExtension(String fileName) {
+        if (fileName.contains(".")) {
+            String beforeDot = fileName.substring(0, fileName.lastIndexOf("."));
+            String afterDot = fileName.substring(fileName.lastIndexOf("."));
+            if (afterDot.equalsIgnoreCase("xml")) {
+                return beforeDot;
+            } else {
+                return (beforeDot + ".xml");
+            }
+        } else {
+            return (fileName + ".xml");
+        }
+    }
 }
