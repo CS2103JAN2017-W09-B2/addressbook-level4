@@ -71,13 +71,13 @@ Format: `help` <br>
 Format: `help COMMAND` <br>
 > `help COMMAND` shows you a detailed explanation of the command's usage information.<br>
 
-### 3.2. Adding a Task or Event
+### 3.2. Adding a Task
 
-#### <a name="addTitle"></a>3.2.1. Adding a Task or Event by Title Only: `add TITLE`
+#### <a name="addTitle"></a>3.2.1. Adding a Task by Title Only: `add TITLE`
 
 Format: `add TITLE`
 
-> `add TITLE` adds your task or event described by TITLE with no additional information. <br>
+> `add TITLE` adds your task described by TITLE with no additional information. <br>
 > Your choice of TITLE should contain only alphanumeric characters.
 
 *e.g. add read 1984 george orwell* <br>
@@ -91,29 +91,29 @@ Format: `add TITLE by DATE`
 
 *e.g. add lose 10 kg by 14/02/2014* <br>
 
-#### <a name="addRecurring"></a>3.2.3. Adding a Recurring Task or Event: `add TITLE every FREQUENCY`
+#### <a name="addRecurring"></a>3.2.3. Adding a Recurring Task: `add TITLE every FREQUENCY`
 
 Format: `add TITLE every FREQUENCY`
 
-> `add TITLE every FREQUENCY` adds an automatically recurring task or event according to the specified FREQUENCY. <br>
-> You may indicate either `daily`, `monthly` or `yearly` when specifying FREQUENCY. <br>
+> `add TITLE every FREQUENCY` adds an automatically recurring task according to the specified FREQUENCY. <br>
+> You may indicate either `day`, `month` or `year` when specifying FREQUENCY. <br>
 > The recurrence will be calculated beginning from the day you enter the task.
 
 *e.g. add boss' birthday every year* <br>
 
-#### <a name="addEventDuration"></a>3.2.4. Adding an Event with a Duration: `add TITLE from DATE to DATE`
+#### <a name="addTaskDuration"></a>3.2.4. Adding a Task with a Duration: `add TITLE from DATE to DATE`
 
 Format: `add TITLE from DATE to DATE`
 
-> `add TITLE from DATE to DATE` adds your event that is happening over days.
+> `add TITLE from DATE to DATE` adds your task that is happening over days.
 
 *e.g. add company retreat in Malaysia from 01/01/2017 to 05/01/2017* <br>
 
-#### <a name="addTaskTag"></a>3.2.5. Adding a Task or Event with Tags: `add TITLE #TAG ..`
+#### <a name="addTaskTag"></a>3.2.5. Adding a Task with Tags: `add TITLE #TAG ..`
 
 Format: `add TITLE #TAG ..`
 
-> `add TITLE #TAG ..` adds your task or event with one or more tags that allow for easy categorisation and retrieval. <br>
+> `add TITLE #TAG ..` adds your task with one or more tags that allow for easy categorisation and retrieval. <br>
 > #TAG must contain only alphanumeric characters. <br>
 > Tagging is compatible with all the other `add` commands. 
 
@@ -121,7 +121,7 @@ Format: `add TITLE #TAG ..`
 *e.g. add write minutes by 25/12/2017 #work #urgent #bosssays* <br>
 
 
-### 3.3. Listing Tasks and Events
+### 3.3. Listing Tasks
 
 #### <a name="list"></a>3.3.1. Listing a Task or Event : `list`
 
@@ -131,47 +131,47 @@ Format: `list`
 
 *e.g. list* <br>
 
-#### <a name="listType"></a>3.2.2. Listing a Task or Event : `list TYPE`
+#### <a name="listType"></a>3.2.2. Listing a Task : `list TYPE`
 
 Format: `list TYPE`
 
 > `list TYPE` shows you your tasks and events sorted by TYPE. <br>
-> Valid formats for TYPE include events, done, undone and all.
+> Valid formats for TYPE include timed, untimed, done, undone and all.
 
 *e.g. list done* <br>
 
-### 3.4. Editing a Task or Event
+### 3.4. Editing a Task
 
-#### <a name="editName"></a>3.4.1. Editing Title of a Task or Event : `edit INDEX NEW_TITLE`
+#### <a name="editName"></a>3.4.1. Editing Title of a Task : `edit INDEX NEW_TITLE`
 
 Format: `edit INDEX NEW_TITLE `
 
-> `edit INDEX NEW_TITLE` changes the title of the task or event specified by INDEX. <br>
+> `edit INDEX NEW_TITLE` changes the title of the task specified by INDEX. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
 *e.g. edit 1 buy green apples* <br>
 
-#### <a name="editDate"></a>3.4.2. Editing Deadline of a Task or Event : `edit INDEX by DATE`
+#### <a name="editDate"></a>3.4.2. Editing Deadline of a Task : `edit INDEX by DATE`
 
 Format: `edit INDEX by DATE `
 
-> `edit INDEX by DATE` changes the deadline of the task or event specified by INDEX. <br> 
-> If you would like to remove a deadline from a task or event, simply enter `edit INDEX by `. <br>
+> `edit INDEX by DATE` changes the deadline of the task specified by INDEX. <br> 
+> If you would like to remove a deadline from a task, simply enter `edit INDEX by `. <br>
 
 *e.g. edit 1 by 05/05/2017* <br>
 *e.g. edit 1 by* <br>
 
-#### <a name="editTag"></a>3.4.3. Editing Tags of a Task or Event : `edit INDEX #TAG .. `
+#### <a name="editTag"></a>3.4.3. Editing Tags of a Task : `edit INDEX #TAG .. `
 
 Format: `edit INDEX #TAG .. `
 
-> `edit INDEX by #TAG` replaces the original tags of the task or event specified by INDEX with the new tags given in the command. <br> 
-> If you would like to remove all associated tags in a task or event, use `edit INDEX # `. <br>
+> `edit INDEX by #TAG` replaces the original tags of the task specified by INDEX with the new tags given in the command. <br> 
+> If you would like to remove all associated tags in a task, use `edit INDEX # `. <br>
 
 *e.g. edit 1 #i #can #add #anything #i #want* <br>
 *e.g. edit 1 #* <br>
 
-#### <a name="editMultiple"></a>3.4.4. Editing Multiple Fields of a Task or Event : `edit INDEX [TITLE] [DATE] [#TAG] .. `
+#### <a name="editMultiple"></a>3.4.4. Editing Multiple Fields of a Task : `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
 Format: `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
@@ -183,11 +183,11 @@ Format: `edit INDEX [TITLE] [DATE] [#TAG] .. `
 
 ### 3.5. Finding Tasks and Events
 
-#### <a name="findKeyword"></a>3.5.1. Find a Task or Event by Title : `find KEYWORD ..`
+#### <a name="findKeyword"></a>3.5.1. Find a Task by Title : `find KEYWORD ..`
 
 Format: `find KEYWORD ..`
 
-> `find KEYWORD ..` finds all your tasks and events containing KEYWORD in their title. <br>
+> `find KEYWORD ..` finds all your tasks containing KEYWORD in their title. <br>
 > Fuzzy find is used to include similar words, e.g. `Sara` will match `Cara`. <br>
 > The search is not case sensitive, e.g `boss` will match `Boss`. <br>
 > The order of the keywords does not matter, e.g. `Hans Bo` will match `Bo Hans`. <br>
@@ -199,7 +199,7 @@ Format: `find KEYWORD ..`
 
 Format: `find #TAG ..`
 
-> `find #TAG ..` finds all your tasks and events tagged with #TAG. <br>
+> `find #TAG ..` finds all your tasks tagged with #TAG. <br>
 > Fuzzy find is used to include similar words, e.g. `#work` will match `#werk`. <br>
 > The search is not case sensitive, e.g `#boss` will match `#Boss`. <br>
 > The order of the tags does not matter, e.g. `#work #urgent` will return the same results as `#urgent #work`. <br>
@@ -207,31 +207,31 @@ Format: `find #TAG ..`
 
 *e.g. find #dope #chill #urgent* <br>
 
-### 3.6. Deleting Tasks and Events
+### 3.6. Deleting Tasks
 
-#### <a name="deleteIndex"></a>3.6.1. Deleting One Task or Event : `delete INDEX `
+#### <a name="deleteIndex"></a>3.6.1. Deleting One Task : `delete INDEX `
 
 Format: `delete INDEX`
 
-> `delete INDEX` removes a task or event identified by INDEX. <br>
+> `delete INDEX` removes a task identified by INDEX. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
 *e.g. delete 2* <br>
 
-#### <a name="deleteRange"></a>3.6.2. Deleting Multiple Tasks or Events : `delete INDEX to INDEX `
+#### <a name="deleteRange"></a>3.6.2. Deleting Multiple Tasks : `delete INDEX to INDEX `
 
 Format: `delete INDEX to INDEX`
 
-> `delete INDEX to INDEX` removes a range of tasks or events identified by INDEX. <br>
+> `delete INDEX to INDEX` removes a range of tasks identified by INDEX. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
 *e.g. delete 2 to 8* <br>
 
-#### <a name="deleteAll"></a>3.6.3. Deleting All Tasks or Events : `delete all `
+#### <a name="deleteAll"></a>3.6.3. Deleting All Tasks : `delete all `
 
 Format: `delete all` 
 
-> `delete all` removes all stored tasks and events. <br>
+> `delete all` removes all stored tasks. <br>
 
 *e.g. delete all* <br>
 
@@ -262,7 +262,7 @@ Format: `undo all`
 
 > `undo all` restores *Typed* to its state before all actions were performed. <br>
 
-*e.g. undo 5* <br>
+*e.g. undo all* <br>
 
 ### 3.8. Redoing Actions
 
@@ -370,7 +370,7 @@ Format: `exit`
 Command | Format |
 -------- | :-------- |
 `help` | [help](#help) <br> [help COMMAND](#specificHelp)|
-`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addEventDuration) <br> [add TASK #TAG ..](#addTaskTag)|
+`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addTaskDuration) <br> [add TASK #TAG ..](#addTaskTag)|
 `list` | [list](#list) <br> [list TYPE](#listType)|
 `edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
 `find` | [find KEYWORD ..](#findKeyword) <br> [find #TAG ..](#findTag) |
