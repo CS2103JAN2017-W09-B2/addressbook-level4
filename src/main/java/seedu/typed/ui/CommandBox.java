@@ -3,6 +3,7 @@ package seedu.typed.ui;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -31,8 +32,6 @@ public class CommandBox extends UiPart<Region> {
     private ArrayList<String> commandHistory;
     private int pointer;
 
-    // private Stack<String> historyCommand = new Stack<String>();
-    // private Stack<String> nextCommand = new Stack<String>();
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, Session session) {
         super(FXML);
@@ -61,10 +60,7 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandSuccess();
             commandTextField.clear();
             resetPointer();
-            // commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
-            // historyCommand.push(commandInput);
-            commandTextField.requestFocus();
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
@@ -72,34 +68,21 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             resetPointer();
-            commandTextField.requestFocus();
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
 
+    //@@author A0139392X
     @FXML
     void handleKeyPressed(KeyEvent event) {
-        if (event.getCode().toString().equals("UP")) { // removed && (!historyCommand.isEmpty())
-            //String commandToShow = historyCommand.pop();
-            // save the command to the nextCommand stack
-            // nextCommand.push(commandToShow);
-
-            // commandTextField.setText(commandToShow);
+        if (event.getCode().toString().equals("UP")) {
             handleUpKey();
         }
         if (event.getCode().toString().equals("DOWN")) {
-            /* if (!nextCommand.isEmpty()) {
-                String commandToShow = nextCommand.pop();
-                // save the command to historyCommand stack
-                historyCommand.push(commandToShow);
-
-                commandTextField.setText(commandToShow);
-            } else {
-                commandTextField.clear();
-            }*/
             handleDownKey();
         }
     }
+    //@@author
 
     /**
      * Sets the command box style to indicate a successful command.
@@ -124,6 +107,7 @@ public class CommandBox extends UiPart<Region> {
         if (pointer > 0) {
             pointer--;
         }
+
         if (pointer < commandHistory.size()) {
             return true;
         } else {
@@ -144,6 +128,7 @@ public class CommandBox extends UiPart<Region> {
         if (canUpPointer()) {
             String commandToShow = getCommandFromHistory();
             commandTextField.setText(commandToShow);
+            setCaretToEnd();
         }
     }
 
@@ -151,6 +136,7 @@ public class CommandBox extends UiPart<Region> {
         if (canDownPointer()) {
             String commandToShow = getCommandFromHistory();
             commandTextField.setText(commandToShow);
+            setCaretToEnd();
         } else {
             resetPointer();
             commandTextField.clear();
@@ -160,4 +146,14 @@ public class CommandBox extends UiPart<Region> {
     private String getCommandFromHistory() {
         return commandHistory.get(pointer);
     }
+
+    private void setCaretToEnd() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                commandTextField.end();
+            }
+        });
+    }
+    //@@author
 }
