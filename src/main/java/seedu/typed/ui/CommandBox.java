@@ -75,11 +75,21 @@ public class CommandBox extends UiPart<Region> {
     //@@author A0139392X
     @FXML
     void handleKeyPressed(KeyEvent event) {
-        if (event.getCode().toString().equals("UP")) {
+        String keyPressed = event.getCode().toString();
+
+        switch(keyPressed) {
+
+        case "UP":
             handleUpKey();
-        }
-        if (event.getCode().toString().equals("DOWN")) {
+            break;
+
+        case "DOWN":
             handleDownKey();
+            break;
+
+        default:
+            break;
+
         }
     }
     //@@author
@@ -104,6 +114,11 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private boolean canUpPointer() {
+
+        if (pointer == 0) {
+            return false;
+        }
+
         if (pointer > 0) {
             pointer--;
         }
@@ -129,6 +144,8 @@ public class CommandBox extends UiPart<Region> {
             String commandToShow = getCommandFromHistory();
             commandTextField.setText(commandToShow);
             setCaretToEnd();
+        } else {
+            setCaretAtOriginal();
         }
     }
 
@@ -152,6 +169,16 @@ public class CommandBox extends UiPart<Region> {
             @Override
             public void run() {
                 commandTextField.end();
+            }
+        });
+    }
+
+    private void setCaretAtOriginal() {
+        int originalPosition = commandTextField.getCaretPosition();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                commandTextField.positionCaret(originalPosition);
             }
         });
     }

@@ -11,21 +11,21 @@ import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 
+//@@author A0143853A
 /**
- * Undoes an add/delete/edit command on the task manager.
- * @@author A0143853A
+ * Undoes an a mutable command entered in the task manager.
  */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the previous add/delete/edit/clear command"
-            + "in the current session.\n"
-            + "Parameters: none\n" + "Example: " + COMMAND_WORD;
-
-    public static final String MESSAGE_SUCCESS = "Undone previous command";
-    public static final String MESSAGE_NO_PREV_COMMAND = "There is no command to be undone";
-    public static final String MESSAGE_ERROR = "Cannot undo previous command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the previous add/delete/edit/clear command "
+                                               + "in the current session.\n"
+                                               + "Parameters: none\n"
+                                               + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_SUCCESS = "Undone successfully!";
+    public static final String MESSAGE_NO_PREV_COMMAND = "There is no command to undo!";
+    public static final String MESSAGE_ERROR = "Cannot undo previous command!";
 
 
     public UndoCommand() {
@@ -33,7 +33,8 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert this.model != null;
+        assert model != null;
+
         Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popUndoStack();
 
         if (optionalTriple.equals(Optional.empty())) {
@@ -46,7 +47,6 @@ public class UndoCommand extends Command {
         Object change = toPush.getThird();
 
         try {
-
             switch(command) {
 
             case CommandTypeUtil.TYPE_ADD_TASK:
@@ -79,11 +79,10 @@ public class UndoCommand extends Command {
                 break;
 
             default:
-                throw new CommandException(MESSAGE_ERROR);
+                break;
+
             }
-
             return new CommandResult(MESSAGE_SUCCESS);
-
         } catch (Exception e) {
             throw new CommandException(MESSAGE_ERROR);
         }

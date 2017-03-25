@@ -51,7 +51,7 @@ public class TaskListPanelHandle extends GuiHandle {
      */
     public boolean isListMatching(ReadOnlyTask... tasks)
             throws IllegalArgumentException, IllegalValueException {
-        return this.isListMatching(0, tasks);
+        return isListMatching(0, tasks);
     }
 
     /**

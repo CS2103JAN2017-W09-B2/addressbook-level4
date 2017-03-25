@@ -11,21 +11,22 @@ import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 
+//@@author A0143853A
 /**
- * Redoes the previous undone command on the task manager.
- * @author Le Yuan
+ * Redoes the previous undone command in the task manager.
+ * Entering a new mutable command clears the stack of undone commands to redo.
  */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the previous undone command"
-            + "in the current session.\n"
-            + "Parameters: none\n" + "Example: " + COMMAND_WORD;
-
-    public static final String MESSAGE_SUCCESS = "Redone previous undone command";
-    public static final String MESSAGE_NO_COMMAND_TO_REDO = "There is no undone command to be redone";
-    public static final String MESSAGE_ERROR = "Cannot redo previous undone command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the previous undone command "
+                                               + "in the current session.\n"
+                                               + "Parameters: none\n"
+                                               + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_SUCCESS = "Redone successfully!";
+    public static final String MESSAGE_NO_COMMAND_TO_REDO = "There is no undo to redo!";
+    public static final String MESSAGE_ERROR = "Cannot redo previous undo!";
 
 
     public RedoCommand() {
@@ -33,7 +34,8 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert this.model != null;
+        assert model != null;
+
         Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popRedoStack();
 
         if (optionalTriple.equals(Optional.empty())) {
@@ -46,7 +48,6 @@ public class RedoCommand extends Command {
         Object change = toPush.getThird();
 
         try {
-
             switch(command) {
 
             case CommandTypeUtil.TYPE_ADD_TASK:
@@ -81,13 +82,11 @@ public class RedoCommand extends Command {
                 break;
 
             default:
-                throw new CommandException(MESSAGE_ERROR);
+                break;
+
             }
-
             return new CommandResult(MESSAGE_SUCCESS);
-
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new CommandException(MESSAGE_ERROR);
         }
     }
