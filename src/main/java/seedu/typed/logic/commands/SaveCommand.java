@@ -47,7 +47,6 @@ public class SaveCommand extends Command {
 
         if (file.isDirectory()) {
             try {
-
                 // if file does not exists, create file
                 if (!file.exists()) {
                     file.createNewFile();
@@ -77,13 +76,13 @@ public class SaveCommand extends Command {
                     String currentFileDirectory = FileUtil.getFullDirectoryPath();
                     System.out.println("Directory: " + currentFileDirectory);
 
-                    File fileToCreate = new File(this.fileName);
+                    File fileToCreate = new File(currentFileDirectory + "/" + this.fileName);
 
                     String contents = FileUtil.readFromFile(toCopyFrom);
 
                     FileUtil.writeToFile(fileToCreate, contents);
 
-                    return new CommandResult(String.format(MESSAGE_SUCCESS, currentFileDirectory + this.fileName + ".xml"));
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, currentFileDirectory + "/" + this.fileName));
                 } catch (IOException ioe) {
                     throw new CommandException(MESSAGE_SAVE_ERROR);
                 }
