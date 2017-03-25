@@ -13,6 +13,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Date date;
     private Date from;
+    private Date to;
     private UniqueTagList tags;
     private boolean isCompleted;
 
@@ -27,6 +28,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.date = taskToCopy.getDate();
         this.from = taskToCopy.getFrom();
+        this.to = taskToCopy.getTo();
         this.tags = taskToCopy.getTags();
     }
 
@@ -38,9 +40,15 @@ public class TestTask implements ReadOnlyTask {
         this.date = date;
     }
 
+    //@@author A0141094M
     public void setFrom(Date from) {
         this.from = from;
     }
+
+    public void setTo(Date to) {
+        this.to = to;
+    }
+    //@@author
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -60,10 +68,17 @@ public class TestTask implements ReadOnlyTask {
         return date;
     }
 
+    //@@author A0141094M
     @Override
     public Date getFrom() {
         return from;
     }
+
+    @Override
+    public Date getTo() {
+        return to;
+    }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {

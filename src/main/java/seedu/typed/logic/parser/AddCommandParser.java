@@ -4,6 +4,7 @@ import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.typed.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,17 +26,18 @@ public class AddCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_FROM, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             if (isFloatingActivity(argsTokenizer)) {
-                return new AddCommand(argsTokenizer.getPreamble().get(), null, null,
+                return new AddCommand(argsTokenizer.getPreamble().get(), null, null, null,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
             } else if (isEvent(argsTokenizer)) {
                 return new AddCommand(argsTokenizer.getPreamble().get(), null, argsTokenizer.getValue(PREFIX_FROM).get(),
+                        argsTokenizer.getValue(PREFIX_TO).get(),
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
             } else if (isTask(argsTokenizer)) {
-                return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(), null,
+                return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(), null, null,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -48,16 +50,20 @@ public class AddCommandParser {
     }
 
     private boolean isEvent(ArgumentTokenizer argsTokenizer) {
-        return (!argsTokenizer.getValue(PREFIX_FROM).equals(Optional.empty())
-                && argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty()));
+        return (argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())
+                && !argsTokenizer.getValue(PREFIX_FROM).equals(Optional.empty())
+                && !argsTokenizer.getValue(PREFIX_TO).equals(Optional.empty()));
     }
 
     private boolean isTask(ArgumentTokenizer argsTokenizer) {
-        return (!argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty()));
+        return (!argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())
+                && argsTokenizer.getValue(PREFIX_FROM).equals(Optional.empty())
+                && argsTokenizer.getValue(PREFIX_TO).equals(Optional.empty()));
     }
 
     private boolean isFloatingActivity(ArgumentTokenizer argsTokenizer) {
         return (argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())
-                && argsTokenizer.getValue(PREFIX_FROM).equals(Optional.empty()));
+                && argsTokenizer.getValue(PREFIX_FROM).equals(Optional.empty())
+                && argsTokenizer.getValue(PREFIX_TO).equals(Optional.empty()));
     }
 }

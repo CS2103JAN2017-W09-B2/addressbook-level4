@@ -13,6 +13,7 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Date date;
     private Date from;
+    private Date to;
 
     private boolean isCompleted;
 
@@ -21,7 +22,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Date date, Date from, UniqueTagList tags, boolean isCompleted) {
+    public Task(Name name, Date date, Date from, Date to, UniqueTagList tags, boolean isCompleted) {
         // commented this out!! allow date tags be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
@@ -29,6 +30,7 @@ public class Task implements ReadOnlyTask {
         this.name = name;
         this.date = date;
         this.from = from;
+        this.to = to;
         this.tags = new UniqueTagList(tags); // protect internal tags from
         this.isCompleted = isCompleted;
         // changes
@@ -40,7 +42,7 @@ public class Task implements ReadOnlyTask {
      * @param date
      * @param tags
      */
-    public Task(Name name, Date date, Date from, UniqueTagList tags) {
+    public Task(Name name, Date date, Date from, Date to, UniqueTagList tags) {
         // commented this out, allow date tags to be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
@@ -48,6 +50,7 @@ public class Task implements ReadOnlyTask {
         this.name = name;
         this.date = date;
         this.from = from;
+        this.to = to;
         this.tags = new UniqueTagList(tags);
         this.isCompleted = false;
     }
@@ -56,7 +59,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDate(), source.getFrom(), source.getTags(), source.getIsCompleted());
+        this(source.getName(), source.getDate(), source.getFrom(), source.getTo(), source.getTags(), source.getIsCompleted());
     }
 
     public void setName(Name name) throws IllegalValueException {
@@ -87,6 +90,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public Date getFrom() {
         return from;
+    }
+
+    public void setTo(Date to) throws IllegalValueException {
+        assert to != null;
+        this.to = new Date(to.getValue());
+    }
+
+    @Override
+    public Date getTo() {
+        return to;
     }
 
     @Override
@@ -120,6 +133,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
         this.setFrom(replacement.getFrom());
+        this.setTo(replacement.getTo());
         this.setTags(replacement.getTags());
         this.setIsCompleted(replacement.getIsCompleted());
     }

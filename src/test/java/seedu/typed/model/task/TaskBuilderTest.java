@@ -23,6 +23,7 @@ public class TaskBuilderTest {
     private Name name;
     private Date date;
     private Date from;
+    private Date to;
     private UniqueTagList tags, tagTest;
     private Set<String> tagSet;
     private Task testTask;
@@ -32,10 +33,11 @@ public class TaskBuilderTest {
             name = new Name("Meet John");
             date = new Date("12/12/2017");
             from = new Date("");
+            to = new Date("");
             tags = new UniqueTagList();
             tagTest = new UniqueTagList();
             tags.add(new Tag("friends"));
-            testTask = new Task(name, date, from, tags);
+            testTask = new Task(name, date, from, to, tags);
             tagSet = new HashSet<String>();
             tagSet.add("friends");
             tagSet.add("work");

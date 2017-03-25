@@ -36,7 +36,7 @@ public class TypicalTestTasks {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
 
-                Task toAdd = new Task(task.getName(), task.getDate(), task.getFrom(), task.getTags());
+                Task toAdd = new Task(task.getName(), task.getDate(), task.getFrom(), task.getTo(), task.getTags());
                 tm.addTask(toAdd);
 
             } catch (UniqueTaskList.DuplicateTaskException e) {

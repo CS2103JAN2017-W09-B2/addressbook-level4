@@ -13,7 +13,11 @@ public interface ReadOnlyTask {
 
     Date getDate();
 
+    //@author A0141094M
     Date getFrom();
+
+    Date getTo();
+    //@@author
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on

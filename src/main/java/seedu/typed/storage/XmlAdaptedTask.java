@@ -23,6 +23,8 @@ public class XmlAdaptedTask {
     private String date;
     @XmlElement(required = true)
     private String from;
+    @XmlElement(required = true)
+    private String to;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,6 +47,7 @@ public class XmlAdaptedTask {
         name = source.getName().getValue();
         date = source.getDate().getValue();
         from = source.getFrom().getValue();
+        to = source.getTo().getValue();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -69,6 +72,7 @@ public class XmlAdaptedTask {
                 .setName(this.name)
                 .setDate(this.date)
                 .setFrom(this.from)
+                .setTo(this.to)
                 .setTags(tags)
                 .build();
     }

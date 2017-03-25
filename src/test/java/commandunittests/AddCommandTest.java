@@ -40,14 +40,15 @@ public class AddCommandTest {
     @Before
     public void setUp() {
         try {
-            testCommand1 = new TestAddCommand("Meet Joe", "05/04/2017", "", new HashSet<String>());
-            testCommand2 = new TestAddCommand("Meet Joe", "05/04/2017", "", new HashSet<String>());
-            testCommand3 = new TestAddCommand("Meet Joe", "05/04/2017", "", new HashSet<String>());
-            allPresent = new TestAddCommand("Meet Moo", "12/12/2017", "", new HashSet<String>());
+            testCommand1 = new TestAddCommand("Meet Joe", "05/04/2017", "", "", new HashSet<String>());
+            testCommand2 = new TestAddCommand("Meet Joe", "05/04/2017", "", "", new HashSet<String>());
+            testCommand3 = new TestAddCommand("Meet Joe", "05/04/2017", "", "", new HashSet<String>());
+            allPresent = new TestAddCommand("Meet Moo", "12/12/2017", "", "", new HashSet<String>());
             testModel = new ModelStub();
             testModel.addTask(new TaskBuilder().setName("Meet Joe")
                     .setDate("05/04/2017")
                     .setFrom("")
+                    .setTo("")
                     .build());
             //dateTagNulls = new TestAddCommand("Meet John", null , null);
             //allNulls = new TestAddCommand(null, null, null);
