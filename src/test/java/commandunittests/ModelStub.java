@@ -22,7 +22,7 @@ public class ModelStub extends ModelManager {
 
     }
 
-    public ModelStub() {
+    public ModelStub() throws IllegalValueException {
         this.taskManager = new TaskManager();
     }
 

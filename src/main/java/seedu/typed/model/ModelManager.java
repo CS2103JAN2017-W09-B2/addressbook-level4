@@ -8,11 +8,11 @@ import seedu.typed.commons.core.ComponentManager;
 import seedu.typed.commons.core.LogsCenter;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.commons.util.StringUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
-import seedu.typed.model.task.UniqueTaskList;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -29,8 +29,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     * @throws IllegalValueException
      */
-    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) throws IllegalValueException {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
@@ -41,19 +42,38 @@ public class ModelManager extends ComponentManager implements Model {
         completedTasks = new FilteredList<>(this.taskManager.getCompletedTasks());
     }
 
-    public ModelManager() {
+    public ModelManager() throws IllegalValueException {
         this(new TaskManager(), new UserPrefs());
     }
 
+    //@@author A0143853A
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        this.taskManager.resetData(newData);
+    public int getIndexOfTask(Task task) throws TaskNotFoundException {
+        return taskManager.getIndexOf(task);
+    }
+
+    //@@author A0143853A
+    @Override
+    public Task getTaskAt(int index) {
+        return taskManager.getTaskAt(index);
+    }
+
+    @Override
+    public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
+        taskManager.resetData(newData);
+        indicateTaskManagerChanged();
+    }
+
+    //@@author A0143853A
+    @Override
+    public void copyData(ReadOnlyTaskManager newData) throws IllegalValueException {
+        taskManager.copyData(newData);
         indicateTaskManagerChanged();
     }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
-        return this.taskManager;
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
@@ -64,12 +84,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    //@@author A0143853A
+    @Override
+    public synchronized void addTask(int index, Task task) throws DuplicateTaskException {
+        taskManager.addTask(index, task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -82,12 +111,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateTaskForUndoRedo(int index, ReadOnlyTask editedTask)
+            throws DuplicateTaskException, IllegalValueException {
+        assert editedTask != null;
+
+        taskManager.updateTask(index, editedTask);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 

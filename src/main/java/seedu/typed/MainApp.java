@@ -16,6 +16,7 @@ import seedu.typed.commons.core.LogsCenter;
 import seedu.typed.commons.core.Version;
 import seedu.typed.commons.events.ui.ExitAppRequestEvent;
 import seedu.typed.commons.exceptions.DataConversionException;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.ConfigUtil;
 import seedu.typed.commons.util.StringUtil;
 import seedu.typed.logic.Logic;
@@ -66,7 +67,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, session);
 
-        ui = new UiManager(logic, config, userPrefs);
+        ui = new UiManager(logic, config, userPrefs, session);
 
         initEventsCenter();
     }
@@ -76,7 +77,7 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) throws IllegalValueException {
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {

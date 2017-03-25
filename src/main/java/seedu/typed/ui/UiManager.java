@@ -20,6 +20,7 @@ import seedu.typed.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.typed.commons.util.StringUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.model.UserPrefs;
+import seedu.typed.storage.temp.Session;
 
 /**
  * The manager of the UI component.
@@ -34,12 +35,14 @@ public class UiManager extends ComponentManager implements Ui {
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
+    private Session session;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Session session) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.session = session;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, session);
             mainWindow.show(); // This should be called before creating other UI
                                // parts
             mainWindow.fillInnerParts();

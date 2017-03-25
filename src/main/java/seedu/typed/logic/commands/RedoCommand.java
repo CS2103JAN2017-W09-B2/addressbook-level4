@@ -9,6 +9,7 @@ import seedu.typed.model.ReadOnlyTaskManager;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
+import seedu.typed.model.task.TaskBuilder;
 
 /**
  * Redoes the previous undone command on the task manager.
@@ -19,8 +20,8 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the previous undone command"
-            + "in the current session."
-            + "Parameters: none" + "Example: " + COMMAND_WORD;
+            + "in the current session.\n"
+            + "Parameters: none\n" + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Redone previous undone command";
     public static final String MESSAGE_NO_COMMAND_TO_REDO = "There is no undone command to be redone";
@@ -33,57 +34,50 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert this.model != null;
-        Optional<TripleUtil<String, Object, Object>> optionalCmd = this.session.popRedoStack();
+        Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popRedoStack();
 
-        if (optionalCmd.equals(Optional.empty())) {
+        if (optionalTriple.equals(Optional.empty())) {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_REDO);
         }
 
-        TripleUtil<String, Object, Object> cmd = optionalCmd.get();
-        String cmdString = cmd.getFirst();
-        Object first = cmd.getSecond();
-        Object second = cmd.getThird();
-        TripleUtil<String, Object, Object> toPush = new TripleUtil<String, Object, Object>("", null, null);
+        TripleUtil<String, Integer, Object> toPush = optionalTriple.get();
+        String command = toPush.getFirst();
+        int index = toPush.getSecond();
+        Object change = toPush.getThird();
+
         try {
 
-            switch(cmdString) {
+            switch(command) {
 
             case CommandTypeUtil.TYPE_ADD_TASK:
-                this.model.addTask((Task) first);
-                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_ADD_TASK));
-                toPush.setSecond(first);
-                this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, toPush, null);
-                this.session.updateValidCommandsHistory(this.commandText);
+                model.addTask(index, (Task) change);
+                toPush.setFirst(CommandTypeUtil.TYPE_DELETE_TASK);
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateValidCommandsHistory(commandText);
                 break;
 
             case CommandTypeUtil.TYPE_DELETE_TASK:
-                this.model.deleteTask((ReadOnlyTask) first);
-                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_DELETE_TASK));
-                toPush.setSecond(first);
-                this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, toPush, null);
-                this.session.updateValidCommandsHistory(this.commandText);
+                model.deleteTask((ReadOnlyTask) change);
+                toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateValidCommandsHistory(commandText);
                 break;
 
             case CommandTypeUtil.TYPE_EDIT_TASK:
-                this.model.deleteTask((ReadOnlyTask) first);
-                this.model.addTask((Task) second);
-                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_EDIT_TASK));
-                toPush.setSecond(second);
-                toPush.setThird(first);
-                this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, toPush, null);
-                this.session.updateValidCommandsHistory(this.commandText);
+                Task currentTask = new TaskBuilder(model.getTaskAt(index)).build();
+                toPush.setThird(currentTask);
+                model.updateTaskForUndoRedo(index, (ReadOnlyTask) change);
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateValidCommandsHistory(commandText);
                 break;
 
             case CommandTypeUtil.TYPE_CLEAR:
-                ReadOnlyTaskManager secondTaskManager = (ReadOnlyTaskManager) second;
-                this.model.resetData(secondTaskManager);
-                TaskManager third = new TaskManager();
-                third.copyData(secondTaskManager);
-                toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_CLEAR));
-                toPush.setSecond(third);
-                toPush.setThird(first);
-                this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, toPush, null);
-                this.session.updateValidCommandsHistory(this.commandText);
+                TaskManager currentTaskManager = new TaskManager();
+                currentTaskManager.copyData(model.getTaskManager());
+                model.resetData((ReadOnlyTaskManager) change);
+                toPush.setThird(currentTaskManager);
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateValidCommandsHistory(commandText);
                 break;
 
             default:

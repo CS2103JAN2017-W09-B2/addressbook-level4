@@ -30,9 +30,9 @@ public class TaskBuilder {
         this.tags = new UniqueTagList();
     }
 
-    public TaskBuilder(ReadOnlyTask task) {
-        this.name = task.getName();
-        this.date = task.getDate();
+    public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
+        this.name = new Name(task.getName().getValue());
+        this.date = new Date(task.getDate().getValue());
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
@@ -42,8 +42,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder setName(Name name) {
-        this.name = name;
+    public TaskBuilder setName(Name name) throws IllegalValueException {
+        assert name != null;
+
+        this.name = new Name(name.getValue());
         return this;
     }
 
@@ -52,8 +54,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder setDate(Date date) {
-        this.date = date;
+    public TaskBuilder setDate(Date date) throws IllegalValueException {
+        assert date != null;
+
+        this.date = new Date(date.getValue());
         return this;
     }
 
@@ -82,7 +86,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(this.name, this.date, this.tags, this.isCompleted);
+        return new Task(name, date, tags, isCompleted);
     }
 
 }

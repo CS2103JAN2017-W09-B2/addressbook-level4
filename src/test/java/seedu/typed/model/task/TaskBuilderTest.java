@@ -1,7 +1,6 @@
 package seedu.typed.model.task;
 
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -45,7 +44,7 @@ public class TaskBuilderTest {
         }
     }
     @Test
-    public void setName_validName_success() {
+    public void setName_validName_success() throws IllegalValueException {
         assertTrue(testBuilder1.setName(name).build().getName().equals(name));
         testBuilder1 = new TaskBuilder();
     }
@@ -58,7 +57,7 @@ public class TaskBuilderTest {
         }
     }
     @Test
-    public void setDate_validDate_success() {
+    public void setDate_validDate_success() throws IllegalValueException {
         assertTrue(testBuilder1.setDate(date).setName(name)
                 .build().getDate().equals(date));
     }
@@ -95,7 +94,7 @@ public class TaskBuilderTest {
         }
     }
     @Test
-    public void taskBuilder_Task_Success() {
+    public void taskBuilder_Task_Success() throws IllegalValueException {
         TaskBuilder builder = new TaskBuilder(testTask);
         assertTrue(builder.build().equals(testTask));
     }
@@ -111,7 +110,7 @@ public class TaskBuilderTest {
         }
     }
     @Test
-    public void setTags_UniqueTagList_success() {
+    public void setTags_UniqueTagList_success() throws IllegalValueException {
         assertTrue(testBuilder1.setName(name).setTags(tags).build().getTags().equals(tags));
     }
 }

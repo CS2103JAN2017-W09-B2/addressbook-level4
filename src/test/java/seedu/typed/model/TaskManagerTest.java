@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
@@ -34,20 +35,20 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void resetData_null_throwsAssertionError() {
+    public void resetData_null_throwsAssertionError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
         taskManager.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyTaskManager_replacesData() {
+    public void resetData_withValidReadOnlyTaskManager_replacesData() throws IllegalValueException {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
     }
 
     @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() throws IllegalValueException {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new TaskBuilder(td.alice).build(),
@@ -60,7 +61,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetData_withDuplicateTags_throwsAssertionError() throws IllegalValueException {
         TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());

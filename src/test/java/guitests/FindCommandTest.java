@@ -5,12 +5,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
+    public void find_nonEmptyList() throws IllegalArgumentException, IllegalValueException {
         assertFindResult("find Z"); // no results
         assertFindResult("find Meller", td.benson, td.daniel, td.elle); // multiple
                                                               // results
@@ -21,7 +22,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_emptyList() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }
@@ -32,7 +33,8 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");

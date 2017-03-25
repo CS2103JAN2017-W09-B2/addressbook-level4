@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.typed.commons.core.UnmodifiableObservableList;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -54,15 +55,17 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Creates a TaskManager using the Tasks and Tags in the
      * {@code toBeCopied}
+     * @throws IllegalValueException
      */
-    public TaskManager(ReadOnlyTaskManager toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) throws IllegalValueException {
         this();
         resetData(toBeCopied);
     }
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws DuplicateTaskException, IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
@@ -70,6 +73,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tags.setTags(tags);
     }
 
+    //@@author A0143853A
     public void copyData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
@@ -77,7 +81,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             Iterator<ReadOnlyTask> iterator = tasksToCopy.iterator();
             while (iterator.hasNext()) {
                 ReadOnlyTask toCopy = iterator.next();
-                this.addTask((Task) toCopy);
+                addTask((Task) toCopy);
             }
         } catch (UniqueTaskList.DuplicateTaskException e) {
             ;
@@ -87,7 +91,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             Iterator<Tag> iterator = tagsToCopy.iterator();
             while (iterator.hasNext()) {
                 Tag toCopy = iterator.next();
-                this.addTag(toCopy);
+                addTag(toCopy);
             }
         } catch (UniqueTagList.DuplicateTagException e) {
             ;
@@ -95,7 +99,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(tasks);
     }
 
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -120,14 +124,30 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        this.tasks.add(p);
+    public void addTask(Task task) throws DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.add(task);
     }
 
-    public void completeTask(Task p) throws TaskNotFoundException, DuplicateTaskException {
-        this.tasks.remove(p);
-        this.completedTasks.add(p);
+    //@@author A0143853A
+    public void addTask(int index, Task task) throws DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.add(index, task);
+    }
+
+    //@@author A0143853A
+    public int getIndexOf(Task task) throws TaskNotFoundException {
+        return tasks.indexOf(task);
+    }
+
+    //@@author A0143853A
+    public Task getTaskAt(int index) {
+        return tasks.getTaskAt(index);
+    }
+
+    public void completeTask(Task task) throws TaskNotFoundException, DuplicateTaskException {
+        tasks.remove(task);
+        completedTasks.add(task);
     }
 
     /**
@@ -142,11 +162,11 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+            throws DuplicateTaskException, IllegalValueException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new TaskBuilder(editedReadOnlyTask).build();
-        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.
         // This can cause the tags master list to have additional tags that are
@@ -154,6 +174,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
+        syncMasterTagListWith(editedTask);
     }
 
     /**
@@ -197,8 +218,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //// tag-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
+    public void addTag(Tag tag) throws UniqueTagList.DuplicateTagException {
+        tags.add(tag);
     }
 
     //// util methods

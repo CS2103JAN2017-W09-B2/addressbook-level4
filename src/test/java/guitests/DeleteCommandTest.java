@@ -5,13 +5,14 @@ import static seedu.typed.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCE
 
 import org.junit.Test;
 
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.testutil.TestTask;
 import seedu.typed.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void delete() {
+    public void delete() throws IllegalArgumentException, IllegalValueException {
 
         // delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
@@ -42,8 +43,11 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
      *            e.g. index 1 to delete the first task in the list,
      * @param currentList
      *            A copy of the current list of tasks (before deletion).
+     * @throws IllegalValueException
+     * @throws IllegalArgumentException
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList)
+            throws IllegalArgumentException, IllegalValueException {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
                                                                         // array
                                                                         // uses

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.Date;
@@ -23,7 +24,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Meet Bobby d/19/03/2017 t/husband";
+        String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
@@ -34,7 +35,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "#sweetie #bestie";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -45,7 +46,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "#";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -91,16 +92,16 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-        commandBox.runCommand("edit 1 d/abcd");
+        commandBox.runCommand("edit 1 by abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Meet Alice Pauline d/01/01/2018 t/friends");
+        commandBox.runCommand("edit 3 Meet Alice Pauline by 01/01/2018 #friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -116,9 +117,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
      *            details to edit the task with as input to the edit command
      * @param editedTask
      *            the expected task after editing the task's details
+     * @throws IllegalValueException
+     * @throws IllegalArgumentException
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit,
-            TestTask editedTask) {
+
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
+            String detailsToEdit, TestTask editedTask)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data

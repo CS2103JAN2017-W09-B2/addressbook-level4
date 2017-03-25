@@ -28,14 +28,16 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state
+                && other.getName().getValue().equals(this.getName().getValue()) // state
                 // checks here
                 // onwards
-                && other.getDate().equals(this.getDate()));
+                && other.getDate().getValue().equals(this.getDate().getValue())
+                && other.getTags().equals(this.getTags())
+                && (other.getIsCompleted() == this.getIsCompleted()));
     }
 
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all task details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();

@@ -16,8 +16,8 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
-        this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EXIT, null, null);
-        this.session.updateValidCommandsHistory(this.commandText);
+        session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EXIT, -1, null);
+        session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 

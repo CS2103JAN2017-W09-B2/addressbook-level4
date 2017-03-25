@@ -5,6 +5,7 @@ import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
+import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -16,7 +17,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
@@ -36,9 +38,10 @@ public class DeleteCommand extends Command {
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            this.model.deleteTask(taskToDelete);
-            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, taskToDelete, null);
-            this.session.updateValidCommandsHistory(this.commandText);
+            int index = model.getIndexOfTask((Task) taskToDelete);
+            model.deleteTask(taskToDelete);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, index, taskToDelete);
+            session.updateValidCommandsHistory(commandText);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }

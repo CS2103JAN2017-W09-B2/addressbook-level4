@@ -26,8 +26,6 @@ public class TaskTest {
     private Tag tag2;
     private Date nullDate;
     private Date date;
-    private boolean isCompleted;
-    private boolean isCompleted2;
     private Task test;
     private UniqueTagList tagList;
     private UniqueTagList tagList2;
@@ -44,8 +42,6 @@ public class TaskTest {
             name = new Name("Meet John");
             name2 = new Name("Meet Honey");
             date = new Date("12/12/2017");
-            isCompleted = false;
-            isCompleted2 = false;
             test = new Task(name, date, new UniqueTagList());
             tagList = new UniqueTagList();
             tagList2 = new UniqueTagList();
@@ -56,22 +52,22 @@ public class TaskTest {
         }
     }
     @Test
-    public void equals_same_success() {
+    public void equals_same_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         assertTrue(test.equals(test));
     }
     @Test
-    public void equals_notSameButSimilar_success() {
+    public void equals_notSameButSimilar_success() throws IllegalValueException {
         Task test2 = new TaskBuilder().setName(name).setTags(new UniqueTagList()).setDate(date).build();
         assertTrue(test.equals(test2));
     }
     @Test
-    public void equals_notSameAndNotSameInstance_false() {
+    public void equals_notSameAndNotSameInstance_false() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         assertFalse(test.equals(name));
     }
     @Test
-    public void task_nameNull_assertError() {
+    public void task_nameNull_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
         Task test = new Task(nullName, date, new UniqueTagList());
         test.setName(name);
@@ -82,49 +78,49 @@ public class TaskTest {
         assertTrue(test.equals(test2));
     }
     @Test
-    public void setName_valid_success() {
+    public void setName_valid_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         test.setName(name2);
         assertTrue(test.getName().equals(name2));
     }
     @Test
-    public void setName_nameNull_assertError() {
+    public void setName_nameNull_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
         Task test = new TaskBuilder().setName(name).build();
         test.setName(nullName);
     }
 
     @Test
-    public void setDate_dateNull_assertError() {
+    public void setDate_dateNull_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
         Task test = new TaskBuilder().setName(name).build();
         test.setDate(nullDate);
     }
     @Test
-    public void setDate_valid_success() {
+    public void setDate_valid_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         test.setDate(date);
         assertTrue(test.getDate().equals(date));
     }
     @Test
-    public void getTags_valid_success() {
+    public void getTags_valid_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).setTags(tagList).build();
         assertTrue(test.getTags().equals(tagList));
     }
     @Test
-    public void setTags_valid_success() {
+    public void setTags_valid_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         test.setTags(tagList2);
         assertTrue(test.getTags().equals(tagList2));
     }
     @Test
-    public void resetData_valid_success() {
+    public void resetData_valid_success() throws IllegalValueException {
         Task test1 = new TaskBuilder().setName(name).build();
         test1.resetData(test);
         assertTrue(test1.equals(test));
     }
     @Test
-    public void resetDate_null_assertError() {
+    public void resetDate_null_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
         Task test = new TaskBuilder().setName(name).build();
         test.resetData(null);

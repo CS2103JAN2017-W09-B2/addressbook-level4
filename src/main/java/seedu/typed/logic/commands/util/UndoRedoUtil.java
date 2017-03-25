@@ -7,7 +7,7 @@ import seedu.typed.commons.util.TripleUtil;
 
 public class UndoRedoUtil {
 
-    public static Optional<TripleUtil<String, Object, Object>> pop(Stack<TripleUtil<String, Object, Object>> stack) {
+    public static Optional<TripleUtil<String, Integer, Object>> pop(Stack<TripleUtil<String, Integer, Object>> stack) {
         if (!stack.empty()) {
             return Optional.of(stack.pop());
         } else {
@@ -15,31 +15,31 @@ public class UndoRedoUtil {
         }
     }
 
-    public static void clear(Stack<TripleUtil<String, Object, Object>> stack) {
+    public static void clear(Stack<TripleUtil<String, Integer, Object>> stack) {
         stack.clear();
     }
 
-    public static boolean isEmpty(Stack<TripleUtil<String, Object, Object>> stack) {
+    public static boolean isEmpty(Stack<TripleUtil<String, Integer, Object>> stack) {
         return stack.empty();
     }
 
     @SuppressWarnings("unchecked")
-    public static void update(Stack<TripleUtil<String, Object, Object>> undoStack,
-                              Stack<TripleUtil<String, Object, Object>> redoStack,
-                              String command, Object first, Object second) {
+    public static void update(Stack<TripleUtil<String, Integer, Object>> undoStack,
+                              Stack<TripleUtil<String, Integer, Object>> redoStack,
+                              String command, Integer index, Object toChange) {
 
-        TripleUtil<String, Object, Object> toPush = new TripleUtil<String, Object, Object>(command,
-                                                                                           first,
-                                                                                           second);
+        TripleUtil<String, Integer, Object> toPush = new TripleUtil<String, Integer, Object>(command,
+                                                                                             index,
+                                                                                             toChange);
         switch(command) {
 
         case CommandTypeUtil.TYPE_UNDO:
-            toPush = (TripleUtil<String, Object, Object>) first;
+            toPush = (TripleUtil<String, Integer, Object>) toChange;
             redoStack.push(toPush);
             break;
 
         case CommandTypeUtil.TYPE_REDO:
-            toPush = (TripleUtil<String, Object, Object>) first;
+            toPush = (TripleUtil<String, Integer, Object>) toChange;
             undoStack.push(toPush);
             break;
 
@@ -57,15 +57,11 @@ public class UndoRedoUtil {
 
         case CommandTypeUtil.TYPE_EDIT_TASK:
             redoStack.clear();
-            toPush.setSecond(second);
-            toPush.setThird(first);
             undoStack.push(toPush);
             break;
 
         case CommandTypeUtil.TYPE_CLEAR:
             redoStack.clear();
-            toPush.setSecond(second);
-            toPush.setThird(first);
             undoStack.push(toPush);
             break;
 
@@ -91,4 +87,6 @@ public class UndoRedoUtil {
             break;
         }
     }
+
+   // TODO write function to check if object is instanceof TripleUtil
 }

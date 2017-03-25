@@ -8,7 +8,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.CommandResult;
+import seedu.typed.logic.commands.exceptions.CommandException;
 
 /**
  * Unit Testing for ClearCommand
@@ -25,7 +27,7 @@ public class ClearCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Before
-    public void setUp() {
+    public void setUp() throws IllegalValueException {
         ModelStub dirtyModel = new ModelStub();
         dirtyModel.addTestTask();
         ModelStub cleanModel = new ModelStub();
@@ -38,19 +40,19 @@ public class ClearCommandTest {
 
 
     @Test
-    public void execute_modelNull_assertError() {
+    public void execute_modelNull_assertError() throws CommandException {
         testCommand.setModel(null);
         thrown.expect(AssertionError.class);
         testCommand.execute();
     }
 
     @Test
-    public void execute_clearDirtyTaskManager_success() {
+    public void execute_clearDirtyTaskManager_success() throws CommandException {
         assertEquals(dirtyClear.execute(), new CommandResult("Task manager has been cleared!"));
     }
 
     @Test
-    public void execute_clearEmptyTaskManager_success() {
+    public void execute_clearEmptyTaskManager_success() throws CommandException {
         assertEquals(cleanClear.execute(), new CommandResult("Task manager has been cleared!"));
     }
 }

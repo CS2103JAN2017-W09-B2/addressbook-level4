@@ -1,10 +1,11 @@
 package commandunittests;
 
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.ClearCommand;
 
 public class TestClearCommand extends ClearCommand {
 
-    public TestClearCommand() {
+    public TestClearCommand() throws IllegalValueException {
         super();
         this.setModel(new ModelStub());
         this.setSession(new SessionStub());
