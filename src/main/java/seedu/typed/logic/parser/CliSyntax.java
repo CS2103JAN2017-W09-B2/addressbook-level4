@@ -12,6 +12,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_DATE = new Prefix(" by ");
+    public static final Prefix PREFIX_FROM = new Prefix(" from ");
     public static final Prefix PREFIX_TAG = new Prefix(" #");
 
     /* Patterns definitions */

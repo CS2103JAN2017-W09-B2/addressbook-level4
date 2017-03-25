@@ -13,6 +13,8 @@ public interface ReadOnlyTask {
 
     Date getDate();
 
+    Date getFrom();
+
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -32,6 +34,7 @@ public interface ReadOnlyTask {
                 // checks here
                 // onwards
                 && other.getDate().getValue().equals(this.getDate().getValue())
+                && other.getFrom().getValue().equals(this.getFrom().getValue())
                 && other.getTags().equals(this.getTags())
                 && (other.getIsCompleted() == this.getIsCompleted()));
     }
@@ -43,6 +46,7 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ").append(getName())
         .append(" Date: ").append(getDate().toString())
+        .append(" From: ").append(getFrom().toString())
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");
         getTags().forEach(builder::append);

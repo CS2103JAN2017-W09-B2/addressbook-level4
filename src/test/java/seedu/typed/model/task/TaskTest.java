@@ -26,6 +26,7 @@ public class TaskTest {
     private Tag tag2;
     private Date nullDate;
     private Date date;
+    private Date from;
     private Task test;
     private UniqueTagList tagList;
     private UniqueTagList tagList2;
@@ -42,7 +43,8 @@ public class TaskTest {
             name = new Name("Meet John");
             name2 = new Name("Meet Honey");
             date = new Date("12/12/2017");
-            test = new Task(name, date, new UniqueTagList());
+            from = new Date("");
+            test = new Task(name, date, from, new UniqueTagList());
             tagList = new UniqueTagList();
             tagList2 = new UniqueTagList();
             tagList2.add(tag2);
@@ -69,7 +71,7 @@ public class TaskTest {
     @Test
     public void task_nameNull_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
-        Task test = new Task(nullName, date, new UniqueTagList());
+        Task test = new Task(nullName, date, from, new UniqueTagList());
         test.setName(name);
     }
     @Test

@@ -16,12 +16,15 @@ public class SampleDataUtil {
                 "Meet David Li", "Meet Irfan Ibrahim", "Meet Roy Balakrishnan"};
             String[] dates = new String[] {"20/01/2017", "21/01/2017", "22/01/2017", "23/01/2017",
                 "24/01/2017", "25/01/2017"};
+            String[] froms = new String[] {"20/01/2017", "21/01/2017", "22/01/2017", "23/01/2017",
+                    "24/01/2017", "25/01/2017"};
             String[] tags = new String[] {"friends", "colleagues", "neighbours", "family", "classmates",
                 "colleagues"};
             for (int i = 0; i < taskNumber; i++) {
                 tasks[i] = new TaskBuilder()
                         .setName(names[i])
                         .setDate(dates[i])
+                        .setFrom(froms[i])
                         .addTags(tags[i])
                         .build();
             }
