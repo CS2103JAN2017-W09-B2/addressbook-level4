@@ -120,7 +120,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
      * @throws IllegalValueException
      * @throws IllegalArgumentException
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToEdit, TestTask editedTask)
+
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
+            String detailsToEdit, TestTask editedTask)
             throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
