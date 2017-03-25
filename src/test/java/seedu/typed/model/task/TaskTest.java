@@ -52,17 +52,17 @@ public class TaskTest {
         }
     }
     @Test
-    public void equals_same_success() {
+    public void equals_same_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         assertTrue(test.equals(test));
     }
     @Test
-    public void equals_notSameButSimilar_success() {
+    public void equals_notSameButSimilar_success() throws IllegalValueException {
         Task test2 = new TaskBuilder().setName(name).setTags(new UniqueTagList()).setDate(date).build();
         assertTrue(test.equals(test2));
     }
     @Test
-    public void equals_notSameAndNotSameInstance_false() {
+    public void equals_notSameAndNotSameInstance_false() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         assertFalse(test.equals(name));
     }
@@ -103,12 +103,12 @@ public class TaskTest {
         assertTrue(test.getDate().equals(date));
     }
     @Test
-    public void getTags_valid_success() {
+    public void getTags_valid_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).setTags(tagList).build();
         assertTrue(test.getTags().equals(tagList));
     }
     @Test
-    public void setTags_valid_success() {
+    public void setTags_valid_success() throws IllegalValueException {
         Task test = new TaskBuilder().setName(name).build();
         test.setTags(tagList2);
         assertTrue(test.getTags().equals(tagList2));
