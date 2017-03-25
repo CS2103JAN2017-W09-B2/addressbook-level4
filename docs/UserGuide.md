@@ -348,9 +348,10 @@ Format: `history`
 Format: `save FILENAME`
 
 > `save FILENAME` saves all your data to a new file specified by FILENAME. <br>
-> FILENAME must contain a .xml extension to be valid.
+> FILENAME will be saved as a xml file.
 
 *e.g. save mynewtasks.xml* <br>
+*e.g. save mynewtasks* <br>
 
 
 ### 3.12. Exiting *Typed*
