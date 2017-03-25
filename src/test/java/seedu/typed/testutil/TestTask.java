@@ -3,6 +3,7 @@ package seedu.typed.testutil;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
+import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
 
 /**
@@ -11,6 +12,7 @@ import seedu.typed.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Notes notes;
     private Date date;
     private Date from;
     private Date to;
@@ -26,6 +28,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
+        this.notes = taskToCopy.getNotes();
         this.date = taskToCopy.getDate();
         this.from = taskToCopy.getFrom();
         this.to = taskToCopy.getTo();
@@ -35,6 +38,12 @@ public class TestTask implements ReadOnlyTask {
     public void setName(Name name) {
         this.name = name;
     }
+
+    //@@author A0141094M
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+    }
+    //@@author
 
     public void setDate(Date date) {
         this.date = date;
@@ -62,6 +71,13 @@ public class TestTask implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
+
+    //@@author A0141094M
+    @Override
+    public Notes getNotes() {
+        return notes;
+    }
+    //@@author
 
     @Override
     public Date getDate() {

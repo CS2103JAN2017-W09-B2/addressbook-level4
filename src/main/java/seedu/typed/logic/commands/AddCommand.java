@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [by DATE]  [#TAG]...\n" + "Example: " + COMMAND_WORD
+            + "Parameters: NAME [by DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + COMMAND_WORD
             + " buy 5 broccolis by tomorrow #survival #grocery ";
 
     public static final String MESSAGE_SUCCESS = "%1$s added";
@@ -31,9 +31,10 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String date, String from, String to, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String notes, String date, String from, String to, Set<String> tags) throws IllegalValueException {
         this.toAdd = new TaskBuilder()
                 .setName(name)
+                .setNotes(notes)
                 .setDate(date)
                 .setFrom(from)
                 .setTo(to)

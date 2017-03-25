@@ -7,8 +7,8 @@ import seedu.typed.logic.commands.AddCommand;
 
 public class TestAddCommand extends AddCommand {
 
-    public TestAddCommand(String name, String date, String from, String to, Set<String> tags) throws IllegalValueException {
-        super(name, date, from, to, tags);
+    public TestAddCommand(String name, String notes, String date, String from, String to, Set<String> tags) throws IllegalValueException {
+        super(name, notes, date, from, to, tags);
         this.setData(new ModelStub(), new SessionStub(), ""); //TODO Change String
     }
 

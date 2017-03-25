@@ -22,6 +22,7 @@ import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 public class TaskBuilder {
 
     private Name name;
+    private Notes notes;
     private Date date;
     private Date from;
     private Date to;
@@ -34,6 +35,7 @@ public class TaskBuilder {
 
     public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
         this.name = new Name(task.getName().getValue());
+        this.notes = new Notes(task.getNotes().getValue());
         this.date = new Date(task.getDate().getValue());
         this.from = new Date(task.getFrom().getValue());
         this.to= new Date(task.getTo().getValue());
@@ -50,6 +52,18 @@ public class TaskBuilder {
         this.name = name;
         return this;
     }
+
+    //@@author A0141094M
+    public TaskBuilder setNotes(String notes) throws IllegalValueException {
+        this.notes = new Notes(notes);
+        return this;
+    }
+
+    public TaskBuilder setNotes(Notes notes) {
+        this.notes = notes;
+        return this;
+    }
+    //@@author
 
     public TaskBuilder setDate(String date) throws IllegalValueException {
         this.date = new Date(date);
@@ -108,7 +122,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, date, from, to, tags, isCompleted);
+        return new Task(name, notes, date, from, to, tags, isCompleted);
     }
 
 }

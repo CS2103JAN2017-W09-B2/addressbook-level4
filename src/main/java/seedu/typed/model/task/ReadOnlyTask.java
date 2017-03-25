@@ -11,6 +11,8 @@ public interface ReadOnlyTask {
 
     Name getName();
 
+    Notes getNotes();
+
     Date getDate();
 
     //@author A0141094M
@@ -37,6 +39,7 @@ public interface ReadOnlyTask {
                 && other.getName().getValue().equals(this.getName().getValue()) // state
                 // checks here
                 // onwards
+                && other.getNotes().getValue().equals(this.getNotes().getValue())
                 && other.getDate().getValue().equals(this.getDate().getValue())
                 && other.getFrom().getValue().equals(this.getFrom().getValue())
                 && other.getTags().equals(this.getTags())
@@ -49,8 +52,10 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ").append(getName())
+        .append(" Notes: ").append(getNotes().toString())
         .append(" Date: ").append(getDate().toString())
         .append(" From: ").append(getFrom().toString())
+        .append(" To: ").append(getTo().toString())
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");
         getTags().forEach(builder::append);
