@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.typed.commons.core.ComponentManager;
+import seedu.typed.commons.core.Config;
 import seedu.typed.commons.core.LogsCenter;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.CommandResult;
@@ -22,11 +23,13 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
     private final Session session;
+    private final Config config;
 
-    public LogicManager(Model model, Session session) {
+    public LogicManager(Model model, Session session, Config config) {
         this.model = model;
         this.parser = new Parser();
         this.session = session;
+        this.config = config;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         this.session.updateAllCommandsHistory(commandText);
         Command command = parser.parseInput(commandText);
-        command.setData(this.model, this.session, commandText);
+        command.setData(this.model, this.session, commandText, config);
 
         return command.execute();
     }

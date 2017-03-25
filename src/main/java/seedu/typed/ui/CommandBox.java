@@ -61,7 +61,6 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandSuccess();
             commandTextField.clear();
             resetPointer();
-            // commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             // historyCommand.push(commandInput);
             commandTextField.requestFocus();

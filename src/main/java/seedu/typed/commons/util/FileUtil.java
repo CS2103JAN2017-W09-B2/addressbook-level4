@@ -92,4 +92,44 @@ public class FileUtil {
         return pathWithForwardSlash.replace("/", File.separator);
     }
 
+    //@@author A0139392X
+    /*
+     * Returns true if the filename is a acceptable in the FNC.
+     */
+    public static boolean isValidName(String fileName) {
+        File f = new File(fileName);
+        try {
+            f.getCanonicalFile();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    //@@author A0139392X
+    /*
+     * Returns the full path of the directory
+     */
+    public static String getFullDirectoryPath() throws IOException {
+        File file = File.createTempFile("hello", ".tmp");
+
+        String absolutePath = file.getAbsolutePath();
+
+        file.delete();
+
+        String directoryPath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+
+        return directoryPath;
+    }
+
+    //@@author A0139392X
+    /*
+     * Given a directory, obtain the filename
+     */
+    public static String getNameFromDirectory(File directory) {
+        String absolutePath = directory.getAbsolutePath();
+        String fileName = absolutePath.substring(absolutePath.lastIndexOf(File.separator));
+
+        return fileName;
+    }
 }
