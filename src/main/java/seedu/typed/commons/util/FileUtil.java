@@ -77,6 +77,15 @@ public class FileUtil {
         Files.write(file.toPath(), content.getBytes(CHARSET));
     }
 
+    //@@author A0139392X
+    /*
+     * Assumes file exists and writes from src to dest. If dest file does not exist yet,
+     * it will be created.
+     */
+    public static void transferToFile(File src, File dest) throws IOException {
+        writeToFile(dest, readFromFile(src));
+    }
+
     /**
      * Converts a string to a platform-specific file path
      *

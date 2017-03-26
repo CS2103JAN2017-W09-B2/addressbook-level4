@@ -1,7 +1,8 @@
 package seedu.typed.logic.commands;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import seedu.typed.commons.util.FileUtil;
@@ -40,33 +41,41 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        File file = new File(this.fileName);
+
         File toCopyFrom = new File(config.getTaskManagerFilePath());
 
         if (isAPath(this.fileName)) {
             try {
                 System.out.println("This is a pathname");
 
-                File fileToCreate = new File(this.fileName);
+                String userHomeDirectory = System.getProperty("user.home");
+
+                System.out.println(userHomeDirectory);
+
+                File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
 
                 System.out.println(fileToCreate.getCanonicalPath());
 
                 // Forms the directories if the directories are missing
                 fileToCreate.getParentFile().mkdirs();
-                System.out.println("Created directories if missing");
 
                 fileToCreate.createNewFile();
 
                 System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
 
-                FileWriter writer = new FileWriter(file);
+                FileInputStream fis = new FileInputStream(toCopyFrom);
+                FileOutputStream fos = new FileOutputStream(fileToCreate);
 
-                String contents = FileUtil.readFromFile(toCopyFrom);
+                int length;
 
-                writer.write(contents);
+                byte[] buffer = new byte[1024];
 
-                writer.flush();
-                writer.close();
+                while ((length = fis.read(buffer)) != (-1)) {
+                    fos.write(buffer, 0, length);
+                }
+
+                fis.close();
+                fos.close();
 
                 return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
             } catch (IOException e) {
@@ -81,9 +90,7 @@ public class SaveCommand extends Command {
 
                     File fileToCreate = new File(currentFileDirectory + "/" + this.fileName);
 
-                    String contents = FileUtil.readFromFile(toCopyFrom);
-
-                    FileUtil.writeToFile(fileToCreate, contents);
+                    FileUtil.transferToFile(toCopyFrom, fileToCreate);
 
                     return new CommandResult(String.format(MESSAGE_SUCCESS, currentFileDirectory + "/" + this.fileName));
                 } catch (IOException ioe) {
