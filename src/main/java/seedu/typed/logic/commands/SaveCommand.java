@@ -1,8 +1,7 @@
 package seedu.typed.logic.commands;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import seedu.typed.commons.util.FileUtil;
@@ -41,37 +40,41 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        // String tempLocation = currentFileDirectory + "/" + this.fileName + ".xml";
         File file = new File(this.fileName);
         File toCopyFrom = new File(config.getTaskManagerFilePath());
 
-        if (file.isDirectory()) {
+        if (isAPath(this.fileName)) {
             try {
-                // if file does not exists, create file
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
+                System.out.println("This is a pathname");
 
-                FileInputStream is = new FileInputStream(toCopyFrom);
-                FileOutputStream os = new FileOutputStream(file);
+                File fileToCreate = new File(this.fileName);
 
-                byte[] buffer = new byte[1024];
-                int length;
+                System.out.println(fileToCreate.getCanonicalPath());
 
-                while ((length = is.read(buffer)) > 0) {
-                    os.write(buffer, 0, length);
-                }
+                // Forms the directories if the directories are missing
+                fileToCreate.getParentFile().mkdirs();
+                System.out.println("Created directories if missing");
 
-                is.close();
-                os.close();
+                fileToCreate.createNewFile();
 
-                return new CommandResult(MESSAGE_SUCCESS);
+                System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
 
+                FileWriter writer = new FileWriter(file);
+
+                String contents = FileUtil.readFromFile(toCopyFrom);
+
+                writer.write(contents);
+
+                writer.flush();
+                writer.close();
+
+                return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
             } catch (IOException e) {
                 throw new CommandException(MESSAGE_SAVE_ERROR);
             }
         } else { // input name is not directory
             if (FileUtil.isValidName(this.fileName)) {
+                System.out.println("This is a fileName");
                 try {
                     String currentFileDirectory = FileUtil.getFullDirectoryPath();
                     System.out.println("Directory: " + currentFileDirectory);
@@ -90,5 +93,12 @@ public class SaveCommand extends Command {
                 throw new CommandException(MESSAGE_FILENAME_INVALID);
             }
         }
+    }
+
+    /*
+     * Returns true is the input given by the user is a path
+     */
+    private boolean isAPath(String fileName2) {
+        return fileName2.contains("/") || fileName2.contains("\\");
     }
 }
