@@ -2,6 +2,7 @@ package seedu.typed.logic.commands;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -52,32 +53,26 @@ public class SaveCommand extends Command {
 
                 System.out.println(userHomeDirectory);
 
-                File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
+                String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/")+1, this.fileName.length());
+                System.out.println("Name is:" + " " + onlyName);
+                if (FileUtil.isValidName(onlyName)) {
+                    File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
 
-                System.out.println(fileToCreate.getCanonicalPath());
+                    System.out.println(fileToCreate.getCanonicalPath());
 
-                // Forms the directories if the directories are missing
-                fileToCreate.getParentFile().mkdirs();
+                    // Forms the directories if the directories are missing
+                    fileToCreate.getParentFile().mkdirs();
 
-                fileToCreate.createNewFile();
+                    fileToCreate.createNewFile();
 
-                System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
+                    System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
 
-                FileInputStream fis = new FileInputStream(toCopyFrom);
-                FileOutputStream fos = new FileOutputStream(fileToCreate);
+                    writingFile(toCopyFrom, fileToCreate);
 
-                int length;
-
-                byte[] buffer = new byte[1024];
-
-                while ((length = fis.read(buffer)) != (-1)) {
-                    fos.write(buffer, 0, length);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
+                } else {
+                    throw new CommandException(MESSAGE_FILENAME_INVALID);
                 }
-
-                fis.close();
-                fos.close();
-
-                return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
             } catch (IOException e) {
                 throw new CommandException(MESSAGE_SAVE_ERROR);
             }
@@ -100,6 +95,31 @@ public class SaveCommand extends Command {
                 throw new CommandException(MESSAGE_FILENAME_INVALID);
             }
         }
+    }
+
+    /*
+     *
+     *
+     *
+     * @param File toCopyFrom
+     *          A source file containing the contents that will be copied over.
+     *        File fileToCreate
+     *          A file that will hold the contents that are being copied over.
+     */
+    private void writingFile(File toCopyFrom, File fileToCreate) throws FileNotFoundException, IOException {
+        FileInputStream fis = new FileInputStream(toCopyFrom);
+        FileOutputStream fos = new FileOutputStream(fileToCreate);
+
+        int length;
+
+        byte[] buffer = new byte[1024];
+
+        while ((length = fis.read(buffer)) != (-1)) {
+            fos.write(buffer, 0, length);
+        }
+
+        fis.close();
+        fos.close();
     }
 
     /*

@@ -103,13 +103,20 @@ public class FileUtil {
 
     //@@author A0139392X
     /*
-     * Returns true if the filename is a acceptable in the FNC.
+     * Returns true if the filename is a acceptable.
+     *
+     *  @param String fileName
+     *             A string that will be tested to see if the naming is valid.
+     *  @return true if name is valid, false if name otherwise.
      */
     public static boolean isValidName(String fileName) {
         File f = new File(fileName);
         try {
+            f.createNewFile();
+            boolean isValid = f.isFile() && !f.isHidden();
             f.getCanonicalFile();
-            return true;
+            f.delete();
+            return isValid;
         } catch (IOException e) {
             return false;
         }
