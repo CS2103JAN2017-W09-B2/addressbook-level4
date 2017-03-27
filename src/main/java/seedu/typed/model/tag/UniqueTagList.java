@@ -50,10 +50,12 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public UniqueTagList(Tag... tags) throws DuplicateTagException {
         assert !CollectionUtil.isAnyNull((Object[]) tags);
+
         final List<Tag> initialTags = Arrays.asList(tags);
         if (!CollectionUtil.elementsAreUnique(initialTags)) {
             throw new DuplicateTagException();
         }
+
         internalList.addAll(initialTags);
     }
 

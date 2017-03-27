@@ -75,8 +75,7 @@ public class XmlTaskManagerStorageTest {
         for (int j = 0; j < toCompare.getTaskList().size(); j++) {
             System.out.println(toCompare.getTaskList().get(j));
         }
-        assertEquals(original, original); // TODO : fix!!!
-        //assertEquals(original, toCompare);
+        assertEquals(original, toCompare);
 
         // Modify data, overwrite exiting file, and read back
         original.addTask(new TaskBuilder(td.hoon)
@@ -85,8 +84,7 @@ public class XmlTaskManagerStorageTest {
                 .build());
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
-        assertEquals(original, original); // TODO : fix!!!
-        //assertEquals(original, new TaskManager(readBack));
+        assertEquals(original, new TaskManager(readBack));
 
         // Save and read without specifying file path
         original.addTask(new TaskBuilder(td.ida)
@@ -96,8 +94,8 @@ public class XmlTaskManagerStorageTest {
         readBack = xmlTaskManagerStorage.readTaskManager().get(); // file path
                                                                   // not
                                                                   // specified
-        assertEquals(original, original); // TODO : fix!!!
-        //assertEquals(original, new TaskManager(readBack));
+
+        assertEquals(original, new TaskManager(readBack));
 
     }
 

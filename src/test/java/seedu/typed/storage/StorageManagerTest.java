@@ -61,8 +61,7 @@ public class StorageManagerTest {
         TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
-        assertEquals(original, original); // TODO : fix!!!
-        //assertEquals(original, new TaskManager(retrieved));
+        assertEquals(original, new TaskManager(retrieved));
     }
 
     @Test

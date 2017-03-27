@@ -28,15 +28,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [by DATE] [#TAG]...\n" + "Example: " + COMMAND_WORD
-            + " 1 buy 10 broccolis by 6 march 2017";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [by DATE] [#TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 buy 10 broccolis by 06/03/2017";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
 
-    private static final String MESSAGE_TASK_NOT_FOUND = "File to edit not found.";
+    private static final String MESSAGE_TASK_NOT_FOUND = "Task to edit not found.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -53,7 +53,6 @@ public class EditCommand extends Command {
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
@@ -61,22 +60,25 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (this.filteredTaskListIndex >= lastShownList.size()) {
+        if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (this.filteredTaskListIndex >= lastShownList.size()) {
+        if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task taskToEditCopy;
+        Task editedTask;
+
         try {
             taskToEditCopy = new TaskBuilder(taskToEdit).build();
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         } catch (IllegalValueException e) {
             throw new CommandException(MESSAGE_EDIT_TASK_FAILURE);
         }
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+
 
         try {
             int index = model.getIndexOfTask(taskToEditCopy);
@@ -97,8 +99,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -157,6 +161,7 @@ public class EditCommand extends Command {
 
         public void setName(Optional<Name> name) {
             assert name != null;
+
             this.name = name;
         }
 
@@ -166,6 +171,7 @@ public class EditCommand extends Command {
 
         public void setDate(Optional<Date> date) {
             assert date != null;
+
             this.date = date;
         }
 
@@ -206,6 +212,7 @@ public class EditCommand extends Command {
 
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
+
             this.tags = tags;
         }
 

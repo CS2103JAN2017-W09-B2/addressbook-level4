@@ -64,8 +64,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder setName(Name name) {
-        this.name = name;
+    public TaskBuilder setName(Name name) throws IllegalValueException {
+        assert name != null;
+
+        this.name = new Name(name.getValue());
         return this;
     }
 
@@ -86,8 +88,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder setDate(Date date) {
-        this.date = date;
+    public TaskBuilder setDate(Date date) throws IllegalValueException {
+        assert date != null;
+
+        this.date = new Date(date.getValue());
         return this;
     }
 

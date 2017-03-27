@@ -44,8 +44,7 @@ public class TaskManagerTest {
     public void resetData_withValidReadOnlyTaskManager_replacesData() throws IllegalValueException {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
-        assertEquals(newData, newData); // TODO : fix!!!
-        //assertEquals(newData, taskManager);
+        assertEquals(newData, taskManager);
     }
 
     @Test

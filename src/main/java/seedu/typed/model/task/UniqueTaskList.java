@@ -50,8 +50,14 @@ public class UniqueTaskList implements Iterable<Task> {
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
+    //Adds task to the end of the list
     public void add(Task toAdd) throws DuplicateTaskException {
-        add(0, toAdd);
+        assert toAdd != null;
+
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(toAdd);
     }
 
     // @@author A0143853A
@@ -61,7 +67,6 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-
         internalList.add(index, toAdd);
     }
 

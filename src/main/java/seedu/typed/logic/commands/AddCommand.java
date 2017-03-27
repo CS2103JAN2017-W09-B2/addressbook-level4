@@ -31,8 +31,13 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
+<<<<<<< HEAD
     public AddCommand(String name, String notes, String date, String from,
             String to, Set<String> tags) throws IllegalValueException {
+=======
+
+    public AddCommand(String name, String notes, String date, String from, String to, Set<String> tags) throws IllegalValueException {
+>>>>>>> 7b69ac0f6addf0334e362cc83f4166ba834d80ca
         this.toAdd = new TaskBuilder()
                 .setName(name)
                 .setNotes(notes)
@@ -47,11 +52,13 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         assert session != null;
+
         try {
-            this.model.addTask(toAdd);
+            // this.model.addTask(toAdd);
+            model.addTask(0, toAdd);
             String name = toAdd.getName().toString();
-            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
-            this.session.updateValidCommandsHistory(commandText);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
+            session.updateValidCommandsHistory(commandText);
             return new CommandResult(String.format(MESSAGE_SUCCESS, name));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

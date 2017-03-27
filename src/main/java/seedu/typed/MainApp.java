@@ -67,7 +67,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, session);
 
-        ui = new UiManager(logic, config, userPrefs);
+        ui = new UiManager(logic, config, userPrefs, session);
 
         initEventsCenter();
     }

@@ -26,9 +26,12 @@ public class RedoCommandTest extends TaskManagerGuiTest {
             throws IllegalArgumentException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
-        assertAddSuccess(taskToAdd, currentList);
-        assertUndoSuccess(expectedUndoTasksList);
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        // assertAddSuccess(taskToAdd, currentList);
+        // assertUndoSuccess(expectedUndoTasksList);
+        commandBox.runCommand("undo");
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        System.out.println("REDO UNDONE ADD");
         assertRedoSuccess(expectedList);
     }
 
@@ -38,9 +41,12 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
-        assertDeleteSuccess(1, currentList);
-        assertUndoSuccess(expectedUndoTasksList);
+        commandBox.runCommand("delete 1");
+        // assertDeleteSuccess(1, currentList);
+        commandBox.runCommand("undo");
+        // assertUndoSuccess(expectedUndoTasksList);
         TestTask[] expectedList = TestUtil.removeTaskFromList(currentList, 1);
+        System.out.println("REDO UNDONE DELETE");
         assertRedoSuccess(expectedList);
     }
 
@@ -48,7 +54,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     public void redo_undoneEditCommand_success() throws Exception {
 
         TestTask[] expectedList = td.getTypicalTasks();
-        String detailsToEdit = "Meet Bobby d/19/03/2017 t/husband";
+        String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
@@ -62,7 +68,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void undo_clearCommand_success() throws Exception {
+    public void redo_undoneClearCommand_success() throws Exception {
 
         TestTask[] expectedUndoList = td.getTypicalTasks();
         assertClearSuccess();
@@ -79,9 +85,10 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertRedoFailure(expectedList);
     }
 
-    private void assertRedoSuccess(TestTask[] expectedList) {
+    private void assertRedoSuccess(TestTask[] expectedList)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("redo");
-        //assertTrue(taskListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
     }
 
