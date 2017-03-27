@@ -16,11 +16,7 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-
         assert model != null;
-
-        // is this the good way of "clearing" the manager by just creating a new one
-        // it's not really just clearing what is required (lists) but remaking everything
 
         TaskManager oldTaskManager = new TaskManager();
         oldTaskManager.copyData(model.getTaskManager());

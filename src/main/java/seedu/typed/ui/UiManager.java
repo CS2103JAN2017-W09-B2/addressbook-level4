@@ -20,6 +20,7 @@ import seedu.typed.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.typed.commons.util.StringUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.model.UserPrefs;
+import seedu.typed.storage.temp.Session;
 
 /**
  * The manager of the UI component.
@@ -27,19 +28,21 @@ import seedu.typed.model.UserPrefs;
 public class UiManager extends ComponentManager implements Ui {
     private static final String DARK_THEME_FILEPATH = "view/DarkTheme.css";
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/task_manager_32.png";
+    private static final String ICON_APPLICATION = "/images/Typed.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
+    private Session session;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Session session) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.session = session;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, session);
             mainWindow.show(); // This should be called before creating other UI
                                // parts
             mainWindow.fillInnerParts();

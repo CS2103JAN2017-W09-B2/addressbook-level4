@@ -124,13 +124,13 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task task) throws DuplicateTaskException {
         syncMasterTagListWith(task);
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     //@@author A0143853A
-    public void addTask(int index, Task task) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(int index, Task task) throws DuplicateTaskException {
         syncMasterTagListWith(task);
         tasks.add(index, task);
     }

@@ -31,6 +31,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
+
     public AddCommand(String name, String notes, String date, String from, String to, Set<String> tags) throws IllegalValueException {
         this.toAdd = new TaskBuilder()
                 .setName(name)
@@ -46,11 +47,13 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         assert session != null;
+
         try {
-            this.model.addTask(toAdd);
+            // this.model.addTask(toAdd);
+            model.addTask(0, toAdd);
             String name = toAdd.getName().toString();
-            this.session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
-            this.session.updateValidCommandsHistory(commandText);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
+            session.updateValidCommandsHistory(commandText);
             return new CommandResult(String.format(MESSAGE_SUCCESS, name));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
