@@ -21,13 +21,14 @@ public class Notes {
      */
     public Notes(String notes) throws IllegalValueException {
         if (notes == null) {
-            notes = "";
+            this.value = "";
+        } else {
+            String trimmedNotes = notes.trim();
+            if (!trimmedNotes.isEmpty() && !isValidName(trimmedNotes)) {
+                throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
+            }
+            this.value = trimmedNotes;
         }
-        String trimmedNotes = notes.trim();
-        if (!trimmedNotes.isEmpty() && !isValidName(trimmedNotes)) {
-            throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
-        }
-        this.value = notes;
     }
 
     /**

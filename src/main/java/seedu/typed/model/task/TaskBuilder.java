@@ -35,10 +35,26 @@ public class TaskBuilder {
 
     public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
         this.name = new Name(task.getName().getValue());
-        this.notes = new Notes(task.getNotes().getValue());
-        this.date = new Date(task.getDate().getValue());
-        this.from = new Date(task.getFrom().getValue());
-        this.to= new Date(task.getTo().getValue());
+        if (task.getNotes() == null) {
+            this.notes = new Notes(null);
+        } else {
+            this.notes = new Notes(task.getNotes().getValue());
+        }
+        if (task.getDate() == null) {
+            this.date = new Date(null);
+        } else {
+            this.date = new Date(task.getDate().getValue());
+        }
+        if (task.getFrom() == null) {
+            this.from = new Date(null);
+        } else {
+            this.from = new Date(task.getFrom().getValue());
+        }
+        if (task.getTo() == null) {
+            this.to = new Date(null);
+        } else {
+            this.to = new Date(task.getTo().getValue());
+        }
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
