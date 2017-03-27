@@ -55,7 +55,7 @@ public class AddCommandParser {
     }
 
     private boolean isNotesPresent(ArgumentTokenizer argsTokenizer) {
-        return argsTokenizer.getValue(PREFIX_NOTES).equals(Optional.empty());
+        return !argsTokenizer.getValue(PREFIX_NOTES).equals(Optional.empty());
     }
 
     private boolean isEvent(ArgumentTokenizer argsTokenizer) {

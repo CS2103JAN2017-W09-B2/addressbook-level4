@@ -42,6 +42,7 @@ public interface ReadOnlyTask {
                 && other.getNotes().getValue().equals(this.getNotes().getValue())
                 && other.getDate().getValue().equals(this.getDate().getValue())
                 && other.getFrom().getValue().equals(this.getFrom().getValue())
+                && other.getTo().getValue().equals(this.getTo().getValue())
                 && other.getTags().equals(this.getTags())
                 && (other.getIsCompleted() == this.getIsCompleted()));
     }

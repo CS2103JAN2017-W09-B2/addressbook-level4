@@ -95,7 +95,7 @@ public class TaskBuilder {
         this.to = to;
         return this;
     }
-    //@@author A0141094M
+    //@@author
 
     public TaskBuilder isCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
