@@ -211,4 +211,30 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0141094M
+    @Override
+    public void updateFilteredListToShowDeadline() {
+        filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowDuration() {
+        filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowDone() {
+        completedTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowUndone() {
+        filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowUntimed() {
+        filteredTasks.setPredicate(null);
+    }
+
 }
