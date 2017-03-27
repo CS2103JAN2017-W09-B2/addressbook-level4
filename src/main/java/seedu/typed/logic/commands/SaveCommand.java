@@ -54,7 +54,7 @@ public class SaveCommand extends Command {
                 String userHomeDirectory = System.getProperty("user.home");
                 // System.out.println(userHomeDirectory);
 
-                String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/")+1, this.fileName.length());
+                String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/") + 1, this.fileName.length());
                 // System.out.println("Name is:" + " " + onlyName);
                 if (FileUtil.isValidName(onlyName)) {
                     File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);

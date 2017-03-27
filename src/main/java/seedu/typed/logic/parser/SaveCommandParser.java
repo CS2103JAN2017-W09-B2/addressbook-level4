@@ -30,7 +30,7 @@ public class SaveCommandParser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
 
         // if there are whitespace, invalid input by user
-        if ((keywords.length) != 1){
+        if ((keywords.length) != 1) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
 
@@ -38,7 +38,7 @@ public class SaveCommandParser {
 
         if (isAPath(fileName)) {
             return new SaveCommand(1, createProperExtension(fileName));
-        } else if (FileUtil.isValidName(fileName)){
+        } else if (FileUtil.isValidName(fileName)) {
             return new SaveCommand(2, createProperExtension(fileName));
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
