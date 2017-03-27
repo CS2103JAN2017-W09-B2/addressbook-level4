@@ -85,6 +85,7 @@ public class FileUtil {
     public static void transferToFile(File src, File dest) throws IOException {
         writeToFile(dest, readFromFile(src));
     }
+    //@@author
 
     /**
      * Converts a string to a platform-specific file path
@@ -121,6 +122,7 @@ public class FileUtil {
             return false;
         }
     }
+    //@@author
 
     //@@author A0139392X
     /*
@@ -137,6 +139,7 @@ public class FileUtil {
 
         return directoryPath;
     }
+    //@@author
 
     //@@author A0139392X
     /*
@@ -148,4 +151,5 @@ public class FileUtil {
 
         return fileName;
     }
+    //@@author
 }
