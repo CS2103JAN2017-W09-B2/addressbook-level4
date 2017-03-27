@@ -28,7 +28,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
-                .withTags("husband").build();
+                .withFrom("").withTo("").withNotes("").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }

@@ -14,18 +14,26 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Meet Alice Pauline").withDate("01/01/2018").withTags("friends").build();
-            benson = new TaskBuilder().withName("Meet Benson Meier").withDate("02/01/2018").
-                    withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Meet Carl Kurz").withDate("03/01/2018").build();
-            daniel = new TaskBuilder().withName("Meet Daniel Meier").withDate("04/01/2018").build();
-            elle = new TaskBuilder().withName("Meet Elle Meyer").withDate("05/01/2018").build();
-            fiona = new TaskBuilder().withName("Meet Fiona Kunz").withDate("06/01/2018").build();
-            george = new TaskBuilder().withName("Meet George Best").withDate("07/01/2018").build();
+            alice = new TaskBuilder().withName("Meet Alice Pauline").withDate("01/01/2018").withFrom("")
+                    .withTo("").withNotes("").withTags("friends").build();
+            benson = new TaskBuilder().withName("Meet Benson Meier").withDate("02/01/2018").withFrom("")
+                    .withTo("").withNotes("").withTags("owesMoney", "friends").build();
+            carl = new TaskBuilder().withName("Meet Carl Kurz").withDate("03/01/2018").withFrom("")
+                    .withTo("").withNotes("").build();
+            daniel = new TaskBuilder().withName("Meet Daniel Meier").withDate("04/01/2018").withFrom("")
+                    .withTo("").withNotes("").build();
+            elle = new TaskBuilder().withName("Meet Elle Meyer").withDate("05/01/2018").withFrom("")
+                    .withTo("").withNotes("").build();
+            fiona = new TaskBuilder().withName("Meet Fiona Kunz").withDate("06/01/2018").withFrom("")
+                    .withTo("").withNotes("").build();
+            george = new TaskBuilder().withName("Meet George Best").withDate("07/01/2018").withFrom("")
+                    .withTo("").withNotes("").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Meet Hoon Meier").withDate("08/02/2018").build();
-            ida = new TaskBuilder().withName("Meet Ida Mueller").withDate("09/02/2018").build();
+            hoon = new TaskBuilder().withName("Meet Hoon Meier").withDate("08/02/2018")
+                    .withFrom("").withTo("").withNotes("").build();
+            ida = new TaskBuilder().withName("Meet Ida Mueller").withDate("09/02/2018")
+                    .withFrom("").withTo("").withNotes("").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

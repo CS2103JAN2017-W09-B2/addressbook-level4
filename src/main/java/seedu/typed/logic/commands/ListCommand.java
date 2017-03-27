@@ -24,9 +24,13 @@ public class ListCommand extends Command {
         switch (type) {
         case ("all"):
             System.out.println("i am in case 'all'");
-            model.updateFilteredListToShowAll();
+            //model.updateFilteredListToShowAll();
+            break;
         case ("done"):
             model.updateFilteredListToShowDone();
+            break;
+        default:
+            break;
         }
     }
 
@@ -52,6 +56,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        model.updateFilteredListToShowAll();
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_LIST_TASK, -1, null);
         session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_SUCCESS);

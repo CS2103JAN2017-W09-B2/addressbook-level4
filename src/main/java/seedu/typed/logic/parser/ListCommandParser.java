@@ -1,6 +1,7 @@
 package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.typed.logic.parser.CliSyntax.PREFIX_WITH;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,15 +26,15 @@ public class ListCommandParser {
      * ListCommand and returns a ListCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_WITH);
         argsTokenizer.tokenize(args);
         try {
-            String type = ALL_STRING;
-            Optional<String> value = argsTokenizer.getPreamble();
+            String type = ALL_STRING; // default is show all
+            Optional<String> value = argsTokenizer.getValue(PREFIX_WITH);
             if (value.isPresent() && !value.get().isEmpty()) {
-                //type = Type.valueOf(argsTokenizer.getPreamble().get());
-                String lowered = argsTokenizer.getPreamble().get().trim().toLowerCase();
-                if (lowered.equals(DONE_STRING)) {
+                String[] split = value.get().split(" ");
+                String lowered = split[0].toLowerCase();
+                if (lowered.equals(ALL_STRING) || lowered.equals(DONE_STRING)) {
                     type = lowered;
                 }
             }

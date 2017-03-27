@@ -44,6 +44,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
+import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -424,10 +425,16 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
             Date date = new Date("11/11/1111");
+            //@@author A0141094M
+            Date from = new Date("");
+            Date to = new Date("");
+            Notes notes = new Notes("");
+            //@@author
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new TaskBuilder().setName(name).setDate(date).setTags(tags).build();
+            return new TaskBuilder().setName(name).setDate(date).setFrom(from)
+                    .setTo(to).setNotes(notes).setTags(tags).build();
         }
 
         /**
@@ -444,6 +451,11 @@ public class LogicManagerTest {
             return new TaskBuilder()
                     .setName("Task " + seed)
                     .setDate("" + seedDate)
+                    //@@author A0141094M
+                    .setFrom("")
+                    .setTo("")
+                    .setNotes("")
+                    //@@author
                     .addTags("tag" + seed)
                     .addTags("tag" + (seed + 1))
                     .build();
@@ -546,6 +558,11 @@ public class LogicManagerTest {
             return new TaskBuilder()
                     .setName(name)
                     .setDate("11/11/1111")
+                    //@@author A0141094M
+                    .setFrom("")
+                    .setTo("")
+                    .setNotes("")
+                    //@@author
                     .addTags("tag")
                     .build();
         }
