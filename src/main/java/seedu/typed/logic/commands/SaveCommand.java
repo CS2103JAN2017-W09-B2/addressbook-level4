@@ -47,27 +47,25 @@ public class SaveCommand extends Command {
 
         if (isAPath(this.fileName)) {
             try {
-                System.out.println("This is a pathname");
+//                System.out.println("This is a pathname");
 
                 String userHomeDirectory = System.getProperty("user.home");
-
-                System.out.println(userHomeDirectory);
+//
+//                System.out.println(userHomeDirectory);
 
                 String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/")+1, this.fileName.length());
-                System.out.println("Name is:" + " " + onlyName);
+//                System.out.println("Name is:" + " " + onlyName);
                 if (FileUtil.isValidName(onlyName)) {
                     File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
 
-                    System.out.println(fileToCreate.getCanonicalPath());
+//                    System.out.println(fileToCreate.getCanonicalPath());
 
                     // Forms the directories if the directories are missing
                     fileToCreate.getParentFile().mkdirs();
 
-                    fileToCreate.createNewFile();
-
-                    System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
-
                     writingFile(toCopyFrom, fileToCreate);
+
+//                    System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
 
                     return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
                 } else {
@@ -81,7 +79,7 @@ public class SaveCommand extends Command {
                 System.out.println("This is a fileName");
                 try {
                     String currentFileDirectory = FileUtil.getFullDirectoryPath();
-                    System.out.println("Directory: " + currentFileDirectory);
+//                    System.out.println("Directory: " + currentFileDirectory);
 
                     File fileToCreate = new File(currentFileDirectory + "/" + this.fileName);
 
@@ -98,8 +96,7 @@ public class SaveCommand extends Command {
     }
 
     /*
-     *
-     *
+     * Copies the file from toCopyFrom to fileToCreate.
      *
      * @param File toCopyFrom
      *          A source file containing the contents that will be copied over.
@@ -107,6 +104,8 @@ public class SaveCommand extends Command {
      *          A file that will hold the contents that are being copied over.
      */
     private void writingFile(File toCopyFrom, File fileToCreate) throws FileNotFoundException, IOException {
+        fileToCreate.createNewFile();
+
         FileInputStream fis = new FileInputStream(toCopyFrom);
         FileOutputStream fos = new FileOutputStream(fileToCreate);
 
@@ -123,7 +122,10 @@ public class SaveCommand extends Command {
     }
 
     /*
-     * Returns true is the input given by the user is a path
+     * Returns true is the input given by the user is a path. False otherwise.
+     *
+     * @param   String fileName
+     *              Input given by the user.
      */
     private boolean isAPath(String fileName2) {
         return fileName2.contains("/") || fileName2.contains("\\");
