@@ -76,7 +76,7 @@ public class SaveCommand extends Command {
                 throw new CommandException(MESSAGE_SAVE_ERROR);
             }
         case 2: // if input is a valid fileName
-            System.out.println("This is a fileName");
+            // System.out.println("This is a fileName");
             try {
                 String currentFileDirectory = FileUtil.getFullDirectoryPath();
                 // System.out.println("Directory: " + currentFileDirectory);
