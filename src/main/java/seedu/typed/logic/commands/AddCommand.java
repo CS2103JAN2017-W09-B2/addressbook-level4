@@ -31,7 +31,8 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String notes, String date, String from, String to, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String notes, String date, String from,
+            String to, Set<String> tags) throws IllegalValueException {
         this.toAdd = new TaskBuilder()
                 .setName(name)
                 .setNotes(notes)

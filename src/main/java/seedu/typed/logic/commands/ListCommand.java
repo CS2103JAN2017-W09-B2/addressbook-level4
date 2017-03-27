@@ -38,17 +38,23 @@ public class ListCommand extends Command {
         switch (type) {
         case DEADLINE:
             model.updateFilteredListToShowDeadline();
+            break;
         case DURATION:
             model.updateFilteredListToShowDuration();
+            break;
         case DONE:
             model.updateFilteredListToShowDone();
+            break;
         case UNDONE:
             model.updateFilteredListToShowUndone();
+            break;
         case UNTIMED:
             model.updateFilteredListToShowUntimed();
+            break;
         case ALL:
             System.out.println("i entered here trying to filter");
             model.updateFilteredListToShowAll();
+            break;
         default:
             break;
         }

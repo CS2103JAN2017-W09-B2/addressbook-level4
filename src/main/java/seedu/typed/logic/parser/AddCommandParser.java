@@ -27,7 +27,8 @@ public class AddCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE, PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE,
+                PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         String notes = null;
         if (isNotesPresent(argsTokenizer)) {
@@ -38,11 +39,13 @@ public class AddCommandParser {
                 return new AddCommand(argsTokenizer.getPreamble().get(), notes, null, null, null,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
             } else if (isEvent(argsTokenizer)) {
-                return new AddCommand(argsTokenizer.getPreamble().get(), notes, null, argsTokenizer.getValue(PREFIX_FROM).get(),
+                return new AddCommand(argsTokenizer.getPreamble().get(), notes, null,
+                        argsTokenizer.getValue(PREFIX_FROM).get(),
                         argsTokenizer.getValue(PREFIX_TO).get(),
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
             } else if (isTask(argsTokenizer)) {
-                return new AddCommand(argsTokenizer.getPreamble().get(), notes, argsTokenizer.getValue(PREFIX_DATE).get(), null, null,
+                return new AddCommand(argsTokenizer.getPreamble().get(), notes,
+                        argsTokenizer.getValue(PREFIX_DATE).get(), null, null,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
