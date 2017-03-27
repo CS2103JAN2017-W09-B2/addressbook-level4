@@ -5,6 +5,7 @@ import static seedu.typed.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 
 import java.util.regex.Matcher;
 
+import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.SaveCommand;
@@ -35,7 +36,13 @@ public class SaveCommandParser {
 
         String fileName = keywords[0];
 
-        return new SaveCommand(createProperExtension(fileName));
+        if (isAPath(fileName)) {
+            return new SaveCommand(1, createProperExtension(fileName));
+        } else if (FileUtil.isValidName(fileName)){
+            return new SaveCommand(2, createProperExtension(fileName));
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+        }
     }
 
     /*
@@ -60,6 +67,12 @@ public class SaveCommandParser {
     }
 
     /*
+     * Returns true is the input given by the user is a path. False otherwise.
      *
+     * @param   String fileName
+     *              Input given by the user.
      */
+    private boolean isAPath(String fileName) {
+        return fileName.contains("/") || fileName.contains("\\");
+    }
 }

@@ -29,9 +29,11 @@ public class SaveCommand extends Command {
             + "Example: " + COMMAND_WORD + " Desktop/typed.xml";
 
     private final String fileName;
+    private final int type;
 
-    public SaveCommand(String fileName) {
+    public SaveCommand(int type, String fileName) {
         this.fileName = fileName;
+        this.type = type;
     }
 
     /*
@@ -42,30 +44,29 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-
         File toCopyFrom = new File(config.getTaskManagerFilePath());
 
-        if (isAPath(this.fileName)) {
+        switch (this.type) {
+        case 1: // if the input is a path
             try {
-//                System.out.println("This is a pathname");
+                // System.out.println("This is a pathname");
 
                 String userHomeDirectory = System.getProperty("user.home");
-//
-//                System.out.println(userHomeDirectory);
+                // System.out.println(userHomeDirectory);
 
                 String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/")+1, this.fileName.length());
-//                System.out.println("Name is:" + " " + onlyName);
+                // System.out.println("Name is:" + " " + onlyName);
                 if (FileUtil.isValidName(onlyName)) {
                     File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
 
-//                    System.out.println(fileToCreate.getCanonicalPath());
+                    // System.out.println(fileToCreate.getCanonicalPath());
 
                     // Forms the directories if the directories are missing
                     fileToCreate.getParentFile().mkdirs();
 
                     writingFile(toCopyFrom, fileToCreate);
 
-//                    System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
+                    // System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
 
                     return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
                 } else {
@@ -74,24 +75,22 @@ public class SaveCommand extends Command {
             } catch (IOException e) {
                 throw new CommandException(MESSAGE_SAVE_ERROR);
             }
-        } else { // input name is not directory
-            if (FileUtil.isValidName(this.fileName)) {
-                System.out.println("This is a fileName");
-                try {
-                    String currentFileDirectory = FileUtil.getFullDirectoryPath();
-//                    System.out.println("Directory: " + currentFileDirectory);
+        case 2: // if input is a valid fileName
+            System.out.println("This is a fileName");
+            try {
+                String currentFileDirectory = FileUtil.getFullDirectoryPath();
+                // System.out.println("Directory: " + currentFileDirectory);
 
-                    File fileToCreate = new File(currentFileDirectory + "/" + this.fileName);
+                File fileToCreate = new File(currentFileDirectory + "/" + this.fileName);
 
-                    FileUtil.transferToFile(toCopyFrom, fileToCreate);
+                FileUtil.transferToFile(toCopyFrom, fileToCreate);
 
-                    return new CommandResult(String.format(MESSAGE_SUCCESS, currentFileDirectory + "/" + this.fileName));
-                } catch (IOException ioe) {
-                    throw new CommandException(MESSAGE_SAVE_ERROR);
-                }
-            } else {
-                throw new CommandException(MESSAGE_FILENAME_INVALID);
+                return new CommandResult(String.format(MESSAGE_SUCCESS, currentFileDirectory + "/" + this.fileName));
+            } catch (IOException ioe) {
+                throw new CommandException(MESSAGE_SAVE_ERROR);
             }
+        default:
+            throw new CommandException(MESSAGE_FILENAME_INVALID);
         }
     }
 
@@ -119,15 +118,5 @@ public class SaveCommand extends Command {
 
         fis.close();
         fos.close();
-    }
-
-    /*
-     * Returns true is the input given by the user is a path. False otherwise.
-     *
-     * @param   String fileName
-     *              Input given by the user.
-     */
-    private boolean isAPath(String fileName2) {
-        return fileName2.contains("/") || fileName2.contains("\\");
     }
 }
