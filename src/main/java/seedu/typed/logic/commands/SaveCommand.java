@@ -17,7 +17,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 public class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
 
-    public static final String MESSAGE_SUCCESS = "File saved to %1$s";
+    public static final String MESSAGE_SUCCESS = "Typed saved to %1$s";
 
     public static final String MESSAGE_SAVE_ERROR = "Unable to save to the location.";
 
