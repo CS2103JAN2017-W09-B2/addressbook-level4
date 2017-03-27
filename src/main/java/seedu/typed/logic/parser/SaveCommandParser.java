@@ -29,7 +29,7 @@ public class SaveCommandParser {
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
 
-        // if there are whitespaces, invalid input by user
+        // if there are whitespace, invalid input by user
         if ((keywords.length) != 1){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
@@ -46,11 +46,11 @@ public class SaveCommandParser {
     }
 
     /*
-     * Returns the correct extension (xml) no matter the input.
+     * Returns the correct extension no matter the input.
      * @param  String fileName
      *             fileName input by the user as the new name
      * @return String
-     *             with the proper extension ".xml".
+     *             with the proper extension.
      */
     private String createProperExtension(String fileName) {
         if (fileName.contains(".")) {
