@@ -1,5 +1,6 @@
 package seedu.typed.logic.commands;
 
+import seedu.typed.commons.core.Config;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.Model;
@@ -13,6 +14,7 @@ public abstract class Command {
     protected Model model;
     protected Session session;
     protected String commandText;
+    protected Config config;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a
@@ -40,9 +42,10 @@ public abstract class Command {
      * any of these should override this method to gain access to the
      * dependencies.
      */
-    public void setData(Model model, Session session, String commandText) {
+    public void setData(Model model, Session session, String commandText, Config config) {
         this.model = model;
         this.session = session;
         this.commandText = commandText;
+        this.config = config;
     }
 }

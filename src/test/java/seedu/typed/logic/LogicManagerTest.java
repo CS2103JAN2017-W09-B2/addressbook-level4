@@ -20,6 +20,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.typed.commons.core.Config;
 import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.commons.events.ui.JumpToListRequestEvent;
@@ -59,6 +60,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private Config config;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -86,7 +88,7 @@ public class LogicManagerTest {
         //String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         //String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         //logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), new Session());
-        logic = new LogicManager(model, new Session());
+        logic = new LogicManager(model, new Session(), config);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
