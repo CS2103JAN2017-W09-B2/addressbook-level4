@@ -120,6 +120,17 @@ public class Task implements ReadOnlyTask {
     }
     //@@author
 
+    //@@author A0139392X
+    @Override
+    public boolean haveDuration() {
+        if (from != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //@@author
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
