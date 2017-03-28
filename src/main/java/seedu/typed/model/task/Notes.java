@@ -1,3 +1,5 @@
+//@@author A0141094M
+
 package seedu.typed.model.task;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
@@ -24,7 +26,7 @@ public class Notes {
             this.value = "";
         } else {
             String trimmedNotes = notes.trim();
-            if (!trimmedNotes.isEmpty() && !isValidName(trimmedNotes)) {
+            if (!trimmedNotes.isEmpty() && !isValidNotes(trimmedNotes)) {
                 throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
             }
             this.value = trimmedNotes;
@@ -36,7 +38,7 @@ public class Notes {
     * @param test
     * @return true if a given notes is a valid task notes.
     */
-    public static boolean isValidName(String test) {
+    public static boolean isValidNotes(String test) {
         return test.matches(NOTES_VALIDATION_REGEX);
     }
 

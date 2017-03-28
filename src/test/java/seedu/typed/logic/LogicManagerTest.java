@@ -204,6 +204,7 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
+    //@@author A0141094M
     @Test
     public void execute_add_invalidArgsFormat() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -219,8 +220,8 @@ public class LogicManagerTest {
         assertCommandFailure("add by 12/34/5678", expectedMessage);
         assertCommandFailure("add Valid Name by not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name by 12/34/5678 #invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
-
     }
+    //@@author
 
     @Test
     public void execute_add_successful() throws Exception {
@@ -365,6 +366,7 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //@@author A0141094M
     @Test
     public void execute_find_matchesSimilarWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -381,6 +383,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
+    //@@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
@@ -421,14 +424,13 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
+        //@@author A0141094M
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
             Date date = new Date("11/11/1111");
-            //@@author A0141094M
             Date from = new Date("");
             Date to = new Date("");
             Notes notes = new Notes("");
-            //@@author
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -450,11 +452,9 @@ public class LogicManagerTest {
             return new TaskBuilder()
                     .setName("Task " + seed)
                     .setDate("" + seedDate)
-                    //@@author A0141094M
                     .setFrom("")
                     .setTo("")
                     .setNotes("")
-                    //@@author
                     .addTags("tag" + seed)
                     .addTags("tag" + (seed + 1))
                     .build();
@@ -476,6 +476,7 @@ public class LogicManagerTest {
 
             return cmd.toString();
         }
+        //@@author
 
         /**
          * Generates an TaskManager with auto-generated tasks.
@@ -548,6 +549,7 @@ public class LogicManagerTest {
             return Arrays.asList(tasks);
         }
 
+        //@@author A0141094M
         /**
          * Generates a Task object with given name. Other fields will have some
          * dummy values.
@@ -557,13 +559,12 @@ public class LogicManagerTest {
             return new TaskBuilder()
                     .setName(name)
                     .setDate("11/11/1111")
-                    //@@author A0141094M
                     .setFrom("")
                     .setTo("")
                     .setNotes("")
-                    //@@author
                     .addTags("tag")
                     .build();
         }
+        //@@author
     }
 }

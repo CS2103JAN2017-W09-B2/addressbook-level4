@@ -51,6 +51,8 @@ public class StringUtilTest {
         assertTrue(StringUtil.isUnsignedInteger("10"));
     }
 
+    //@@author A0141094M
+
     // ---------------- Tests for isFuzzyKeywordSearchIgnoreCase
     // --------------------------------------
 
@@ -189,6 +191,8 @@ public class StringUtilTest {
     /*
      * Equivalence Partitions: null, valid throwable object
      */
+
+    //@@author
 
     @Test
     public void getDetails_exceptionGiven() {

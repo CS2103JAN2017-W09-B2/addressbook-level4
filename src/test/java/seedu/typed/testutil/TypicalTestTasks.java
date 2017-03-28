@@ -14,6 +14,7 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
+            //@@author A0141094M
             alice = new TaskBuilder().withName("Meet Alice Pauline").withDate("01/01/2018").withFrom("")
                     .withTo("").withNotes("").withTags("friends").build();
             benson = new TaskBuilder().withName("Meet Benson Meier").withDate("02/01/2018").withFrom("")
@@ -34,6 +35,7 @@ public class TypicalTestTasks {
                     .withFrom("").withTo("").withNotes("").build();
             ida = new TaskBuilder().withName("Meet Ida Mueller").withDate("09/02/2018")
                     .withFrom("").withTo("").withNotes("").build();
+            //@@author
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -43,9 +45,10 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-
+                //@@author A0141094M
                 Task toAdd = new Task(task.getName(), task.getNotes(), task.getDate(),
                         task.getFrom(), task.getTo(), task.getTags());
+                //@@author
                 tm.addTask(toAdd);
 
             } catch (UniqueTaskList.DuplicateTaskException e) {

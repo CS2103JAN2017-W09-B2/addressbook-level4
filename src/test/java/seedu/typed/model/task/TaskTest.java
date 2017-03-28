@@ -23,13 +23,15 @@ public class TaskTest {
     private Name nullName;
     private Name name;
     private Name name2;
-    private Notes notes;
     private Tag tag;
     private Tag tag2;
     private Date nullDate;
     private Date date;
+    //@@author A0141094M
+    private Notes notes;
     private Date from;
     private Date to;
+    //@@author
     private Task test;
     private UniqueTagList tagList;
     private UniqueTagList tagList2;
@@ -45,10 +47,12 @@ public class TaskTest {
             tag2 = new Tag("friends");
             name = new Name("Meet John");
             name2 = new Name("Meet Honey");
-            notes = new Notes("");
             date = new Date("12/12/2017");
+            //@@author A0141094M
+            notes = new Notes("");
             from = new Date("");
             to = new Date("");
+            //@@author
             test = new Task(name, notes, date, from, to, new UniqueTagList());
             tagList = new UniqueTagList();
             tagList2 = new UniqueTagList();
@@ -133,8 +137,10 @@ public class TaskTest {
         Task test = new TaskBuilder().setName(name).build();
         test.resetData(null);
     }
+    //@@author A0141094M
     @Test
     public void toString_valid_success() {
         assertEquals(test.toString(), " Name: Meet John Notes:  Date: 12/12/2017 From:  To:  Completed: false Tags: ");
     }
+    //@@author
 }

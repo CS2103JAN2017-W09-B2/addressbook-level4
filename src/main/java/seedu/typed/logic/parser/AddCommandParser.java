@@ -18,8 +18,6 @@ import seedu.typed.logic.commands.AddCommand;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.IncorrectCommand;
 
-//@@author A0141094M
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */

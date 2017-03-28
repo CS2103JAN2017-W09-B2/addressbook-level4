@@ -1,3 +1,5 @@
+//@@author A0141094M
+
 package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -10,8 +12,6 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
-
-//@@author A0141094M
 
 /**
  * Parses input arguments and creates a new AddCommand object

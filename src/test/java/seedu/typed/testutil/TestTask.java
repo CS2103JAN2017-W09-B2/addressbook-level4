@@ -12,10 +12,12 @@ import seedu.typed.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Notes notes;
     private Date date;
+    //@@author A0141094M
+    private Notes notes;
     private Date from;
     private Date to;
+    //@@author
     private UniqueTagList tags;
     private boolean isCompleted;
 
@@ -28,10 +30,12 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.notes = taskToCopy.getNotes();
         this.date = taskToCopy.getDate();
+        //@@author A0141094M
+        this.notes = taskToCopy.getNotes();
         this.from = taskToCopy.getFrom();
         this.to = taskToCopy.getTo();
+        //@@author
         this.tags = taskToCopy.getTags();
     }
 
@@ -39,17 +43,15 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    //@@author A0141094M
-    public void setNotes(Notes notes) {
-        this.notes = notes;
-    }
-    //@@author
-
     public void setDate(Date date) {
         this.date = date;
     }
 
     //@@author A0141094M
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+    }
+
     public void setFrom(Date from) {
         this.from = from;
     }
@@ -72,19 +74,17 @@ public class TestTask implements ReadOnlyTask {
         return name;
     }
 
-    //@@author A0141094M
-    @Override
-    public Notes getNotes() {
-        return notes;
-    }
-    //@@author
-
     @Override
     public Date getDate() {
         return date;
     }
 
     //@@author A0141094M
+    @Override
+    public Notes getNotes() {
+        return notes;
+    }
+
     @Override
     public Date getFrom() {
         return from;
@@ -118,6 +118,7 @@ public class TestTask implements ReadOnlyTask {
     }
     //@@author
 
+    //@@author A0141094M
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().getValue() + " ");
@@ -125,5 +126,6 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
+    //@@author
 
 }

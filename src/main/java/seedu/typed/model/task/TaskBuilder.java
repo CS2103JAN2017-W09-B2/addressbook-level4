@@ -35,6 +35,7 @@ public class TaskBuilder {
 
     public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
         this.name = new Name(task.getName().getValue());
+        //@@author A0140194M
         if (task.getNotes() == null) {
             this.notes = new Notes(null);
         } else {
@@ -55,6 +56,7 @@ public class TaskBuilder {
         } else {
             this.to = new Date(task.getTo().getValue());
         }
+        //@@author
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
