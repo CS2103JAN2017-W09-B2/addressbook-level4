@@ -85,10 +85,10 @@ public class Parser {
             return new DeleteCommandParser().parse(args);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            return new UndoCommandParser().parse(args);
 
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            return new RedoCommandParser().parse(args);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -63,6 +63,7 @@ public interface Model {
      */
     void updateTaskForUndoRedo(int index, ReadOnlyTask editedTask)
             throws DuplicateTaskException, IllegalValueException;
+    //@@author
 
     /**
      * Returns the filtered task list as an
