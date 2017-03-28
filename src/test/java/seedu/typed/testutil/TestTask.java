@@ -111,14 +111,6 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    public String getAddCommand() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().getValue() + " ");
-        sb.append("by " + this.getDate().getValue() + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
-        return sb.toString();
-    }
-
     @Override
     public boolean haveDuration() {
         if (from != null) {
@@ -127,4 +119,13 @@ public class TestTask implements ReadOnlyTask {
             return false;
         }
     }
+
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getName().getValue() + " ");
+        sb.append("by " + this.getDate().getValue() + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
+        return sb.toString();
+    }
+
 }
