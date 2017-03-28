@@ -1,7 +1,6 @@
 package seedu.typed.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -23,9 +22,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    @FXML
-    private CheckBox checkBox;
-
     //@@author A0139392X
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -43,4 +39,5 @@ public class TaskCard extends UiPart<Region> {
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
 }
