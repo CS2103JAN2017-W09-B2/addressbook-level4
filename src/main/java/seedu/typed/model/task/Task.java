@@ -123,7 +123,7 @@ public class Task implements ReadOnlyTask {
     //@@author A0139392X
     @Override
     public boolean haveDuration() {
-        return (from != null);
+        return (!this.getFrom().isEmpty());
     }
     //@@author
 

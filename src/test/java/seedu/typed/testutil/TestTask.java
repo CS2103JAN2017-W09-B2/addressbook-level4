@@ -114,7 +114,7 @@ public class TestTask implements ReadOnlyTask {
     //@@author A0139392X
     @Override
     public boolean haveDuration() {
-        return (from != null);
+        return !from.isEmpty();
     }
     //@@author
 
