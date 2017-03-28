@@ -109,4 +109,3 @@ public class CompleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, tasksToCompleteList.get(0)));
     }
 }
-//@@author A0139379M

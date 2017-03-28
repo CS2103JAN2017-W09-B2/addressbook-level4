@@ -19,4 +19,3 @@ public class TestClearCommand extends ClearCommand {
         this.session = session;
     }
 }
-//@@author A0139379M

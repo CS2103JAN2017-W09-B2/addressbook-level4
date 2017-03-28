@@ -138,4 +138,3 @@ public class TaskTest {
         assertEquals(test.toString(), " Name: Meet John Notes:  Date: 12/12/2017 From:  To:  Completed: false Tags: ");
     }
 }
-//@@author A0139379M

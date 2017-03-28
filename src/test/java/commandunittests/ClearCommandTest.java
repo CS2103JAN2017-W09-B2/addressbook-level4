@@ -56,4 +56,3 @@ public class ClearCommandTest {
         assertEquals(cleanClear.execute(), new CommandResult("Task manager has been cleared!"));
     }
 }
-//@@author A0139379M
