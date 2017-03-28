@@ -37,11 +37,13 @@ public class UniqueTaskList implements Iterable<Task> {
             return index;
         }
     }
+    //@@author
 
     //@@author A0143853A
     public Task getTaskAt(int index) {
         return internalList.get(index);
     }
+    //@@author
 
     /**
      * Adds a task to the list.
@@ -60,7 +62,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
-    // @@author A0143853A
+    //@@author A0143853A
     public void add(int index, Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
 
@@ -69,6 +71,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(index, toAdd);
     }
+    //@@author
 
     /**
      * Updates the task in the list at position {@code index} with

@@ -80,10 +80,12 @@ public class EditCommand extends Command {
 
 
         try {
+            //@@author A0143853A
             int index = model.getIndexOfTask(taskToEditCopy);
             model.updateTask(filteredTaskListIndex, editedTask);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, index, taskToEditCopy);
             session.updateValidCommandsHistory(commandText);
+            //@@author
         } catch (DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException tnfe) {

@@ -7,7 +7,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
-import seedu.typed.model.task.UniqueTaskList;
+import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Adds a task to the task manager.
@@ -45,11 +45,13 @@ public class AddCommand extends Command {
         assert session != null;
 
         try {
+            //@@author A0143853A
             model.addTask(0, toAdd);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
             session.updateValidCommandsHistory(commandText);
-            return new CommandResult(String.format(MESSAGE_SUCCESS));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
+            //@@author
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }

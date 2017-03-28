@@ -25,9 +25,11 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            //@@author A0143853A
             if (argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())) {
                 return new AddCommand(argsTokenizer.getPreamble().get(), null,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+            //@@author
             } else {
                 return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));

@@ -5,6 +5,11 @@ import java.util.Stack;
 
 import seedu.typed.commons.util.TripleUtil;
 
+//@@author A0143853A
+/**
+ * Helps to manage Undo and Redo stacks in the Session class.
+ *
+ */
 public class UndoRedoUtil {
 
     public static Optional<TripleUtil<String, Integer, Object>> pop(Stack<TripleUtil<String, Integer, Object>> stack) {

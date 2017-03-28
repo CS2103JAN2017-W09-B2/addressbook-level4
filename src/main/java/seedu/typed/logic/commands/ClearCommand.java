@@ -14,6 +14,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Task manager has been cleared!";
     public static final String MESSAGE_FAILURE = "Task manager cannot be cleared!";
 
+    //@@author A0143853A
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

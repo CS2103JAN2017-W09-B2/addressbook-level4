@@ -12,7 +12,6 @@ import seedu.typed.logic.commands.util.UndoRedoUtil;
 /**
  * Keeps track of commands to undo and redo in a session.
  * Keeps track of history of commands entered
- * @@author A0143853A
  *
  */
 

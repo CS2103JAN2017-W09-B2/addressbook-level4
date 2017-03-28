@@ -20,7 +20,9 @@ public interface Model {
     void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
     //@@author A0143853A
+    /** Copies tasks over into current TaskManager. **/
     void copyData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    //@@author
 
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
@@ -34,6 +36,7 @@ public interface Model {
     //@@author A0143853A
     /** Adds the given task at the specified index. */
     void addTask(int index, Task task) throws DuplicateTaskException;
+    //@@author
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
@@ -86,7 +89,9 @@ public interface Model {
 
     //@@author A0143853A
     Task getTaskAt(int index);
+    //@@author
 
     //@@author A0143853A
     int getIndexOfTask(Task task) throws TaskNotFoundException;
+    //@@author
 }

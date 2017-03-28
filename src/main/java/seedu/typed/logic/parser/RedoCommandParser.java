@@ -8,14 +8,14 @@ import seedu.typed.logic.commands.RedoCommand;
 
 //@@author A0143853A
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new RedoCommand object
  */
 public class RedoCommandParser {
 
     public static String POSITIVE_INTEGER_REGEX = "[1-9]+[0-9]*";
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * FindCommand and returns an FindCommand object for execution.
+     * RedoCommand and returns an RedoCommand object for execution.
      */
     public Command parse(String args) {
         String trimmedArgs = args.trim();

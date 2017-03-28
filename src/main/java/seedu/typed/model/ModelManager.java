@@ -51,12 +51,14 @@ public class ModelManager extends ComponentManager implements Model {
     public int getIndexOfTask(Task task) throws TaskNotFoundException {
         return taskManager.getIndexOf(task);
     }
+    //@@author
 
     //@@author A0143853A
     @Override
     public Task getTaskAt(int index) {
         return taskManager.getTaskAt(index);
     }
+    //@@author
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
@@ -70,6 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.copyData(newData);
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
@@ -102,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public synchronized void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException {

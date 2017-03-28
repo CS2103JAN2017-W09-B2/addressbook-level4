@@ -1,9 +1,8 @@
 package seedu.typed.commons.util;
 
+//@@author A0143853A
 /**
  * Stores three items.
- * @author Le Yuan
- *
  */
 
 public class TripleUtil<F, S, T> {

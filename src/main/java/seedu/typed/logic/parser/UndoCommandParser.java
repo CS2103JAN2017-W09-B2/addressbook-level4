@@ -8,14 +8,14 @@ import seedu.typed.logic.commands.UndoCommand;
 
 //@@author A0143853A
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new UndoCommand object
  */
 public class UndoCommandParser {
 
     public static String POSITIVE_INTEGER_REGEX = "[1-9]+[0-9]*";
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * FindCommand and returns an FindCommand object for execution.
+     * UndoCommand and returns an UndoCommand object for execution.
      */
     public Command parse(String args) {
         String trimmedArgs = args.trim();
