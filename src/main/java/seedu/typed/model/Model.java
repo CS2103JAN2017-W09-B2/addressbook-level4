@@ -88,4 +88,15 @@ public interface Model {
 
     //@@author A0143853A
     int getIndexOfTask(Task task) throws TaskNotFoundException;
+
+    //@@author A0141094M
+    void updateFilteredListToShowDeadline();
+
+    void updateFilteredListToShowDuration();
+
+    void updateFilteredListToShowDone();
+
+    void updateFilteredListToShowUndone();
+
+    void updateFilteredListToShowUntimed();
 }

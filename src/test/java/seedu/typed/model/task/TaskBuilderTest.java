@@ -22,7 +22,10 @@ import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 public class TaskBuilderTest {
     private TaskBuilder testBuilder1 = new TaskBuilder();
     private Name name;
+    private Notes notes;
     private Date date;
+    private Date from;
+    private Date to;
     private UniqueTagList tags, tagTest;
     private Set<String> tagSet;
     private Task testTask;
@@ -30,11 +33,14 @@ public class TaskBuilderTest {
     public void setUp() {
         try {
             name = new Name("Meet John");
+            notes = new Notes("");
             date = new Date("12/12/2017");
+            from = new Date("");
+            to = new Date("");
             tags = new UniqueTagList();
             tagTest = new UniqueTagList();
             tags.add(new Tag("friends"));
-            testTask = new Task(name, date, tags);
+            testTask = new Task(name, notes, date, from, to, tags);
             tagSet = new HashSet<String>();
             tagSet.add("friends");
             tagSet.add("work");

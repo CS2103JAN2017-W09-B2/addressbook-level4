@@ -16,12 +16,11 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager."
-            + "Parameters: NAME [by DATE]  [#TAG]...\n"
-            + "Example: " + COMMAND_WORD + " buy 5 broccolis by tomorrow #survival #grocery ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
+            + "Parameters: NAME [by DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + COMMAND_WORD
+            + " buy 5 broccolis by tomorrow #survival #grocery ";
 
-    //public static final String MESSAGE_SUCCESS = "%1$s added";
-    public static final String MESSAGE_SUCCESS = "Task Added!";
+    public static final String MESSAGE_SUCCESS = "%1$s added";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
@@ -32,11 +31,16 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String date, Set<String> tags) throws IllegalValueException {
-        this.toAdd = new TaskBuilder().setName(name)
-                                      .setDate(date)
-                                      .setTags(tags)
-                                      .build();
+    public AddCommand(String name, String notes, String date, String from,
+            String to, Set<String> tags) throws IllegalValueException {
+        this.toAdd = new TaskBuilder()
+                .setName(name)
+                .setNotes(notes)
+                .setDate(date)
+                .setFrom(from)
+                .setTo(to)
+                .setTags(tags)
+                .build();
     }
 
     @Override
@@ -45,10 +49,12 @@ public class AddCommand extends Command {
         assert session != null;
 
         try {
+            // this.model.addTask(toAdd);
             model.addTask(0, toAdd);
+            String name = toAdd.getName().toString();
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
             session.updateValidCommandsHistory(commandText);
-            return new CommandResult(String.format(MESSAGE_SUCCESS));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, name));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

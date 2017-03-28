@@ -11,6 +11,7 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
+import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -106,12 +107,21 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        //@@author A0141094M
+        Date updatedFrom = editTaskDescriptor.getFrom().orElseGet(taskToEdit::getFrom);
+        Date updatedTo = editTaskDescriptor.getTo().orElseGet(taskToEdit::getTo);
+        Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
+        //@@author
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new TaskBuilder().setName(updatedName)
-                                .setDate(updatedDate)
-                                .setTags(updatedTags)
-                                .build();
+        return new TaskBuilder()
+                .setName(updatedName)
+                .setNotes(updatedNotes)
+                .setDate(updatedDate)
+                .setFrom(updatedFrom)
+                .setTo(updatedTo)
+                .setTags(updatedTags)
+                .build();
     }
 
     /**
@@ -121,6 +131,11 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Date> date = Optional.empty();
+        //@@author A0141094M
+        private Optional<Date> from = Optional.empty();
+        private Optional<Date> to = Optional.empty();
+        private Optional<Notes> notes = Optional.empty();
+        //@@author
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {
@@ -129,6 +144,11 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
+            //@@author A0141094M
+            this.from = toCopy.getFrom();
+            this.to = toCopy.getTo();
+            this.notes = toCopy.getNotes();
+            //@@author
             this.tags = toCopy.getTags();
         }
 
@@ -136,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(name, date, tags);
+            return CollectionUtil.isAnyPresent(this.name, this.date, this.from, this.to, this.notes, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -158,6 +178,37 @@ public class EditCommand extends Command {
         public Optional<Date> getDate() {
             return date;
         }
+
+        //@@author A0141094M
+
+        public void setFrom(Optional<Date> from) {
+            assert from != null;
+            this.from = from;
+        }
+
+        public Optional<Date> getFrom() {
+            return from;
+        }
+
+        public void setTo(Optional<Date> to) {
+            assert to != null;
+            this.to = to;
+        }
+
+        public Optional<Date> getTo() {
+            return to;
+        }
+
+        public void setNotes(Optional<Notes> notes) {
+            assert notes != null;
+            this.notes = notes;
+        }
+
+        public Optional<Notes> getNotes() {
+            return notes;
+        }
+
+        //@@author
 
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;

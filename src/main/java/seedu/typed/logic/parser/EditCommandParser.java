@@ -39,7 +39,19 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            //@@author A0141094M
+            //TODO: iron out editTaskDescriptor.isAnyFieldEdited()
+            if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
+                System.out.println("hey there is a date specified");
+                if (argsTokenizer.getValue(PREFIX_DATE).get().equals("none")) {
+                    System.out.println("i detected none!");
+                    editTaskDescriptor.setDate(Optional.empty());
+                } else {
+                    System.out.println("i detected NOT none");
+                    editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+                }
+            }
+            //@@author
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

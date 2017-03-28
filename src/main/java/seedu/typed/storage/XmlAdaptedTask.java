@@ -20,7 +20,13 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
+    private String notes;
+    @XmlElement(required = true)
     private String date;
+    @XmlElement(required = true)
+    private String from;
+    @XmlElement(required = true)
+    private String to;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -41,7 +47,10 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().getValue();
+        notes = source.getNotes().getValue();
         date = source.getDate().getValue();
+        from = source.getFrom().getValue();
+        to = source.getTo().getValue();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -64,7 +73,10 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new TaskBuilder()
                 .setName(this.name)
+                .setNotes(this.notes)
                 .setDate(this.date)
+                .setFrom(this.from)
+                .setTo(this.to)
                 .setTags(tags)
                 .build();
     }

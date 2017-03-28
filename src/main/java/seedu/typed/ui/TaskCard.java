@@ -26,13 +26,19 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private CheckBox checkBox;
 
+    //@@author A0139392X
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
-        date.setText(task.getDate().getValue());
+        if (task.haveDuration()) {
+            date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
+        } else {
+            date.setText(task.getDate().getValue());
+        }
         initTags(task);
     }
+    //@@author
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
