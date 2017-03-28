@@ -111,14 +111,12 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0139392X
     @Override
     public boolean haveDuration() {
-        if (from != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return (from != null);
     }
+    //@@author
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
