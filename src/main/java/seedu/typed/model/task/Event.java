@@ -1,7 +1,7 @@
 package seedu.typed.model.task;
 
 import seedu.typed.model.tag.UniqueTagList;
-
+//@@author A0139379M
 public class Event implements ReadOnlyEvent {
 
     private Name name;
@@ -59,3 +59,4 @@ public class Event implements ReadOnlyEvent {
     }
 
 }
+//@@author A0139379M

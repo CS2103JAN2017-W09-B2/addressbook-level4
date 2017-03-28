@@ -15,7 +15,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
-
+//@@author A0139379M
 /*
  * Unit testing for EventBuilder 100%
  * @author YIM CHIA HUI
@@ -155,3 +155,4 @@ public class EventBuilderTest {
     }
 
 }
+//@@author A0139379M

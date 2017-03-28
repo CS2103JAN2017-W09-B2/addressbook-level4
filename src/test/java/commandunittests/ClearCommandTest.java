@@ -11,7 +11,7 @@ import org.junit.rules.ExpectedException;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
-
+//@@author A0139379M
 /**
  * Unit Testing for ClearCommand
  * We are testing on whether a populated TaskManager and new TaskManager will be cleared successfully
@@ -56,3 +56,4 @@ public class ClearCommandTest {
         assertEquals(cleanClear.execute(), new CommandResult("Task manager has been cleared!"));
     }
 }
+//@@author A0139379M

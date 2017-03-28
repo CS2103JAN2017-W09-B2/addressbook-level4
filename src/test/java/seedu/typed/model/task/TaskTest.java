@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
+//@@author A0139379M
 /**
  * Unit testing for Task class 98.3%
  * @author YIM CHIA HUI
@@ -130,3 +131,4 @@ public class TaskTest {
         assertEquals(test.toString(), " Name: Meet John Date: 12/12/2017 Completed: false Tags: ");
     }
 }
+//@@author A0139379M

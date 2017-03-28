@@ -2,7 +2,7 @@ package commandunittests;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.ClearCommand;
-
+//@@author A0139379M
 public class TestClearCommand extends ClearCommand {
 
     public TestClearCommand() throws IllegalValueException {
@@ -19,3 +19,4 @@ public class TestClearCommand extends ClearCommand {
         this.session = session;
     }
 }
+//@@author A0139379M

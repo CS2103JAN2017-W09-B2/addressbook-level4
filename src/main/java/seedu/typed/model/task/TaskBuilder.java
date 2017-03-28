@@ -8,7 +8,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 
-
+//@@author A0139379M
 /**
  * TaskBuilder helps to build a Task object by being flexible in
  * what attributes a Task object will initialise with. In particular,
@@ -90,3 +90,4 @@ public class TaskBuilder {
     }
 
 }
+//@@author A0139379M
