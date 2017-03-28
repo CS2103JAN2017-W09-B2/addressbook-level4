@@ -31,7 +31,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
-        if (task.haveDuration() != false) {
+        if (task.haveDuration()) {
             date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
         } else {
             date.setText(task.getDate().getValue());
