@@ -37,7 +37,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         this.session = session;
-        this.commandHistory = this.session.getValidCommandsHistory();
+        this.commandHistory = this.session.getAllCommandsHistory();
         this.pointer = 0;
         addToPlaceholder(commandBoxPlaceholder);
     }
