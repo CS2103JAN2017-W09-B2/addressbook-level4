@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.typed.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -21,6 +22,8 @@ public class TaskCard extends UiPart<Region> {
     private Label date;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Text notes;
 
     //@@author A0139392X
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -32,6 +35,7 @@ public class TaskCard extends UiPart<Region> {
         } else {
             date.setText(task.getDate().getValue());
         }
+        notes.setText(task.getNotes().toString());
         initTags(task);
     }
     //@@author
