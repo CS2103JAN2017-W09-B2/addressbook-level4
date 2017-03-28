@@ -118,4 +118,13 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
+
+    @Override
+    public boolean haveDuration() {
+        if (from != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
