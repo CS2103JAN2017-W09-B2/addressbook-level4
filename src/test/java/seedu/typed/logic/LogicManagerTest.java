@@ -370,10 +370,10 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("KE Y");
-        Task p1 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p2 = helper.generateTaskWithName("KE Y");
+        Task pTarget3 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(pTarget1, pTarget2, pTarget3, p1);
+        List<Task> fourTasks = helper.generateTaskList(pTarget1, pTarget2, p2, pTarget3);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);

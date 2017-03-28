@@ -169,18 +169,18 @@ public class StringUtilTest {
         assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ABB"));
     }
     @Test
-    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfTwoSameCase_trueReturned() {
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "b"));
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "bbbbb"));
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "abc"));
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ccde"));
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfTwoSameCase_falseReturned() {
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "b"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "bbbbb"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "abc"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ccde"));
     }
     @Test
-    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfTwoDifferentCase_trueReturned() {
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "B"));
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "BBBBB"));
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ABC"));
-        assertTrue(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "CCDE"));
+    public void isFuzzyKeywordSearchIgnoreCase_validPartialMatchDistanceOfTwoDifferentCase_falseReturned() {
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "B"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "BBBBB"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "ABC"));
+        assertFalse(StringUtil.isFuzzyKeywordSearchIgnoreCase("aaa bbb cccc", "CCDE"));
     }
 
     // ---------------- Tests for getDetails
