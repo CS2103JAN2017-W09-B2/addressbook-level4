@@ -76,10 +76,20 @@ public class TestUtil {
                 "Meet Elle Meyer", "Meet Fiona Kunz", "Meet George Best", "Meet Hoon Meier", "Meet Ida Mueller"};
             String[] dates = new String[] {"30/01/2018", "31/01/2018", "03/01/2018", "04/01/2018", "05/01/2018", "06/01/2018",
                 "07/01/2018", "08/01/2018", "09/01/2018"};
+            //@@author A0141094M
+            String[] froms = new String[] {"", "", "", "", "", "", "", "", ""};
+            String[] tos = new String[] {"", "", "", "", "", "", "", "", ""};
+            String[] notes = new String[] {"", "", "", "", "", "", "", "", ""};
+            //@@author
             for (int i = 0; i < taskNumber; i++) {
                 tasks[i] = new TaskBuilder()
                         .setName(names[i])
                         .setDate(dates[i])
+                        //@@author A0141094M
+                        .setFrom(froms[i])
+                        .setTo(tos[i])
+                        .setNotes(notes[i])
+                        //@@author
                         .build();
             }
             return tasks;

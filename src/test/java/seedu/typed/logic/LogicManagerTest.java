@@ -20,6 +20,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.typed.commons.core.Config;
 import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.commons.events.ui.JumpToListRequestEvent;
@@ -44,6 +45,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
+import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -59,6 +61,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private Config config;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -86,7 +89,7 @@ public class LogicManagerTest {
         //String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         //String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         //logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), new Session());
-        logic = new LogicManager(model, new Session());
+        logic = new LogicManager(model, new Session(), config);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
@@ -201,6 +204,7 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
+    //@@author A0141094M
     @Test
     public void execute_add_invalidArgsFormat() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -216,8 +220,8 @@ public class LogicManagerTest {
         assertCommandFailure("add by 12/34/5678", expectedMessage);
         assertCommandFailure("add Valid Name by not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name by 12/34/5678 #invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
-
     }
+    //@@author
 
     @Test
     public void execute_add_successful() throws Exception {
@@ -362,15 +366,16 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //@@author A0141094M
     @Test
     public void execute_find_matchesSimilarWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("KE Y");
-        Task p1 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p2 = helper.generateTaskWithName("KE Y");
+        Task pTarget3 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(pTarget1, pTarget2, pTarget3, p1);
+        List<Task> fourTasks = helper.generateTaskList(pTarget1, pTarget2, p2, pTarget3);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
@@ -378,6 +383,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
+    //@@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
@@ -418,13 +424,18 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
+        //@@author A0141094M
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
             Date date = new Date("11/11/1111");
+            Date from = new Date("");
+            Date to = new Date("");
+            Notes notes = new Notes("");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new TaskBuilder().setName(name).setDate(date).setTags(tags).build();
+            return new TaskBuilder().setName(name).setDate(date).setFrom(from)
+                    .setTo(to).setNotes(notes).setTags(tags).build();
         }
 
         /**
@@ -441,6 +452,9 @@ public class LogicManagerTest {
             return new TaskBuilder()
                     .setName("Task " + seed)
                     .setDate("" + seedDate)
+                    .setFrom("")
+                    .setTo("")
+                    .setNotes("")
                     .addTags("tag" + seed)
                     .addTags("tag" + (seed + 1))
                     .build();
@@ -462,6 +476,7 @@ public class LogicManagerTest {
 
             return cmd.toString();
         }
+        //@@author
 
         /**
          * Generates an TaskManager with auto-generated tasks.
@@ -534,6 +549,7 @@ public class LogicManagerTest {
             return Arrays.asList(tasks);
         }
 
+        //@@author A0141094M
         /**
          * Generates a Task object with given name. Other fields will have some
          * dummy values.
@@ -543,8 +559,12 @@ public class LogicManagerTest {
             return new TaskBuilder()
                     .setName(name)
                     .setDate("11/11/1111")
+                    .setFrom("")
+                    .setTo("")
+                    .setNotes("")
                     .addTags("tag")
                     .build();
         }
+        //@@author
     }
 }

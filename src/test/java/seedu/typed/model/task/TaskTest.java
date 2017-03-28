@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
+//@@author A0139379M
 /**
  * Unit testing for Task class 98.3%
  * @author YIM CHIA HUI
@@ -26,6 +27,11 @@ public class TaskTest {
     private Tag tag2;
     private Date nullDate;
     private Date date;
+    //@@author A0141094M
+    private Notes notes;
+    private Date from;
+    private Date to;
+    //@@author
     private Task test;
     private UniqueTagList tagList;
     private UniqueTagList tagList2;
@@ -42,7 +48,12 @@ public class TaskTest {
             name = new Name("Meet John");
             name2 = new Name("Meet Honey");
             date = new Date("12/12/2017");
-            test = new Task(name, date, new UniqueTagList());
+            //@@author A0141094M
+            notes = new Notes("");
+            from = new Date("");
+            to = new Date("");
+            //@@author
+            test = new Task(name, notes, date, from, to, new UniqueTagList());
             tagList = new UniqueTagList();
             tagList2 = new UniqueTagList();
             tagList2.add(tag2);
@@ -53,12 +64,13 @@ public class TaskTest {
     }
     @Test
     public void equals_same_success() throws IllegalValueException {
-        Task test = new TaskBuilder().setName(name).build();
+        Task test = new TaskBuilder().setName(name).setDate("").setFrom("").setTo("").setNotes("").build();
         assertTrue(test.equals(test));
     }
     @Test
     public void equals_notSameButSimilar_success() throws IllegalValueException {
-        Task test2 = new TaskBuilder().setName(name).setTags(new UniqueTagList()).setDate(date).build();
+        Task test2 = new TaskBuilder().setName(name).setTags(new UniqueTagList())
+                .setDate(date).setFrom("").setTo("").setNotes("").build();
         assertTrue(test.equals(test2));
     }
     @Test
@@ -69,7 +81,7 @@ public class TaskTest {
     @Test
     public void task_nameNull_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
-        Task test = new Task(nullName, date, new UniqueTagList());
+        Task test = new Task(nullName, notes, date, from, to, new UniqueTagList());
         test.setName(name);
     }
     @Test
@@ -125,8 +137,10 @@ public class TaskTest {
         Task test = new TaskBuilder().setName(name).build();
         test.resetData(null);
     }
+    //@@author A0141094M
     @Test
     public void toString_valid_success() {
-        assertEquals(test.toString(), " Name: Meet John Date: 12/12/2017 Completed: false Tags: ");
+        assertEquals(test.toString(), " Name: Meet John Notes:  Date: 12/12/2017 From:  To:  Completed: false Tags: ");
     }
+    //@@author
 }

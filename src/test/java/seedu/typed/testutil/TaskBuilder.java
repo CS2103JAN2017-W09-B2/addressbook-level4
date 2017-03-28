@@ -5,6 +5,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
+import seedu.typed.model.task.Notes;
 
 /**
  *
@@ -41,6 +42,23 @@ public class TaskBuilder {
         this.task.setDate(new Date(date));
         return this;
     }
+
+    //@@author A0141094M
+    public TaskBuilder withFrom(String from) throws IllegalValueException {
+        this.task.setFrom(new Date(from));
+        return this;
+    }
+
+    public TaskBuilder withTo(String to) throws IllegalValueException {
+        this.task.setTo(new Date(to));
+        return this;
+    }
+
+    public TaskBuilder withNotes(String notes) throws IllegalValueException {
+        this.task.setNotes(new Notes(notes));
+        return this;
+    }
+    //@@author
 
     public TestTask build() {
         return this.task;

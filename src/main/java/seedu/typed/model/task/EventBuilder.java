@@ -8,7 +8,7 @@ import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 
-
+//@@author A0139379M
 /**
  * EventBuilder faciliates the builder of Event objects
  * By default, tags and description are empty and isRecurring is false

@@ -10,6 +10,7 @@ import seedu.typed.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
+    //@@author A0141094M
     @Test
     public void find_nonEmptyList() throws IllegalArgumentException, IllegalValueException {
         assertFindResult("find Z"); // no results
@@ -20,6 +21,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("delete 1");
         assertFindResult("find Meller", td.daniel, td.elle);
     }
+    //@@author
 
     @Test
     public void find_emptyList() throws IllegalArgumentException, IllegalValueException {

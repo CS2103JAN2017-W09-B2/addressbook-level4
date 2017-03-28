@@ -77,6 +77,16 @@ public class FileUtil {
         Files.write(file.toPath(), content.getBytes(CHARSET));
     }
 
+    //@@author A0139392X
+    /*
+     * Assumes file exists and writes from src to dest. If dest file does not exist yet,
+     * it will be created.
+     */
+    public static void transferToFile(File src, File dest) throws IOException {
+        writeToFile(dest, readFromFile(src));
+    }
+    //@@author
+
     /**
      * Converts a string to a platform-specific file path
      *
@@ -92,4 +102,54 @@ public class FileUtil {
         return pathWithForwardSlash.replace("/", File.separator);
     }
 
+    //@@author A0139392X
+    /*
+     * Returns true if the filename is a acceptable.
+     *
+     *  @param String fileName
+     *             A string that will be tested to see if the naming is valid.
+     *  @return true if name is valid, false if name otherwise.
+     */
+    public static boolean isValidName(String fileName) {
+        File f = new File(fileName);
+        try {
+            f.createNewFile();
+            boolean isValid = f.isFile() && !f.isHidden();
+            f.getCanonicalFile();
+            f.delete();
+            return isValid;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    //@@author
+
+    //@@author A0139392X
+    /*
+     * Returns the full path of the directory
+     */
+    public static String getFullDirectoryPath() throws IOException {
+        File file = File.createTempFile("hello", ".tmp");
+
+        String absolutePath = file.getAbsolutePath();
+
+        file.delete();
+
+        String directoryPath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+
+        return directoryPath;
+    }
+    //@@author
+
+    //@@author A0139392X
+    /*
+     * Given a directory, obtain the filename
+     */
+    public static String getNameFromDirectory(File directory) {
+        String absolutePath = directory.getAbsolutePath();
+        String fileName = absolutePath.substring(absolutePath.lastIndexOf(File.separator));
+
+        return fileName;
+    }
+    //@@author
 }

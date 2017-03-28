@@ -11,7 +11,10 @@ import seedu.typed.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private Notes notes;
     private Date date;
+    private Date from;
+    private Date to;
 
     private boolean isCompleted;
 
@@ -20,13 +23,16 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Date date, UniqueTagList tags, boolean isCompleted) {
+    public Task(Name name, Notes notes, Date date, Date from, Date to, UniqueTagList tags, boolean isCompleted) {
         // commented this out!! allow date tags be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
 
         this.name = name;
+        this.notes = notes;
         this.date = date;
+        this.from = from;
+        this.to = to;
         this.tags = new UniqueTagList(tags); // protect internal tags from
         this.isCompleted = isCompleted;
         // changes
@@ -38,13 +44,16 @@ public class Task implements ReadOnlyTask {
      * @param date
      * @param tags
      */
-    public Task(Name name, Date date, UniqueTagList tags) {
+    public Task(Name name, Notes notes, Date date, Date from, Date to, UniqueTagList tags) {
         // commented this out, allow date tags to be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
 
         this.name = name;
+        this.notes = notes;
         this.date = date;
+        this.from = from;
+        this.to = to;
         this.tags = new UniqueTagList(tags);
         this.isCompleted = false;
     }
@@ -53,7 +62,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDate(), source.getTags(), source.getIsCompleted());
+        this(source.getName(), source.getNotes(), source.getDate(),
+                source.getFrom(), source.getTo(), source.getTags(), source.getIsCompleted());
     }
 
     public void setName(Name name) throws IllegalValueException {
@@ -66,6 +76,18 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
+    //@@author A0141094M
+    public void setNotes(Notes notes) throws IllegalValueException {
+        assert notes != null;
+        this.notes = new Notes(notes.getValue());
+    }
+
+    @Override
+    public Notes getNotes() {
+        return notes;
+    }
+    //@@author
+
     public void setDate(Date date) throws IllegalValueException {
         assert date != null;
         this.date = new Date(date.getValue());
@@ -75,6 +97,35 @@ public class Task implements ReadOnlyTask {
     public Date getDate() {
         return date;
     }
+
+    //@@author A0141094M
+    public void setFrom(Date from) throws IllegalValueException {
+        assert from != null;
+        this.from = new Date(from.getValue());
+    }
+
+    @Override
+    public Date getFrom() {
+        return from;
+    }
+
+    public void setTo(Date to) throws IllegalValueException {
+        assert to != null;
+        this.to = new Date(to.getValue());
+    }
+
+    @Override
+    public Date getTo() {
+        return to;
+    }
+    //@@author
+
+    //@@author A0139392X
+    @Override
+    public boolean haveDuration() {
+        return (!this.getFrom().isEmpty());
+    }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {
@@ -105,7 +156,10 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
+        this.setNotes(replacement.getNotes());
         this.setDate(replacement.getDate());
+        this.setFrom(replacement.getFrom());
+        this.setTo(replacement.getTo());
         this.setTags(replacement.getTags());
         this.setIsCompleted(replacement.getIsCompleted());
     }

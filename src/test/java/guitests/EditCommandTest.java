@@ -22,16 +22,18 @@ public class EditCommandTest extends TaskManagerGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    //@@author A0141094M
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
-                .withTags("husband").build();
+                .withFrom("").withTo("").withNotes("").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
+    //@@author
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
@@ -87,9 +89,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
+    //@@author A0141094M
     @Test
     public void edit_invalidValues_failure() {
-
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
         commandBox.runCommand("edit 1 by abcd");
@@ -104,6 +106,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 3 Meet Alice Pauline by 01/01/2018 #friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
+    //@@author
 
     /**
      * Checks whether the edited task has the correct updated details.

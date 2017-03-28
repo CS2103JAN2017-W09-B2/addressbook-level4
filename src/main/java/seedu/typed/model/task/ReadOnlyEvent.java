@@ -1,7 +1,7 @@
 package seedu.typed.model.task;
 
 import seedu.typed.model.tag.UniqueTagList;
-
+//@@author A0139379M
 /**
  * A read-only immutable interface for a Event in the TaskManager.
  * Implementations should guarantee: details are present and not null, field

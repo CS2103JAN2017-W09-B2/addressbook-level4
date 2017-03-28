@@ -162,14 +162,16 @@ public class TaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public TaskCardHandle getTaskCardHandle(int index) throws IllegalValueException {
+    public TaskCardHandle getTaskCardHandle(int index)
+            throws IllegalValueException {
         return getTaskCardHandle(new TaskBuilder(getTask(index)).build());
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task)).findFirst();
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n)
+                                 .isSameTask(task)).findFirst();
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
