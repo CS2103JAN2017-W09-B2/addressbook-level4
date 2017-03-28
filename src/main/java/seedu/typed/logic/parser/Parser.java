@@ -20,6 +20,7 @@ import seedu.typed.logic.commands.HistoryCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
+import seedu.typed.logic.commands.SaveCommand;
 import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.UndoCommand;
 
@@ -107,6 +108,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(args);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
