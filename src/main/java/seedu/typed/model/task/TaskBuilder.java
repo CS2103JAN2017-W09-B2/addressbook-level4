@@ -33,9 +33,9 @@ public class TaskBuilder {
         this.tags = new UniqueTagList();
     }
 
+    //@@author A0141094M
     public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
         this.name = new Name(task.getName().getValue());
-        //@@author A0140194M
         if (task.getNotes() == null) {
             this.notes = new Notes(null);
         } else {
@@ -56,10 +56,10 @@ public class TaskBuilder {
         } else {
             this.to = new Date(task.getTo().getValue());
         }
-        //@@author
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
+    //@@author
 
     public TaskBuilder setName(String name) throws IllegalValueException {
         this.name = new Name(name);
