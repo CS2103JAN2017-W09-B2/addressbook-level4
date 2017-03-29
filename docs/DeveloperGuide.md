@@ -4,11 +4,11 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -343,12 +343,12 @@ Priority | As a ... | I want to ... | So that I can... |
 `* * *` | user | add a new task with a specified deadline | track when it is due |
 `* * *` | user | add a new task without specifying deadline | do it sometime later | 
 `* * *` | user | add a new event | reserve that time |
-`* * *` | user | add a tentative event | hold my schedule until confirmation |
 `* * *` | user | add recurring tasks | add all at once |
 `* * *` | user | add tasks using everyday phrases (e.g. today, next monday) | save time looking the exact dates up on a calendar |
+`* * *` | user | add comments to a task | refer back to details about the task |
+`* * *` | user | add tasks with multiple tags | track overlapping tasks |
+`* *` | user | add a tentative event | hold my schedule until confirmation |
 `* *` | user | add subtasks to a bigger task | organise my tasks into smaller parts |
-`* *` | user | add comments to a task | refer back to details about the task |
-`* *` | user | add tasks with multiple tags | track overlapping tasks |
 `* *` | user | add attachments to a task | complete my task with greater ease |
 `* *` | user | be alerted when adding clashing events | know I am unavailable |
 
@@ -368,7 +368,7 @@ Priority | As a ... | I want to ... | So that I can... |
 
 Priority | As a ... | I want to ... | So that I can... |
 -------- | :-------- | :--------- | :----------- |
-`* *` | user | task type filter | view tasks by their types |
+`* *` | user | have a task type filter | view tasks by their types |
 `* *` | user | sort the tasks based on tags | view tasks by tags |
 `* *` | user | sort tasks by name | locate a task easily |
 `* *` | user | sort tasks by deadline | do what is more urgent first |
@@ -393,12 +393,12 @@ Priority | As a ... | I want to ... | So that I can... |
 Priority | As a ... | I want to ... | So that I can... |
 -------- | :-------- | :--------- | :----------- |
 `* * *` | user | see my overdue tasks | finish them right away |
-`* * *` | user | view my tasks by day | know what my tasks and schedule are for a certain day |
+`* * *` | user | view a confirmation that my command has been processed | be assured  |
+`* *` | user | view my tasks by day | know what my tasks and schedule are for a certain day |
 `* *` | user | weekly overview of what is due this week | plan my time in advance |
 `* *` | user | big picture overview of my daily performance | learn the patterns of my own productivity |
 `* *` | user | see all upcoming deadlines in a calendar view | have an overview of all my tasks |
 `* *` | user | see a countdown timer | know how much time is left to do each task |
-`* *` | user | view a confirmation that my command has been processed | be assured  |
 
 ### Help Functions
 
@@ -413,8 +413,8 @@ Priority | As a ... | I want to ... | So that I can... |
 
 Priority | As a ... | I want to ... | So that I can... |
 -------- | :-------- | :--------- | :----------- |
-`* * *` | advanced user | enter commands with the use of flags | specify the perimeters of the command more clearly |
-`* * *` | advanced user | use shorter versions of commands | type each command faster |
+`* *` | advanced user | enter commands with the use of flags | specify the perimeters of the command more clearly |
+`* *` | advanced user | use shorter versions of commands | type each command faster |
 `* *` | advanced user | create new shortcuts | speed up my workflow |
 
 ### Integration Functions
@@ -433,8 +433,8 @@ Priority | As a ... | I want to ... | So that I can... |
 
 Priority | As a ... | I want to ... | So that I can... |
 -------- | :-------- | :--------- | :----------- |
-`* * *` | user | have a few colour themes I can choose between | select colours I am more comfortable with |
 `* * *` | user | a simple user interface | be less distracted and more productive |
+`* *` | user | have a few colour themes I can choose between | select colours I am more comfortable with |
 `* *` | user | change font, font size, colour of words | personalise my task manager to my preference |
 `*` | user | see affirmations of my effort upon task completions | look forward to accomplishing more tasks |
 `*` | user | be greeted with motivational lines when I launch the task manager | feel motivated to start doing things |
@@ -470,20 +470,16 @@ Priority | As a ... | I want to ... | So that I can... |
 
 **MSS**
 
-1. User keys in a series of command(s) <br>
-2. User requests to view history of actions <br>
-3. Typed displays the list of past actions <br>
-4. Use case ends. <br>
+1. User requests to view history of actions <br>
+2. Typed displays the list of past actions <br>
+3. Use case ends. <br>
 
 **Extensions**
 
-1a. Command is typed in wrongly <br>
-  > Systems indicate error and output a list of valid commands <br>
-
-2a. List is empty <br>
+1a. List is empty <br>
   > System indicate History Command only <br>
   
-2b. List size is way too large <br>
+1b. List size is way too large <br>
   > System shows the recent 10 commands <br>
 
 #### Use Case: Perform simple keyword query ####
@@ -504,25 +500,24 @@ Priority | As a ... | I want to ... | So that I can... |
 
 **MSS**
 
-1. User keys in a series of command(s) changing information stored in Typed. <br>
-2. User requests to undo the last action done. <br>
-3. Typed undoes the last action done. <br>
-4. Typed displays text informing user that the last action has been successfully undone. <br>
-5. Use case ends.
+1. User requests to undo the last action done. <br>
+2. Typed undoes the last action done. <br>
+3. Typed displays text informing user that the last action has been successfully undone. <br>
+4. Use case ends.
 
 **Extensions**
 
-1a. User does not key in any command at all <br>
+2a. User does not key in any command at all <br>
   > User requests to undo the last action done <br>
   > Typed displays text informing user that there are no actions to be undone <br>
   > Use case ends <br>
 
-1b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+2b. User keys in a series of command(s) that do not change the information stored in Typed <br>
   > User requests to undo the last action done <br>
   > Typed displays text informing user that there are no actions to be undone <br>
   > Use case ends <br>
 
-2a. User restarts the session <br>
+3a. User restarts the session <br>
   > User requests to undo the last action done <br>
   > Typed displays text informing user that there are no actions to be undone <br>
   > Use case ends <br>
@@ -531,39 +526,33 @@ Priority | As a ... | I want to ... | So that I can... |
 
 **MSS**
 
-1. User keys in a series of command(s) changing information stored in Typed. <br>
-2. User requests to undo the last action done. <br>
-3. User requests to redo the previously undone action. <br>
-4. Typed redoes the last action undone by Typed. <br>
-5. Typed displays text informing user that the last undone action has been successfully redone. <br>
-6. Use case ends.
+1. User requests to undo the last action done. <br>
+2. User requests to redo the previously undone action. <br>
+3. Typed redoes the last action undone by Typed. <br>
+4. Typed displays text informing user that the last undone action has been successfully redone. <br>
+5. Use case ends.
 
 **Extensions**
 
-1a. User does not key in any command at all <br>
+1a. User keys in a command that does not change the information stored in Typed <br>
   > User requests to undo the last action done <br>
   > Typed displays text informing user that there are no actions to be undone <br>
   > Use case ends <br>
 
-1b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+1b. User restarts the session <br>
   > User requests to undo the last action done <br>
   > Typed displays text informing user that there are no actions to be undone <br>
   > Use case ends <br>
 
-2a. User restarts the session <br>
-  > User requests to undo the last action done <br>
-  > Typed displays text informing user that there are no actions to be undone <br>
-  > Use case ends <br>
-
-3a. User keys in a command that changes the information stored in Typed <br>
+2a. User keys in a command that changes the information stored in Typed <br>
   > User requests to redo the last action done <br>
   > Typed displays text informing user that there are no undone actions to be redone <br>
   > Use case ends <br>
 
-3b. User keys in a series of command(s) that do not change the information stored in Typed <br>
-  > Use case continues from step 3 <br>
+2b. User keys in a series of command(s) that do not change the information stored in Typed <br>
+  > Use case continues from step 2 <br>
 
-3c. User restarts the session <br>
+2c. User restarts the session <br>
   > User requests to redo the last action done <br>
   > Typed displays text informing user that there are no undone actions to be redone <br>
   > Use case ends <br>
@@ -575,10 +564,9 @@ Priority | As a ... | I want to ... | So that I can... |
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should minimise keystrokes required to enter a command.
-5. Should be stored as a local copy. 
-6. Code should be open-source.
-7. Should contain automated test cases. 
+4. Should minimise keystrokes required to enter a command. 
+5. Code should be open-source.
+6. Should contain automated test cases. 
 
 ## Appendix D : Glossary
 

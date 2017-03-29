@@ -106,6 +106,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         syncMasterTagListWith(tasks);
     }
+    //@@author
 
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         assert newData != null;

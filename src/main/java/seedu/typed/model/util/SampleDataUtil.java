@@ -16,12 +16,22 @@ public class SampleDataUtil {
                 "Meet David Li", "Meet Irfan Ibrahim", "Meet Roy Balakrishnan"};
             String[] dates = new String[] {"20/01/2017", "21/01/2017", "22/01/2017", "23/01/2017",
                 "24/01/2017", "25/01/2017"};
+            //@@author A0141094M
+            String[] froms = new String[] {"", "", "", "", "", ""};
+            String[] tos = new String[] {"", "", "", "", "", ""};
+            String[] notes = new String[] {"", "", "", "", "", ""};
+            //@@author
             String[] tags = new String[] {"friends", "colleagues", "neighbours", "family", "classmates",
                 "colleagues"};
             for (int i = 0; i < taskNumber; i++) {
                 tasks[i] = new TaskBuilder()
                         .setName(names[i])
+                        //@@author A0141094M
+                        .setNotes(notes[i])
                         .setDate(dates[i])
+                        .setFrom(froms[i])
+                        .setTo(tos[i])
+                        //@@author
                         .addTags(tags[i])
                         .build();
             }

@@ -2,7 +2,11 @@ package seedu.typed.logic.commands.util;
 
 import java.util.ArrayList;
 
-
+//@@author A0143853A
+/**
+ * Provides a data structure for "history" in Session class.
+ *
+ */
 public class HistoryUtil {
 
     private ArrayList<String> allCommandsHistory;

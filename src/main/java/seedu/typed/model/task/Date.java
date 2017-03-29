@@ -67,4 +67,10 @@ public class Date {
         return value.hashCode();
     }
 
+    //@@author A0139392X
+    public boolean isEmpty() {
+        return ((this.value.equals("")) || (this.value == null));
+    }
+    //@@author
+
 }

@@ -1,3 +1,5 @@
+//@@author A0141094M
+
 package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_EMPTY_COMMAND;
@@ -86,10 +88,10 @@ public class Parser {
             return new DeleteCommandParser().parse(args);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            return new UndoCommandParser().parse(args);
 
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            return new RedoCommandParser().parse(args);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -98,7 +100,7 @@ public class Parser {
             return new FindCommandParser().parse(args);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(args);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

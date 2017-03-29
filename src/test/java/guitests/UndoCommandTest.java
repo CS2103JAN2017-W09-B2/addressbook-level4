@@ -4,129 +4,86 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.typed.commons.exceptions.IllegalValueException;
-import seedu.typed.logic.commands.ClearCommand;
-import seedu.typed.logic.commands.DeleteCommand;
-import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.logic.commands.UndoCommand;
-import seedu.typed.testutil.TaskBuilder;
 import seedu.typed.testutil.TestTask;
-import seedu.typed.testutil.TestUtil;
 
-
+//@@author A0143853A
 public class UndoCommandTest extends TaskManagerGuiTest {
 
 
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
-    public void undo_addCommand_success() throws IllegalArgumentException, IllegalValueException {
-        TestTask[] currentList = td.getTypicalTasks();
+    public void undo_addCommand_success()
+            throws IllegalArgumentException, IllegalValueException {
         TestTask taskToAdd = td.hoon;
-        assertAddSuccess(taskToAdd, currentList);
+        commandBox.runCommand(taskToAdd.getAddCommand());
         assertUndoSuccess();
     }
 
     @Test
-    public void undo_deleteCommand_success() throws IllegalArgumentException, IllegalValueException {
-
-        //delete the first in the list
-        TestTask[] currentList = td.getTypicalTasks();
-        assertDeleteSuccess(1, currentList);
+    public void undo_deleteCommand_success()
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("delete 1");
         assertUndoSuccess();
     }
 
     @Test
-    public void undo_editCommand_success() throws Exception {
-        String detailsToEdit = "Meet Bobby d/19/03/2017 t/husband";
-        int taskManagerIndex = 1;
-
-        TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
-                .withTags("husband").build();
-
-        // TODO : fix failing test
-        //assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        //assertUndoSuccess();
-    }
-
-    @Test
-    public void undo_clearCommand_success() throws Exception {
-        assertClearSuccess();
+    public void undo_editCommand_success()
+            throws IllegalArgumentException, IllegalValueException {
+        String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
+        commandBox.runCommand("edit 1 " + detailsToEdit);
         assertUndoSuccess();
     }
 
     @Test
-    public void undo_noPreviousValidCommand_failure() throws IllegalArgumentException, IllegalValueException {
+    public void undo_clearCommand_success()
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("clear");
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_multipleCommands_success()
+            throws IllegalArgumentException, IllegalValueException {
+        TestTask taskToAdd = td.ida;
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand("delete 2");
+        commandBox.runCommand("clear");
+        assertMultipleUndosSuccess(3);
+    }
+
+    @Test
+    public void undo_noPreviousValidCommand_failure()
+            throws IllegalArgumentException, IllegalValueException {
         assertUndoFailure();
     }
 
 
-    private void assertUndoSuccess() {
+    private void assertUndoSuccess()
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("undo");
-        //assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
 
-    private void assertUndoFailure() throws IllegalArgumentException, IllegalValueException {
+    private void assertMultipleUndosSuccess(int n)
+            throws IllegalArgumentException, IllegalValueException {
+        assert n > 0;
+
+        for (int count = 0; count < n; count++) {
+            commandBox.runCommand("undo");
+            assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
+        }
+
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+    }
+
+    private void assertUndoFailure()
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("undo");
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(UndoCommand.MESSAGE_NO_PREV_COMMAND);
     }
-
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
-            throws IllegalArgumentException, IllegalValueException {
-        commandBox.runCommand(taskToAdd.getAddCommand());
-
-        // confirm the new card contains the right data
-        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().getValue());
-        assertMatching(taskToAdd, addedCard);
-
-        // confirm the list now contains all previous tasks plus the new task
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(taskListPanel.isListMatching(expectedList));
-    }
-
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList)
-            throws IllegalArgumentException, IllegalValueException {
-        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
-                                                                        // array
-                                                                        // uses
-                                                                        // zero
-                                                                        // indexing
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
-
-        // confirm the list now contains all previous tasks except the deleted
-        // task
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
-
-        // confirm the result message is correct
-        assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
-    }
-
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
-            String detailsToEdit, TestTask editedTask)
-            throws IllegalArgumentException, IllegalValueException {
-        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
-
-        // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().getValue());
-        assertMatching(editedTask, editedCard);
-
-        TestTask[] expectedEditedTasksList = td.getTypicalTasks();
-        // confirm the list now contains all previous tasks plus the task with
-        // updated details
-        expectedEditedTasksList[taskManagerIndex - 1] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedEditedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
-    }
-
-    private void assertClearSuccess() {
-        commandBox.runCommand("clear");
-        assertListSize(0);
-        assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
-    }
-
 }

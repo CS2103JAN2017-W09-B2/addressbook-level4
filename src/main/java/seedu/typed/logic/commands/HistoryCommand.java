@@ -2,8 +2,8 @@ package seedu.typed.logic.commands;
 
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 
+//@@author A0143853A
 /**
- * @author Le Yuan
  * Lists all past successful commands executed in the task manager in the current session to the user.
  */
 public class HistoryCommand extends Command {

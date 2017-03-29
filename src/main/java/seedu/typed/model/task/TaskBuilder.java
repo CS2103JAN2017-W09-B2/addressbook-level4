@@ -22,7 +22,10 @@ import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 public class TaskBuilder {
 
     private Name name;
+    private Notes notes;
     private Date date;
+    private Date from;
+    private Date to;
     private UniqueTagList tags;
     private boolean isCompleted;
 
@@ -30,12 +33,33 @@ public class TaskBuilder {
         this.tags = new UniqueTagList();
     }
 
+    //@@author A0141094M
     public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
         this.name = new Name(task.getName().getValue());
-        this.date = new Date(task.getDate().getValue());
+        if (task.getNotes() == null) {
+            this.notes = new Notes(null);
+        } else {
+            this.notes = new Notes(task.getNotes().getValue());
+        }
+        if (task.getDate() == null) {
+            this.date = new Date(null);
+        } else {
+            this.date = new Date(task.getDate().getValue());
+        }
+        if (task.getFrom() == null) {
+            this.from = new Date(null);
+        } else {
+            this.from = new Date(task.getFrom().getValue());
+        }
+        if (task.getTo() == null) {
+            this.to = new Date(null);
+        } else {
+            this.to = new Date(task.getTo().getValue());
+        }
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
+    //@@author
 
     public TaskBuilder setName(String name) throws IllegalValueException {
         this.name = new Name(name);
@@ -49,6 +73,18 @@ public class TaskBuilder {
         return this;
     }
 
+    //@@author A0141094M
+    public TaskBuilder setNotes(String notes) throws IllegalValueException {
+        this.notes = new Notes(notes);
+        return this;
+    }
+
+    public TaskBuilder setNotes(Notes notes) {
+        this.notes = notes;
+        return this;
+    }
+    //@@author
+
     public TaskBuilder setDate(String date) throws IllegalValueException {
         this.date = new Date(date);
         return this;
@@ -60,6 +96,28 @@ public class TaskBuilder {
         this.date = new Date(date.getValue());
         return this;
     }
+
+    //@@author A0141094M
+    public TaskBuilder setFrom(String from) throws IllegalValueException {
+        this.from = new Date(from);
+        return this;
+    }
+
+    public TaskBuilder setFrom(Date from) {
+        this.from = from;
+        return this;
+    }
+
+    public TaskBuilder setTo(String to) throws IllegalValueException {
+        this.to = new Date(to);
+        return this;
+    }
+
+    public TaskBuilder setTo(Date to) {
+        this.to = to;
+        return this;
+    }
+    //@@author
 
     public TaskBuilder isCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
@@ -86,8 +144,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, date, tags, isCompleted);
+        return new Task(name, notes, date, from, to, tags, isCompleted);
     }
 
 }
-//@@author A0139379M

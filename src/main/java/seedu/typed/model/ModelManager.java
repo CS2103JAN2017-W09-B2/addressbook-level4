@@ -57,12 +57,14 @@ public class ModelManager extends ComponentManager implements Model {
     public int getIndexOfTask(Task task) throws TaskNotFoundException {
         return taskManager.getIndexOf(task);
     }
+    //@@author
 
     //@@author A0143853A
     @Override
     public Task getTaskAt(int index) {
         return taskManager.getTaskAt(index);
     }
+    //@@author
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
@@ -76,6 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.copyData(newData);
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
@@ -108,6 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException {
@@ -241,6 +245,32 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    //@@author A0141094M
+    @Override
+    public void updateFilteredListToShowDeadline() {
+        filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowDuration() {
+        filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowDone() {
+        completedTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowUndone() {
+        filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowUntimed() {
+        filteredTasks.setPredicate(null);
     }
 
 }

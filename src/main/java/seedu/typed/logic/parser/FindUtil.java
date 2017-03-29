@@ -1,4 +1,4 @@
-//@author Peixuan
+//@@author A0141094M
 package seedu.typed.logic.parser;
 
 /**
@@ -7,7 +7,34 @@ package seedu.typed.logic.parser;
 public class FindUtil {
 
     private static final int MAX_EDIT_DISTANCE = 2; // lower distance = higher similarity
+    private static final int MAX_EDIT_DISTANCE_STRICT = 1;
     private static final String WHITESPACE_DELIMITER = "\\s+";
+
+    /**
+     * Checks if specified strings are an exact match.
+     */
+    public static boolean isExactWordMatchIgnoreCase(String str, String word) {
+        assert str != null : "str cannot be null";
+        assert word != null : "word cannot be null";
+        assert !word.isEmpty() : "word cannot be empty";
+        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+        str = str.toLowerCase();
+        word = word.toLowerCase();
+        return str.equals(word);
+    }
+
+    /**
+     * Checks if specified strings are substring match.
+     */
+    public static boolean isSubstringWordMatchIgnoreCase(String str, String word) {
+        assert str != null : "str cannot be null";
+        assert word != null : "word cannot be null";
+        assert !word.isEmpty() : "word cannot be empty";
+        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+        str = str.toLowerCase();
+        word = word.toLowerCase();
+        return str.contains(word);
+    }
 
     /**
      * Checks if specified strings are similar.
@@ -22,7 +49,13 @@ public class FindUtil {
         assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
         str = str.toLowerCase();
         word = word.toLowerCase();
-        return computeMinEditDistance(str, word) <= MAX_EDIT_DISTANCE;
+        if (str.length() <= 2) {
+            return isExactWordMatchIgnoreCase(str, word);
+        } else if (str.length() <= 4) {
+            return computeMinEditDistance(str, word) <= MAX_EDIT_DISTANCE_STRICT;
+        } else {
+            return computeMinEditDistance(str, word) <= MAX_EDIT_DISTANCE || isSubstringWordMatchIgnoreCase(str, word);
+        }
     }
 
     /**

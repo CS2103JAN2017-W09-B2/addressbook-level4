@@ -1,5 +1,10 @@
 package seedu.typed.logic.commands.util;
 
+//@@author A0143853A
+/**
+ * Provides different categories of commands for UndoCommand and RedoCommand.
+ *
+ */
 public class CommandTypeUtil {
 
     public static final String TYPE_ADD_TASK = "add Task";

@@ -38,10 +38,12 @@ public class DeleteCommand extends Command {
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
+            //@@author A0143853A
             int index = model.getIndexOfTask((Task) taskToDelete);
             model.deleteTask(taskToDelete);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, index, taskToDelete);
             session.updateValidCommandsHistory(commandText);
+            //@@author
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }

@@ -55,7 +55,7 @@ I am always happy to see you again! Forget the tutorial you saw the first time, 
 Words in `UPPER_CASE` are the parameters. <br>
 Words in `lower_case` are the exact strings. <br>
 Items in `SQUARE_BRACKETS` are optional. <br>
-Items with `...` after them can have multiple instances. <br>
+Items with `..` after them can have multiple instances. <br>
 
 ### 3.1. Getting Some Help
 
@@ -82,7 +82,7 @@ Format: `add TITLE`
 
 *e.g. add read 1984 george orwell* <br>
 
-#### <a name="addTitleDate"></a>3.2.1. Adding a Task with Deadline: `add TITLE by DATE`
+#### <a name="addTitleDate"></a>3.2.2. Adding a Task with Deadline: `add TITLE by DATE`
 
 Format: `add TITLE by DATE`
 
@@ -91,17 +91,27 @@ Format: `add TITLE by DATE`
 
 *e.g. add lose 10 kg by 14/02/2014* <br>
 
-#### <a name="addRecurring"></a>3.2.3. Adding a Recurring Task: `add TITLE every FREQUENCY`
+#### <a name="addTitleByOn"></a>3.2.3. Adding a Task with Occurrence Date: `add TITLE on DATE`
+
+Format: `add TITLE on DATE`
+
+> `add TITLE on DATE` adds your task along with the date it is happening on. <br>
+> DATE takes the format DD/MM/YYYY.
+
+*e.g. add Open Day on 10/02/2014* <br>
+
+#### <a name="addRecurring"></a>3.2.4. Adding a Recurring Task: `add TITLE every FREQUENCY`
 
 Format: `add TITLE every FREQUENCY`
 
+> Note: Support for this has not been implemented. <br>
 > `add TITLE every FREQUENCY` adds an automatically recurring task according to the specified FREQUENCY. <br>
 > You may indicate either `day`, `month` or `year` when specifying FREQUENCY. <br>
 > The recurrence will be calculated beginning from the day you enter the task.
 
 *e.g. add boss' birthday every year* <br>
 
-#### <a name="addTaskDuration"></a>3.2.4. Adding a Task with a Duration: `add TITLE from DATE to DATE`
+#### <a name="addTaskDuration"></a>3.2.5. Adding a Task with a Duration: `add TITLE from DATE to DATE`
 
 Format: `add TITLE from DATE to DATE`
 
@@ -109,7 +119,7 @@ Format: `add TITLE from DATE to DATE`
 
 *e.g. add company retreat in Malaysia from 01/01/2017 to 05/01/2017* <br>
 
-#### <a name="addTaskTag"></a>3.2.5. Adding a Task with Tags: `add TITLE #TAG ..`
+#### <a name="addTaskTag"></a>3.2.6. Adding a Task with Tags: `add TITLE #TAG ..`
 
 Format: `add TITLE #TAG ..`
 
@@ -135,6 +145,7 @@ Format: `list`
 
 Format: `list TYPE`
 
+> Note: Support for this has not been implemented. <br>
 > `list TYPE` shows you your tasks and events sorted by TYPE. <br>
 > Valid formats for TYPE include timed, untimed, done, undone and all.
 
@@ -171,15 +182,16 @@ Format: `edit INDEX #TAG .. `
 *e.g. edit 1 #i #can #add #anything #i #want* <br>
 *e.g. edit 1 #* <br>
 
-#### <a name="editMultiple"></a>3.4.4. Editing Multiple Fields of a Task : `edit INDEX [TITLE] [DATE] [#TAG] .. `
+#### <a name="editMultiple"></a>3.4.4. Editing Multiple Fields of a Task : `edit INDEX [TITLE] [by DATE] [#TAG] .. `
 
-Format: `edit INDEX [TITLE] [DATE] [#TAG] .. `
+Format: `edit INDEX [TITLE] [by DATE] [#TAG] .. `
 
-> `edit INDEX [TITLE] [DATE] [#TAG] .. ` updates the specified fields with new values, if any. <br> 
+> `edit INDEX [TITLE] [by DATE] [#TAG] .. ` updates the specified fields with new values, if any. <br> 
 > You should provide minimally one of the optional fields when using this command format. <br>
+> Currently, we do not support removing a task with a specified date, i.e. *edit 1 by* is not enabled.
 
 *e.g. edit 1 buy groceries by 05/05/2017* <br>
-*e.g. edit 1 buy groceries by* <br>
+*e.g. edit 1 buy groceries #* <br> 
 
 ### 3.5. Finding Tasks and Events
 
@@ -199,6 +211,7 @@ Format: `find KEYWORD ..`
 
 Format: `find #TAG ..`
 
+> Note: Support for this has not been implemented. <br>
 > `find #TAG ..` finds all your tasks tagged with #TAG. <br>
 > Fuzzy find is used to include similar words, e.g. `#work` will match `#werk`. <br>
 > The search is not case sensitive, e.g `#boss` will match `#Boss`. <br>
@@ -222,6 +235,7 @@ Format: `delete INDEX`
 
 Format: `delete INDEX to INDEX`
 
+> Note: Support for this has not been implemented. <br>
 > `delete INDEX to INDEX` removes a range of tasks identified by INDEX. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
@@ -231,6 +245,7 @@ Format: `delete INDEX to INDEX`
 
 Format: `delete all` 
 
+> Note: Support for this has not been implemented. <br>
 > `delete all` removes all stored tasks. <br>
 
 *e.g. delete all* <br>
@@ -297,33 +312,35 @@ Format: `redo all`
 *e.g. redo all* <br>
 
 
-### 3.9. Completing Tasks
+### 3.9. Finishing Tasks
 
-#### <a name="completeOne"></a>3.9.1. Completing One Task : `complete INDEX `
+#### <a name="completeOne"></a>3.9.1. Finishing One Task : `finish INDEX `
 
-Format: `complete INDEX`
+Format: `finish INDEX`
 
-> `complete INDEX` marks a task identified by INDEX as completed. <br>
+> `finish INDEX` marks a task identified by INDEX as completed. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
-*e.g. complete 2* <br>
+*e.g. finish 2* <br>
 
-#### <a name="completeRange"></a>3.9.2. Completing Multiple Tasks : `complete INDEX to INDEX `
+#### <a name="completeRange"></a>3.9.2. Finishing Multiple Tasks : `finish INDEX to INDEX `
 
-Format: `complete INDEX to INDEX`
+Format: `finish INDEX to INDEX`
 
-> `complete INDEX to INDEX` marks a range of tasks identified by INDEX as done. <br>
+> Note: Support for this has not been implemented. <br>
+> `finish INDEX to INDEX` marks a range of tasks identified by INDEX as done. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
-*e.g. complete 2 to 8* <br>
+*e.g. finish 2 to 8* <br>
 
-#### <a name="completeAll"></a>3.9.3. Completing All Tasks : `complete all `
+#### <a name="completeAll"></a>3.9.3. Finishing All Tasks : `finish all `
 
-Format: `complete all` 
+Format: `finish all` 
 
-> `complete all` marks all undone tasks as complete. <br>
+> Note: Support for this has not been implemented. <br>
+> `finish all` marks all undone tasks as done. <br>
 
-*e.g. complete all* <br>
+*e.g. finish all* <br>
 
 
 ### 3.10. Showing History
@@ -332,6 +349,7 @@ Format: `complete all`
 
 Format: `history`
 
+> Note: Support for this has not been implemented. <br>
 > `history` shows you a list of all executed actions in the current session.
 
 *e.g. history* <br>
@@ -371,14 +389,14 @@ Format: `exit`
 Command | Format |
 -------- | :-------- |
 `help` | [help](#help) <br> [help COMMAND](#specificHelp)|
-`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addTaskDuration) <br> [add TASK #TAG ..](#addTaskTag)|
+`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE on DATE](#addTitleByOn) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addTaskDuration) <br> [add TASK #TAG ..](#addTaskTag)|
 `list` | [list](#list) <br> [list TYPE](#listType)|
 `edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
 `find` | [find KEYWORD ..](#findKeyword) <br> [find #TAG ..](#findTag) |
 `delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
 `undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
 `redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
-`complete` | [complete INDEX](#completeOne) <br> [complete INDEX to INDEX](#completeRange) <br> [complete all](#completeAll) |
+`finish` | [finish INDEX](#completeOne) <br> [finish INDEX to INDEX](#completeRange) <br> [finish all](#completeAll) |
 `history` | [history](#history) |
 `save` | [save FILENAME](#saveFilename) |
 `exit` | [exit](#exit) |
@@ -391,7 +409,7 @@ Command | Format |
 
 **Q**: How do I backup my data to another location?<br>
 **A**: Copy the saved Typed file to any desired location of your choice. Alternatively,
-       use our in-built backup feature as described in the [Features](#features) section above.<br>
+       use our in-built backup feature as described in the **[3. Features](#3-features)** section above.<br>
 
 **Q**: Is my personal data and information kept secure from the eyes of others (including the dev team)?<br>
 **A**: Yes! Everything you enter into Typed is only stored on your local machine in your specified storage file.<br>

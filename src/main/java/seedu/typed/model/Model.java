@@ -21,7 +21,9 @@ public interface Model {
     void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
     //@@author A0143853A
+    /** Copies tasks over into current TaskManager. **/
     void copyData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    //@@author
 
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
@@ -35,6 +37,7 @@ public interface Model {
     //@@author A0143853A
     /** Adds the given task at the specified index. */
     void addTask(int index, Task task) throws DuplicateTaskException;
+    //@@author
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
@@ -64,6 +67,7 @@ public interface Model {
      */
     void updateTaskForUndoRedo(int index, ReadOnlyTask editedTask)
             throws DuplicateTaskException, IllegalValueException;
+    //@@author
 
     /**
      * Returns the filtered task list as an
@@ -90,6 +94,7 @@ public interface Model {
 
     //@@author A0143853A
     Task getTaskAt(int index);
+    //@@author
 
     //@@author A0143853A
     int getIndexOfTask(Task task) throws TaskNotFoundException;
@@ -98,4 +103,17 @@ public interface Model {
 
     void updateCompletedTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task completedTask)
             throws DuplicateTaskException, IllegalValueException, TaskNotFoundException;
+    //@@author
+
+    //@@author A0141094M
+    void updateFilteredListToShowDeadline();
+
+    void updateFilteredListToShowDuration();
+
+    void updateFilteredListToShowDone();
+
+    void updateFilteredListToShowUndone();
+
+    void updateFilteredListToShowUntimed();
+    //@@author
 }
