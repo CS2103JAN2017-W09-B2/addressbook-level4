@@ -312,35 +312,35 @@ Format: `redo all`
 *e.g. redo all* <br>
 
 
-### 3.9. Completing Tasks
+### 3.9. Finishing Tasks
 
-#### <a name="completeOne"></a>3.9.1. Completing One Task : `complete INDEX `
+#### <a name="completeOne"></a>3.9.1. Finishing One Task : `finish INDEX `
 
-Format: `complete INDEX`
+Format: `finish INDEX`
 
-> `complete INDEX` marks a task identified by INDEX as completed. <br>
+> `finish INDEX` marks a task identified by INDEX as completed. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
-*e.g. complete 2* <br>
+*e.g. finish 2* <br>
 
-#### <a name="completeRange"></a>3.9.2. Completing Multiple Tasks : `complete INDEX to INDEX `
+#### <a name="completeRange"></a>3.9.2. Finishing Multiple Tasks : `finish INDEX to INDEX `
 
-Format: `complete INDEX to INDEX`
+Format: `finish INDEX to INDEX`
 
 > Note: Support for this has not been implemented. <br>
-> `complete INDEX to INDEX` marks a range of tasks identified by INDEX as done. <br>
+> `finish INDEX to INDEX` marks a range of tasks identified by INDEX as done. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
-*e.g. complete 2 to 8* <br>
+*e.g. finish 2 to 8* <br>
 
-#### <a name="completeAll"></a>3.9.3. Completing All Tasks : `complete all `
+#### <a name="completeAll"></a>3.9.3. Finishing All Tasks : `finish all `
 
-Format: `complete all` 
+Format: `finish all` 
 
 > Note: Support for this has not been implemented. <br>
-> `complete all` marks all undone tasks as complete. <br>
+> `finish all` marks all undone tasks as done. <br>
 
-*e.g. complete all* <br>
+*e.g. finish all* <br>
 
 
 ### 3.10. Showing History
@@ -396,7 +396,7 @@ Command | Format |
 `delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
 `undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
 `redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
-`complete` | [complete INDEX](#completeOne) <br> [complete INDEX to INDEX](#completeRange) <br> [complete all](#completeAll) |
+`finish` | [finish INDEX](#completeOne) <br> [finish INDEX to INDEX](#completeRange) <br> [finish all](#completeAll) |
 `history` | [history](#history) |
 `save` | [save FILENAME](#saveFilename) |
 `exit` | [exit](#exit) |
