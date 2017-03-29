@@ -1,5 +1,7 @@
 package seedu.typed.model.task;
 
+import java.time.LocalDateTime;
+
 import seedu.typed.model.tag.UniqueTagList;
 
 /**
@@ -12,7 +14,8 @@ public interface ReadOnlyTask {
     Name getName();
 
     Date getDate();
-
+    
+    LocalDateTime getDateAdded();
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -31,6 +34,7 @@ public interface ReadOnlyTask {
                 && other.getName().getValue().equals(this.getName().getValue()) // state
                 // checks here
                 // onwards
+                && other.getDateAdded().equals(this.getDateAdded())
                 && other.getDate().getValue().equals(this.getDate().getValue())
                 && other.getTags().equals(this.getTags())
                 && (other.getIsCompleted() == this.getIsCompleted()));

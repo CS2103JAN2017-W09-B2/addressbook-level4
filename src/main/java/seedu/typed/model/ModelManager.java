@@ -45,6 +45,12 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() throws IllegalValueException {
         this(new TaskManager(), new UserPrefs());
     }
+    
+    /*public void printFilteredTasks() {
+        for (int i = 0; i<filteredTasks.size(); i++) {
+            System.out.println("index of filtered tasks: " + i + filteredTasks.get(i));
+        }
+    }*/
 
     //@@author A0143853A
     @Override
@@ -104,8 +110,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException {
-        taskManager.completeTask(task);
+    public void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException {
+        //taskManager.completeTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -131,6 +137,21 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    @Override
+    public synchronized void updateCompletedTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task completedTask) 
+            throws DuplicateTaskException, IllegalValueException, TaskNotFoundException {
+        assert editedTask != null;
+        try {
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        taskManager.completeTask(taskManager.getTaskAt(taskManagerIndex), completedTask);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+        } catch (TaskNotFoundException tnfe) {
+            updateFilteredListToShowAll();
+        }
+    }
+
     // Completed Task List accessors
 
     @Override
@@ -145,6 +166,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
+    }
+
+    public FilteredList<ReadOnlyTask> getFilteredTasks() {
+        return this.filteredTasks;
     }
 
     @Override

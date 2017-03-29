@@ -47,6 +47,14 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public TaskManager() {
     }
+    
+    /*public void printTasks() {
+        System.out.println("huhh");
+        System.out.println(tasks.size());
+        for (int i = 0; i<tasks.size(); i++) {
+            System.out.println("index is :" + i + "taskName: " + tasks.getTaskAt(i).getAsText());
+        }
+    }*/
 
     public UnmodifiableObservableList<ReadOnlyTask> getCompletedTasks() {
         return new UnmodifiableObservableList<>(completedTasks.asObservableList());
@@ -145,9 +153,9 @@ public class TaskManager implements ReadOnlyTaskManager {
         return tasks.getTaskAt(index);
     }
 
-    public void completeTask(Task task) throws TaskNotFoundException, DuplicateTaskException {
-        tasks.remove(task);
-        completedTasks.add(task);
+    public void completeTask(ReadOnlyTask editedTask, Task completedTask) throws TaskNotFoundException, DuplicateTaskException {
+        tasks.remove(editedTask);
+        completedTasks.add(completedTask);
     }
 
     /**
