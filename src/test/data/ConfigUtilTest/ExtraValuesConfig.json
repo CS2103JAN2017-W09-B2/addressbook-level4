@@ -2,7 +2,7 @@
   "appTitle" : "Typed App",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "C:\\preferences.json",
-  "taskManagerFilePath" : "taskmanager.xml",
+  "taskManagerFilePath" : "typed.xml",
   "taskManagerName" : "Typed",
   "extra" : "extra value"
 }

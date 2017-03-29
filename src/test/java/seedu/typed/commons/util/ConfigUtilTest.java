@@ -78,7 +78,7 @@ public class ConfigUtilTest {
         config.setAppTitle("Typed App");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskManagerFilePath("taskmanager.xml");
+        config.setTaskManagerFilePath("typed.xml");
         config.setTaskManagerName("Typed");
         return config;
     }
