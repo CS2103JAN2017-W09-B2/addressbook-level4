@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.typed.commons.core.Messages;
-import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
-import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 //@@author A0139379M
 public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "finish";
