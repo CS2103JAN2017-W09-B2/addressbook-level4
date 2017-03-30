@@ -79,6 +79,25 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager.getIndexOf(task);
     }
     //@@author
+    
+    public int getNumberCompletedTasks() {
+        /*int num = 0;
+        for (int i = 0; i <= taskManager.getTaskList().size(); i++) {
+            Task current = taskManager.getTaskAt(i);
+            if (current.getIsCompleted()) {
+                num++;
+            }
+        }*/
+        return taskManager.getCompletedTasks().size();
+    }
+    
+    public int getNumberUncompletedTasks() {
+        return getTotalNumberTasks() - getNumberCompletedTasks();
+    }
+    
+    public int getTotalNumberTasks() {
+        return taskManager.getTaskList().size();
+    }
 
     //@@author A0143853A
     @Override
