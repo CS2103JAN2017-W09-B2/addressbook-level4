@@ -1,6 +1,5 @@
 package seedu.typed.model.task;
 
-
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.UniqueTagList;
 
@@ -38,26 +37,6 @@ public class Task implements ReadOnlyTask {
         // changes
         // in the arg list
     }
-    /**
-     * Alternative Constructor with isCompleted false as default
-     * @param name
-     * @param date
-     * @param tags
-     */
-    public Task(Name name, Notes notes, Date date, Date from, Date to, UniqueTagList tags) {
-        // commented this out, allow date tags to be null
-        //assert !CollectionUtil.isAnyNull(name, date, tags);
-        assert name != null;
-
-        this.name = name;
-        this.notes = notes;
-        this.date = date;
-        this.from = from;
-        this.to = to;
-        this.tags = new UniqueTagList(tags);
-        this.isCompleted = false;
-    }
-
     /**
      * Creates a copy of the given ReadOnlyTask.
      */

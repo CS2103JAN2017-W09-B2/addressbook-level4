@@ -95,6 +95,12 @@ public class TaskManagerTest {
         public ObservableList<Tag> getTagList() {
             return tags;
         }
+
+        @Override
+        public void printData() {
+            // TODO Auto-generated method stub
+
+        }
     }
 
 }

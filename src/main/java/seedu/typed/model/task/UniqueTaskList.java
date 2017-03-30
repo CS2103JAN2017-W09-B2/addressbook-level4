@@ -46,12 +46,13 @@ public class UniqueTaskList implements Iterable<Task> {
     //@@author
 
     /**
-     * Adds a task to the end of the list.
+     * Adds a task to the list.
      *
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
+    //Adds task to the end of the list
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
 
@@ -76,7 +77,6 @@ public class UniqueTaskList implements Iterable<Task> {
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
      * @throws IllegalValueException
-     *
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
@@ -87,15 +87,32 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
-
-        taskToUpdate.resetData(editedTask);
+        Task edited = new TaskBuilder(editedTask).build();
+        //taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the
         // updated task.
         // The right way is to implement observable properties in the task
         // class.
         // Then, taskcard should then bind its text labels to those observable
         // properties.
-        internalList.set(index, taskToUpdate);
+        internalList.set(index, edited);
+    }
+    public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
+        assert editedTask != null;
+
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+            throw new DuplicateTaskException();
+        }
+
+        //taskToUpdate.resetData(editedTask);
+        // TODO: The code below is just a workaround to notify observers of the
+        // updated task.
+        // The right way is to implement observable properties in the task
+        // class.
+        // Then, taskcard should then bind its text labels to those observable
+        // properties.
+        internalList.set(index, editedTask);
     }
 
     /**
@@ -167,10 +184,8 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
-    //@@author A0139392X
-    public int getSize() {
-        return internalList.size();
+    public int size() {
+        return this.internalList.size();
     }
-    //@@author
 
 }
