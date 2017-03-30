@@ -46,14 +46,8 @@ public class Chart extends UiPart<Region> {
     }
 
     @FXML
-void updateValue() {
-//        for (Data d : pieData) {
-//            if (d.getName().equals(name)) {
-//                d.setPieValue(value);
-//                return;
-//            }
-//        }
- }
+    void updateValue() {
+    }
 
 }
 //@@author
