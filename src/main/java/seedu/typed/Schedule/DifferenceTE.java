@@ -13,12 +13,12 @@ import seedu.typed.model.task.DateTime;
 public class DifferenceTE extends TimeExpression {
     private TimeExpression included;
     private TimeExpression excluded;
-    
+
     public DifferenceTE(TimeExpression included, TimeExpression excluded) {
         this.included = included;
         this.excluded = excluded;
     }
-    
+
     public boolean includes(DateTime date) {
         return included.includes(date) && !excluded.includes(date);
     }

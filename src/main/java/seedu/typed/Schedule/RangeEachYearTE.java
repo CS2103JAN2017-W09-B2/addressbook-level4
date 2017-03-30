@@ -13,7 +13,7 @@ import seedu.typed.model.task.DateTime;
  *
  */
 public class RangeEachYearTE extends TimeExpression {
-    
+
     private int startMonth;
     private int endMonth;
     private int startDay;
@@ -25,14 +25,14 @@ public class RangeEachYearTE extends TimeExpression {
         this.startDay = 0;
         this.endDay = 0;
     }
-    
+
     public RangeEachYearTE(int month) {
         this.startMonth = month;
         this.endMonth = month;
         this.startDay = 0;
         this.endDay = 0;
     }
-    
+
     public RangeEachYearTE(int startMonth, int endMonth, int startDay, int endDay) {
         super();
         this.startMonth = startMonth;

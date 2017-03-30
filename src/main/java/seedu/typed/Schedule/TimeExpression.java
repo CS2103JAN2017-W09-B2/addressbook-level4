@@ -10,7 +10,7 @@ import seedu.typed.model.task.DateTime;
  * @author: YIM CHIA HUI
  **/
 public abstract class TimeExpression {
-    
+
     /**
      * Checks if date falls within TimeExpression
      * i.e if 12/12/2017 falls within every Monday
@@ -19,5 +19,5 @@ public abstract class TimeExpression {
      * @return True if TimeExpression includes date
      **/
     public abstract boolean includes(DateTime date);
-    
+
 }

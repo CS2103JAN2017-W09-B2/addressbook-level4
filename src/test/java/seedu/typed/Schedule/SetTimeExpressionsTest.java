@@ -19,7 +19,7 @@ import seedu.typed.model.task.DateTime;
 public class SetTimeExpressionsTest {
 
     private DateTime aprilFoolDay = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
-    
+
     // Generic DayInMonth
     private DayInMonthTE everyFirstWed = new DayInMonthTE(1, 3);
     private DayInMonthTE everyLastWed = new DayInMonthTE(-1, 3);
@@ -28,11 +28,11 @@ public class SetTimeExpressionsTest {
     //private DayInMonthTE everyFifthMon = new DayInMonthTE(5, 1);
     //private DayInMonthTE everySecondSat = new DayInMonthTE(2, 6);
     private DayInMonthTE everyLastSun = new DayInMonthTE(-1, 7);
-    
+
     // Generic RangeEachYearTE Range of Months
     private RangeEachYearTE marchToJune = new RangeEachYearTE(3, 6);
     private RangeEachYearTE julyToDec = new RangeEachYearTE(7, 12);
-    
+
     // Generic RangeEachYearTE Month Specific 
     private RangeEachYearTE jan = new RangeEachYearTE(1);
     private RangeEachYearTE feb = new RangeEachYearTE(2);
@@ -46,11 +46,11 @@ public class SetTimeExpressionsTest {
     //private RangeEachYearTE oct = new RangeEachYearTE(10);
     //private RangeEachYearTE nov = new RangeEachYearTE(11);
     //private RangeEachYearTE dec = new RangeEachYearTE(12);
-    
+
     // Test Cases for UnionTE @ testing logical OR
     private UnionTE everyLastSunOrJulyToDec = new UnionTE(everyLastSun, julyToDec);
     //private UnionTE everyFirstWedOrEveryLastWed = new UnionTE(everyFirstWed, everyLastWed);
-    
+
     // Unit Testing for unionTE methods
     @Test
     public void unionTEIncludes_210717_everyLastSunOrJulyToDec_true() {
@@ -78,7 +78,7 @@ public class SetTimeExpressionsTest {
         assertTrue(testTe.includes(testDate3));
         assertFalse(testTe.includes(testDate4));
     }
-    
+
     // Unit Testing for IntersectionTE methods
     @Test
     public void intersectionTEIncludes_everyFirstWedAndMarchToJune() {
@@ -107,7 +107,7 @@ public class SetTimeExpressionsTest {
         assertFalse(testTe.includes(testDate2));
         assertFalse(testTe.includes(testDate1));
     }
-    
+
     // Testing for DifferenceTE
     @Test
     public void differenceTEIncludes_everyLastWedExceptJun() {
@@ -121,7 +121,7 @@ public class SetTimeExpressionsTest {
         DateTime testDate3 = DateTime.getDateTime(2017, Month.JUNE, 28, 0, 0);
         // Any Date in June 2017
         DateTime testDate4 = DateTime.getDateTime(2017, Month.JUNE, 1, 0, 0);
-        
+
         assertTrue(testTe.includes(testDate1));
         assertTrue(testTe.includes(testDate2));
         assertFalse(testTe.includes(testDate3));
