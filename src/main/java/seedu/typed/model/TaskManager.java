@@ -108,10 +108,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         syncMasterTagListWith(tasks);
     }
-    
+
     public void printData() {
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("tasks: " + i + " "+ tasks.getTaskAt(i).toString());
+            System.out.println("tasks: " + i + " " + tasks.getTaskAt(i).toString());
         }
     }
 

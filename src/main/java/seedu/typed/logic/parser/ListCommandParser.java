@@ -37,7 +37,7 @@ public class ListCommandParser {
                 String lowered = split[0].toLowerCase();
                 if (lowered.equals(ALL_STRING)
                         || lowered.equals(DONE_STRING)
-                        || lowered.equals(DURATION_STRING)){
+                        || lowered.equals(DURATION_STRING)) {
                     type = lowered;
                 }
             }

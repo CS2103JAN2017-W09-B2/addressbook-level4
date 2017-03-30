@@ -18,7 +18,7 @@ public class ListCommand extends Command {
             + " deadline ";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
-    
+
     private final String type;
 
     public ListCommand(String type) throws IllegalValueException {

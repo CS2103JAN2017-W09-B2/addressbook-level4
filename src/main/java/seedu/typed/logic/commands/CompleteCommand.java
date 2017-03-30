@@ -53,7 +53,7 @@ public class CompleteCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             if (endIndex == -1) {
-                endIndex = this.model.getFilteredTaskList().size()-1;
+                endIndex = this.model.getFilteredTaskList().size() - 1;
             }
             this.model.completeTasks(startIndex, endIndex);
         } catch (Exception e) {

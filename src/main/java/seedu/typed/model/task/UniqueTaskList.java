@@ -76,7 +76,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
@@ -183,7 +183,7 @@ public class UniqueTaskList implements Iterable<Task> {
     @SuppressWarnings("serial")
     public static class TaskNotFoundException extends Exception {
     }
-    
+
     public int size() {
         return this.internalList.size();
     }
