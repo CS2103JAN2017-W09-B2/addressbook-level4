@@ -13,8 +13,6 @@ import seedu.typed.model.Model;
 public class Chart extends UiPart<Region> {
     private static final String FXML = "Chart.fxml";
 
-    private final Model model;
-
     @FXML
     private AnchorPane mainPane;
 
@@ -25,6 +23,8 @@ public class Chart extends UiPart<Region> {
     private Circle blockOut;
 
     private ObservableList<PieChart.Data> pieData;
+
+    private Model model;
 
     /**
      * @param placeholder
@@ -42,16 +42,11 @@ public class Chart extends UiPart<Region> {
         assert chart != null;
 
         pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Completed", 13),
-                new PieChart.Data("Pending", 11));
+                new PieChart.Data("Completed", model.getNumberCompletedTasks()),
+                new PieChart.Data("Pending", model.getNumberUncompletedTasks()));
 
         chart.setData(pieData);
         chart.setStartAngle(90);
     }
-
-    @FXML
-    void updateValue() {
-    }
-
 }
 //@@author

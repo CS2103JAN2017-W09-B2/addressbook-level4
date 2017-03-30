@@ -46,7 +46,6 @@ public class UiManager extends ComponentManager implements Ui {
         this.prefs = prefs;
         this.session = session;
         this.model = model;
-        System.out.println("HERE " + model.getNumberCompletedTasks());
     }
 
     @Override

@@ -7,6 +7,6 @@
 <AnchorPane fx:id="mainPane" prefHeight="201.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <PieChart fx:id="chart" labelsVisible="false" layoutX="-20.0" legendVisible="false" prefHeight="201.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0" />
-      <Circle fx:id="blockOut" fill="WHITE" layoutX="93.0" layoutY="101.0" onKeyPressed="#updateValue" radius="80.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="21.0" />
+      <Circle fx:id="blockOut" fill="WHITE" layoutX="93.0" layoutY="101.0" radius="80.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="21.0" />
    </children>
 </AnchorPane>
