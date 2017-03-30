@@ -92,7 +92,7 @@ public class CompleteCommand extends Command {
             Task taskToCompleteCopy = new TaskBuilder(tasksList.get(i)).build();
             Task completedTask = new TaskBuilder(taskToCompleteCopy).isCompleted(true).build();
             model.updateTask(startIndex + i, completedTask);
-            model.completeTask(completedTask);
+            //model.completeTask(completedTask);
             //session.update(CommandTypeUtil.TYPE_EDIT_TASK, taskToCompleteCopy, completedTask);
         }
     }

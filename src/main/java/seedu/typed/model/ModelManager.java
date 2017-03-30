@@ -26,6 +26,9 @@ public class ModelManager extends ComponentManager implements Model {
     private TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyTask> completedTasks;
+    
+    private Expression currentExpression;
+    private Expression defaultExpression = null;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -40,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         completedTasks = new FilteredList<>(this.taskManager.getCompletedTasks());
+        this.currentExpression = defaultExpression;
     }
 
     public ModelManager() throws IllegalValueException {
@@ -221,6 +225,21 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    //@@author A0139379M
+    /**
+     * Returns true for tasks that are completed
+     * @author YIM CHIA HUI
+     *
+     */
+    private class CompletedQualifer implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getIsCompleted();
+        }
+        
+    }
+    //@@author
 
     //@@author A0141094M
     @Override
@@ -235,7 +254,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowDone() {
-        completedTasks.setPredicate(null);
+        updateFilteredTaskList(new PredicateExpression(new CompletedQualifer()));
     }
 
     @Override
