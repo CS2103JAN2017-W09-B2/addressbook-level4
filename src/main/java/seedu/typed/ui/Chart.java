@@ -49,11 +49,12 @@ public class Chart extends UiPart<Region> {
 
         int completed = model.getNumberCompletedTasks();
         int pending = model.getNumberUncompletedTasks();
-        int total = model.getTotalNumberTasks();
+        int total = model.getTotalTasks();
 
         System.out.println("Total: " + total);
         System.out.println("Pending: " + pending);
         System.out.println("Completed: " + completed);
+
         pieData = FXCollections.observableArrayList(
                 new PieChart.Data("Completed", completed),
                 new PieChart.Data("Pending", pending));
