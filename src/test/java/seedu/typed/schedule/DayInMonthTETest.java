@@ -8,7 +8,6 @@ import java.time.Month;
 import org.junit.Test;
 
 import seedu.typed.model.task.DateTime;
-import seedu.typed.schedule.DayInMonthTE;
 //@@author A0139379M
 public class DayInMonthTETest {
 
