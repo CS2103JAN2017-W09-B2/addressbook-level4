@@ -1,7 +1,10 @@
 package seedu.typed.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -18,6 +21,7 @@ public class TestTask implements ReadOnlyTask {
     private Date from;
     private Date to;
     //@@author
+    private LocalDateTime dateAdded;
     private UniqueTagList tags;
     private boolean isCompleted;
 
@@ -31,6 +35,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.date = taskToCopy.getDate();
+        this.dateAdded = taskToCopy.getDateAdded();
         //@@author A0141094M
         this.notes = taskToCopy.getNotes();
         this.from = taskToCopy.getFrom();
@@ -127,5 +132,10 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
     //@@author
+
+    @Override
+    public LocalDateTime getDateAdded() {
+        return this.dateAdded;
+    }
 
 }

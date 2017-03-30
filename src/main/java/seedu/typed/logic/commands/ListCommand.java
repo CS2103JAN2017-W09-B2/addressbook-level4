@@ -19,21 +19,13 @@ public class ListCommand extends Command {
             + " deadline ";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    
+    private final String type;
 
     public ListCommand(String type) throws IllegalValueException {
-        switch (type) {
-        case ("all"):
-            System.out.println("i am in case 'all'");
-            //model.updateFilteredListToShowAll();
-            break;
-        case ("done"):
-            model.updateFilteredListToShowDone();
-            break;
-        default:
-            break;
-        }
+        this.type = type;
     }
-
+    /*
     public ListCommand(Type type) throws IllegalValueException {
         switch (type) {
         case DEADLINE:
@@ -58,11 +50,11 @@ public class ListCommand extends Command {
         default:
             break;
         }
-    }
+    }*/
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();
+        model.updateFilteredTaskList(type);
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_LIST_TASK, -1, null);
         session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_SUCCESS);

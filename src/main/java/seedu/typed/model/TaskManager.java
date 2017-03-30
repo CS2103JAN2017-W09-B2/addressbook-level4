@@ -29,7 +29,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     private static final String DUPLICATE_TASK_WARNING = "Task Manager should not have duplicate tasks";
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
-    private final UniqueTaskList completedTasks;
 
     /*
      * The 'unusual' code block below is an non-static initialization block,
@@ -41,15 +40,10 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     {
         tasks = new UniqueTaskList();
-        completedTasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
     public TaskManager() {
-    }
-
-    public UnmodifiableObservableList<ReadOnlyTask> getCompletedTasks() {
-        return new UnmodifiableObservableList<>(completedTasks.asObservableList());
     }
 
     /**
@@ -114,6 +108,12 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         syncMasterTagListWith(tasks);
     }
+    
+    public void printData() {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("tasks: " + i + " "+ tasks.getTaskAt(i).toString());
+        }
+    }
 
     //// task-level operations
 
@@ -146,9 +146,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         return tasks.getTaskAt(index);
     }
 
-    public void completeTask(Task task) throws TaskNotFoundException, DuplicateTaskException {
-        tasks.remove(task);
-        completedTasks.add(task);
+    public void completeTask(int index, Task completedTask) throws TaskNotFoundException, IllegalValueException {
+        tasks.updateTask(index, completedTask);
     }
 
     /**
@@ -255,6 +254,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         // your
         // own
         return Objects.hash(tasks, tags);
+    }
+
+    public void completeTask(int taskManagerIndex) throws IllegalValueException {
+        Task toBeCompleted = tasks.getTaskAt(taskManagerIndex);
+        Task completedTask = new TaskBuilder(toBeCompleted).isCompleted(true).build();
+        tasks.updateTask(taskManagerIndex, completedTask);
+        
     }
 
 }

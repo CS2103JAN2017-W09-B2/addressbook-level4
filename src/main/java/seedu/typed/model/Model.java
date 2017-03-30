@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.logic.commands.util.Type;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
@@ -83,9 +84,7 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
-    void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException;
-
-    void updateCompletedTasksToShowAll();
+    void completeTask(int index, Task task) throws IllegalValueException, TaskNotFoundException;
 
     //@@author A0143853A
     Task getTaskAt(int index);
@@ -106,4 +105,14 @@ public interface Model {
 
     void updateFilteredListToShowUntimed();
     //@@author
+    
+    //@@author A0139379M
+    void completeTasks(int startIndex, int endIndex) throws IllegalValueException;
+    //@@author
+
+    void updateFilteredListToShowDefault();
+
+    void updateFilteredTaskList(Type type);
+
+    void updateFilteredTaskList(String type);
 }

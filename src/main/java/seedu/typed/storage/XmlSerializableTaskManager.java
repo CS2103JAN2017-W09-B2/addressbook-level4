@@ -73,4 +73,10 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(tags);
     }
 
+    @Override
+    public void printData() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

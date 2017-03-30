@@ -76,8 +76,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
-     * @throws IllegalValueException
-     *
+     * @throws IllegalValueException 
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
@@ -88,15 +87,32 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
-
-        taskToUpdate.resetData(editedTask);
+        Task edited = new TaskBuilder(editedTask).build();
+        //taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the
         // updated task.
         // The right way is to implement observable properties in the task
         // class.
         // Then, taskcard should then bind its text labels to those observable
         // properties.
-        internalList.set(index, taskToUpdate);
+        internalList.set(index, edited);
+    }
+    public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
+        assert editedTask != null;
+
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+            throw new DuplicateTaskException();
+        }
+
+        //taskToUpdate.resetData(editedTask);
+        // TODO: The code below is just a workaround to notify observers of the
+        // updated task.
+        // The right way is to implement observable properties in the task
+        // class.
+        // Then, taskcard should then bind its text labels to those observable
+        // properties.
+        internalList.set(index, editedTask);
     }
 
     /**
@@ -166,6 +182,10 @@ public class UniqueTaskList implements Iterable<Task> {
     // TODO: fill in blanks
     @SuppressWarnings("serial")
     public static class TaskNotFoundException extends Exception {
+    }
+    
+    public int size() {
+        return this.internalList.size();
     }
 
 }
