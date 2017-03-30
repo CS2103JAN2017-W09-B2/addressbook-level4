@@ -54,14 +54,14 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
     
     public int getNumberCompletedTasks() {
-        int num = 0;
+        /*int num = 0;
         for (int i = 0; i <= taskManager.getTaskList().size(); i++) {
             Task current = taskManager.getTaskAt(i);
             if (current.getIsCompleted()) {
                 num++;
             }
-        }
-        return num;
+        }*/
+        return taskManager.getCompletedTasks().size();
     }
     
     public int getNumberUncompletedTasks() {
