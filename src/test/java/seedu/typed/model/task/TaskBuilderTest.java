@@ -44,7 +44,7 @@ public class TaskBuilderTest {
             tags = new UniqueTagList();
             tagTest = new UniqueTagList();
             tags.add(new Tag("friends"));
-            testTask = new Task(name, notes, date, from, to, tags);
+            testTask = new Task(name, notes, date, from, to, tags, false);
             tagSet = new HashSet<String>();
             tagSet.add("friends");
             tagSet.add("work");

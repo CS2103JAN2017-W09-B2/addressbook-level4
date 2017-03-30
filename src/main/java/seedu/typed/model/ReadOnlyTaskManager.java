@@ -21,5 +21,7 @@ public interface ReadOnlyTaskManager {
      */
     ObservableList<Tag> getTagList();
 
+    public void printData();
+
 
 }

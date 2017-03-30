@@ -51,6 +51,7 @@ public class AddCommand extends Command {
         try {
             //@@author A0143853A
             model.addTask(0, toAdd);
+            model.getTaskManager().printData();
             String name = toAdd.getName().toString();
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
             session.updateValidCommandsHistory(commandText);
