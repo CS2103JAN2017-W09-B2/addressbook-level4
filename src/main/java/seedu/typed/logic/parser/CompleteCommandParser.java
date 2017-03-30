@@ -18,7 +18,7 @@ public class CompleteCommandParser {
         assert args != null;
         String trimmedArgs = args.trim();
         try {
-            if (trimmedArgs.equals("all")) {
+            if ("all".equals(trimmedArgs)) {
                 return new CompleteCommand();
             } else if (trimmedArgs.matches("\\d+\\s*\\d*")) {
                 String[] arguments = trimmedArgs.split("\\s+");

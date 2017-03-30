@@ -1,6 +1,5 @@
 package seedu.typed.model.task;
 
-
 import java.time.LocalDateTime;
 
 import seedu.typed.commons.exceptions.IllegalValueException;

@@ -109,7 +109,7 @@ public class CompleteCommand extends Command {
             throw new CommandException(MESSAGE_NOT_COMPLETED);
         }*/
         try {
-            for (int i = startIndex; i<= endIndex; i++) {
+            for (int i = startIndex; i <= endIndex; i++) {
                 Task taskToCompleteCopy = new TaskBuilder(this.model.getFilteredTasks().get(startIndex)).build();
                 Task completedTask = new TaskBuilder(taskToCompleteCopy).isCompleted(true).build();
                 model.updateCompletedTask(startIndex, completedTask, completedTask);

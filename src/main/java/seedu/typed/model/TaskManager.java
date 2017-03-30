@@ -154,7 +154,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         return tasks.getTaskAt(index);
     }
 
-    public void completeTask(ReadOnlyTask editedTask, Task completedTask) 
+    public void completeTask(ReadOnlyTask editedTask, Task completedTask)
             throws TaskNotFoundException, DuplicateTaskException {
         tasks.remove(editedTask);
         completedTasks.add(completedTask);
