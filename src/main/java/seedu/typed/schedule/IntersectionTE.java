@@ -6,7 +6,7 @@ import seedu.typed.model.task.DateTime;
 
 //@@author A0139379M
 /**
- * IntersectionTE returns the logical intersection of 
+ * IntersectionTE returns the logical intersection of
  * two or more TimeExpressions
  * Example: IntersectionTE(lastMonday, Jul) would refer to
  * the last Monday in July

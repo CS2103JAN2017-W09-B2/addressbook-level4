@@ -16,7 +16,7 @@ import seedu.typed.schedule.UnionTE;
 
 //@@author A0139379M
 /**
- * Unit Testing for Set TimeExpression 
+ * Unit Testing for Set TimeExpression
  * which includes UnionTE, IntersectionTE and DifferenceTE
  * @author YIM CHIA HUI
  *
@@ -38,7 +38,7 @@ public class SetTimeExpressionsTest {
     private RangeEachYearTE marchToJune = new RangeEachYearTE(3, 6);
     private RangeEachYearTE julyToDec = new RangeEachYearTE(7, 12);
 
-    // Generic RangeEachYearTE Month Specific 
+    // Generic RangeEachYearTE Month Specific
     private RangeEachYearTE jan = new RangeEachYearTE(1);
     private RangeEachYearTE feb = new RangeEachYearTE(2);
     private RangeEachYearTE mar = new RangeEachYearTE(3);

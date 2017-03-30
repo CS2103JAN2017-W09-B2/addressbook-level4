@@ -3,10 +3,10 @@ package seedu.typed.schedule;
 import seedu.typed.model.task.DateTime;
 //@@author A0139379M
 /**
- * RangeEachYear represents a particular range in a year 
+ * RangeEachYear represents a particular range in a year
  * It could be from March to April or more specifically
- * 17 March to 19 April. 
- * includes returns true if a particular date falls 
+ * 17 March to 19 April.
+ * includes returns true if a particular date falls
  * within this range
  * For example, 18 March falls in the range of 17 March to 19 April
  * @author YIM CHIA HUI

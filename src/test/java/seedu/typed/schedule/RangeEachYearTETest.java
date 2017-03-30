@@ -18,7 +18,7 @@ public class RangeEachYearTETest {
     private DateTime goodFridayDay = DateTime.getDateTime(2017, Month.APRIL, 18, 0, 0);
     private DateTime happyNewYear = DateTime.getDateTime(2017, Month.JANUARY, 1, 0, 0);
 
-    // Generic RangeEachYearTE 
+    // Generic RangeEachYearTE
     private RangeEachYearTE marchToJune = new RangeEachYearTE(3, 6);
     private RangeEachYearTE julyToDec = new RangeEachYearTE(7, 12);
     private RangeEachYearTE jan = new RangeEachYearTE(1);

@@ -6,8 +6,8 @@ import seedu.typed.model.task.DateTime;
 
 //@@author A0139379M
 /**
- * UnionTE represents the union of TimeExpressions 
- * where includes would return true for either of the 
+ * UnionTE represents the union of TimeExpressions
+ * where includes would return true for either of the
  * TimeExpression.
  * Example UnionTE(LastMonday, LastTuesday) would return true
  * for a either a date which lands on the last Monday or Tuesday

@@ -3,10 +3,10 @@ package seedu.typed.schedule;
 import seedu.typed.model.task.DateTime;
 //@@author A0139379M
 /**
- * TimeExpression is an expression that specifies 
+ * TimeExpression is an expression that specifies
  * a recurring date. All TimeExpression has an individual
  * instance method to work out whether a day lies in the
- * expression. 
+ * expression.
  * @author: YIM CHIA HUI
  **/
 public abstract class TimeExpression {
