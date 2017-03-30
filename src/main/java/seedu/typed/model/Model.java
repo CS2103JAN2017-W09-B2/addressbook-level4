@@ -83,13 +83,13 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-    
+
     //@@author A0139379M
     void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException;
-    
+
     //@@author A0139379M
     void updateCompletedTasksToShowAll();
-    
+
     FilteredList<ReadOnlyTask> getFilteredTasks();
 
     //@@author A0143853A
@@ -98,7 +98,7 @@ public interface Model {
 
     //@@author A0143853A
     int getIndexOfTask(Task task) throws TaskNotFoundException;
-    
+
     //@@author A0139379M
 
     void updateCompletedTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task completedTask)

@@ -14,7 +14,7 @@ public interface ReadOnlyTask {
     Name getName();
 
     Date getDate();
-    
+
     LocalDateTime getDateAdded();
 
     //@author A0141094M

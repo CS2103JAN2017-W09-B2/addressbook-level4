@@ -20,7 +20,7 @@ public interface ReadOnlyTaskManager {
      * any duplicate tags.
      */
     ObservableList<Tag> getTagList();
-    
+
     //public void printTasks();
 
 

@@ -45,7 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() throws IllegalValueException {
         this(new TaskManager(), new UserPrefs());
     }
-    
+
     /*public void printFilteredTasks() {
         for (int i = 0; i<filteredTasks.size(); i++) {
             System.out.println("index of filtered tasks: " + i + filteredTasks.get(i));
@@ -146,11 +146,11 @@ public class ModelManager extends ComponentManager implements Model {
             throws DuplicateTaskException, IllegalValueException, TaskNotFoundException {
         assert editedTask != null;
         try {
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskManagerIndex, editedTask);
-        taskManager.completeTask(taskManager.getTaskAt(taskManagerIndex), completedTask);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+            int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+            taskManager.updateTask(taskManagerIndex, editedTask);
+            taskManager.completeTask(taskManager.getTaskAt(taskManagerIndex), completedTask);
+            updateFilteredListToShowAll();
+            indicateTaskManagerChanged();
         } catch (TaskNotFoundException tnfe) {
             updateFilteredListToShowAll();
         }

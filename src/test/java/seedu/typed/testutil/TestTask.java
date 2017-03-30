@@ -72,7 +72,7 @@ public class TestTask implements ReadOnlyTask {
     public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
-    
+
     public void setDateAdded(LocalDateTime dateAdded) {
         this.dateAdded = dateAdded;
     }
@@ -86,7 +86,7 @@ public class TestTask implements ReadOnlyTask {
     public Date getDate() {
         return date;
     }
-    
+
     @Override
     public LocalDateTime getDateAdded() {
         return dateAdded;
