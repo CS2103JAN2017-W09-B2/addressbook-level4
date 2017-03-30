@@ -27,9 +27,9 @@ public class ModelManager extends ComponentManager implements Model {
     private TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
-    private Expression currentExpression;
+    //private Expression currentExpression;
     private Expression defaultExpression = new Negation(new CompletedQualifer());
-    private Expression doneExpression = new PredicateExpression(new CompletedQualifer());
+    //private Expression doneExpression = new PredicateExpression(new CompletedQualifer());
 
 
     // =========== ModelManager Constructors =======================
@@ -46,7 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        this.currentExpression = defaultExpression;
+        //this.currentExpression = defaultExpression;
     }
 
     public ModelManager() throws IllegalValueException {
