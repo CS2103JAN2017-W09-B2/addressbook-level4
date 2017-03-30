@@ -8,6 +8,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import seedu.typed.model.Model;
 
 public class Chart extends UiPart<Region> {
@@ -22,6 +23,9 @@ public class Chart extends UiPart<Region> {
     @FXML
     private Circle blockOut;
 
+    @FXML
+    private Text percentage;
+
     private ObservableList<PieChart.Data> pieData;
 
     private Model model;
@@ -35,15 +39,23 @@ public class Chart extends UiPart<Region> {
         this.model = model;
         holder.getChildren().add(chart);
         holder.getChildren().add(blockOut);
+        holder.getChildren().add(percentage);
+
+        initialize();
     }
 
-    @FXML
     void initialize() {
         assert chart != null;
 
+        int completed = model.getNumberCompletedTasks();
+        int pending = model.getNumberUncompletedTasks();
+        int total = model.getTotalNumberTasks();
+
         pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Completed", model.getNumberCompletedTasks()),
-                new PieChart.Data("Pending", model.getNumberUncompletedTasks()));
+                new PieChart.Data("Completed", completed),
+                new PieChart.Data("Pending", pending));
+
+        percentage.setText((Math.abs(pending/total) * 100) + " %");
 
         chart.setData(pieData);
         chart.setStartAngle(90);
