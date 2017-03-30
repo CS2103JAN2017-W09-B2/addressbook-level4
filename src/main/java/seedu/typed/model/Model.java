@@ -106,4 +106,9 @@ public interface Model {
 
     void updateFilteredListToShowUntimed();
     //@@author
+    int getNumberUncompletedTasks();
+    
+    int getNumberCompletedTasks();
+    
+    int getTotalNumberTasks();
 }

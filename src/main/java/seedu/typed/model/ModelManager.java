@@ -64,7 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         return num;
     }
     
-    public int getNumberUnCompletedTasks() {
+    public int getNumberUncompletedTasks() {
         return getTotalNumberTasks() - getNumberCompletedTasks();
     }
     
