@@ -254,8 +254,10 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public void completeTask(int taskManagerIndex) throws DuplicateTaskException {
         Task completedTask = tasks.getTaskAt(taskManagerIndex);
-        completedTask.setIsCompleted(true);
-        tasks.updateTask(taskManagerIndex, completedTask);
+        if (!completedTask.getIsCompleted()) {
+            completedTask.setIsCompleted(true);
+            tasks.updateTask(taskManagerIndex, completedTask);
+        }
     }
 
     public int getNumCompletedTasks() {
