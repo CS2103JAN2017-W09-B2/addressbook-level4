@@ -131,12 +131,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException {
-        for (int i = startIndex; i <= endIndex; i++) {
+        int num = endIndex - startIndex + 1;
+        for (int i = 0; i < num; i++) {
             int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
+            System.out.println("TaskManagerIndex: " + taskManagerIndex);
             taskManager.completeTask(taskManagerIndex);
+            updateFilteredListToShowDefault();
+            indicateTaskManagerChanged();
         }
-        updateFilteredListToShowDefault();
-        indicateTaskManagerChanged();
     }
     //@@author
 
