@@ -1,5 +1,6 @@
 package seedu.typed.model.task;
 
+import java.time.LocalDateTime;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.UniqueTagList;
@@ -13,6 +14,7 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Notes notes;
     private Date date;
+    private LocalDateTime dateAdded;
     private Date from;
     private Date to;
 
@@ -27,7 +29,7 @@ public class Task implements ReadOnlyTask {
         // commented this out!! allow date tags be null
         //assert !CollectionUtil.isAnyNull(name, date, tags);
         assert name != null;
-
+        this.dateAdded = LocalDateTime.now();
         this.name = name;
         this.notes = notes;
         this.date = date;
@@ -174,6 +176,10 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+    @Override
+    public LocalDateTime getDateAdded() {
+        return this.dateAdded;
     }
 
 }

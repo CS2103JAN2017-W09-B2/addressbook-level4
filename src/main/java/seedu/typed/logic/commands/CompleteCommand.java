@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.typed.commons.core.Messages;
-import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
-import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 //@@author A0139379M
 public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "finish";
@@ -24,8 +21,8 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_NOT_COMPLETED = "Task does not exists in the task manager";
     public static final String MESSAGE_ALREADY_COMPLETED = "This task is already completed in the task manager.";
 
-    private final int startIndex;
-    private final int endIndex;
+    private int startIndex;
+    private int endIndex;
 
     /**
      * @param startIndex
@@ -55,9 +52,8 @@ public class CompleteCommand extends Command {
      * Default constructor assumes complete all tasks in filtered task list
      */
     public CompleteCommand() {
-        int size = model.getFilteredTaskList().size();
         this.startIndex = 0;
-        this.endIndex = size - 1;
+        this.endIndex = -1;
     }
 
     /**
@@ -86,22 +82,36 @@ public class CompleteCommand extends Command {
      * @throws TaskNotFoundException
      * @throws IllegalValueException, DuplicateTaskException
      */
-    private void updateCompletedTasks(List<ReadOnlyTask> tasksList)
+    /*private void updateCompletedTasks(List<ReadOnlyTask> tasksList)
             throws TaskNotFoundException, IllegalValueException, DuplicateTaskException {
         for (int i = 0; i < tasksList.size(); i++) {
+            System.out.println(tasksList.size());
             Task taskToCompleteCopy = new TaskBuilder(tasksList.get(i)).build();
             Task completedTask = new TaskBuilder(taskToCompleteCopy).isCompleted(true).build();
-            model.updateTask(startIndex + i, completedTask);
+            model.updateTaskWithoutShowing(startIndex + i, completedTask);
             model.completeTask(completedTask);
             //session.update(CommandTypeUtil.TYPE_EDIT_TASK, taskToCompleteCopy, completedTask);
         }
-    }
+    }*/
 
     @Override
     public CommandResult execute() throws CommandException {
+        if (this.endIndex == -1) {
+            this.endIndex = this.model.getFilteredTaskList().size() - 1;
+        }
         List<ReadOnlyTask> tasksToCompleteList = getAffectedTasks(startIndex, endIndex);
-        try {
+        /*try {
             updateCompletedTasks(tasksToCompleteList);
+            this.model.updateFilteredListToShowAll();
+        } catch (Exception e) {
+            throw new CommandException(MESSAGE_NOT_COMPLETED);
+        }*/
+        try {
+            for (int i = startIndex; i <= endIndex; i++) {
+                Task taskToCompleteCopy = new TaskBuilder(this.model.getFilteredTasks().get(startIndex)).build();
+                Task completedTask = new TaskBuilder(taskToCompleteCopy).isCompleted(true).build();
+                model.updateCompletedTask(startIndex, completedTask, completedTask);
+            }
         } catch (Exception e) {
             throw new CommandException(MESSAGE_NOT_COMPLETED);
         }

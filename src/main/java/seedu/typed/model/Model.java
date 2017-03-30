@@ -2,6 +2,7 @@ package seedu.typed.model;
 
 import java.util.Set;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -83,9 +84,13 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
+    //@@author A0139379M
     void completeTask(Task task) throws DuplicateTaskException, TaskNotFoundException;
 
+    //@@author A0139379M
     void updateCompletedTasksToShowAll();
+
+    FilteredList<ReadOnlyTask> getFilteredTasks();
 
     //@@author A0143853A
     Task getTaskAt(int index);
@@ -93,6 +98,11 @@ public interface Model {
 
     //@@author A0143853A
     int getIndexOfTask(Task task) throws TaskNotFoundException;
+
+    //@@author A0139379M
+
+    void updateCompletedTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task completedTask)
+            throws DuplicateTaskException, IllegalValueException, TaskNotFoundException;
     //@@author
 
     //@@author A0141094M
