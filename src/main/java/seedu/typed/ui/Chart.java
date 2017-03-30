@@ -31,6 +31,7 @@ public class Chart extends UiPart<Region> {
     public Chart(AnchorPane holder) {
         super(FXML);
         holder.getChildren().add(chart);
+        holder.getChildren().add(blockOut);
     }
 
     @FXML
@@ -38,8 +39,8 @@ public class Chart extends UiPart<Region> {
         assert chart != null;
 
         pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Completed", 10),
-                new PieChart.Data("Pending", 13));
+                new PieChart.Data("Completed", 13),
+                new PieChart.Data("Pending", 10));
 
         chart.setData(pieData);
         chart.setStartAngle(90);

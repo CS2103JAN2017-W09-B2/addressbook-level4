@@ -46,13 +46,12 @@ public class UniqueTaskList implements Iterable<Task> {
     //@@author
 
     /**
-     * Adds a task to the list.
+     * Adds a task to the end of the list.
      *
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
-    //Adds task to the end of the list
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
 
@@ -167,5 +166,11 @@ public class UniqueTaskList implements Iterable<Task> {
     @SuppressWarnings("serial")
     public static class TaskNotFoundException extends Exception {
     }
+
+    //@@author A0139392X
+    public int getSize() {
+        return internalList.size();
+    }
+    //@@author
 
 }
