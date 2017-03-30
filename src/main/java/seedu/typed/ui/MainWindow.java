@@ -68,7 +68,7 @@ public class MainWindow extends UiPart<Region> {
         this.session = session;
 
         // Configure the UI
-        setTitle(config.getAppTitle());
+        setTitle(this.config.getAppTitle());
         setIcon(ICON);
         setWindowMinSize();
         setWindowDefaultSize(prefs);

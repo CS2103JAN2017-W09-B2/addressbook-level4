@@ -9,7 +9,6 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
-import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 //@@author A0139379M
 public class CompleteCommand extends Command {
