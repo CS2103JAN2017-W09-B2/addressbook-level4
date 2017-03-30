@@ -142,7 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void updateCompletedTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task completedTask) 
+    public synchronized void updateCompletedTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task completedTask)
             throws DuplicateTaskException, IllegalValueException, TaskNotFoundException {
         assert editedTask != null;
         try {
