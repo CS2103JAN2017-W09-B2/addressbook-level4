@@ -1,4 +1,4 @@
-package seedu.typed.Schedule;
+package seedu.typed.schedule;
 
 import java.time.LocalDateTime;
 

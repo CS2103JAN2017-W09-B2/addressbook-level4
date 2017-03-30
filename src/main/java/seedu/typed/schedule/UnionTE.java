@@ -1,4 +1,4 @@
-package seedu.typed.Schedule;
+package seedu.typed.schedule;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import seedu.typed.model.task.DateTime;
  *
  */
 public class UnionTE extends TimeExpression {
-    ArrayList<TimeExpression> elements;
+    private ArrayList<TimeExpression> elements;
 
     @Override
     public boolean includes(DateTime date) {

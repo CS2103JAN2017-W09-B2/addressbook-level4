@@ -1,4 +1,4 @@
-package seedu.typed.Schedule;
+package seedu.typed.schedule;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,11 @@ import java.time.Month;
 import org.junit.Test;
 
 import seedu.typed.model.task.DateTime;
+import seedu.typed.schedule.DayInMonthTE;
+import seedu.typed.schedule.DifferenceTE;
+import seedu.typed.schedule.IntersectionTE;
+import seedu.typed.schedule.RangeEachYearTE;
+import seedu.typed.schedule.UnionTE;
 
 //@@author A0139379M
 /**
