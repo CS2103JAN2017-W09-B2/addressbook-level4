@@ -8,8 +8,8 @@ import seedu.typed.model.task.DateTime;
  * Represents a particular day in the month
  * Specified by the week and the day.
  * In particular, it is best used for every [weekday|weekend]
- * Example : every first monday would match 
- * monday and first week in DayInMonthTE which holds 
+ * Example : every first monday would match
+ * monday and first week in DayInMonthTE which holds
  * true either on January or December
  **/
 
