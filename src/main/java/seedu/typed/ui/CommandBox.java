@@ -32,7 +32,6 @@ public class CommandBox extends UiPart<Region> {
     private ArrayList<String> commandHistory;
     private int pointer;
 
-
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, Session session) {
         super(FXML);
         this.logic = logic;

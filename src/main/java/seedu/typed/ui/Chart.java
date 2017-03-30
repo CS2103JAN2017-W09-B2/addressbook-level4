@@ -8,9 +8,12 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
+import seedu.typed.model.Model;
 
 public class Chart extends UiPart<Region> {
     private static final String FXML = "Chart.fxml";
+
+    private final Model model;
 
     @FXML
     private AnchorPane mainPane;
@@ -21,15 +24,15 @@ public class Chart extends UiPart<Region> {
     @FXML
     private Circle blockOut;
 
-    @FXML
-    ObservableList<PieChart.Data> pieData;
+    private ObservableList<PieChart.Data> pieData;
 
     /**
      * @param placeholder
      *            The AnchorPane where the BrowserPanel must be inserted
      */
-    public Chart(AnchorPane holder) {
+    public Chart(AnchorPane holder, Model model) {
         super(FXML);
+        this.model = model;
         holder.getChildren().add(chart);
         holder.getChildren().add(blockOut);
     }
@@ -40,7 +43,7 @@ public class Chart extends UiPart<Region> {
 
         pieData = FXCollections.observableArrayList(
                 new PieChart.Data("Completed", 13),
-                new PieChart.Data("Pending", 10));
+                new PieChart.Data("Pending", 11));
 
         chart.setData(pieData);
         chart.setStartAngle(90);
