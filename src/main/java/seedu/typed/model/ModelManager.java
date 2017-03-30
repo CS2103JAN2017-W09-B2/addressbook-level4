@@ -61,6 +61,32 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
+    @Override
+    public int getNumberCompletedTasks() {
+        return taskManager.getNumCompletedTasks();
+    }
+    @Override
+    public int getNumberUncompletedTasks() {
+        return taskManager.getNumUncompletedTasks();
+    }
+    @Override
+    public int getTotalTasks() {
+        return getNumberCompletedTasks() + getNumberUncompletedTasks();
+    }
+    //@@author A0143853A
+    @Override
+    public int getIndexOfTask(Task task) throws TaskNotFoundException {
+        return taskManager.getIndexOf(task);
+    }
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public Task getTaskAt(int index) {
+        return taskManager.getTaskAt(index);
+    }
+    //@@author
+
     // =========== ModelManager Add Tasks ==========================
     // =============================================================
 
@@ -95,17 +121,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0139379M
     @Override
-    public synchronized void completeTask(int filteredTaskListIndex, Task completedTask)
-            throws TaskNotFoundException, IllegalValueException {
-
+    public synchronized void completeTask(int filteredTaskListIndex) throws DuplicateTaskException {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.completeTask(taskManagerIndex, completedTask);
+        taskManager.completeTask(taskManagerIndex);
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void completeTasks(int startIndex, int endIndex) throws IllegalValueException {
+    public synchronized void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException {
         for (int i = startIndex; i <= endIndex; i++) {
             int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
             taskManager.completeTask(taskManagerIndex);
@@ -135,23 +159,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
-
-    // =========== TaskManager Getters =============================
-    // =============================================================
-
-    //@@author A0143853A
-    @Override
-    public int getIndexOfTask(Task task) throws TaskNotFoundException {
-        return taskManager.getIndexOf(task);
-    }
-    //@@author
-
-    //@@author A0143853A
-    @Override
-    public Task getTaskAt(int index) {
-        return taskManager.getTaskAt(index);
-    }
-    //@@author
 
     // =========== ModelManager Util Methods =======================
     // =============================================================
@@ -190,7 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowDefault() {
         updateFilteredTaskList(this.defaultExpression);
     }
-    
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -199,7 +206,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     @Override
     public void updateFilteredTaskList(String type) {
         switch (type) {
@@ -225,7 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredListToShowDefault();
         }
     }
-    
+
     @Override
     public void updateFilteredTaskList(Type type) {
         switch (type) {
@@ -233,7 +240,7 @@ public class ModelManager extends ComponentManager implements Model {
         case DEADLINE:
             updateFilteredListToShowDeadline();
             break;
-        // NOT DONE
+            // NOT DONE
         case DURATION:
             updateFilteredListToShowDuration();
             break;
@@ -243,7 +250,7 @@ public class ModelManager extends ComponentManager implements Model {
         case UNDONE:
             updateFilteredListToShowUndone();
             break;
-        // NOT DONE
+            // NOT DONE
         case UNTIMED:
             updateFilteredListToShowUntimed();
             break;
@@ -253,7 +260,7 @@ public class ModelManager extends ComponentManager implements Model {
         default:
             updateFilteredListToShowDefault();
         }
-        
+
     }
 
     //@@author A0141094M
@@ -317,7 +324,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A01393793M
     private class Negation implements Expression {
         private final Qualifier qualifier;
-        
+
         Negation(Qualifier qualifier) {
             this.qualifier = qualifier;
         }

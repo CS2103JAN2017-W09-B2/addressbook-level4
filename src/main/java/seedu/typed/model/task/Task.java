@@ -1,8 +1,5 @@
 package seedu.typed.model.task;
 
-
-import java.time.LocalDateTime;
-
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.UniqueTagList;
 
@@ -14,7 +11,6 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Notes notes;
-    private LocalDateTime dateAdded;
     private Date date;
     private Date from;
     private Date to;
@@ -34,7 +30,6 @@ public class Task implements ReadOnlyTask {
         this.name = name;
         this.notes = notes;
         this.date = date;
-        this.dateAdded = LocalDateTime.now();
         this.from = from;
         this.to = to;
         this.tags = new UniqueTagList(tags); // protect internal tags from
@@ -50,17 +45,6 @@ public class Task implements ReadOnlyTask {
                 source.getFrom(), source.getTo(), source.getTags(), source.getIsCompleted());
     }
 
-    public Task(Name name, Notes notes, Date date, LocalDateTime dateAdded, Date from, Date to,
-            UniqueTagList tags, boolean isCompleted) {
-        this.name = name;
-        this.notes = notes;
-        this.date = date;
-        this.dateAdded = dateAdded;
-        this.from = from;
-        this.to = to;
-        this.tags = tags;
-        this.isCompleted = isCompleted;
-    }
     public void setName(Name name) throws IllegalValueException {
         assert name != null;
         this.name = new Name(name.getValue());
@@ -141,10 +125,6 @@ public class Task implements ReadOnlyTask {
     @Override
     public boolean getIsCompleted() {
         return isCompleted;
-    }
-    
-    public LocalDateTime getDateAdded() {
-        return this.dateAdded;
     }
 
     /**

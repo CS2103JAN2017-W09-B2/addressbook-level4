@@ -3,7 +3,6 @@ package seedu.typed.logic.commands;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
-import seedu.typed.logic.commands.util.Type;
 
 /**
  * Lists all tasks in the task manager to the user.
@@ -25,32 +24,6 @@ public class ListCommand extends Command {
     public ListCommand(String type) throws IllegalValueException {
         this.type = type;
     }
-    /*
-    public ListCommand(Type type) throws IllegalValueException {
-        switch (type) {
-        case DEADLINE:
-            model.updateFilteredListToShowDeadline();
-            break;
-        case DURATION:
-            model.updateFilteredListToShowDuration();
-            break;
-        case DONE:
-            model.updateFilteredListToShowDone();
-            break;
-        case UNDONE:
-            model.updateFilteredListToShowUndone();
-            break;
-        case UNTIMED:
-            model.updateFilteredListToShowUntimed();
-            break;
-        case ALL:
-            System.out.println("i entered here trying to filter");
-            model.updateFilteredListToShowAll();
-            break;
-        default:
-            break;
-        }
-    }*/
 
     @Override
     public CommandResult execute() {

@@ -47,7 +47,7 @@ public class TypicalTestTasks {
             try {
                 //@@author A0141094M
                 Task toAdd = new Task(task.getName(), task.getNotes(), task.getDate(),
-                        task.getDateAdded(),task.getFrom(), task.getTo(), task.getTags(), false);
+                        task.getFrom(), task.getTo(), task.getTags(), false);
                 //@@author
                 tm.addTask(toAdd);
 

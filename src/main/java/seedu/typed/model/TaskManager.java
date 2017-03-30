@@ -146,10 +146,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         return tasks.getTaskAt(index);
     }
 
-    public void completeTask(int index, Task completedTask) throws TaskNotFoundException, IllegalValueException {
-        tasks.updateTask(index, completedTask);
-    }
-
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
@@ -256,11 +252,24 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(tasks, tags);
     }
 
-    public void completeTask(int taskManagerIndex) throws IllegalValueException {
-        Task toBeCompleted = tasks.getTaskAt(taskManagerIndex);
-        Task completedTask = new TaskBuilder(toBeCompleted).isCompleted(true).build();
+    public void completeTask(int taskManagerIndex) throws DuplicateTaskException {
+        Task completedTask = tasks.getTaskAt(taskManagerIndex);
+        completedTask.setIsCompleted(true);
         tasks.updateTask(taskManagerIndex, completedTask);
-        
+    }
+
+    public int getNumCompletedTasks() {
+        int num = 0;
+        for (int i = 0; i <= 0; i++) {
+            if (tasks.getTaskAt(i).getIsCompleted()) {
+                num++;
+            }
+        }
+        return num;
+    }
+
+    public int getNumUncompletedTasks() {
+        return tasks.size() - getNumCompletedTasks();
     }
 
 }

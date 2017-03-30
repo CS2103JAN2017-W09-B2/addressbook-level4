@@ -14,23 +14,31 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * Clears existing backing model and replaces with the provided new data.
-     * @throws IllegalValueException
-     */
-    void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
-    //@@author A0143853A
-    /** Copies tasks over into current TaskManager. **/
-    void copyData(ReadOnlyTaskManager newData) throws IllegalValueException;
-    //@@author
 
+    // =========== ModelManager Constructors =======================
+    // =============================================================
+    // =========== TaskManager Getters =============================
+    // =============================================================
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 
-    /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws TaskNotFoundException;
+    int getNumberCompletedTasks();
 
+    int getNumberUncompletedTasks();
+
+    int getTotalTasks();
+
+    //@@author A0143853A
+    Task getTaskAt(int index);
+    //@@author
+
+    //@@author A0143853A
+    int getIndexOfTask(Task task) throws TaskNotFoundException;
+    //@@author
+
+    // =========== ModelManager Add Tasks ==========================
+    // =============================================================
     /** Adds the given task. */
     void addTask(Task task) throws DuplicateTaskException;
 
@@ -38,7 +46,12 @@ public interface Model {
     /** Adds the given task at the specified index. */
     void addTask(int index, Task task) throws DuplicateTaskException;
     //@@author
-
+    // =========== ModelManager Delete Tasks =======================
+    // =============================================================
+    /** Deletes the given task. */
+    void deleteTask(ReadOnlyTask target) throws TaskNotFoundException;
+    // =========== ModelManager Update Tasks =======================
+    // =============================================================
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
@@ -69,6 +82,42 @@ public interface Model {
             throws DuplicateTaskException, IllegalValueException;
     //@@author
 
+    //@@author A0139379M
+    void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException;
+    //@@author
+    void completeTask(int filteredTaskListIndex) throws DuplicateTaskException;
+    // =========== ModelManager Util Methods =======================
+    // =============================================================
+    /**
+     * Clears existing backing model and replaces with the provided new data.
+     * @throws IllegalValueException
+     */
+    void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
+
+    //@@author A0143853A
+    /** Copies tasks over into current TaskManager. **/
+    void copyData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    //@@author
+
+    // =========== ModelManager Display ============================
+    // =============================================================
+    //@@author A0141094M
+    void updateFilteredListToShowDeadline();
+
+    void updateFilteredListToShowDuration();
+
+    void updateFilteredListToShowDone();
+
+    void updateFilteredListToShowUndone();
+
+    void updateFilteredListToShowUntimed();
+    //@@author
+
+    void updateFilteredListToShowDefault();
+
+    void updateFilteredTaskList(Type type);
+
+    void updateFilteredTaskList(String type);
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -83,36 +132,4 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-
-    void completeTask(int index, Task task) throws IllegalValueException, TaskNotFoundException;
-
-    //@@author A0143853A
-    Task getTaskAt(int index);
-    //@@author
-
-    //@@author A0143853A
-    int getIndexOfTask(Task task) throws TaskNotFoundException;
-    //@@author
-
-    //@@author A0141094M
-    void updateFilteredListToShowDeadline();
-
-    void updateFilteredListToShowDuration();
-
-    void updateFilteredListToShowDone();
-
-    void updateFilteredListToShowUndone();
-
-    void updateFilteredListToShowUntimed();
-    //@@author
-    
-    //@@author A0139379M
-    void completeTasks(int startIndex, int endIndex) throws IllegalValueException;
-    //@@author
-
-    void updateFilteredListToShowDefault();
-
-    void updateFilteredTaskList(Type type);
-
-    void updateFilteredTaskList(String type);
 }
