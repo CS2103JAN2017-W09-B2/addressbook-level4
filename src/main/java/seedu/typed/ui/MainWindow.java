@@ -58,6 +58,12 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
+    @FXML
+    private AnchorPane chartPlaceholder;
+
+    @FXML
+    private AnchorPane miscPlaceholder;
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Session session) {
         super(FXML);
 
@@ -124,7 +130,11 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         // new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic, session);
+        new Chart(getChartPlaceholder());
+    }
 
+    private AnchorPane getChartPlaceholder() {
+        return chartPlaceholder;
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
