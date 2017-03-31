@@ -1,14 +1,18 @@
 //@@author A0139392X
 package seedu.typed.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import seedu.typed.commons.events.ui.NewResultAvailableEvent;
 import seedu.typed.model.Model;
 
 public class Chart extends UiPart<Region> {
@@ -42,6 +46,7 @@ public class Chart extends UiPart<Region> {
         holder.getChildren().add(percentage);
 
         initialize();
+        registerAsAnEventHandler(this);
     }
 
     void initialize() {
@@ -64,5 +69,23 @@ public class Chart extends UiPart<Region> {
         chart.setData(pieData);
         chart.setStartAngle(90);
     }
+
+    @Subscribe
+    private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
+        int completed = model.getNumberCompletedTasks();
+        int pending = model.getNumberUncompletedTasks();
+        int total = model.getTotalTasks();
+
+        for (Data d : pieData) {
+            if (d.getName().equals("Completed")) {
+                d.setPieValue(completed);
+            } else {
+                d.setPieValue(pending);
+            }
+        }
+
+        percentage.setText((Math.abs((completed*100)/total)) + " %");
+    }
+
 }
 //@@author
