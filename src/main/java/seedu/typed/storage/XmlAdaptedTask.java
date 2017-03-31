@@ -29,6 +29,8 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String to;
     //@@author
+    @XmlElement(required = true)
+    private boolean isCompleted;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -55,6 +57,7 @@ public class XmlAdaptedTask {
         from = source.getFrom().getValue();
         to = source.getTo().getValue();
         //@@author
+        isCompleted = source.getIsCompleted();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -83,6 +86,7 @@ public class XmlAdaptedTask {
                 .setFrom(this.from)
                 .setTo(this.to)
                 //@@author
+                .isCompleted(this.isCompleted)
                 .setTags(tags)
                 .build();
     }

@@ -57,7 +57,7 @@ public class CompleteCommand extends Command {
             }
             this.model.completeTasks(startIndex, endIndex);
         } catch (Exception e) {
-            throw new CommandException(MESSAGE_NOT_COMPLETED);
+            throw new CommandException(e.getMessage());
         }
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, "Task Name!"));
     }
