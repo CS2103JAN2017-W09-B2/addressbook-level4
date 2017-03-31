@@ -56,15 +56,11 @@ public class Chart extends UiPart<Region> {
         int pending = model.getNumberUncompletedTasks();
         int total = model.getTotalTasks();
 
-        System.out.println("Total: " + total);
-        System.out.println("Pending: " + pending);
-        System.out.println("Completed: " + completed);
-
         pieData = FXCollections.observableArrayList(
                 new PieChart.Data("Completed", completed),
                 new PieChart.Data("Pending", pending));
 
-        percentage.setText((Math.abs((completed*100)/total)) + " %");
+        tabulatingPercentage(completed, total);
 
         chart.setData(pieData);
         chart.setStartAngle(90);
@@ -72,15 +68,16 @@ public class Chart extends UiPart<Region> {
 
     @Subscribe
     private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
-        System.out.println("meow");
         int completed = model.getNumberCompletedTasks();
         int pending = model.getNumberUncompletedTasks();
         int total = model.getTotalTasks();
 
-        System.out.println("Total: " + total);
-        System.out.println("Pending: " + pending);
-        System.out.println("Completed: " + completed);
+        updatePie(completed, pending);
 
+        tabulatingPercentage(completed, total);
+    }
+
+    private void updatePie(int completed, int pending) {
         for (Data d : pieData) {
             if (d.getName().equals("Completed")) {
                 d.setPieValue(completed);
@@ -88,7 +85,9 @@ public class Chart extends UiPart<Region> {
                 d.setPieValue(pending);
             }
         }
+    }
 
+    private void tabulatingPercentage(int completed, int total) {
         if (total != 0) {
             percentage.setText((Math.abs((completed*100)/total)) + " %");
         } else {
