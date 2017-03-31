@@ -59,7 +59,7 @@ public class Chart extends UiPart<Region> {
                 new PieChart.Data("Completed", completed),
                 new PieChart.Data("Pending", pending));
 
-        percentage.setText((Math.abs(pending/total) * 100) + " %");
+        percentage.setText((Math.abs((completed*100)/total)) + " %");
 
         chart.setData(pieData);
         chart.setStartAngle(90);

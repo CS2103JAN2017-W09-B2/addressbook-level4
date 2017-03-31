@@ -46,6 +46,7 @@
             <AnchorPane fx:id="chartPlaceholder" />
          </children>
       </VBox>
-      <AnchorPane fx:id="miscPlaceholder" layoutX="-72.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="110.0" />
+      <AnchorPane fx:id="taskCounterPlaceholder" layoutY="88.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="129.0" />
+      <AnchorPane fx:id="miscPlaceholder" layoutX="-72.0" layoutY="129.0" prefHeight="71.0" prefWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="129.0" />
    </children>
 </AnchorPane>

@@ -64,6 +64,9 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane chartPlaceholder;
 
     @FXML
+    private AnchorPane taskCounterPlaceholder;
+
+    @FXML
     private AnchorPane miscPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Session session, Model model) {
@@ -134,6 +137,11 @@ public class MainWindow extends UiPart<Region> {
         // new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic, session);
         new Chart(getChartPlaceholder(), model);
+        new TaskCounter(getTaskCounterPlaceholder(), model);
+    }
+
+    private AnchorPane getTaskCounterPlaceholder() {
+        return taskCounterPlaceholder;
     }
 
     private AnchorPane getChartPlaceholder() {
