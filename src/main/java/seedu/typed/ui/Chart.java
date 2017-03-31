@@ -89,7 +89,11 @@ public class Chart extends UiPart<Region> {
             }
         }
 
-        percentage.setText((Math.abs((completed*100)/total)) + " %");
+        if (total != 0) {
+            percentage.setText((Math.abs((completed*100)/total)) + " %");
+        } else {
+            percentage.setText(0 + " %");
+        }
     }
 
 }
