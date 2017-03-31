@@ -46,11 +46,13 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        updateFilteredListToShowDefault();
         //this.currentExpression = defaultExpression;
     }
 
     public ModelManager() throws IllegalValueException {
         this(new TaskManager(), new UserPrefs());
+        updateFilteredListToShowDefault();
     }
 
 
