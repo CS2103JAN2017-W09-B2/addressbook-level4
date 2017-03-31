@@ -15,6 +15,7 @@ import seedu.typed.commons.core.GuiSettings;
 import seedu.typed.commons.events.ui.ExitAppRequestEvent;
 import seedu.typed.commons.util.FxViewUtil;
 import seedu.typed.logic.Logic;
+import seedu.typed.model.Model;
 import seedu.typed.model.UserPrefs;
 import seedu.typed.storage.temp.Session;
 
@@ -37,6 +38,7 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
     private Config config;
     private Session session;
+    private Model model;
 
     /*
     @FXML
@@ -58,7 +60,16 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Session session) {
+    @FXML
+    private AnchorPane chartPlaceholder;
+
+    @FXML
+    private AnchorPane taskCounterPlaceholder;
+
+    @FXML
+    private AnchorPane miscPlaceholder;
+
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Session session, Model model) {
         super(FXML);
 
         // Set dependencies
@@ -66,6 +77,7 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.config = config;
         this.session = session;
+        this.model = model;
 
         // Configure the UI
         setTitle(this.config.getAppTitle());
@@ -124,7 +136,16 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         // new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic, session);
+        new Chart(getChartPlaceholder(), model);
+        new TaskCounter(getTaskCounterPlaceholder(), model);
+    }
 
+    private AnchorPane getTaskCounterPlaceholder() {
+        return taskCounterPlaceholder;
+    }
+
+    private AnchorPane getChartPlaceholder() {
+        return chartPlaceholder;
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

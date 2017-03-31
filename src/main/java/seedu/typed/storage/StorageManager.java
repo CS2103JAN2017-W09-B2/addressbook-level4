@@ -45,7 +45,7 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-    // ================ AddressBook methods ==============================
+    // ================ Typed methods ==============================
 
     @Override
     public String getTaskManagerFilePath() {

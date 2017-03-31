@@ -49,24 +49,16 @@ public class SaveCommand extends Command {
         switch (this.type) {
         case 1: // if the input is a path
             try {
-                // System.out.println("This is a pathname");
-
                 String userHomeDirectory = System.getProperty("user.home");
-                // System.out.println(userHomeDirectory);
 
                 String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/") + 1, this.fileName.length());
-                // System.out.println("Name is:" + " " + onlyName);
                 if (FileUtil.isValidName(onlyName)) {
                     File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
-
-                    // System.out.println(fileToCreate.getCanonicalPath());
 
                     // Forms the directories if the directories are missing
                     fileToCreate.getParentFile().mkdirs();
 
                     writingFile(toCopyFrom, fileToCreate);
-
-                    // System.out.println("created file at directory: " + fileToCreate.getCanonicalPath());
 
                     return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
                 } else {
@@ -76,10 +68,8 @@ public class SaveCommand extends Command {
                 throw new CommandException(MESSAGE_SAVE_ERROR);
             }
         case 2: // if input is a valid fileName
-            // System.out.println("This is a fileName");
             try {
                 String currentFileDirectory = FileUtil.getFullDirectoryPath();
-                // System.out.println("Directory: " + currentFileDirectory);
 
                 File fileToCreate = new File(currentFileDirectory + "/" + this.fileName);
 
