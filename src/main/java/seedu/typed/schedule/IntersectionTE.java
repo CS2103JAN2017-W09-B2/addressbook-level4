@@ -13,7 +13,7 @@ import seedu.typed.model.task.DateTime;
  * @author YIM CHIA HUI
  *
  */
-public class IntersectionTE extends TimeExpression {
+public class IntersectionTE implements TimeExpression {
     private ArrayList<TimeExpression> elements;
 
     public IntersectionTE(TimeExpression te1, TimeExpression te2) {
@@ -28,7 +28,7 @@ public class IntersectionTE extends TimeExpression {
             this.elements.add(te[i]);
         }
     }
-
+    @Override
     public boolean includes(DateTime date) {
         for (TimeExpression te : elements) {
             if (!te.includes(date)) {
