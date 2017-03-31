@@ -6,24 +6,24 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="completedTitle" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" AnchorPane.leftAnchor="10.0">
+      <Text fx:id="completedTitle" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="95.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Bradley Hand Bold" size="25.0" />
          </font>
       </Text>
-      <Text fx:id="pendingTitle" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending" AnchorPane.leftAnchor="10.0">
+      <Text fx:id="pendingTitle" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Bradley Hand Bold" size="25.0" />
          </font>
       </Text>
-      <Text fx:id="completedCount" fill="#1912d6" layoutX="149.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$first" AnchorPane.leftAnchor="149.0">
+      <Text fx:id="completedCount" fill="#1912d6" layoutX="149.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$first" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="95.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Bradley Hand Bold" size="25.0" />
          </font>
       </Text>
-      <Text fx:id="pendingCount" fill="#1912d6" layoutX="149.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$second" AnchorPane.leftAnchor="149.0">
+      <Text fx:id="pendingCount" fill="#1912d6" layoutX="149.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$second" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="120.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Bradley Hand Bold" size="25.0" />
          </font>
       </Text>
    </children>
