@@ -1,9 +1,12 @@
 package seedu.typed.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
+import seedu.typed.commons.events.ui.NewResultAvailableEvent;
 import seedu.typed.model.Model;
 
 public class TaskCounter extends UiPart<Region> {
@@ -28,5 +31,13 @@ public class TaskCounter extends UiPart<Region> {
 
         completedCount.setText(model.getNumberCompletedTasks() + "");
         pendingCount.setText(model.getNumberUncompletedTasks() + "");
+        registerAsAnEventHandler(this);
     }
+
+    @Subscribe
+    private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
+        completedCount.setText(model.getNumberCompletedTasks() + "");
+        pendingCount.setText(model.getNumberUncompletedTasks() + "");
+    }
+
 }
