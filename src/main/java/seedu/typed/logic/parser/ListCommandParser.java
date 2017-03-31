@@ -20,6 +20,7 @@ public class ListCommandParser {
 
     private static final String ALL_STRING = "all";
     private static final String DONE_STRING = "done";
+    private static final Object DURATION_STRING = "duration";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -34,7 +35,9 @@ public class ListCommandParser {
             if (value.isPresent() && !value.get().isEmpty()) {
                 String[] split = value.get().split(" ");
                 String lowered = split[0].toLowerCase();
-                if (lowered.equals(ALL_STRING) || lowered.equals(DONE_STRING)) {
+                if (lowered.equals(ALL_STRING)
+                        || lowered.equals(DONE_STRING)
+                        || lowered.equals(DURATION_STRING)) {
                     type = lowered;
                 }
             }

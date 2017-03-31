@@ -95,7 +95,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_EDIT_TASK_FAILURE);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     /**
