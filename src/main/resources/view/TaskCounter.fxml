@@ -6,12 +6,12 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="Completed" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" AnchorPane.leftAnchor="10.0">
+      <Text fx:id="completedTitle" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" AnchorPane.leftAnchor="10.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="Pending" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending" AnchorPane.leftAnchor="10.0">
+      <Text fx:id="pendingTitle" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending" AnchorPane.leftAnchor="10.0">
          <font>
             <Font size="20.0" />
          </font>

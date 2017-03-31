@@ -89,7 +89,7 @@ public class Chart extends UiPart<Region> {
 
     private void tabulatingPercentage(int completed, int total) {
         if (total != 0) {
-            percentage.setText((Math.abs((completed*100)/total)) + " %");
+            percentage.setText((Math.abs((completed * 100) / total)) + " %");
         } else {
             percentage.setText(0 + " %");
         }
