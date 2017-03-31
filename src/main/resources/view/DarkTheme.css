@@ -300,3 +300,12 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.data0.chart-pie
+{
+-fx-pie-color: #00BFFF;
+
+}
+.data1.chart-pie{
+-fx-pie-color: #D3D3D3;
+}
