@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import seedu.typed.commons.events.ui.NewResultAvailableEvent;
+import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.model.Model;
 
 public class Chart extends UiPart<Region> {
@@ -71,10 +71,15 @@ public class Chart extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
+    private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
+        System.out.println("meow");
         int completed = model.getNumberCompletedTasks();
         int pending = model.getNumberUncompletedTasks();
         int total = model.getTotalTasks();
+
+        System.out.println("Total: " + total);
+        System.out.println("Pending: " + pending);
+        System.out.println("Completed: " + completed);
 
         for (Data d : pieData) {
             if (d.getName().equals("Completed")) {
