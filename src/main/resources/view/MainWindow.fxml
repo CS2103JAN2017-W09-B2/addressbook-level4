@@ -23,10 +23,10 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane fx:id="taskCounterPlaceholder" layoutY="88.0" style="-fx-background-color: #FFC0CB;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="150.0" />
-      <VBox fx:id="chart" layoutY="29.0" prefWidth="150.0" style="-fx-background-color: #FFC0CB;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="29.0">
+      <AnchorPane fx:id="taskCounterPlaceholder" layoutY="88.0" prefHeight="200.0" style="-fx-background-color: #FFC0CB;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="29.0" />
+      <VBox fx:id="chart" layoutY="29.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="29.0">
          <children>
-            <AnchorPane fx:id="chartPlaceholder" />
+            <AnchorPane fx:id="chartPlaceholder" prefHeight="0.0" prefWidth="134.0" />
          </children>
       </VBox>
       <VBox fx:id="taskList" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
