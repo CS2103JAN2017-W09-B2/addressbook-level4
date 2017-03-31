@@ -1,3 +1,4 @@
+//@@author A0139392X
 package seedu.typed.ui;
 
 import com.google.common.eventbus.Subscribe;
@@ -41,3 +42,4 @@ public class TaskCounter extends UiPart<Region> {
     }
 
 }
+//@@author
