@@ -73,7 +73,7 @@ public class SaveCommandParser {
      *              Input given by the user.
      */
     private boolean isAPath(String fileName) {
-        return fileName.contains("/") || fileName.contains("\\");
+        return fileName.contains("/");
     }
 }
 //@@author

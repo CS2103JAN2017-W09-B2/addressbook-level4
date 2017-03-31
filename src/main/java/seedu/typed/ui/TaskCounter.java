@@ -16,6 +16,9 @@ public class TaskCounter extends UiPart<Region> {
     private Model model;
 
     @FXML
+    private AnchorPane mainPane;
+
+    @FXML
     private Text completedCount;
 
     @FXML
@@ -30,6 +33,8 @@ public class TaskCounter extends UiPart<Region> {
     public TaskCounter(AnchorPane taskCounterPlaceholder, Model model) {
         super(FXML);
         this.model = model;
+
+        taskCounterPlaceholder.getChildren().add(mainPane);
 
         taskCounterPlaceholder.getChildren().add(completedTitle);
         taskCounterPlaceholder.getChildren().add(pendingTitle);
