@@ -1,10 +1,13 @@
 package seedu.typed.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.model.Model;
 
 //@@author A0139392X
@@ -65,5 +68,34 @@ public class TypeOverview extends UiPart<Region> {
         holder.getChildren().add(floatingTitle);
         holder.getChildren().add(floatingNumber);
 
+        initialize();
+        registerAsAnEventHandler(this);
+    }
+
+    void initialize() {
+        int pendingFloating = model.getNumberFloatingTasks();
+        int pendingDeadline = model.getNumberDeadlines();
+        int pendingDuration = model.getNumberEvents();
+
+        floatingNumber.setText(pendingFloating + "");
+        deadlineNumber.setText(pendingDeadline + "");
+        durationNumber.setText(pendingDuration + "");
+
+        //TO FIX
+        overdueNumber.setText("0");
+    }
+    @Subscribe
+    private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
+        int pendingFloating = model.getNumberFloatingTasks();
+        int pendingDeadline = model.getNumberDeadlines();
+        int pendingDuration = model.getNumberEvents();
+
+        floatingNumber.setText(pendingFloating + "");
+        deadlineNumber.setText(pendingDeadline + "");
+        durationNumber.setText(pendingDuration + "");
+
+        //TO FIX
+        overdueNumber.setText("0");
     }
 }
+//@@author

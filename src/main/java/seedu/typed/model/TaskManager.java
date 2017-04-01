@@ -274,40 +274,40 @@ public class TaskManager implements ReadOnlyTaskManager {
     public int getNumberUncompletedTasks() {
         return tasks.size() - getNumberCompletedTasks();
     }
-    
+
     public int getNumberFloatingTasks() {
         int size = tasks.size();
         int count = 0;
         for (int i = 0; i < size; i++) {
             if (tasks.getTaskAt(i).isFloating()) {
-                count ++;
+                count++;
             }
         }
         return count;
     }
-    
-    public int getNumberEvents(){
+
+    public int getNumberEvents() {
         int size = tasks.size();
         int count = 0;
         for (int i = 0; i < size; i++) {
             if (tasks.getTaskAt(i).isEvent()) {
-                count ++;
+                count++;
             }
         }
         return count;
-        
+
     }
-    
+
     public int getNumberDeadlines() {
         int size = tasks.size();
         int count = 0;
         for (int i = 0; i < size; i++) {
             if (tasks.getTaskAt(i).isDeadline()) {
-                count ++;
+                count++;
             }
         }
         return count;
-        
+
     }
 
 }
