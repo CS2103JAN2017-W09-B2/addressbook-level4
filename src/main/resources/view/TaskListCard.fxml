@@ -10,20 +10,25 @@
 	<children>
 		<Label fx:id="id" text="N" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
 			<font>
-				<Font size="30.0" />
+				<Font size="25.0" />
 			</font>
 		</Label>
-		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="344.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="344.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0">
 			<font>
-				<Font size="30.0" />
+				<Font size="25.0" />
 			</font>
 		</Label>
-		<FlowPane fx:id="tags" alignment="CENTER_RIGHT" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-		<Label fx:id="date" text="\$date" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="68.0" />
-		<Text fx:id="notes" fill="#2291da" layoutX="16.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notes" wrappingWidth="393.95556640625" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+		<FlowPane fx:id="tags" alignment="CENTER_RIGHT" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+		<Label fx:id="date" text="\$date" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="60.0" />
+		<Text fx:id="notes" fill="#2291da" layoutX="16.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notes" wrappingWidth="393.95556640625" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0">
 			<font>
 				<Font size="11.0" />
 			</font>
 		</Text>
+      <Label fx:id="priority" layoutX="39.0" layoutY="8.0" text="!!!" textFill="#ff0000e8" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="Bradley Hand Bold" size="25.0" />
+         </font>
+      </Label>
 	</children>
 </AnchorPane>

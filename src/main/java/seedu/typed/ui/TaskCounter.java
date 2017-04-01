@@ -41,8 +41,8 @@ public class TaskCounter extends UiPart<Region> {
         taskCounterPlaceholder.getChildren().add(completedCount);
         taskCounterPlaceholder.getChildren().add(pendingCount);
 
-        completedCount.setText(model.getNumberCompletedTasks() + "");
-        pendingCount.setText(model.getNumberUncompletedTasks() + "");
+        completedCount.setText("" + model.getNumberCompletedTasks());
+        pendingCount.setText("" + model.getNumberUncompletedTasks());
         registerAsAnEventHandler(this);
     }
 
