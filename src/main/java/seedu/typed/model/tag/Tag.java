@@ -58,4 +58,13 @@ public class Tag {
         return OPEN_SQUARE_BRACKET + tagName + CLOSE_SQUARE_BRACKET;
     }
 
+    //@@author A0141094M
+    /**
+     * Returns the text representation of the tag
+     */
+    public String getValue() {
+        return tagName;
+    }
+    //@@author
+
 }

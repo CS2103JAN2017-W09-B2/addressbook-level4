@@ -129,6 +129,10 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+    //@@author A0141094M
+    void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords);
+    //@@author
+
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -137,4 +141,5 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
 }
