@@ -5,11 +5,11 @@ package seedu.typed.commons.util;
  * Stores two items.
  */
 
-public class PairUtil<F, S> {
+public class Pair<F, S> {
     private F first;
     private S second;
 
-    public PairUtil(F first, S second) {
+    public Pair(F first, S second) {
         this.first = first;
         this.second = second;
     }
@@ -37,9 +37,9 @@ public class PairUtil<F, S> {
             return true;
         }
 
-        if (obj instanceof PairUtil) {
+        if (obj instanceof Pair) {
             @SuppressWarnings("unchecked")
-            PairUtil<F, S> pair = (PairUtil<F, S>) obj;
+            Pair<F, S> pair = (Pair<F, S>) obj;
             return first.equals(pair.getFirst())
                    && second.equals(pair.getSecond());
         } else {
