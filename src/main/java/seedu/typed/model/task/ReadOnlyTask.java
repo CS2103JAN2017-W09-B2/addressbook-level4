@@ -32,11 +32,11 @@ public interface ReadOnlyTask {
     UniqueTagList getTags();
 
     boolean getIsCompleted();
-    
+
     boolean isEvent();
-    
+
     boolean isDeadline();
-    
+
     boolean isFloating();
 
     /**

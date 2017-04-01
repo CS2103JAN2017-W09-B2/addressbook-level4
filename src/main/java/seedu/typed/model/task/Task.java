@@ -154,7 +154,7 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-    
+
     public boolean isEvent() {
         if ("".equals(from) || "".equals(to)) {
             // if either from or to is empty string
@@ -163,7 +163,7 @@ public class Task implements ReadOnlyTask {
         // if it has a field, it means it would be a valid date and event
         return true;
     }
-    
+
     public boolean isDeadline() {
         if ("".equals(date)) {
             // if date field is empty string
