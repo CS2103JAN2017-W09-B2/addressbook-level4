@@ -20,6 +20,7 @@ public class Date {
      *             if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
+        System.out.println(date);
         if (date == null) {
             this.value = "";
         } else {
