@@ -76,7 +76,11 @@ public class Parser {
             return new AddCommandParser().parse(args);
 
         case "complete":
+            return new CompleteCommandParser().parse(args);
+
         case "do":
+            return new CompleteCommandParser().parse(args);
+
         case CompleteCommand.COMMAND_WORD:
             return new CompleteCommandParser().parse(args);
 
