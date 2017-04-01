@@ -1,5 +1,6 @@
 package seedu.typed.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.typed.commons.core.UnmodifiableObservableList;
@@ -85,7 +86,7 @@ public interface Model {
     //@@author A0139379M
     void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException;
     //@@author
-    void completeTask(int filteredTaskListIndex) throws DuplicateTaskException;
+    void completeTaskAt(int filteredTaskListIndex) throws DuplicateTaskException;
     // =========== ModelManager Util Methods =======================
     // =============================================================
     /**
@@ -131,4 +132,14 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    //@@author A0143853A
+    void uncompleteTaskAtForUndoRedo(int taskManagerIndex) throws DuplicateTaskException;
+
+    void completeTaskAtForUndoRedo(int taskManagerIndex) throws DuplicateTaskException;
+
+    void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
+            throws DuplicateTaskException;
+    //@@author
+
 }

@@ -1,5 +1,6 @@
 package seedu.typed.logic.commands;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.typed.commons.util.TripleUtil;
@@ -71,6 +72,7 @@ public class RedoCommand extends Command {
 
     }
 
+    @SuppressWarnings("unchecked")
     private void executeRedoCommand() throws CommandException {
         Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popRedoStack();
 
@@ -106,6 +108,15 @@ public class RedoCommand extends Command {
                 currentTaskManager.copyData(model.getTaskManager());
                 model.resetData((ReadOnlyTaskManager) change);
                 toPush.setThird(currentTaskManager);
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                break;
+
+            case CommandTypeUtil.TYPE_COMPLETE:
+                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) toPush.getThird();
+                for (int curr = 0; curr < listOfIndices.size(); curr++) {
+                    int indexToComplete = listOfIndices.get(curr);
+                    model.completeTaskAtForUndoRedo(indexToComplete);
+                }
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
                 break;
 

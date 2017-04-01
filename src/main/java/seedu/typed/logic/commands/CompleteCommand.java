@@ -1,8 +1,12 @@
 package seedu.typed.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.typed.logic.commands.exceptions.CommandException;
-//@@author A0139379M
+import seedu.typed.logic.commands.util.CommandTypeUtil;
+
 public class CompleteCommand extends Command {
+    //@@author A0139379M
     public static final String COMMAND_WORD = "finish";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a Task as completed "
@@ -11,7 +15,8 @@ public class CompleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: %1$s";
-    public static final String MESSAGE_NOT_COMPLETED = "Task does not exists in the task manager";
+    public static final String MESSAGE_COMPLETED_TASKS_SUCCESS = "Completed %1$d tasks.";
+    public static final String MESSAGE_NOT_COMPLETED = "Task does not exist in the task manager";
     public static final String MESSAGE_ALREADY_COMPLETED = "This task is already completed in the task manager.";
 
     private int startIndex;
@@ -21,12 +26,12 @@ public class CompleteCommand extends Command {
      * @param startIndex
      *            the index of the task in the filtered task list to complete
      */
-    public CompleteCommand(int startIndex) {
-        assert startIndex > 0;
+    public CompleteCommand(int index) {
+        assert index > 0;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.startIndex = startIndex - 1;
-        this.endIndex = this.startIndex;
+        startIndex = index - 1;
+        endIndex = startIndex;
     }
     /**
      *
@@ -46,19 +51,32 @@ public class CompleteCommand extends Command {
      */
     public CompleteCommand() {
         this.startIndex = 0;
-        this.endIndex = -1;
+        this.endIndex = model.getFilteredTaskList().size() - 1;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
+        ArrayList<Integer> listOfIndices = new ArrayList<Integer>();
         try {
-            if (endIndex == -1) {
-                endIndex = this.model.getFilteredTaskList().size() - 1;
-            }
-            this.model.completeTasks(startIndex, endIndex);
+            model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_COMPLETE, -1, listOfIndices);
+            session.updateValidCommandsHistory(commandText);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }
-        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, "Task Name!"));
+        return commandResultBasedOnIndicesList(listOfIndices);
     }
+    //@@author
+
+    //@@author A0143853A
+    private CommandResult commandResultBasedOnIndicesList(ArrayList<Integer> list) {
+        if (list.size() == 1) {
+            int taskIndex = list.get(0);
+            String taskName = model.getTaskAt(taskIndex).getName().getValue();
+            return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, taskName));
+        } else {
+            return new CommandResult(String.format(MESSAGE_COMPLETED_TASKS_SUCCESS, list.size()));
+        }
+    }
+    //@@author
 }

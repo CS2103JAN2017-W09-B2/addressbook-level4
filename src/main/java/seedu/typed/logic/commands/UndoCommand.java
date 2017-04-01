@@ -1,5 +1,6 @@
 package seedu.typed.logic.commands;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.typed.commons.util.TripleUtil;
@@ -71,6 +72,7 @@ public class UndoCommand extends Command {
 
     }
 
+    @SuppressWarnings("unchecked")
     private void executeUndoCommand() throws CommandException {
         Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popUndoStack();
 
@@ -104,6 +106,15 @@ public class UndoCommand extends Command {
             case CommandTypeUtil.TYPE_CLEAR:
                 model.resetData((ReadOnlyTaskManager) change);
                 toPush.setThird(new TaskManager());
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                break;
+
+            case CommandTypeUtil.TYPE_COMPLETE:
+                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) toPush.getThird();
+                for (int curr = 0; curr < listOfIndices.size(); curr++) {
+                    int indexToUncomplete = listOfIndices.get(curr);
+                    model.uncompleteTaskAtForUndoRedo(indexToUncomplete);
+                }
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
 

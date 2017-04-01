@@ -1,5 +1,6 @@
 package seedu.typed.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -124,26 +125,65 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0139379M
     @Override
-    public synchronized void completeTask(int filteredTaskListIndex) throws DuplicateTaskException {
+    public synchronized void completeTaskAt(int filteredTaskListIndex)
+            throws DuplicateTaskException {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.completeTask(taskManagerIndex);
+        taskManager.completeTaskAt(taskManagerIndex);
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException {
+    public synchronized void completeTasks(int startIndex, int endIndex)
+            throws DuplicateTaskException {
         int num = endIndex - startIndex + 1;
         for (int i = 0; i < num; i++) {
             int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
-            System.out.println("TaskManagerIndex: " + taskManagerIndex);
-            taskManager.completeTask(taskManagerIndex);
+            taskManager.completeTaskAt(taskManagerIndex);
             updateFilteredListToShowDefault();
             indicateTaskManagerChanged();
         }
     }
     //@@author
 
+    //@@author A0143853A
+    @Override
+    public synchronized void completeTasksAndStoreIndices(int startIndex, int endIndex,
+            ArrayList<Integer> list) throws DuplicateTaskException {
+        int num = endIndex - startIndex + 1;
+        for (int i = 0; i < num; i++) {
+            int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
+            addTaskIndexToListIfUncompleted(taskManagerIndex, list);
+            taskManager.completeTaskAt(taskManagerIndex);
+            updateFilteredListToShowDefault();
+            indicateTaskManagerChanged();
+        }
+    }
+
+    private void addTaskIndexToListIfUncompleted(int taskIndex, ArrayList<Integer> list) {
+        if (!taskManager.getTaskAt(taskIndex).getIsCompleted()) {
+            list.add(taskIndex);
+        }
+    }
+
+    @Override
+    public synchronized void uncompleteTaskAtForUndoRedo(int taskManagerIndex)
+            throws DuplicateTaskException {
+        taskManager.uncompleteTaskAt(taskManagerIndex);
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void completeTaskAtForUndoRedo(int taskManagerIndex)
+            throws DuplicateTaskException {
+        taskManager.completeTaskAt(taskManagerIndex);
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+    //@@author
+
+    //@@author A0143853A
     @Override
     public void updateTaskForUndoRedo(int index, ReadOnlyTask editedTask)
             throws DuplicateTaskException, IllegalValueException {
@@ -153,6 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -200,7 +241,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public void updateFilteredListToShowDefault() {
-        updateFilteredTaskList(this.defaultExpression);
+        updateFilteredTaskList(defaultExpression);
     }
 
     @Override

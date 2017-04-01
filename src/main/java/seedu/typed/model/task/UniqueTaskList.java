@@ -115,6 +115,22 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, editedTask);
     }
 
+    public void completeTaskAt(int index) throws DuplicateTaskException {
+        Task taskToComplete = internalList.get(index);
+        if (!taskToComplete.getIsCompleted()) {
+            taskToComplete.setIsCompleted(true);
+        }
+    }
+
+    //@@author A0143853A
+    public void uncompleteTaskAt(int index) throws DuplicateTaskException {
+        Task taskToUncomplete = internalList.get(index);
+        if (taskToUncomplete.getIsCompleted()) {
+            taskToUncomplete.setIsCompleted(false);
+        }
+    }
+    //@@author
+
     /**
      * Removes the equivalent task from the list.
      *

@@ -10,6 +10,8 @@ public class CommandTypeUtil {
     public static final String TYPE_ADD_TASK = "add Task";
     public static final String TYPE_DELETE_TASK = "delete Task";
     public static final String TYPE_EDIT_TASK = "edit Task";
+    public static final String TYPE_COMPLETE = "complete";
+    public static final String TYPE_UNCOMPLETE = "uncomplete";
     public static final String TYPE_UNDO = "undo";
     public static final String TYPE_REDO = "redo";
     public static final String TYPE_CLEAR = "clear";
