@@ -37,7 +37,7 @@
             <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-       <AnchorPane fx:id="resultDisplayPlaceholder" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0">
+       <AnchorPane fx:id="resultDisplayPlaceholder" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="0.0">
            <padding>
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>

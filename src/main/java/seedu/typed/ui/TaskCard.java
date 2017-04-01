@@ -24,8 +24,6 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Text notes;
-    @FXML
-    private Label priority;
 
     //@@author A0139392X
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -38,7 +36,6 @@ public class TaskCard extends UiPart<Region> {
             date.setText(task.getDate().getValue());
         }
         notes.setText(task.getNotes().toString());
-        priority.setText("!!!");
         initTags(task);
     }
     //@@author

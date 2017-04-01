@@ -1,5 +1,7 @@
 package seedu.typed.logic.parser;
 
+import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.CompleteCommand;
@@ -37,7 +39,8 @@ public class CompleteCommandParser {
                 throw new IllegalValueException(CompleteCommand.MESSAGE_USAGE);
             }
         } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    CompleteCommand.MESSAGE_USAGE));
         }
     }
 }
