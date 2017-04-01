@@ -203,6 +203,18 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(this.defaultExpression);
     }
 
+    //@@author A0141094M
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)),
+                new PredicateExpression(new TagQualifier(tagKeywords)));
+    }
+
+    private void updateFilteredTaskList(Expression expression, Expression tagExpression) {
+        filteredTasks.setPredicate(p -> (expression.satisfies(p) || tagExpression.satisfies(p)));
+    }
+    //@@author
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -367,6 +379,28 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    //@@author A0141094M
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeyWords;
+
+        TagQualifier(Set<String> tagKeyWords) {
+            this.tagKeyWords = tagKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return tagKeyWords.stream().filter(keyword -> StringUtil
+                    .isFuzzyKeywordSearchIgnoreCase(task.getTags(), keyword)).findAny().isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "tag=" + String.join(", ", tagKeyWords);
+        }
+    }
+    //@@author
+
     //@@author A0139379M
     /**
      * Returns true for tasks that are completed

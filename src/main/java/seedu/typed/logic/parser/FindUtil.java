@@ -59,6 +59,30 @@ public class FindUtil {
     }
 
     /**
+     * Checks if specified strings are similar.
+     * @param str non-null string
+     * @param tag non-null, non-empty string that contains a single word
+     * @return isFuzzyMatch boolean indicating if str and word are a fuzzy match, i.e. similar
+     */
+    public static boolean isFuzzyTagMatchIgnoreCase(String str, String tag) {
+        assert str != null : "str cannot be null";
+        assert tag != null : "tag cannot be null";
+        assert !tag.isEmpty() : "tag cannot be empty";
+        assert tag.split(WHITESPACE_DELIMITER).length == 1 : "tag parameter should be a single word";
+        str = str.toLowerCase();
+        tag = tag.toLowerCase();
+        if (str.length() == 0) {
+            return true;
+        } else if (str.length() <= 2) {
+            return isExactWordMatchIgnoreCase(str, tag);
+        } else if (str.length() <= 4) {
+            return computeMinEditDistance(str, tag) <= MAX_EDIT_DISTANCE_STRICT;
+        } else {
+            return computeMinEditDistance(str, tag) <= MAX_EDIT_DISTANCE || isSubstringWordMatchIgnoreCase(str, tag);
+        }
+    }
+
+    /**
      * Computes the minimum edit distance between specified strings as a measure of similarity.
      * @param str non-null string
      * @param word non-null, non-empty string that contains a single word

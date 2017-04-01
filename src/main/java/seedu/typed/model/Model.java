@@ -131,4 +131,6 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords);
 }
