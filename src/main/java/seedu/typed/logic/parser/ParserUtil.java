@@ -15,7 +15,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.StringUtil;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 
 /**
@@ -75,9 +75,9 @@ public class ParserUtil {
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if
      * {@code date} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+    public static Optional<DateTime> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        return date.isPresent() ? Optional.of(DateTime.parseDateString(date.get())) : Optional.empty();
     }
 
     /**

@@ -8,6 +8,7 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * Adds a task to the task manager.
@@ -33,12 +34,16 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String notes, String date, String from,
             String to, Set<String> tags) throws IllegalValueException {
+        ScheduleElement se;
+        if (date == null) {
+            se = null;
+        } else {
+            se = ScheduleElement.parseDateString(date);
+        }
         this.toAdd = new TaskBuilder()
                 .setName(name)
                 .setNotes(notes)
-                .setDate(date)
-                .setFrom(from)
-                .setTo(to)
+                .setSE(se)
                 .setTags(tags)
                 .build();
     }

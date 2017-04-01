@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * Provides a handle to a task card in the task list panel.
@@ -56,7 +57,8 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().getValue()) && getDate().equals(task.getDate().getValue())
+        return getFullName().equals(task.getName().getValue())
+                && getDate().equals(task.getSE().map(ScheduleElement::toString).orElse(""))
                 && getTags().equals(getTags(task.getTags()));
     }
 

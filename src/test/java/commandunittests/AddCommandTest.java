@@ -1,5 +1,6 @@
 package commandunittests;
 
+import java.time.Month;
 import java.util.HashSet;
 
 import org.junit.Before;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList;
 //@@author A0139379M
@@ -45,9 +47,7 @@ public class AddCommandTest {
             testModel.addTask(new TaskBuilder()
                     .setName("Meet Joe")
                     .setNotes("")
-                    .setDate("05/04/2017")
-                    .setFrom("")
-                    .setTo("")
+                    .setDeadline(DateTime.getDateTime(2017, Month.APRIL, 5, 0, 0))
                     .build());
             //dateTagNulls = new TestAddCommand("Meet John", null , null);
             //allNulls = new TestAddCommand(null, null, null);

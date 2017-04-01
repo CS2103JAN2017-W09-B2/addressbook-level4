@@ -102,13 +102,6 @@ public class DateTimeTest {
     }
 
     @Test
-    public void setLocalDateTime_valid_true() {
-        DateTime testDate = new DateTime();
-        testDate.setLocalDateTime(LocalDateTime.of(2017, Month.APRIL, 1, 0, 0));
-        assertTrue(aprilFoolDay.equals(testDate));
-    }
-
-    @Test
     public void toString_AprilFool_success() {
         assertTrue((aprilFoolDay.toString()).equals("2017-04-01"));
     }

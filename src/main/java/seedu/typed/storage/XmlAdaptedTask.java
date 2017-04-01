@@ -2,6 +2,7 @@ package seedu.typed.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -11,6 +12,7 @@ import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * JAXB-friendly version of the Task.
@@ -24,10 +26,6 @@ public class XmlAdaptedTask {
     //@@author A0141094M
     @XmlElement(required = true)
     private String notes;
-    @XmlElement(required = true)
-    private String from;
-    @XmlElement(required = true)
-    private String to;
     //@@author
     @XmlElement(required = true)
     private boolean isCompleted;
@@ -51,11 +49,14 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().getValue();
-        date = source.getDate().getValue();
+        Optional<ScheduleElement> optSE = source.getSE();
+        String dateInput = "";
+        if (optSE.isPresent()) {
+            dateInput = optSE.get().toString();
+        }
+        date = dateInput;
         //@@author A0141094M
         notes = source.getNotes().getValue();
-        from = source.getFrom().getValue();
-        to = source.getTo().getValue();
         //@@author
         isCompleted = source.getIsCompleted();
         tagged = new ArrayList<>();
@@ -77,14 +78,13 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+        ScheduleElement se = ScheduleElement.parseDateString(this.date);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new TaskBuilder()
                 .setName(this.name)
-                .setDate(this.date)
+                .setSE(se)
                 //@@author A0141094M
                 .setNotes(this.notes)
-                .setFrom(this.from)
-                .setTo(this.to)
                 //@@author
                 .isCompleted(this.isCompleted)
                 .setTags(tags)

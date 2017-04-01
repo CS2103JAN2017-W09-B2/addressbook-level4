@@ -1,6 +1,9 @@
 package seedu.typed.model.task;
 
+import java.util.Optional;
+
 import seedu.typed.model.tag.UniqueTagList;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * A read-only immutable interface for a Task in the TaskManager.
@@ -10,19 +13,9 @@ import seedu.typed.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-
-    Date getDate();
-
-    //@author A0141094M
-    Date getFrom();
-
-    Date getTo();
+    Optional<ScheduleElement> getSE();
 
     Notes getNotes();
-    //@@author
-
-    //@@author A0139392X
-    boolean haveDuration();
     //@@author
 
     /**
@@ -43,11 +36,7 @@ public interface ReadOnlyTask {
                 && other.getName().getValue().equals(this.getName().getValue()) // state
                 // checks here
                 // onwards
-                && other.getDate().getValue().equals(this.getDate().getValue())
-                //@@author A0141094M
-                && other.getNotes().getValue().equals(this.getNotes().getValue())
-                && other.getFrom().getValue().equals(this.getFrom().getValue())
-                && other.getTo().getValue().equals(this.getTo().getValue())
+                && other.getSE().equals(this.getSE())
                 //@@author
                 && other.getTags().equals(this.getTags())
                 && (other.getIsCompleted() == this.getIsCompleted()));
@@ -61,9 +50,7 @@ public interface ReadOnlyTask {
         builder.append(" Name: ").append(getName())
         //@@author A0141094M
         .append(" Notes: ").append(getNotes().toString())
-        .append(" Date: ").append(getDate().toString())
-        .append(" From: ").append(getFrom().toString())
-        .append(" To: ").append(getTo().toString())
+        .append(getSE().map(ScheduleElement::toString).orElse(" "))
         //@@author
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");

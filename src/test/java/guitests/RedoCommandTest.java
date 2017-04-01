@@ -2,10 +2,13 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.time.Month;
+
 import org.junit.Test;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.RedoCommand;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.testutil.TaskBuilder;
 import seedu.typed.testutil.TestTask;
 import seedu.typed.testutil.TestUtil;
@@ -44,7 +47,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         TestTask[] expectedList = td.getTypicalTasks();
         String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
         int taskManagerIndex = 1;
-        TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDate("19/03/2017")
+        DateTime testDate = DateTime.getDateTime(2017, Month.MARCH, 19, 0, 0);
+        TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDeadline(testDate)
                 .withTags("husband").build();
         expectedList[taskManagerIndex - 1] = editedTask;
 

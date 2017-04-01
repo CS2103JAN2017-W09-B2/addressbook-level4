@@ -3,6 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.Month;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -11,6 +13,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.testutil.TaskBuilder;
 import seedu.typed.testutil.TestTask;
@@ -27,10 +30,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
         int taskManagerIndex = 1;
-
+        DateTime testDate = DateTime.getDateTime(2017, Month.MARCH, 19, 0, 0);
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Bobby").withDate("19/03/2017")
-                .withFrom("").withTo("").withNotes("").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Bobby").withDeadline(testDate)
+                .withNotes("").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -127,7 +130,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
             String detailsToEdit, TestTask editedTask)
-            throws IllegalArgumentException, IllegalValueException {
+                    throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data

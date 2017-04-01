@@ -7,10 +7,12 @@ import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.typed.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,11 +46,13 @@ import seedu.typed.model.TaskManager;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
+import seedu.typed.schedule.ScheduleElement;
 import seedu.typed.storage.temp.Session;
 
 public class LogicManagerTest {
@@ -427,15 +431,13 @@ public class LogicManagerTest {
         //@@author A0141094M
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
-            Date date = new Date("11/11/1111");
-            Date from = new Date("");
-            Date to = new Date("");
+            DateTime date = DateTime.getDateTime(1111, Month.NOVEMBER, 11, 0, 0);
             Notes notes = new Notes("");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new TaskBuilder().setName(name).setDate(date).setFrom(from)
-                    .setTo(to).setNotes(notes).setTags(tags).build();
+            return new TaskBuilder().setName(name).setDeadline(date)
+                    .setNotes(notes).setTags(tags).build();
         }
 
         /**
@@ -448,12 +450,10 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            String seedDate = "00/00/000" + String.valueOf(seed);
+            DateTime seedDate = DateTime.getDateTime(0000, Month.JANUARY, seed, 0, 0);
             return new TaskBuilder()
                     .setName("Task " + seed)
-                    .setDate("" + seedDate)
-                    .setFrom("")
-                    .setTo("")
+                    .setDeadline(seedDate)
                     .setNotes("")
                     .addTags("tag" + seed)
                     .addTags("tag" + (seed + 1))
@@ -462,12 +462,15 @@ public class LogicManagerTest {
 
         /** Generates the correct add command based on the task given */
         String generateAddCommand(Task task) {
+            Optional<ScheduleElement> optSE = task.getSE();
+            String dateInput = "";
+            if (optSE.isPresent()) {
+                dateInput = optSE.get().toString();
+            }
             StringBuffer cmd = new StringBuffer();
-
             cmd.append("add ");
-
             cmd.append(task.getName().toString());
-            cmd.append(" by ").append(task.getDate());
+            cmd.append(dateInput);
 
             UniqueTagList tags = task.getTags();
             for (Tag t : tags) {
@@ -558,9 +561,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new TaskBuilder()
                     .setName(name)
-                    .setDate("11/11/1111")
-                    .setFrom("")
-                    .setTo("")
+                    .setDeadline(DateTime.getDateTime(1111, Month.NOVEMBER, 11, 0, 0))
                     .setNotes("")
                     .addTags("tag")
                     .build();

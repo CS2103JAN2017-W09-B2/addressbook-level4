@@ -9,7 +9,7 @@ import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -17,6 +17,7 @@ import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -106,22 +107,28 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException {
         assert taskToEdit != null;
-
+        ScheduleElement newSE = null;
+        if (editTaskDescriptor.getFrom().isPresent()) {
+            // editing by event
+            newSE = ScheduleElement.makeEvent(editTaskDescriptor.getFrom().get()
+                    , editTaskDescriptor.getTo().get());
+        } else {
+            if (editTaskDescriptor.getDate().isPresent()) {
+                newSE = ScheduleElement.makeDeadline(editTaskDescriptor.getDate().get());
+            }
+        }
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
-        //@@author A0141094M
-        Date updatedFrom = editTaskDescriptor.getFrom().orElseGet(taskToEdit::getFrom);
-        Date updatedTo = editTaskDescriptor.getTo().orElseGet(taskToEdit::getTo);
         Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
         //@@author
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        if (newSE == null) {
+            newSE = taskToEdit.getSE().orElse(null);
+        }
 
         return new TaskBuilder()
                 .setName(updatedName)
                 .setNotes(updatedNotes)
-                .setDate(updatedDate)
-                .setFrom(updatedFrom)
-                .setTo(updatedTo)
+                .setSE(newSE)
                 .setTags(updatedTags)
                 .build();
     }
@@ -132,10 +139,10 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<DateTime> date = Optional.empty();
         //@@author A0141094M
-        private Optional<Date> from = Optional.empty();
-        private Optional<Date> to = Optional.empty();
+        private Optional<DateTime> from = Optional.empty();
+        private Optional<DateTime> to = Optional.empty();
         private Optional<Notes> notes = Optional.empty();
         //@@author
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -171,33 +178,33 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDate(Optional<Date> date) {
+        public void setDate(Optional<DateTime> date) {
             assert date != null;
 
             this.date = date;
         }
 
-        public Optional<Date> getDate() {
+        public Optional<DateTime> getDate() {
             return date;
         }
 
         //@@author A0141094M
 
-        public void setFrom(Optional<Date> from) {
+        public void setFrom(Optional<DateTime> from) {
             assert from != null;
             this.from = from;
         }
 
-        public Optional<Date> getFrom() {
+        public Optional<DateTime> getFrom() {
             return from;
         }
 
-        public void setTo(Optional<Date> to) {
+        public void setTo(Optional<DateTime> to) {
             assert to != null;
             this.to = to;
         }
 
-        public Optional<Date> getTo() {
+        public Optional<DateTime> getTo() {
             return to;
         }
 

@@ -1,5 +1,7 @@
 package seedu.typed.ui;
 
+import java.util.Optional;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -7,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.typed.model.task.ReadOnlyTask;
+import seedu.typed.schedule.ScheduleElement;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -30,11 +33,12 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
-        if (task.haveDuration()) {
-            date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
-        } else {
-            date.setText(task.getDate().getValue());
+        Optional<ScheduleElement> optSE = task.getSE();
+        String dateInput = "";
+        if (optSE.isPresent()) {
+            dateInput = optSE.get().toString();
         }
+        date.setText(dateInput);
         notes.setText(task.getNotes().toString());
         initTags(task);
     }

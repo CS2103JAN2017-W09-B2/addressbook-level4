@@ -1,5 +1,6 @@
 package commandunittests;
 
+import java.time.Month;
 import java.util.Set;
 
 import seedu.typed.commons.core.UnmodifiableObservableList;
@@ -7,6 +8,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.ModelManager;
 import seedu.typed.model.ReadOnlyTaskManager;
 import seedu.typed.model.TaskManager;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
@@ -29,7 +31,7 @@ public class ModelStub extends ModelManager {
     public void addTestTask() {
         try {
             this.taskManager.addTask(new TaskBuilder().setName("Meet Joe")
-                    .setDate("12/12/2017")
+                    .setDeadline(DateTime.getDateTime(2017, Month.DECEMBER, 12, 0, 0))
                     .build());
         } catch (DuplicateTaskException e) {
             e.printStackTrace();
