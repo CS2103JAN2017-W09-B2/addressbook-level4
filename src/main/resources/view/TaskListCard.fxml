@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
@@ -25,5 +26,6 @@
 				<Font size="11.0" />
 			</font>
 		</Text>
+      <ImageView fx:id="stamp" fitHeight="67.0" fitWidth="109.0" layoutX="157.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="17.0" />
 	</children>
 </AnchorPane>
