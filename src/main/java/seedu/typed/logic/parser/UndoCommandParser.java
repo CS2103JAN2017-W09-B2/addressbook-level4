@@ -22,6 +22,8 @@ public class UndoCommandParser {
 
         if (trimmedArgs.equals("")) {
             return new UndoCommand();
+        } else if (trimmedArgs.equals("all")) {
+            return new UndoCommand(-1);
         } else if (trimmedArgs.matches(POSITIVE_INTEGER_REGEX)) {
             int num = Integer.parseInt(trimmedArgs);
             return new UndoCommand(num);

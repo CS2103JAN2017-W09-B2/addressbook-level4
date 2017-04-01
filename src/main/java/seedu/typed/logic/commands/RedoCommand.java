@@ -26,19 +26,29 @@ public class RedoCommand extends Command {
                                                + "Parameters: [NUMBER]\n"
                                                + "Example: " + COMMAND_WORD + " 2";
     public static final String MESSAGE_SUCCESS = "Redone successfully!";
-    public static final String MESSAGE_MULTIPLE_SUCCESS = "Redone successfully %1s commands!";
-    public static final String MESSAGE_PARTIAL_SUCCESS = "Redone successfully %1s commands only!";
+    public static final String MESSAGE_ALL_SUCCESS = "Redone all successfully!";
+    public static final String MESSAGE_SINGLE_SUCCESS = "Redone successfully 1 command!";
+    public static final String MESSAGE_MULTIPLE_SUCCESS = "Redone successfully %1$s commands!";
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Redone successfully %1$s commands only!";
+    public static final String MESSAGE_SINGLE_PARTIAL_SUCCESS = "Redone successfully 1 command only!";
     public static final String MESSAGE_NO_COMMAND_TO_REDO = "There is no undo to redo!";
     public static final String MESSAGE_ERROR = "Cannot redo previous undo!";
 
     private int numberOfCmdsToRedo;
+    private String type;
 
     public RedoCommand() {
         numberOfCmdsToRedo = 1;
+        type = "no number";
     }
 
     public RedoCommand(int num) {
         numberOfCmdsToRedo = num;
+        if (num == -1) {
+            type = "all";
+        } else {
+            type = "number";
+        }
     }
 
     @Override
@@ -46,6 +56,11 @@ public class RedoCommand extends Command {
         assert model != null;
 
         int maxNumberToRedo = session.getRedoStack().size();
+
+        if (numberOfCmdsToRedo == -1) {
+            numberOfCmdsToRedo = maxNumberToRedo;
+        }
+
         if (maxNumberToRedo == 0) {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_REDO);
         }
@@ -60,16 +75,42 @@ public class RedoCommand extends Command {
         }
 
         session.updateValidCommandsHistory(commandText);
-        if (numberOfCmdsToRedo == 1) {
+        switch (type) {
+
+        case "no number":
             return new CommandResult(MESSAGE_SUCCESS);
-        } else if (actualNumberOfCmdsToRedo < numberOfCmdsToRedo) {
+
+        case "all":
+            return new CommandResult(MESSAGE_ALL_SUCCESS);
+
+        case "number":
+            return commandResultBasedOnNumber(maxNumberToRedo);
+
+        default:
+            return new CommandResult(MESSAGE_SUCCESS);
+
+        }
+    }
+
+    private CommandResult commandResultBasedOnNumber(int maxNumber) {
+
+        int actualNumber = numberOfCmdsToRedo;
+        if (numberOfCmdsToRedo > maxNumber) {
+            actualNumber = maxNumber;
+        }
+
+        if (numberOfCmdsToRedo == 1) {
+            return new CommandResult(MESSAGE_SINGLE_SUCCESS);
+        } else if ((actualNumber < numberOfCmdsToRedo)
+                   && (actualNumber == 1)) {
+            return new CommandResult(MESSAGE_SINGLE_PARTIAL_SUCCESS);
+        } else if (actualNumber < numberOfCmdsToRedo) {
             return new CommandResult(String.format(MESSAGE_PARTIAL_SUCCESS,
-                                                   actualNumberOfCmdsToRedo));
+                                                   actualNumber));
         } else {
             return new CommandResult(String.format(MESSAGE_MULTIPLE_SUCCESS,
                                                    numberOfCmdsToRedo));
         }
-
     }
 
     @SuppressWarnings("unchecked")

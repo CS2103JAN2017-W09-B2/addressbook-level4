@@ -27,17 +27,17 @@ public class LogicManager extends ComponentManager implements Logic {
 
     public LogicManager(Model model, Session session, Config config) {
         this.model = model;
-        this.parser = new Parser();
         this.session = session;
         this.config = config;
+        this.parser = new Parser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        this.session.updateAllCommandsHistory(commandText);
+        session.updateAllCommandsHistory(commandText);
         Command command = parser.parseInput(commandText);
-        command.setData(this.model, this.session, commandText, config);
+        command.setData(model, session, commandText, config);
 
         return command.execute();
     }

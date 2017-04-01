@@ -22,6 +22,8 @@ public class RedoCommandParser {
 
         if (trimmedArgs.equals("")) {
             return new RedoCommand();
+        } else if (trimmedArgs.equals("all")) {
+            return new RedoCommand(-1);
         } else if (trimmedArgs.matches(POSITIVE_INTEGER_REGEX)) {
             int num = Integer.parseInt(trimmedArgs);
             return new RedoCommand(num);
