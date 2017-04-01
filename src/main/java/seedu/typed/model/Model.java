@@ -31,6 +31,12 @@ public interface Model {
 
     int getTotalTasks();
 
+    int getNumberEvents();
+
+    int getNumberDeadlines();
+
+    int getNumberFloatingTasks();
+
     //@@author A0143853A
     Task getTaskAt(int index);
     //@@author
@@ -125,6 +131,10 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+    //@@author A0141094M
+    void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords);
+    //@@author
+
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}

@@ -33,6 +33,12 @@ public interface ReadOnlyTask {
 
     boolean getIsCompleted();
 
+    boolean isEvent();
+
+    boolean isDeadline();
+
+    boolean isFloating();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)

@@ -114,6 +114,9 @@ public class TaskManager implements ReadOnlyTaskManager {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("tasks: " + i + " " + tasks.getTaskAt(i).toString());
         }
+        System.out.println("Number of Deadline Tasks : " + this.getNumberDeadlines());
+        System.out.println("Number of Floating Tasks : " + this.getNumberFloatingTasks());
+        System.out.println("Number of Event Tasks : " + this.getNumberEvents());
     }
 
     //// task-level operations
@@ -254,13 +257,14 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.completeTaskAt(taskManagerIndex);
     }
 
+
     //@@author A0143853A
     public void uncompleteTaskAt(int taskManagerIndex) throws DuplicateTaskException {
         tasks.uncompleteTaskAt(taskManagerIndex);
     }
     //@@author
 
-    public int getNumCompletedTasks() {
+    public int getNumberCompletedTasks() {
         int num = 0;
         for (int i = 0; i <= 0; i++) {
             if (tasks.getTaskAt(i).getIsCompleted()) {
@@ -270,8 +274,43 @@ public class TaskManager implements ReadOnlyTaskManager {
         return num;
     }
 
-    public int getNumUncompletedTasks() {
-        return tasks.size() - getNumCompletedTasks();
+    public int getNumberUncompletedTasks() {
+        return tasks.size() - getNumberCompletedTasks();
+    }
+
+    public int getNumberFloatingTasks() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isFloating()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getNumberEvents() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isEvent()) {
+                count++;
+            }
+        }
+        return count;
+
+    }
+
+    public int getNumberDeadlines() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isDeadline()) {
+                count++;
+            }
+        }
+        return count;
+
     }
 
 }

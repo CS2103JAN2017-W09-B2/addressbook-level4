@@ -68,15 +68,27 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public int getNumberCompletedTasks() {
-        return taskManager.getNumCompletedTasks();
+        return taskManager.getNumberCompletedTasks();
     }
     @Override
     public int getNumberUncompletedTasks() {
-        return taskManager.getNumUncompletedTasks();
+        return taskManager.getNumberUncompletedTasks();
     }
     @Override
     public int getTotalTasks() {
         return getNumberCompletedTasks() + getNumberUncompletedTasks();
+    }
+    @Override
+    public int getNumberEvents() {
+        return taskManager.getNumberEvents();
+    }
+    @Override
+    public int getNumberDeadlines() {
+        return taskManager.getNumberDeadlines();
+    }
+    @Override
+    public int getNumberFloatingTasks() {
+        return taskManager.getNumberFloatingTasks();
     }
     //@@author A0143853A
     @Override
@@ -262,6 +274,18 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(defaultExpression);
     }
 
+    //@@author A0141094M
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)),
+                new PredicateExpression(new TagQualifier(tagKeywords)));
+    }
+
+    private void updateFilteredTaskList(Expression expression, Expression tagExpression) {
+        filteredTasks.setPredicate(p -> (expression.satisfies(p) || tagExpression.satisfies(p)));
+    }
+    //@@author
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -426,6 +450,28 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    //@@author A0141094M
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeyWords;
+
+        TagQualifier(Set<String> tagKeyWords) {
+            this.tagKeyWords = tagKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return tagKeyWords.stream().filter(keyword -> StringUtil
+                    .isFuzzyKeywordSearchIgnoreCase(task.getTags(), keyword)).findAny().isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "tag=" + String.join(", ", tagKeyWords);
+        }
+    }
+    //@@author
+
     //@@author A0139379M
     /**
      * Returns true for tasks that are completed

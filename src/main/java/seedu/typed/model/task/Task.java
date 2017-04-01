@@ -155,4 +155,29 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    public boolean isEvent() {
+        if ("".equals(from.getValue()) || "".equals(to.getValue())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean isDeadline() {
+        if ("".equals(date.getValue())) {
+            // if date field is empty string
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public boolean isFloating() {
+        if (isDeadline() || isEvent()) {
+            // return true if it is an event or deadline
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
