@@ -7,9 +7,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import seedu.typed.model.task.ReadOnlyTask;
-
+//@@author A0139392X
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -28,18 +30,25 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Text notes;
     @FXML
+    private Circle taskType;
+    @FXML
     private ImageView stamp;
 
-    //@@author A0139392X
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
         if (task.haveDuration()) {
             date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
-        } else {
+            taskType.setFill(Color.GREENYELLOW);
+        } else if (task.haveDeadline()) {
             date.setText(task.getDate().getValue());
+            taskType.setFill(Color.LIGHTPINK);
+        } else {
+            date.setText("");
+            taskType.setFill(Color.CORNFLOWERBLUE);
         }
+
         notes.setText(task.getNotes().toString());
 
         if (task.getIsCompleted()) {

@@ -67,7 +67,10 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane taskCounterPlaceholder;
 
     @FXML
-    private AnchorPane miscPlaceholder;
+    private AnchorPane typeOverviewPlaceholder;
+
+    @FXML
+    private AnchorPane quotesPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Session session, Model model) {
         super(FXML);
@@ -138,6 +141,11 @@ public class MainWindow extends UiPart<Region> {
         new CommandBox(getCommandBoxPlaceholder(), logic, session);
         new Chart(getChartPlaceholder(), model);
         new TaskCounter(getTaskCounterPlaceholder(), model);
+        new Quotes(getQuotesPlaceholder());
+    }
+
+    private AnchorPane getQuotesPlaceholder() {
+        return quotesPlaceholder;
     }
 
     private AnchorPane getTaskCounterPlaceholder() {

@@ -129,4 +129,15 @@ public class TestTask implements ReadOnlyTask {
     }
     //@@author
 
+    //@@author A0139392X
+    @Override
+    public boolean haveDeadline() {
+        return !this.getDate().isEmpty();
+    }
+    @Override
+    public boolean justFloating() {
+        return (!haveDeadline() && !haveDuration());
+    }
+    //@@author
+
 }

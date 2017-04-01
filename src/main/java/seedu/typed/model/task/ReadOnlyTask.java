@@ -23,6 +23,10 @@ public interface ReadOnlyTask {
 
     //@@author A0139392X
     boolean haveDuration();
+
+    boolean haveDeadline();
+
+    boolean justFloating();
     //@@author
 
     /**
