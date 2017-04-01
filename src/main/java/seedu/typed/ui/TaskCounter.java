@@ -4,6 +4,7 @@ package seedu.typed.ui;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
@@ -30,6 +31,12 @@ public class TaskCounter extends UiPart<Region> {
     @FXML
     private Text pendingTitle;
 
+    @FXML
+    private Label firstLabel;
+
+    @FXML
+    private Label secondLabel;
+
     public TaskCounter(AnchorPane taskCounterPlaceholder, Model model) {
         super(FXML);
         this.model = model;
@@ -40,6 +47,8 @@ public class TaskCounter extends UiPart<Region> {
         taskCounterPlaceholder.getChildren().add(pendingTitle);
         taskCounterPlaceholder.getChildren().add(completedCount);
         taskCounterPlaceholder.getChildren().add(pendingCount);
+        taskCounterPlaceholder.getChildren().add(firstLabel);
+        taskCounterPlaceholder.getChildren().add(secondLabel);
 
         completedCount.setText("" + model.getNumberCompletedTasks());
         pendingCount.setText("" + model.getNumberUncompletedTasks());
