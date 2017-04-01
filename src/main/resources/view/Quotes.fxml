@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <Text fx:id="quote" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quote" textAlignment="CENTER" wrappingWidth="200.0" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Text fx:id="author" layoutX="86.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
+   </children>
+</AnchorPane>
