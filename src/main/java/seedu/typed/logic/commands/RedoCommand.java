@@ -3,6 +3,7 @@ package seedu.typed.logic.commands;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import seedu.typed.commons.util.Pair;
 import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
@@ -133,7 +134,11 @@ public class RedoCommand extends Command {
                 break;
 
             case CommandTypeUtil.TYPE_DELETE_TASK:
-                model.deleteTask((ReadOnlyTask) change);
+                ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = (ArrayList<Pair<Integer, Task>>) change;
+                for (int curr = 0; curr < listOfIndicesAndTasks.size(); curr++) {
+                    Task taskToDelete = listOfIndicesAndTasks.get(curr).getSecond();
+                    model.deleteTask(taskToDelete);
+                }
                 toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
                 break;

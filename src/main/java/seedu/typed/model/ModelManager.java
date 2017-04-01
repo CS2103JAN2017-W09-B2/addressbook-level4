@@ -11,6 +11,7 @@ import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
+import seedu.typed.commons.util.Pair;
 import seedu.typed.commons.util.StringUtil;
 import seedu.typed.logic.commands.util.Type;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -119,6 +120,23 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
+
+    //@@author A0143853A
+    @Override
+    public synchronized void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex,
+            ArrayList<Pair<Integer, Task>> list) throws TaskNotFoundException {
+        int num = endIndex - startIndex + 1;
+        for (int i = 0; i < num; i++) {
+            int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
+            Task taskToDelete = taskManager.getTaskAt(taskManagerIndex);
+            Pair<Integer, Task> toAdd = new Pair<Integer, Task>(taskManagerIndex, taskToDelete);
+            list.add(toAdd);
+            taskManager.removeTask(taskToDelete);
+            updateFilteredListToShowDefault();
+            indicateTaskManagerChanged();
+        }
+    }
+    //@@author
 
     // =========== ModelManager Update Tasks =======================
     // =============================================================

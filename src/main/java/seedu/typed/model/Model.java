@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.commons.util.Pair;
 import seedu.typed.logic.commands.util.Type;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
@@ -140,6 +141,9 @@ public interface Model {
 
     void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
             throws DuplicateTaskException;
-    //@@author
 
+    void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex, ArrayList<Pair<Integer, Task>> list)
+            throws TaskNotFoundException;
+
+    //@@author
 }

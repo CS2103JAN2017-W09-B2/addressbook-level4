@@ -2,8 +2,11 @@ package seedu.typed.logic.commands;
 
 import java.util.ArrayList;
 
+import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
+import seedu.typed.model.task.ReadOnlyTask;
 
 public class CompleteCommand extends Command {
     //@@author A0139379M
@@ -15,7 +18,7 @@ public class CompleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: %1$s";
-    public static final String MESSAGE_COMPLETED_TASKS_SUCCESS = "Completed %1$d tasks.";
+    public static final String MESSAGE_COMPLETED_TASKS_SUCCESS = "Completed %1$d tasks!";
     public static final String MESSAGE_NOT_COMPLETED = "Task does not exist in the task manager";
     public static final String MESSAGE_ALREADY_COMPLETED = "This task is already completed in the task manager.";
 
@@ -57,6 +60,12 @@ public class CompleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         ArrayList<Integer> listOfIndices = new ArrayList<Integer>();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (endIndex > lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
         try {
             model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_COMPLETE, -1, listOfIndices);

@@ -3,6 +3,7 @@ package seedu.typed.logic.commands;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import seedu.typed.commons.util.Pair;
 import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
@@ -126,7 +127,12 @@ public class UndoCommand extends Command {
             switch(command) {
 
             case CommandTypeUtil.TYPE_ADD_TASK:
-                model.addTask(index, (Task) change);
+                ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = (ArrayList<Pair<Integer, Task>>) change;
+                for (int curr = 0; curr < listOfIndicesAndTasks.size(); curr++) {
+                    int indexToAdd = listOfIndicesAndTasks.get(curr).getFirst();
+                    Task taskToAdd = listOfIndicesAndTasks.get(curr).getSecond();
+                    model.addTask(indexToAdd, taskToAdd);
+                }
                 toPush.setFirst(CommandTypeUtil.TYPE_DELETE_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
@@ -151,7 +157,7 @@ public class UndoCommand extends Command {
                 break;
 
             case CommandTypeUtil.TYPE_COMPLETE:
-                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) toPush.getThird();
+                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) change;
                 for (int curr = 0; curr < listOfIndices.size(); curr++) {
                     int indexToUncomplete = listOfIndices.get(curr);
                     model.uncompleteTaskAtForUndoRedo(indexToUncomplete);
