@@ -113,6 +113,7 @@ public class RedoCommand extends Command {
         }
     }
 
+
     @SuppressWarnings("unchecked")
     private void executeRedoCommand() throws CommandException {
         Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popRedoStack();

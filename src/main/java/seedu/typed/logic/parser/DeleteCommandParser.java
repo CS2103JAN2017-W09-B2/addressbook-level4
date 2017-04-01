@@ -7,7 +7,7 @@ import java.util.Optional;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.DeleteCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
-
+//@@author A0143853
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
@@ -25,6 +25,21 @@ public class DeleteCommandParser {
         }
 
         return new DeleteCommand(index.get());
+
+       /* String trimmedArgs = args.trim();
+
+        if (trimmedArgs.equals("all")) {
+            return new CompleteCommand();
+        }
+
+        IndexRangeUtil range = new IndexRangeUtil(args);
+        if (range.isValid()) {
+            return new CompleteCommand(range.getStartIndex(),
+                                       range.getEndIndex());
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    CompleteCommand.MESSAGE_USAGE));
+        }*/
     }
 
 }

@@ -27,8 +27,8 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Undone successfully!";
     public static final String MESSAGE_ALL_SUCCESS = "Undone all successfully!";
     public static final String MESSAGE_SINGLE_SUCCESS = "Undone successfully 1 command!";
-    public static final String MESSAGE_MULTIPLE_SUCCESS = "Undone successfully %1s commands!";
-    public static final String MESSAGE_PARTIAL_SUCCESS = "Undone successfully %1s commands only!";
+    public static final String MESSAGE_MULTIPLE_SUCCESS = "Undone successfully %1$s commands!";
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Undone successfully %1$s commands only!";
     public static final String MESSAGE_SINGLE_PARTIAL_SUCCESS = "Redone successfully 1 command only!";
     public static final String MESSAGE_NO_PREV_COMMAND = "There is no command to undo!";
     public static final String MESSAGE_ERROR = "Cannot undo previous command!";
