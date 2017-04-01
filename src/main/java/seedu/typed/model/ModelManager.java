@@ -142,7 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
             int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
             Task taskToDelete = taskManager.getTaskAt(taskManagerIndex);
             Pair<Integer, Task> toAdd = new Pair<Integer, Task>(taskManagerIndex, taskToDelete);
-            list.add(toAdd);
+            list.add(0, toAdd);
             taskManager.removeTask(taskToDelete);
             updateFilteredListToShowDefault();
             indicateTaskManagerChanged();

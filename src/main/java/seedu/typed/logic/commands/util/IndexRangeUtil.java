@@ -4,6 +4,7 @@ public class IndexRangeUtil {
 
     private static final String RANGE_TO_REGEX = "[1-9]+[0-9]*\\s+[t]{1}[o]{1}\\s+[1-9]+[0-9]*";
     private static final String RANGE_NUMBERS_ONLY_REGEX = "[1-9]+[0-9]*\\s+[1-9]+[0-9]*";
+    private static final String RANGE_SINGLE_NUMBER_REGEX = "[1-9]+[0-9]*";
     private static final String RANGE_DASH_REGEX = "[1-9]+[0-9]*\\s+[\\-]\\s+[1-9]+[0-9]*";
 
     private static final String TO_REGEX = "\\s+[t]{1}[o]{1}\\s+";
@@ -18,7 +19,8 @@ public class IndexRangeUtil {
         String trimmedRange = range.trim();
         if (trimmedRange.matches(RANGE_TO_REGEX)) {
             handleToRange(trimmedRange);
-        } else if (trimmedRange.matches(RANGE_NUMBERS_ONLY_REGEX)) {
+        } else if (trimmedRange.matches(RANGE_NUMBERS_ONLY_REGEX)
+                   || trimmedRange.matches(RANGE_SINGLE_NUMBER_REGEX)) {
             handleNumbersOnlyRange(trimmedRange);
         } else if (trimmedRange.matches(RANGE_DASH_REGEX)) {
             handleDashRange(trimmedRange);
