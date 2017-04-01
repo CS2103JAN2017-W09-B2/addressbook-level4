@@ -7,7 +7,7 @@ import java.util.Optional;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.DeleteCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
-//@@author A0143853
+//@@author A0143853A
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
