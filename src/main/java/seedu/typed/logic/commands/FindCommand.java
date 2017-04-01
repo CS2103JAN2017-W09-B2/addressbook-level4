@@ -1,3 +1,5 @@
+//@@author A0141094M
+
 package seedu.typed.logic.commands;
 
 import java.util.Set;
@@ -13,19 +15,23 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Example: " + COMMAND_WORD + " broccoli green healthy";
+            + "the specified keywords or tags (not case-sensitive).\n"
+            + "Parameters: KEYWORD #TAG [MORE_KEYWORDS_OR_TAGS]...\n"
+            + "Example: " + COMMAND_WORD + " broccoli #green #healthy";
 
     private final Set<String> keywords;
+    private final Set<String> tagKeywords;
 
-    public FindCommand(Set<String> keywords) {
+    public FindCommand(Set<String> keywords, Set<String> tagKeywords) {
         assert keywords != null;
+        assert tagKeywords != null;
         this.keywords = keywords;
+        this.tagKeywords = tagKeywords;
     }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        model.updateFilteredTaskList(keywords, tagKeywords);
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_FIND_TASK, -1, null);
         session.updateValidCommandsHistory(commandText);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
