@@ -260,7 +260,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    public int getNumCompletedTasks() {
+    public int getNumberCompletedTasks() {
         int num = 0;
         int total = tasks.size();
         for (int i = 0; i < total; i++) {
@@ -271,8 +271,43 @@ public class TaskManager implements ReadOnlyTaskManager {
         return num;
     }
 
-    public int getNumUncompletedTasks() {
-        return tasks.size() - getNumCompletedTasks();
+    public int getNumberUncompletedTasks() {
+        return tasks.size() - getNumberCompletedTasks();
+    }
+    
+    public int getNumberFloatingTasks() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isFloating()) {
+                count ++;
+            }
+        }
+        return count;
+    }
+    
+    public int getNumberEvents(){
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isEvent()) {
+                count ++;
+            }
+        }
+        return count;
+        
+    }
+    
+    public int getNumberDeadlines() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isDeadline()) {
+                count ++;
+            }
+        }
+        return count;
+        
     }
 
 }

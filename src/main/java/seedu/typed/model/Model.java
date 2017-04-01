@@ -29,6 +29,12 @@ public interface Model {
 
     int getTotalTasks();
 
+    int getNumberEvents();
+
+    int getNumberDeadlines();
+
+    int getNumberFloatingTasks();
+
     //@@author A0143853A
     Task getTaskAt(int index);
     //@@author
