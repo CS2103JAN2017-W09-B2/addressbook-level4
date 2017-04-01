@@ -78,15 +78,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
     @Override
     public int getNumberEvents() {
-        return 0;
+        return taskManager.getNumberEvents();
     }
     @Override
     public int getNumberDeadlines() {
-        return 0;
+        return taskManager.getNumberDeadlines();
     }
     @Override
     public int getNumberFloatingTasks() {
-        return 0;
+        return taskManager.getNumberFloatingTasks();
     }
     //@@author A0143853A
     @Override
