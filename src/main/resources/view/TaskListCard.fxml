@@ -28,6 +28,6 @@
 			</font>
 		</Text>
       <ImageView fx:id="stamp" fitHeight="67.0" fitWidth="109.0" layoutX="157.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="17.0" />
-      <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="18.0" />
+      <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="18.0" />
 	</children>
 </AnchorPane>

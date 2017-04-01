@@ -142,6 +142,11 @@ public class MainWindow extends UiPart<Region> {
         new Chart(getChartPlaceholder(), model);
         new TaskCounter(getTaskCounterPlaceholder(), model);
         new Quotes(getQuotesPlaceholder());
+        new TypeOverview(getTypeOverviewPlaceholder(), model);
+    }
+
+    private AnchorPane getTypeOverviewPlaceholder() {
+        return typeOverviewPlaceholder;
     }
 
     private AnchorPane getQuotesPlaceholder() {
