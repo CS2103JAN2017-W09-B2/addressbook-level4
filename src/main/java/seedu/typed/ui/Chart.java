@@ -19,9 +19,6 @@ public class Chart extends UiPart<Region> {
     private static final String FXML = "Chart.fxml";
 
     @FXML
-    private AnchorPane mainPane;
-
-    @FXML
     private PieChart chart;
 
     @FXML
@@ -49,7 +46,7 @@ public class Chart extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    void initialize() {
+    private void initialize() {
         assert chart != null;
 
         int completed = model.getNumberCompletedTasks();
