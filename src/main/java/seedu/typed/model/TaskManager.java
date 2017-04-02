@@ -265,7 +265,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public int getNumberCompletedTasks() {
         int num = 0;
-        for (int i = 0; i <= 0; i++) {
+        int total = tasks.size();
+        for (int i = 0; i < total; i++) {
             if (tasks.getTaskAt(i).getIsCompleted()) {
                 num++;
             }

@@ -2,15 +2,20 @@ package seedu.typed.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import seedu.typed.model.task.ReadOnlyTask;
-
+//@@author A0139392X
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+    private final Image stampComplete = new Image("/images/tick.png");
 
     @FXML
     private AnchorPane cardPane;
@@ -24,18 +29,32 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Text notes;
+    @FXML
+    private Circle taskType;
+    @FXML
+    private ImageView stamp;
 
-    //@@author A0139392X
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
-        if (task.haveDuration()) {
+        if (task.isEvent()) {
             date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
-        } else {
+            taskType.setFill(Color.GREENYELLOW);
+        } else if (task.isDeadline()) {
             date.setText(task.getDate().getValue());
+            taskType.setFill(Color.LIGHTPINK);
+        } else {
+            date.setText("");
+            taskType.setFill(Color.CORNFLOWERBLUE);
         }
+
         notes.setText(task.getNotes().toString());
+
+        if (task.getIsCompleted()) {
+            stamp.setImage(stampComplete);
+        }
+
         initTags(task);
     }
     //@@author

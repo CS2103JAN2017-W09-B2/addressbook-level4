@@ -146,7 +146,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                || (other instanceof ReadOnlyTask // instance of handles nulls
                         && this.isSameStateAs((ReadOnlyTask) other));
     }
 
@@ -155,29 +155,21 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    @Override
     public boolean isEvent() {
-        if ("".equals(from.getValue()) || "".equals(to.getValue())) {
-            return false;
-        } else {
-            return true;
-        }
+        return !from.isEmpty();
     }
 
+    @Override
     public boolean isDeadline() {
-        if ("".equals(date.getValue())) {
-            // if date field is empty string
-            return false;
-        } else {
-            return true;
-        }
+        return !this.getDate().isEmpty();
     }
+    @Override
     public boolean isFloating() {
-        if (isDeadline() || isEvent()) {
-            // return true if it is an event or deadline
-            return false;
-        } else {
-            return true;
-        }
+        return (!haveDeadline() && !haveDuration());
     }
-
+    @Override
+    public boolean haveDeadline() {
+        return !getDate().isEmpty();
+    }
 }
