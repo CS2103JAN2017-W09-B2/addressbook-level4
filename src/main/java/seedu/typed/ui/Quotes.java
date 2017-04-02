@@ -1,3 +1,4 @@
+//@@author A0139392X
 package seedu.typed.ui;
 
 import java.util.ArrayList;
@@ -109,4 +110,4 @@ public class Quotes extends UiPart<Region> {
         return new Pair<String, String>(quote, author);
     }
 }
-
+//@@author

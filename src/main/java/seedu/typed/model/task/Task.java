@@ -155,40 +155,21 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
-    public boolean isEvent() {
-        if ("".equals(from.getValue()) || "".equals(to.getValue())) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public boolean isDeadline() {
-        if ("".equals(date.getValue())) {
-            // if date field is empty string
-            return false;
-        } else {
-            return true;
-        }
-    }
-    public boolean isFloating() {
-        if (isDeadline() || isEvent()) {
-            // return true if it is an event or deadline
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    //@@author A0139392X
     @Override
-    public boolean haveDeadline() {
+    public boolean isEvent() {
+        return !from.isEmpty();
+    }
+
+    @Override
+    public boolean isDeadline() {
         return !this.getDate().isEmpty();
     }
     @Override
-    public boolean justFloating() {
+    public boolean isFloating() {
         return (!haveDeadline() && !haveDuration());
     }
-    //@@author
-
+    @Override
+    public boolean haveDeadline() {
+        return !getDate().isEmpty();
+    }
 }

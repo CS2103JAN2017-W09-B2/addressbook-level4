@@ -38,10 +38,10 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
-        if (task.haveDuration()) {
+        if (task.isEvent()) {
             date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
             taskType.setFill(Color.GREENYELLOW);
-        } else if (task.haveDeadline()) {
+        } else if (task.isDeadline()) {
             date.setText(task.getDate().getValue());
             taskType.setFill(Color.LIGHTPINK);
         } else {
