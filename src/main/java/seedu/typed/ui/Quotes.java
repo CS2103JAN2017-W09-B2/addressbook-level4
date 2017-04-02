@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
+import seedu.typed.commons.events.ui.NewResultAvailableEvent;
 
 public class Quotes extends UiPart<Region> {
 
@@ -47,14 +48,21 @@ public class Quotes extends UiPart<Region> {
         int randomNumber = randomizedNumber();
         System.out.println(randomNumber);
 
-        quote.setText(quotesDatabase.get(3).getElem1());
-        author.setText(quotesDatabase.get(3).getElem2());
+        quote.setText(quotesDatabase.get(randomNumber).getElem1());
+        author.setText("~ " + quotesDatabase.get(randomNumber).getElem2());
 
         registerAsAnEventHandler(this);
     }
 
     @Subscribe
     private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
+        quote.setText("");
+        author.setText("");
+        quotationHolder.setImage(null);
+    }
+
+    @Subscribe
+    private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
         quote.setText("");
         author.setText("");
         quotationHolder.setImage(null);
@@ -69,9 +77,8 @@ public class Quotes extends UiPart<Region> {
                 + "you were never able to do before.";
         String firstAuthor = "Franz Kafka";
 
-        String second = "If you don’t pay appropriate attention to what has your attention, "
-                + "it will take more of your attention than it deserves.";
-        String secondAuthor = "David Allen";
+        String second = "If you spend too much time thinking about a thing, you’ll never get it done.";
+        String secondAuthor = "Bruce Lee";
 
         String third = "There is no substitute for hard work.";
         String thirdAuthor = "Thomas Edison";

@@ -11,7 +11,7 @@
          <font>
             <Font name="Helvetica Neue" size="17.0" />
          </font></Text>
-      <Text fx:id="author" layoutX="124.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
+      <Text fx:id="author" layoutX="124.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" textAlignment="RIGHT" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <ImageView fx:id="quotationHolder" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" />
    </children>
 </AnchorPane>
