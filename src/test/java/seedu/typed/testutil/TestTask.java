@@ -95,7 +95,8 @@ public class TestTask implements ReadOnlyTask {
         ScheduleElement se = this.getSE();
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().getValue() + " ");
-        sb.append(se.toString());
+        sb.append("by " + se.getDate().toString());
+        //sb.append(se.toString());
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }

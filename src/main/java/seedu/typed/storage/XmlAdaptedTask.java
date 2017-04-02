@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -22,12 +21,8 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private DateTime dateTime;
+    private String dateTime;
     //@@author A0141094M
-    @XmlElement(required = true)
-    private DateTime startDateTime;
-    @XmlElement(required = true)
-    private DateTime endDateTime;
     @XmlElement(required = true)
     private String notes;
     //@@author
@@ -53,11 +48,9 @@ public class XmlAdaptedTask {
      *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
+        System.out.println("whaddap");
         name = source.getName().getValue();
-        ScheduleElement se = source.getSE();
-        dateTime = se.getDate();
-        startDateTime = se.getStartDate();
-        endDateTime = se.getEndDate();
+        dateTime = source.getSE().toString();
         notes = source.getNotes().getValue();
         isCompleted = source.getIsCompleted();
         tagged = new ArrayList<>();
@@ -79,8 +72,12 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        ScheduleElement se = new ScheduleElement(dateTime, startDateTime, endDateTime);
-        System.out.println(this.name + " " + se.getDate() + " " + se.getStartDate() + " " + se.getEndDate());
+        System.out.println(name);
+        System.out.println(notes);
+        System.out.println(isCompleted);
+        System.out.println(dateTime);
+        ScheduleElement se = ScheduleElement.parseDateString(dateTime);
+        //System.out.println(this.name + " " + se.getDate() + " " + se.getStartDate() + " " + se.getEndDate());
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new TaskBuilder()
                 .setName(this.name)

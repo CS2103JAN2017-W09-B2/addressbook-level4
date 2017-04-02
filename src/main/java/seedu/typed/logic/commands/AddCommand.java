@@ -37,9 +37,9 @@ public class AddCommand extends Command {
     public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
             LocalDateTime to, Set<String> tags) throws IllegalValueException {
         ScheduleElement se;
-        if (date == null) {
+        if (date == null && from != null && to != null) {
             se = new ScheduleElement(new DateTime(from), new DateTime(to));
-        } else if (from == null && to == null){
+        } else if (date != null && from == null && to == null){
             se = new ScheduleElement(new DateTime(date));
         } else {
             se = new ScheduleElement();
@@ -61,10 +61,10 @@ public class AddCommand extends Command {
             //@@author A0143853A
             model.addTask(0, toAdd);
             model.getTaskManager().printData();
-            String name = toAdd.getName().toString();
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
             session.updateValidCommandsHistory(commandText);
             //@@author
+            String name = toAdd.getName().toString();
             return new CommandResult(String.format(MESSAGE_SUCCESS, name));
         } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

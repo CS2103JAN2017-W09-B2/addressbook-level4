@@ -1,5 +1,9 @@
 package seedu.typed.schedule;
 
+import java.time.LocalDateTime;
+
+import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.logic.parser.DateTimeParser;
 import seedu.typed.model.task.DateTime;
 
 public class ScheduleElement implements TimeExpression {
@@ -8,8 +12,12 @@ public class ScheduleElement implements TimeExpression {
     private final DateTime startDate; // start time of the event
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence
-
     //@@author A0141094M
+    private final static String BY_DISPLAY_IDENTIFIER = "By:";
+    private final static String FROM_DISPLAY_IDENTIFIER = "From:";
+    private final static String TO_DISPLAY_IDENTIFIER = "To:";
+    private final static String WHITESPACE_DELIMITER_REGEX = "\\s+";
+
     public ScheduleElement() {
         this.date = null;
         this.startDate = null;
@@ -46,25 +54,32 @@ public class ScheduleElement implements TimeExpression {
         this.date = null;
         this.te = null;
     }
+
+    //@@author A0141094M
     /**
-     * A special method which parses a String that matches the
-     * regex for adding tasks with deadlines/duration
-     * @param dateInput
-     * @return
-     * @return
+     * Returns a ScheduleElement built according to the {@code dateInput}.
      */
-    public static ScheduleElement parseDateString(String dateInput) {
-        String[] inputs = dateInput.trim().split("\\s+");
-        System.out.println("parseDateShit");
-        for (int i = 0; i<inputs.length; i++) {
-            System.out.println(inputs[i]);
+    public static ScheduleElement parseDateString(String dateInput) throws IllegalValueException {
+        if (dateInput == null || dateInput.isEmpty()) {
+            return makeFloating();
         }
-        if ("By".equals(inputs[0])) {
-            return new ScheduleElement(DateTime.parseDateString(inputs[1]));
-        } else {
-            return new ScheduleElement(DateTime.parseDateString(inputs[1]), DateTime.parseDateString(inputs[3]));
+        if (dateInput.contains(BY_DISPLAY_IDENTIFIER)) {
+            String[] dateTime = dateInput.trim().split(WHITESPACE_DELIMITER_REGEX);
+            LocalDateTime deadline = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
+            return makeDeadline(DateTimeParser.getDateTimeFromLocalDateTime(deadline));
         }
+        if (dateInput.contains(FROM_DISPLAY_IDENTIFIER) && dateInput.contains(TO_DISPLAY_IDENTIFIER)) {
+            String[] dateTime = dateInput.trim().split(WHITESPACE_DELIMITER_REGEX);
+            if (!dateTime[1].equals(TO_DISPLAY_IDENTIFIER)) {
+                LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
+                LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[3]);
+                return makeEvent(DateTimeParser.getDateTimeFromLocalDateTime(startDateTime),
+                        DateTimeParser.getDateTimeFromLocalDateTime(endDateTime));
+            }
+        }
+        return makeFloating();
     }
+    //@@author
 
     public DateTime getDate() {
         return date;
@@ -83,6 +98,9 @@ public class ScheduleElement implements TimeExpression {
     }
     public boolean isDeadline() {
         return date != null && startDate == null && endDate == null;
+    }
+    public boolean isFloating() {
+        return date == null && startDate == null && endDate == null;
     }
     @Override
     public boolean includes(DateTime date) {
@@ -111,15 +129,17 @@ public class ScheduleElement implements TimeExpression {
                         && this.te == ((ScheduleElement) other).getTe());// state check
     }
 
+    //@@author A0141094M
     @Override
     public String toString() {
         if (isEvent()) {
             return " From: " + this.startDate + " To: " + this.endDate;
         } else if (isDeadline()) {
-            return " By " + this.date;
+            return " By: " + this.date;
         } else {
             return " ";
         }
     }
+    //@@author
 
 }

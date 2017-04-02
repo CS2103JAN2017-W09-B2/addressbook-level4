@@ -85,7 +85,7 @@ public class AddCommandParser {
         if (isNotesPresent(argsTokenizer)) {
             return argsTokenizer.getValue(PREFIX_NOTES).get();
         } else {
-            return null;
+            return "";
         }
     }
 
