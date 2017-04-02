@@ -8,12 +8,28 @@ public class ScheduleElement implements TimeExpression {
     private final DateTime startDate; // start time of the event
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence
-    
+
+    //@@author A0141094M
+    public ScheduleElement() {
+        this.date = null;
+        this.startDate = null;
+        this.endDate = null;
+        this.te = null;
+    }
+
+    public ScheduleElement(DateTime date, DateTime startDate, DateTime endDate) {
+        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.te = null;
+    }
+    //@@author
+
     /**
      * Representation of a deadline in our TaskManager
      * @param date
      */
-    private ScheduleElement(DateTime date) {
+    public ScheduleElement(DateTime date) {
         this.date = date;
         this.startDate = null;
         this.endDate = null;
@@ -24,7 +40,7 @@ public class ScheduleElement implements TimeExpression {
      * @param startDate
      * @param endDate
      */
-    private ScheduleElement(DateTime startDate, DateTime endDate) {
+    public ScheduleElement(DateTime startDate, DateTime endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.date = null;
@@ -34,8 +50,8 @@ public class ScheduleElement implements TimeExpression {
      * A special method which parses a String that matches the
      * regex for adding tasks with deadlines/duration
      * @param dateInput
-     * @return 
-     * @return 
+     * @return
+     * @return
      */
     public static ScheduleElement parseDateString(String dateInput) {
         String[] inputs = dateInput.trim().split("\\s+");
@@ -63,22 +79,26 @@ public class ScheduleElement implements TimeExpression {
         return te;
     }
     public boolean isEvent() {
-        return date == null;
+        return date == null && startDate != null && endDate != null;
     }
-    public boolean isDeadLine() {
-        return date != null;
+    public boolean isDeadline() {
+        return date != null && startDate == null && endDate == null;
     }
     @Override
     public boolean includes(DateTime date) {
         return te.includes(date);
     }
-    
+
     public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate) {
         return new ScheduleElement(startDate, endDate);
     }
-    
+
     public static ScheduleElement makeDeadline(DateTime date) {
         return new ScheduleElement(date);
+    }
+
+    public static ScheduleElement makeFloating() {
+        return new ScheduleElement();
     }
 
     @Override
@@ -90,14 +110,16 @@ public class ScheduleElement implements TimeExpression {
                         && this.endDate == ((ScheduleElement) other).getEndDate()
                         && this.te == ((ScheduleElement) other).getTe());// state check
     }
-    
+
     @Override
     public String toString() {
-        if (date == null) {
+        if (isEvent()) {
             return " From: " + this.startDate + " To: " + this.endDate;
-        } else {
+        } else if (isDeadline()) {
             return " By " + this.date;
+        } else {
+            return " ";
         }
     }
-    
+
 }

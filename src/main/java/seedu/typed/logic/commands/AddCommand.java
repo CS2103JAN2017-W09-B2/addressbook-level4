@@ -1,10 +1,12 @@
 package seedu.typed.logic.commands;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
@@ -18,7 +20,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [by DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + COMMAND_WORD
+            + "Parameters: NAME [by DATE] [on DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + COMMAND_WORD
             + " buy 5 broccolis by tomorrow #survival #grocery ";
 
     public static final String MESSAGE_SUCCESS = "%1$s added";
@@ -32,13 +34,15 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String notes, String date, String from,
-            String to, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
+            LocalDateTime to, Set<String> tags) throws IllegalValueException {
         ScheduleElement se;
         if (date == null) {
-            se = null;
+            se = new ScheduleElement(new DateTime(from), new DateTime(to));
+        } else if (from == null && to == null){
+            se = new ScheduleElement(new DateTime(date));
         } else {
-            se = ScheduleElement.parseDateString(date);
+            se = new ScheduleElement();
         }
         this.toAdd = new TaskBuilder()
                 .setName(name)

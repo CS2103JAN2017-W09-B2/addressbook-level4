@@ -16,7 +16,6 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
-import seedu.typed.schedule.ScheduleElement;
 //@@author A0139379M
 /*
  * Unit testing for TaskBuilder 100%
@@ -71,14 +70,14 @@ public class TaskBuilderTest {
     @Test
     public void setDate_validDate_success() throws IllegalValueException {
         DateTime testDate = testBuilder1
-                .setDeadline(date).setName(name).build().getSE().map(ScheduleElement::getDate).orElse(null);
+                .setDeadline(date).setName(name).build().getSE().getDate();
         assertTrue(date.equals(testDate));
     }
     @Test
     public void setDate_validLocalDateTime_success() {
         LocalDateTime test = LocalDateTime.of(2017, Month.APRIL, 1, 0, 0, 0);
         Task testTask = testBuilder1.setDeadline(test).setName(name).build();
-        DateTime testDate = testTask.getSE().map(ScheduleElement::getDate).orElse(null);
+        DateTime testDate = testTask.getSE().getDate();
         assertTrue(date.equals(testDate));
     }
     @Test

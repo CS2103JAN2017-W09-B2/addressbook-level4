@@ -1,8 +1,7 @@
 package seedu.typed.model.task;
 
-import java.util.Optional;
-
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.schedule.ScheduleElement;
 
@@ -25,8 +24,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, Notes notes, DateTime date, DateTime startDate,
             DateTime endDate, UniqueTagList tags, boolean isCompleted) {
-        // commented this out!! allow date tags be null
-        //assert !CollectionUtil.isAnyNull(name, date, tags);
+        assert !CollectionUtil.isAnyNull(name, tags);
         assert name != null;
         if (startDate != null && endDate != null) {
             // both startDate, endDate not null => event
@@ -36,14 +34,14 @@ public class Task implements ReadOnlyTask {
             this.se = ScheduleElement.makeDeadline(date);
         } else {
             // all nulls => floating task
-            this.se = null;
+            this.se = ScheduleElement.makeFloating();
         }
         this.name = name;
         this.notes = notes;
         this.tags = new UniqueTagList(tags);
         this.isCompleted = isCompleted;
     }
-    
+
     public Task(Name name, Notes notes, ScheduleElement se, UniqueTagList tags, boolean isCompleted) {
         this.name = name;
         this.notes = notes;
@@ -55,15 +53,16 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getNotes(), source.getSE().orElse(null), source.getTags(), source.getIsCompleted());
+        this(source.getName(), source.getNotes(), source.getSE(), source.getTags(), source.getIsCompleted());
     }
 
     public void setSE(ScheduleElement se) {
         this.se = se;
     }
 
-    public Optional<ScheduleElement> getSE() {
-        return Optional.ofNullable(se);
+    @Override
+    public ScheduleElement getSE() {
+        return se;
     }
 
     public void setName(Name name) {
@@ -116,7 +115,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setNotes(replacement.getNotes());
-        this.setSE(replacement.getSE().orElse(null));
+        this.setSE(replacement.getSE());
         this.setTags(replacement.getTags());
         this.setIsCompleted(replacement.getIsCompleted());
     }

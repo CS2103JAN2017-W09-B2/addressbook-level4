@@ -14,15 +14,15 @@ import seedu.typed.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-    
+
     public DateTime testDate1 = DateTime.getDateTime(2018, Month.JANUARY, 1, 0, 0);
     public DateTime testDate2 = DateTime.getDateTime(2018, Month.JANUARY, 2, 0, 0);
     public DateTime testDate3 = DateTime.getDateTime(2018, Month.JANUARY, 3, 0, 0);
-    
+
     public DateTime testDate4 = DateTime.getDateTime(2018, Month.JANUARY, 4, 0, 0);
     public DateTime testDate5 = DateTime.getDateTime(2018, Month.JANUARY, 5, 0, 0);
     public DateTime testDate6 = DateTime.getDateTime(2018, Month.JANUARY, 6, 0, 0);
-    
+
     public DateTime testDate7 = DateTime.getDateTime(2018, Month.JANUARY, 7, 0, 0);
     public DateTime testDate8 = DateTime.getDateTime(2018, Month.JANUARY, 8, 0, 0);
     public DateTime testDate9 = DateTime.getDateTime(2018, Month.JANUARY, 9, 0, 0);
@@ -61,7 +61,7 @@ public class TypicalTestTasks {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 //@@author A0141094M
-                Task toAdd = new Task(task.getName(), task.getNotes(), task.getSE().orElse(null),
+                Task toAdd = new Task(task.getName(), task.getNotes(), task.getSE(),
                         task.getTags(), false);
                 //@@author
                 tm.addTask(toAdd);

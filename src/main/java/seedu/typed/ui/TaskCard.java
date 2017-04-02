@@ -1,7 +1,5 @@
 package seedu.typed.ui;
 
-import java.util.Optional;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -33,12 +31,8 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
-        Optional<ScheduleElement> optSE = task.getSE();
-        String dateInput = "";
-        if (optSE.isPresent()) {
-            dateInput = optSE.get().toString();
-        }
-        date.setText(dateInput);
+        ScheduleElement se = task.getSE();
+        date.setText(se.toString());
         notes.setText(task.getNotes().toString());
         initTags(task);
     }

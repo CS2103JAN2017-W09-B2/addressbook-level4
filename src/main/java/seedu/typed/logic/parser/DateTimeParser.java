@@ -11,6 +11,7 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.model.task.DateTime;
 
 /**
  * Parses date from a non-null string to LocalDateTime.
@@ -31,13 +32,24 @@ public class DateTimeParser {
     }
 
     /**
+     * Returns a date in its DateTime equivalent.
+     * @param ldt LocalDateTime
+     * @return a DateTime instance of the LocalDateTime parsed
+     */
+    public static DateTime getDateTimeFromLocalDateTime(LocalDateTime ldt) {
+        return new DateTime(ldt);
+    }
+
+    /**
      * Returns a date in its LocalDateTime equivalent.
      * @param date non-null String containing a date
      * @return a LocalDateTime instance of the parsed date
      * @throws IllegalValueException if date is in an invalid or ambiguous format
      */
     public static LocalDateTime getLocalDateTimeFromString(String date) throws IllegalValueException {
-        assert date != null;
+        if (date == null) {
+            return null;
+        }
         DateGroup dateGroup = getDateGroupFromString(date);
         Instant instant = dateGroup.getDates().get(0).toInstant();
         return LocalDateTime.ofInstant(instant, getSystemDefaultTimeZone());
@@ -50,7 +62,7 @@ public class DateTimeParser {
      * @throws IllegalValueException if date is in an invalid or ambiguous format
      */
     private static DateGroup getDateGroupFromString(String date) throws IllegalValueException {
-        assert date != null;
+        //assert date != null;
         List<DateGroup> dateGroup = natty.parse(date);
         if (!isEmptyDateGroup(dateGroup)) {
             return dateGroup.get(0);

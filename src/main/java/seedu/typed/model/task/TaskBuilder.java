@@ -33,11 +33,11 @@ public class TaskBuilder {
         this.tags = new UniqueTagList();
         this.notes = new Notes();
     }
-    
+
     public TaskBuilder(ReadOnlyTask task) {
         this.name = task.getName();
         this.notes = task.getNotes();
-        this.se = task.getSE().orElse(null);
+        this.se = task.getSE();
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
@@ -65,7 +65,7 @@ public class TaskBuilder {
         return this;
     }
     //@@author
-    
+
     public TaskBuilder setSE(ScheduleElement se) {
         this.se = se;
         return this;
@@ -74,21 +74,28 @@ public class TaskBuilder {
         this.se = ScheduleElement.makeDeadline(date);
         return this;
     }
-    
+
     public TaskBuilder setDeadline(LocalDateTime date) {
         this.se = ScheduleElement.makeDeadline(new DateTime(date));
         return this;
     }
-    
+
     public TaskBuilder setEvent(DateTime startDate, DateTime endDate) {
         this.se = ScheduleElement.makeEvent(startDate, endDate);
         return this;
     }
-    
+
     public TaskBuilder setEvent(LocalDateTime startDate, LocalDateTime endDate) {
         this.se = ScheduleElement.makeEvent(new DateTime(startDate), new DateTime(endDate));
         return this;
     }
+
+    //@@author A0141094M
+    public TaskBuilder setFloating() {
+        this.se = ScheduleElement.makeFloating();
+        return this;
+    }
+    //@@author
 
     public TaskBuilder isCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;

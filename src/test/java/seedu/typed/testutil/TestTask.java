@@ -1,8 +1,6 @@
 package seedu.typed.testutil;
 
 
-import java.util.Optional;
-
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
@@ -31,7 +29,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.se = taskToCopy.getSE().orElse(null);
+        this.se = taskToCopy.getSE();
         //@@author A0141094M
         this.notes = taskToCopy.getNotes();
         //@@author
@@ -41,7 +39,7 @@ public class TestTask implements ReadOnlyTask {
     public void setName(Name name) {
         this.name = name;
     }
-    
+
     public void setSE(ScheduleElement se) {
         this.se = se;
     }
@@ -87,20 +85,17 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    public Optional<ScheduleElement> getSE() {
-        return Optional.ofNullable(se);
+    @Override
+    public ScheduleElement getSE() {
+        return se;
     }
 
     //@@author A0141094M
     public String getAddCommand() {
-        Optional<ScheduleElement> optSE = this.getSE();
-        String dateInput = "";
-        if (optSE.isPresent()) {
-            dateInput = optSE.get().toString();
-        }
+        ScheduleElement se = this.getSE();
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().getValue() + " ");
-        sb.append(dateInput);
+        sb.append(se.toString());
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }

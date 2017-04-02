@@ -42,12 +42,9 @@ public class EditCommandParser {
             //@@author A0141094M
             //TODO: iron out editTaskDescriptor.isAnyFieldEdited()
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
-                System.out.println("hey there is a date specified");
                 if (argsTokenizer.getValue(PREFIX_DATE).get().equals("none")) {
-                    System.out.println("i detected none!");
                     editTaskDescriptor.setDate(Optional.empty());
                 } else {
-                    System.out.println("i detected NOT none");
                     editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
                 }
             }

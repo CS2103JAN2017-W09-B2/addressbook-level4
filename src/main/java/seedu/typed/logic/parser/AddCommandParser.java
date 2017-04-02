@@ -10,8 +10,9 @@ import static seedu.typed.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TO;
 
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.AddCommand;
@@ -28,39 +29,25 @@ public class AddCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE, PREFIX_ON,
-                PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
-        String notes = null;
-        if (isNotesPresent(argsTokenizer)) {
-            notes = argsTokenizer.getValue(PREFIX_NOTES).get();
-        }
-
-        if (hasByAndOnField(argsTokenizer)) {
-            return new IncorrectCommand(getIncorrectAddMessage());
-        }
-
         try {
-            if (isFloatingActivity(argsTokenizer)) {
-                return new AddCommand(argsTokenizer.getPreamble().get(), notes, null, null, null,
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
-            } else if (isEvent(argsTokenizer)) {
-                return new AddCommand(argsTokenizer.getPreamble().get(), notes, null,
-                        argsTokenizer.getValue(PREFIX_FROM).get(),
-                        argsTokenizer.getValue(PREFIX_TO).get(),
-                        ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
-            } else if (isTask(argsTokenizer)) {
-                String deadline = null;
-                if (isByField(argsTokenizer)) {
-                    deadline = argsTokenizer.getValue(PREFIX_DATE).get();
-                } else {
-                    deadline = argsTokenizer.getValue(PREFIX_ON).get();
-                }
-                return new AddCommand(argsTokenizer.getPreamble().get(), notes, deadline,
-                        null, null, ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
-            } else {
+            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE, PREFIX_ON,
+                    PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
+            argsTokenizer.tokenize(args);
+
+            String name = argsTokenizer.getPreamble().get();
+            String notes = getNotes(argsTokenizer);
+            String deadline = getDeadline(argsTokenizer);
+            String startString = getFrom(argsTokenizer);
+            String endString = getTo(argsTokenizer);
+            Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+            LocalDateTime deadlineDateTime = DateTimeParser.getLocalDateTimeFromString(deadline);
+            LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(startString);
+            LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(endString);
+
+            if (hasBothByAndOnFields(argsTokenizer) || isBothDeadlineTaskAndEventTask(argsTokenizer)) {
                 return new IncorrectCommand(getIncorrectAddMessage());
             }
+            return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(getIncorrectAddMessage());
         } catch (IllegalValueException ive) {
@@ -68,47 +55,78 @@ public class AddCommandParser {
         }
     }
 
-    /**
-     * @return
-     */
+    private String getDeadline(ArgumentTokenizer argsTokenizer) {
+        if (isByPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_DATE).get();
+        } else if (isOnPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_ON).get();
+        } else {
+            return null;
+        }
+    }
+
+    private String getFrom(ArgumentTokenizer argsTokenizer) {
+        if (isFromPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_FROM).get();
+        } else {
+            return null;
+        }
+    }
+
+    private String getTo(ArgumentTokenizer argsTokenizer) {
+        if (isToPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_TO).get();
+        } else {
+            return null;
+        }
+    }
+
+    private String getNotes(ArgumentTokenizer argsTokenizer) {
+        if (isNotesPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_NOTES).get();
+        } else {
+            return null;
+        }
+    }
+
     private String getIncorrectAddMessage() {
         return String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
     }
 
-    private boolean isByField(ArgumentTokenizer argsTokenizer) {
-        return !argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty());
+    private boolean isByPresent(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_DATE).isPresent();
     }
 
-    private boolean isOnField(ArgumentTokenizer argsTokenizer) {
-        return !argsTokenizer.getValue(PREFIX_ON).equals(Optional.empty());
+    private boolean isOnPresent(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_ON).isPresent();
     }
 
-    private boolean hasDeadlineField(ArgumentTokenizer argsTokenizer) {
-        return isByField(argsTokenizer) || isOnField(argsTokenizer);
+    private boolean isFromPresent(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_FROM).isPresent();
     }
 
-    private boolean hasByAndOnField(ArgumentTokenizer argsTokenizer) {
-        return isByField(argsTokenizer) && isOnField(argsTokenizer);
-    }
-
-    private boolean hasFromToFields(ArgumentTokenizer argsTokenizer) {
-        return !argsTokenizer.getValue(PREFIX_FROM).equals(Optional.empty()) &&
-                !argsTokenizer.getValue(PREFIX_TO).equals(Optional.empty());
+    private boolean isToPresent(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_TO).isPresent();
     }
 
     private boolean isNotesPresent(ArgumentTokenizer argsTokenizer) {
-        return !argsTokenizer.getValue(PREFIX_NOTES).equals(Optional.empty());
+        return argsTokenizer.getValue(PREFIX_NOTES).isPresent();
     }
 
-    private boolean isEvent(ArgumentTokenizer argsTokenizer) {
-        return (!hasDeadlineField(argsTokenizer) && hasFromToFields(argsTokenizer));
+    private boolean isDeadlineTask(ArgumentTokenizer argsTokenizer) {
+        return isByPresent(argsTokenizer) || isOnPresent(argsTokenizer);
     }
 
-    private boolean isTask(ArgumentTokenizer argsTokenizer) {
-        return (hasDeadlineField(argsTokenizer) && !hasFromToFields(argsTokenizer));
+    private boolean hasBothByAndOnFields(ArgumentTokenizer argsTokenizer) {
+        return isByPresent(argsTokenizer) && isOnPresent(argsTokenizer);
     }
 
-    private boolean isFloatingActivity(ArgumentTokenizer argsTokenizer) {
-        return (!hasDeadlineField(argsTokenizer) && !hasFromToFields(argsTokenizer));
+    private boolean isBothDeadlineTaskAndEventTask(ArgumentTokenizer argsTokenizer) {
+        return isDeadlineTask(argsTokenizer) && isEventTask(argsTokenizer);
     }
+
+    private boolean isEventTask(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_FROM).isPresent() && argsTokenizer.getValue(PREFIX_TO).isPresent();
+    }
+
 }

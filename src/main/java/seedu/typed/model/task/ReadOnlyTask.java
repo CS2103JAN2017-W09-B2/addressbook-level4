@@ -1,7 +1,5 @@
 package seedu.typed.model.task;
 
-import java.util.Optional;
-
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.schedule.ScheduleElement;
 
@@ -13,10 +11,8 @@ import seedu.typed.schedule.ScheduleElement;
 public interface ReadOnlyTask {
 
     Name getName();
-    Optional<ScheduleElement> getSE();
-
+    ScheduleElement getSE();
     Notes getNotes();
-    //@@author
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -48,10 +44,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ").append(getName())
-        //@@author A0141094M
         .append(" Notes: ").append(getNotes().toString())
-        .append(getSE().map(ScheduleElement::toString).orElse(" "))
-        //@@author
+        .append(getSE().toString())
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");
         getTags().forEach(builder::append);

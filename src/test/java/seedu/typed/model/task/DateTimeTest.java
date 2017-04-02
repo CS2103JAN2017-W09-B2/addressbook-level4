@@ -1,9 +1,7 @@
 package seedu.typed.model.task;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.time.LocalDateTime;
 import java.time.Month;
 
 import org.junit.Test;
@@ -14,8 +12,8 @@ import org.junit.Test;
  */
 public class DateTimeTest {
 
-    private DateTime today = new DateTime();
-    private DateTime tomorrow = today.tomorrow();
+    //private DateTime today = new DateTime();
+    //private DateTime tomorrow = today.tomorrow();
 
     private DateTime aprilFoolDay = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
     private DateTime christmasDay = DateTime.getDateTime(2017, Month.DECEMBER, 25, 0, 0);
@@ -76,6 +74,7 @@ public class DateTimeTest {
         assertTrue(goodFridayDay.nextYear().equals(yearAfterGoodFridayDay));
     }
 
+    /*
     @Test
     public void isToday_notToday_returnFalse() {
         assertFalse(tomorrow.isToday());
@@ -95,6 +94,7 @@ public class DateTimeTest {
     public void isAfter_TomorrowAfterToday_returnTrue() {
         assertTrue(tomorrow.isAfter(today));
     }
+    */
 
     @Test
     public void nextWeek_AprilFool_Success() {

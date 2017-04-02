@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -462,21 +461,15 @@ public class LogicManagerTest {
 
         /** Generates the correct add command based on the task given */
         String generateAddCommand(Task task) {
-            Optional<ScheduleElement> optSE = task.getSE();
-            String dateInput = "";
-            if (optSE.isPresent()) {
-                dateInput = optSE.get().toString();
-            }
+            ScheduleElement se = task.getSE();
             StringBuffer cmd = new StringBuffer();
             cmd.append("add ");
             cmd.append(task.getName().toString());
-            cmd.append(dateInput);
-
+            cmd.append(se.toString());
             UniqueTagList tags = task.getTags();
             for (Tag t : tags) {
                 cmd.append(" #").append(t.tagName);
             }
-
             return cmd.toString();
         }
         //@@author

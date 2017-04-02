@@ -33,9 +33,10 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 buy 10 broccolis by 06/03/2017";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
+    public static final String MESSAGE_EDIT_DATE_FAILURE = "You have entered invalid date formats.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
 
     private static final String MESSAGE_TASK_NOT_FOUND = "Task to edit not found.";
 
@@ -60,10 +61,6 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -99,6 +96,7 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
+    //@@author A0141094M
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -107,30 +105,41 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException {
         assert taskToEdit != null;
-        ScheduleElement newSE = null;
-        if (editTaskDescriptor.getFrom().isPresent()) {
-            // editing by event
-            newSE = ScheduleElement.makeEvent(editTaskDescriptor.getFrom().get()
-                    , editTaskDescriptor.getTo().get());
-        } else {
-            if (editTaskDescriptor.getDate().isPresent()) {
-                newSE = ScheduleElement.makeDeadline(editTaskDescriptor.getDate().get());
-            }
-        }
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
-        //@@author
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        if (newSE == null) {
-            newSE = taskToEdit.getSE().orElse(null);
-        }
+        ScheduleElement updatedSe;
 
+        if (hasOnlyDeadlineField(editTaskDescriptor)) {
+            updatedSe = ScheduleElement.makeDeadline(editTaskDescriptor.getDate().get());
+        } else if (hasOnlyFromAndToFields(editTaskDescriptor)) {
+            updatedSe = ScheduleElement.makeEvent(editTaskDescriptor.getFrom().get(), editTaskDescriptor.getTo().get());
+        } else if (hasNoDeadlineAndNoFromToFields(editTaskDescriptor)) {
+            updatedSe = ScheduleElement.makeFloating();
+        } else {
+            throw new IllegalValueException(MESSAGE_EDIT_DATE_FAILURE);
+        }
         return new TaskBuilder()
                 .setName(updatedName)
                 .setNotes(updatedNotes)
-                .setSE(newSE)
+                .setSE(updatedSe)
                 .setTags(updatedTags)
                 .build();
+    }
+
+    private static boolean hasOnlyFromAndToFields(EditTaskDescriptor edt) {
+        return !edt.getDate().isPresent()
+                && edt.getFrom().isPresent() && edt.getTo().isPresent();
+    }
+
+    private static boolean hasOnlyDeadlineField(EditTaskDescriptor edt) {
+        return edt.getDate().isPresent()
+                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
+    }
+
+    private static boolean hasNoDeadlineAndNoFromToFields(EditTaskDescriptor edt) {
+        return !edt.getDate().isPresent()
+                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
     }
 
     /**
@@ -140,11 +149,9 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<DateTime> date = Optional.empty();
-        //@@author A0141094M
         private Optional<DateTime> from = Optional.empty();
         private Optional<DateTime> to = Optional.empty();
         private Optional<Notes> notes = Optional.empty();
-        //@@author
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {
@@ -153,11 +160,9 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
-            //@@author A0141094M
             this.from = toCopy.getFrom();
             this.to = toCopy.getTo();
             this.notes = toCopy.getNotes();
-            //@@author
             this.tags = toCopy.getTags();
         }
 
@@ -188,8 +193,6 @@ public class EditCommand extends Command {
             return date;
         }
 
-        //@@author A0141094M
-
         public void setFrom(Optional<DateTime> from) {
             assert from != null;
             this.from = from;
@@ -217,11 +220,8 @@ public class EditCommand extends Command {
             return notes;
         }
 
-        //@@author
-
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
-
             this.tags = tags;
         }
 
@@ -229,4 +229,5 @@ public class EditCommand extends Command {
             return tags;
         }
     }
+    //@@author
 }

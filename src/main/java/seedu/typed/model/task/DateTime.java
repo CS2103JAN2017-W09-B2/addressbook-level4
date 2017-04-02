@@ -25,7 +25,7 @@ public class DateTime {
     }
 
     public DateTime() {
-        this.localDateTime = LocalDateTime.now();
+        this.localDateTime = null;
     }
 
     public static DateTime parseDateString(String date) {
@@ -44,7 +44,7 @@ public class DateTime {
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }
-    
+
     public boolean equals(DateTime other) {
         LocalDateTime self = this.localDateTime;
         LocalDateTime others = other.localDateTime;
@@ -113,9 +113,16 @@ public class DateTime {
     private static DateTime getDateTime(int year, int month, int day, int hr, int min) {
         return new DateTime(LocalDateTime.of(year, month, day, hr, min));
     }
+
+    //@@author A0141094M
     @Override
     public String toString() {
-        return localDateTime.toLocalDate().toString();
+        if (localDateTime ==  null) {
+            return " ";
+        } else {
+            return localDateTime.toLocalDate().toString();
+        }
     }
+    //@@author
 
 }
