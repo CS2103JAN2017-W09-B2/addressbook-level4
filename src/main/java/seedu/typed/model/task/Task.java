@@ -174,9 +174,9 @@ public class Task implements ReadOnlyTask {
     public boolean isFloating() {
         if (isDeadline() || isEvent()) {
             // return true if it is an event or deadline
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
