@@ -15,7 +15,7 @@ import seedu.typed.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    private final Image stampComplete = new Image("/images/done.png");
+    private final Image stampComplete = new Image("/images/tick.png");
 
     @FXML
     private AnchorPane cardPane;
