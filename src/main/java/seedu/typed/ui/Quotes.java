@@ -43,7 +43,7 @@ public class Quotes extends UiPart<Region> {
 
         quotationHolder.setImage(quotationLogo);
 
-        quotesDatabase = new ArrayList<Pair<String,String>>();
+        quotesDatabase = new ArrayList<Pair<String, String>>();
         initializeDatabase();
 
         int randomNumber = randomizedNumber();
