@@ -48,14 +48,19 @@ public class DeleteCommand extends Command {
     }
 
     public DeleteCommand() {
-        startIndex = 0;
-        endIndex = model.getFilteredTaskList().size() - 1;
+        startIndex = -1;
+        endIndex = -1;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = new ArrayList<Pair<Integer, Task>>();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (startIndex == -1) {
+            startIndex = 0;
+            endIndex = model.getFilteredTaskList().size() - 1;
+        }
 
         if (endIndex > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

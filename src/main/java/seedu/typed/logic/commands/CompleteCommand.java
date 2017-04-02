@@ -52,14 +52,19 @@ public class CompleteCommand extends Command {
      * Default constructor assumes complete all tasks in filtered task list
      */
     public CompleteCommand() {
-        this.startIndex = 0;
-        this.endIndex = model.getFilteredTaskList().size() - 1;
+        this.startIndex = -1;
+        this.endIndex = -1;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         ArrayList<Integer> listOfIndices = new ArrayList<Integer>();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (startIndex == -1) {
+            startIndex = 0;
+            endIndex = model.getFilteredTaskList().size() - 1;
+        }
 
         if (endIndex > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
