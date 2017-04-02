@@ -113,6 +113,9 @@ public class TaskManager implements ReadOnlyTaskManager {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("tasks: " + i + " " + tasks.getTaskAt(i).toString());
         }
+        System.out.println("Number of Deadline Tasks : " + this.getNumberDeadlines());
+        System.out.println("Number of Floating Tasks : " + this.getNumberFloatingTasks());
+        System.out.println("Number of Event Tasks : " + this.getNumberEvents());
     }
 
     //// task-level operations
