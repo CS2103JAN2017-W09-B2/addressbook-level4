@@ -135,10 +135,7 @@ public class RedoCommand extends Command {
 
             case CommandTypeUtil.TYPE_DELETE_TASK:
                 ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = (ArrayList<Pair<Integer, Task>>) change;
-                for (int curr = 0; curr < listOfIndicesAndTasks.size(); curr++) {
-                    Task taskToDelete = listOfIndicesAndTasks.get(curr).getSecond();
-                    model.deleteTask(taskToDelete);
-                }
+                model.deleteTasksForRedo(listOfIndicesAndTasks);
                 toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
                 break;
@@ -160,10 +157,7 @@ public class RedoCommand extends Command {
 
             case CommandTypeUtil.TYPE_COMPLETE:
                 ArrayList<Integer> listOfIndices = (ArrayList<Integer>) toPush.getThird();
-                for (int curr = 0; curr < listOfIndices.size(); curr++) {
-                    int indexToComplete = listOfIndices.get(curr);
-                    model.completeTaskAtForUndoRedo(indexToComplete);
-                }
+                model.completeTasksAtForRedo(listOfIndices);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
                 break;
 

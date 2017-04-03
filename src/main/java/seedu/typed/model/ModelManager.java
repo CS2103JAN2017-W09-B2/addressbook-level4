@@ -121,6 +121,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
+
+    @Override
+    public synchronized void addTasksForUndo(ArrayList<Pair<Integer, Task>> list)
+            throws DuplicateTaskException {
+        for (int curr = 0; curr < list.size(); curr++) {
+            Pair<Integer, Task> indexAndTask = list.get(curr);
+            int index = indexAndTask.getFirst();
+            Task task = indexAndTask.getSecond();
+            taskManager.addTask(index, task);
+        }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
     //@@author
 
     // =========== ModelManager Delete Tasks =======================
@@ -135,6 +148,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0143853A
     @Override
+    public synchronized void deleteTaskAt(int index) {
+        taskManager.removeTaskAt(index);
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+    //@@author
+
+    //@@author A0143853A
+    @Override
     public synchronized void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex,
             ArrayList<Pair<Integer, Task>> list) throws TaskNotFoundException {
         int num = endIndex - startIndex + 1;
@@ -143,10 +165,22 @@ public class ModelManager extends ComponentManager implements Model {
             Task taskToDelete = taskManager.getTaskAt(taskManagerIndex);
             Pair<Integer, Task> toAdd = new Pair<Integer, Task>(taskManagerIndex, taskToDelete);
             list.add(0, toAdd);
-            taskManager.removeTask(taskToDelete);
-            updateFilteredListToShowDefault();
-            indicateTaskManagerChanged();
+            taskManager.removeTaskAt(taskManagerIndex);
         }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list)
+            throws DuplicateTaskException {
+        for (int curr = 0; curr < list.size(); curr++) {
+            Pair<Integer, Task> indexAndTask = list.get(curr);
+            int index = indexAndTask.getFirst();
+            taskManager.removeTaskAt(index);
+        }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
     }
     //@@author
 
@@ -180,14 +214,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void completeTasksAndStoreIndices(int startIndex, int endIndex,
             ArrayList<Integer> list) throws DuplicateTaskException {
-        int num = endIndex - startIndex + 1;
-        for (int i = 0; i < num; i++) {
-            int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
+        for (int curr = startIndex; curr <= endIndex; curr++) {
+            int taskManagerIndex = filteredTasks.getSourceIndex(curr);
             addTaskIndexToListIfUncompleted(taskManagerIndex, list);
             taskManager.completeTaskAt(taskManagerIndex);
-            updateFilteredListToShowDefault();
-            indicateTaskManagerChanged();
         }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
     }
 
     private void addTaskIndexToListIfUncompleted(int taskIndex, ArrayList<Integer> list) {
@@ -197,7 +230,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void uncompleteTaskAtForUndoRedo(int taskManagerIndex)
+    public synchronized void uncompleteTaskAtForUndo(int taskManagerIndex)
             throws DuplicateTaskException {
         taskManager.uncompleteTaskAt(taskManagerIndex);
         updateFilteredListToShowDefault();
@@ -205,7 +238,27 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void completeTaskAtForUndoRedo(int taskManagerIndex)
+    public synchronized void uncompleteTasksAtForUndo(ArrayList<Integer> list)
+            throws DuplicateTaskException {
+        for (int curr = 0; curr < list.size(); curr++) {
+            taskManager.uncompleteTaskAt(list.get(curr));
+        }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void completeTasksAtForRedo(ArrayList<Integer> list)
+            throws DuplicateTaskException {
+        for (int curr = 0; curr < list.size(); curr++) {
+            taskManager.completeTaskAt(list.get(curr));
+        }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void completeTaskAtForRedo(int taskManagerIndex)
             throws DuplicateTaskException {
         taskManager.completeTaskAt(taskManagerIndex);
         updateFilteredListToShowDefault();

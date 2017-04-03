@@ -62,7 +62,7 @@ public class DeleteCommand extends Command {
             endIndex = model.getFilteredTaskList().size() - 1;
         }
 
-        if (endIndex > lastShownList.size()) {
+        if (endIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -79,8 +79,7 @@ public class DeleteCommand extends Command {
 
     private CommandResult commandResultBasedOnIndicesAndTasksList(ArrayList<Pair<Integer, Task>> list) {
         if (list.size() == 1) {
-            int taskIndex = list.get(0).getFirst();
-            String taskName = model.getTaskAt(taskIndex).getName().getValue();
+            String taskName = list.get(0).getSecond().getName().getValue();
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskName));
         } else {
             return new CommandResult(String.format(MESSAGE_DELETE_TASKS_SUCCESS, list.size()));

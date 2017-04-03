@@ -25,10 +25,17 @@ public class CompleteCommandParser {
         IndexRangeUtil range = new IndexRangeUtil(args);
         if (range.isValid()) {
             return new CompleteCommand(range.getStartIndex(),
+<<<<<<< HEAD
                     range.getEndIndex());
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     CompleteCommand.MESSAGE_USAGE));
+=======
+                                       range.getEndIndex());
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                      CompleteCommand.MESSAGE_USAGE));
+>>>>>>> d1b41e6417c89c3eed400e78300b6f321d9338cf
         }
     }
     //@@author

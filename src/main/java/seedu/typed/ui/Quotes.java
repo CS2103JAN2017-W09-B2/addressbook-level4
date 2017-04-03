@@ -97,17 +97,22 @@ public class Quotes extends UiPart<Region> {
         String seventh = "Your mind is for having ideas, not holding them.";
         String seventhAuthor = "David Allen";
 
-        quotesDatabase.add(Pair(first, firstAuthor));
-        quotesDatabase.add(Pair(second, secondAuthor));
-        quotesDatabase.add(Pair(third, thirdAuthor));
-        quotesDatabase.add(Pair(forth, forthAuthor));
-        quotesDatabase.add(Pair(fifth, fifthAuthor));
-        quotesDatabase.add(Pair(sixth, sixthAuthor));
-        quotesDatabase.add(Pair(seventh, seventhAuthor));
+        quotesDatabase.add(pair(first, firstAuthor));
+        quotesDatabase.add(pair(second, secondAuthor));
+        quotesDatabase.add(pair(third, thirdAuthor));
+        quotesDatabase.add(pair(forth, forthAuthor));
+        quotesDatabase.add(pair(fifth, fifthAuthor));
+        quotesDatabase.add(pair(sixth, sixthAuthor));
+        quotesDatabase.add(pair(seventh, seventhAuthor));
     }
 
+<<<<<<< HEAD
     private StringPair<String, String> Pair(String quote, String author) {
         return new StringPair<String, String>(quote, author);
+=======
+    private Pair<String, String> pair(String quote, String author) {
+        return new Pair<String, String>(quote, author);
+>>>>>>> d1b41e6417c89c3eed400e78300b6f321d9338cf
     }
 }
 //@@author

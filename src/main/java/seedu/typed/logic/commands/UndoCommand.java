@@ -128,17 +128,13 @@ public class UndoCommand extends Command {
 
             case CommandTypeUtil.TYPE_ADD_TASK:
                 ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = (ArrayList<Pair<Integer, Task>>) change;
-                for (int curr = 0; curr < listOfIndicesAndTasks.size(); curr++) {
-                    int indexToAdd = listOfIndicesAndTasks.get(curr).getFirst();
-                    Task taskToAdd = listOfIndicesAndTasks.get(curr).getSecond();
-                    model.addTask(indexToAdd, taskToAdd);
-                }
+                model.addTasksForUndo(listOfIndicesAndTasks);
                 toPush.setFirst(CommandTypeUtil.TYPE_DELETE_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
 
             case CommandTypeUtil.TYPE_DELETE_TASK:
-                model.deleteTask((ReadOnlyTask) change);
+                model.deleteTaskAt(index);
                 toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
@@ -158,10 +154,7 @@ public class UndoCommand extends Command {
 
             case CommandTypeUtil.TYPE_COMPLETE:
                 ArrayList<Integer> listOfIndices = (ArrayList<Integer>) change;
-                for (int curr = 0; curr < listOfIndices.size(); curr++) {
-                    int indexToUncomplete = listOfIndices.get(curr);
-                    model.uncompleteTaskAtForUndoRedo(indexToUncomplete);
-                }
+                model.uncompleteTasksAtForUndo(listOfIndices);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
 
