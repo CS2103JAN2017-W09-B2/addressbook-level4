@@ -29,7 +29,7 @@ public class RedoCommandParser {
             return new RedoCommand(num);
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                      RedoCommand.MESSAGE_USAGE));
+                    RedoCommand.MESSAGE_USAGE));
         }
     }
 

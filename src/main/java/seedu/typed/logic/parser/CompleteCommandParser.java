@@ -18,18 +18,18 @@ public class CompleteCommandParser {
     public Command parse(String args) {
         String trimmedArgs = args.trim();
 
-            if (trimmedArgs.equals("all")) {
-                return new CompleteCommand();
-            }
+        if (trimmedArgs.equals("all")) {
+            return new CompleteCommand();
+        }
 
-            IndexRangeUtil range = new IndexRangeUtil(args);
-            if (range.isValid()) {
-                return new CompleteCommand(range.getStartIndex(),
-                                           range.getEndIndex());
-            } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        CompleteCommand.MESSAGE_USAGE));
-            }
+        IndexRangeUtil range = new IndexRangeUtil(args);
+        if (range.isValid()) {
+            return new CompleteCommand(range.getStartIndex(),
+                    range.getEndIndex());
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    CompleteCommand.MESSAGE_USAGE));
+        }
     }
     //@@author
 }
