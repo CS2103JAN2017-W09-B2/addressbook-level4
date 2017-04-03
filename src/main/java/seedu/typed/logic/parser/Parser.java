@@ -90,6 +90,9 @@ public class Parser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(args);
 
+        case "remove":
+            return new DeleteCommandParser().parse(args);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(args);
 
