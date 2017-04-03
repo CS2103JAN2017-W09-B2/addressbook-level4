@@ -10,12 +10,12 @@ import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
-import seedu.typed.logic.commands.StoreCommand;
+import seedu.typed.logic.commands.SaveCommand;
 
 /**
  * Parses input argument and stores the file.
  */
-public class StoreCommandParser {
+public class SaveCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -38,9 +38,9 @@ public class StoreCommandParser {
         String location = keywords[0];
 
         if (FileUtil.isValidLocation(location)) {
-            return new StoreCommand(FileUtil.createProperExtension(location));
+            return new SaveCommand(FileUtil.createProperExtension(location));
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StoreCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
     }
 }
