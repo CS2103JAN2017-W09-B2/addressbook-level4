@@ -27,8 +27,8 @@ public class SampleDataUtil {
             //@@author A0141094M
             String[] notes = new String[] {"", "", "", "", "", ""};
             //@@author
-            String[] tags = new String[] {"friends", "colleagues", "neighbours", "family", "classmates",
-            "colleagues"};
+            String[] tags = new String[] {"friends", "colleagues", "neighbours", "family",
+                "classmates", "colleagues"};
             for (int i = 0; i < taskNumber; i++) {
                 tasks[i] = new TaskBuilder()
                         .setName(names[i])

@@ -31,7 +31,7 @@ public class DateTime {
     public static DateTime parseDateString(String date) {
         // assume in dd/mm/yyyy format
         String[] dates = date.trim().split("-");
-        for (int i = 0; i<dates.length; i++) {
+        for (int i = 0; i < dates.length; i++) {
             System.out.println(dates[i] + " " + Integer.valueOf(dates[i]));
         }
         System.out.println(dates[0]);

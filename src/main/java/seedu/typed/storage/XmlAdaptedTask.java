@@ -72,12 +72,8 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        System.out.println(name);
-        System.out.println(notes);
-        System.out.println(isCompleted);
-        System.out.println(dateTime);
-        ScheduleElement se = ScheduleElement.parseDateString(dateTime);
-        //System.out.println(this.name + " " + se.getDate() + " " + se.getStartDate() + " " + se.getEndDate());
+        ScheduleElement se = new ScheduleElement();
+        se = se.parseDateString(dateTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new TaskBuilder()
                 .setName(this.name)

@@ -39,7 +39,7 @@ public class AddCommand extends Command {
         ScheduleElement se;
         if (date == null && from != null && to != null) {
             se = new ScheduleElement(new DateTime(from), new DateTime(to));
-        } else if (date != null && from == null && to == null){
+        } else if (date != null && from == null && to == null) {
             se = new ScheduleElement(new DateTime(date));
         } else {
             se = new ScheduleElement();

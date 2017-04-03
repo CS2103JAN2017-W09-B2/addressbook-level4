@@ -3,7 +3,6 @@ package seedu.typed.testutil;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
 import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
@@ -39,12 +38,12 @@ public class TaskBuilder {
         }
         return this;
     }
-    
+
     public TaskBuilder withDeadline(DateTime date) {
         this.task.setSE(ScheduleElement.makeDeadline(date));
         return this;
     }
-    
+
     public TaskBuilder withEvent(DateTime startDate, DateTime endDate) {
         this.task.setSE(ScheduleElement.makeEvent(startDate, endDate));
         return this;

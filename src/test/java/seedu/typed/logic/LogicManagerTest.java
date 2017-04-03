@@ -234,16 +234,9 @@ public class LogicManagerTest {
         expectedTM.addTask(toBeAdded);
 
         // execute command and verify result
-        System.out.println("(1) helper.genAddCmd(tobeadded): " + helper.generateAddCommand(toBeAdded));
-        System.out.println("(2) String.format(blah): " + String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded.getName()));
-        for (ReadOnlyTask task : expectedTM.getTaskList()) {
-            System.out.println(task.toString());
-        }
-
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded.getName()),
                 expectedTM, expectedTM.getTaskList());
-
     }
 
     @Test

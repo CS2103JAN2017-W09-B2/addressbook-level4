@@ -13,10 +13,10 @@ public class ScheduleElement implements TimeExpression {
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence
     //@@author A0141094M
-    private final static String BY_DISPLAY_IDENTIFIER = "By:";
-    private final static String FROM_DISPLAY_IDENTIFIER = "From:";
-    private final static String TO_DISPLAY_IDENTIFIER = "To:";
-    private final static String WHITESPACE_DELIMITER_REGEX = "\\s+";
+    private final String BY_DISPLAY_IDENTIFIER = "By:";
+    private final String FROM_DISPLAY_IDENTIFIER = "From:";
+    private final String TO_DISPLAY_IDENTIFIER = "To:";
+    private final String WHITESPACE_DELIMITER_REGEX = "\\s+";
 
     public ScheduleElement() {
         this.date = null;
@@ -59,7 +59,7 @@ public class ScheduleElement implements TimeExpression {
     /**
      * Returns a ScheduleElement built according to the {@code dateInput}.
      */
-    public static ScheduleElement parseDateString(String dateInput) throws IllegalValueException {
+    public ScheduleElement parseDateString(String dateInput) throws IllegalValueException {
         if (dateInput == null || dateInput.isEmpty()) {
             return makeFloating();
         }
@@ -126,7 +126,7 @@ public class ScheduleElement implements TimeExpression {
                         && this.date == ((ScheduleElement) other).getDate()
                         && this.startDate == ((ScheduleElement) other).getStartDate()
                         && this.endDate == ((ScheduleElement) other).getEndDate()
-                        && this.te == ((ScheduleElement) other).getTe());// state check
+                        && this.te == ((ScheduleElement) other).getTe()); // state check
     }
 
     //@@author A0141094M
