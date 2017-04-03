@@ -17,7 +17,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_SUCCESS = "Typed saved to %1$s";
+    public static final String MESSAGE_SUCCESS = "Typed exported to %1$s";
 
     public static final String MESSAGE_SAVE_ERROR = "Unable to export to the location.";
 
