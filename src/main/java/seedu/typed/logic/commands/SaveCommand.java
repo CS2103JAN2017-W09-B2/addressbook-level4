@@ -16,7 +16,7 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the storage location"
             + " and saves at the new location.\n"
             + "Example: " + COMMAND_WORD
-            + " C:/User/(username)/Desktop/typed.xml";
+            + " C:\\Users\\(username)\\Desktop\\typed.xml";
 
     public static final String MESSAGE_SUCCESS = "Storage location changed! \n" + "New location: %1$s";
     public static final String MESSAGE_ERROR = "Unable to save to new location.";
