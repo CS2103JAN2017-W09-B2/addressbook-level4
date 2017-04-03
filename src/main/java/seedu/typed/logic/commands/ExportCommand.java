@@ -1,3 +1,4 @@
+//@@author A0139392X
 package seedu.typed.logic.commands;
 
 import java.io.File;
@@ -9,7 +10,6 @@ import java.io.IOException;
 import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 
-//@@author A0139392X
 /*
  * If only given filename, save the file to the same directory.
  * If given a path, save the file to that path.
