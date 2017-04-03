@@ -167,8 +167,8 @@ public class ModelManager extends ComponentManager implements Model {
             list.add(0, toAdd);
             taskManager.removeTaskAt(taskManagerIndex);
         }
-       updateFilteredListToShowDefault();
-       indicateTaskManagerChanged();
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
     }
 
     @Override

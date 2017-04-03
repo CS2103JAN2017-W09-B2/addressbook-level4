@@ -25,7 +25,7 @@ public class DeleteCommandParser {
 
         return new DeleteCommand(index.get());*/
 
-       String trimmedArgs = args.trim();
+        String trimmedArgs = args.trim();
 
         if (trimmedArgs.equals("all")) {
             return new DeleteCommand();
