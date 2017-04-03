@@ -13,7 +13,8 @@ public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the storage location and saves at the new location.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the storage location"
+            + " and saves at the new location.\n"
             + "Example: " + COMMAND_WORD
             + " C:/User/(username)/Desktop/typed.xml";
 
