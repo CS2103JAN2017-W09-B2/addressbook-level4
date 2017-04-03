@@ -32,7 +32,7 @@ public class Quotes extends UiPart<Region> {
     @FXML
     private ImageView quotationHolder;
 
-    private ArrayList<StringPair<String, String>> quotesDatabase;
+    private ArrayList<StringPair> quotesDatabase;
 
     public Quotes(AnchorPane placeholder) {
         super(FXML);
@@ -43,7 +43,7 @@ public class Quotes extends UiPart<Region> {
 
         quotationHolder.setImage(quotationLogo);
 
-        quotesDatabase = new ArrayList<StringPair<String, String>>();
+        quotesDatabase = new ArrayList<StringPair>();
         initializeDatabase();
 
         int randomNumber = randomizedNumber();
@@ -106,8 +106,8 @@ public class Quotes extends UiPart<Region> {
         quotesDatabase.add(pair(seventh, seventhAuthor));
     }
 
-    private StringPair<String, String> pair(String quote, String author) {
-        return new StringPair<String, String>(quote, author);
+    private StringPair pair(String quote, String author) {
+        return new StringPair(quote, author);
     }
 }
 //@@author
