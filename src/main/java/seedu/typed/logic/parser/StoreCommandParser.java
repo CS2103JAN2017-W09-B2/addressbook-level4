@@ -1,3 +1,4 @@
+//@@author A0139392X
 package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -9,16 +10,16 @@ import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.Command;
 import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
+import seedu.typed.logic.commands.StoreCommand;
 
-//@@author A0139392X
 /**
- * Parses input argument and exports the file.
+ * Parses input argument and stores the file.
  */
-public class ExportCommandParser {
+public class StoreCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * ExportCommand and returns an SaveCommand object for execution.
+     * StoreCommand and returns an SaveCommand object for execution.
      */
     public Command parse(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
@@ -34,25 +35,13 @@ public class ExportCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
-        String fileName = keywords[0];
+        String location = keywords[0];
 
-        if (isAPath(fileName)) {
-            return new ExportCommand(1, FileUtil.createProperExtension(fileName));
-        } else if (FileUtil.isValidName(fileName)) {
-            return new ExportCommand(2, FileUtil.createProperExtension(fileName));
+        if (FileUtil.isValidLocation(location)) {
+            return new StoreCommand(FileUtil.createProperExtension(location));
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StoreCommand.MESSAGE_USAGE));
         }
-    }
-
-    /*
-     * Returns true is the input given by the user is a path. False otherwise.
-     *
-     * @param   String fileName
-     *              Input given by the user.
-     */
-    private boolean isAPath(String fileName) {
-        return fileName.contains("/");
     }
 }
 //@@author
