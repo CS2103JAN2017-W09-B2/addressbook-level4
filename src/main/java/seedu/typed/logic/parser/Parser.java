@@ -16,13 +16,13 @@ import seedu.typed.logic.commands.CompleteCommand;
 import seedu.typed.logic.commands.DeleteCommand;
 import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.logic.commands.ExitCommand;
+import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.FindCommand;
 import seedu.typed.logic.commands.HelpCommand;
 import seedu.typed.logic.commands.HistoryCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
-import seedu.typed.logic.commands.SaveCommand;
 import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.UndoCommand;
 
@@ -117,8 +117,8 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(args);
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(args);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
