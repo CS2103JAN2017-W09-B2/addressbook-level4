@@ -23,8 +23,8 @@ import seedu.typed.logic.commands.HistoryCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
-import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.SaveCommand;
+import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.UndoCommand;
 
 /**
@@ -88,6 +88,9 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(args);
 
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(args);
+
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(args);
 
@@ -120,9 +123,6 @@ public class Parser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(args);
-
-        case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(args);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

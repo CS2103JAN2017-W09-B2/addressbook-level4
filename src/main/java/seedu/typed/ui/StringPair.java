@@ -1,12 +1,12 @@
 package seedu.typed.ui;
 
 //@@author A0139392X
-public class Pair<T1, T2> {
+public class StringPair<T1, T2> {
 
     private T1 elem1;
     private T2 elem2;
 
-    public Pair(T1 elem1, T2 elem2) {
+    public StringPair(T1 elem1, T2 elem2) {
         this.setElem1(elem1);
         this.setElem2(elem2);
     }
