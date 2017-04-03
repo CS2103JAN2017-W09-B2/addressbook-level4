@@ -151,5 +151,37 @@ public class FileUtil {
 
         return fileName;
     }
-    //@@author
+
+    public static boolean isValidLocation(String tempLocation) {
+        File f = new File(tempLocation);
+
+        try {
+            f.getCanonicalPath();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /*
+     * Returns the correct extension no matter the input.
+     * @param  String fileName
+     *             fileName input by the user as the new name
+     * @return String
+     *             with the proper extension.
+     */
+    public static String createProperExtension(String str) {
+        if (str.contains(".")) {
+            String beforeDot = str.substring(0, str.lastIndexOf("."));
+            String afterDot = str.substring(str.lastIndexOf("."));
+            if (afterDot.equalsIgnoreCase("xml")) {
+                return beforeDot;
+            } else {
+                return (beforeDot + ".xml");
+            }
+        } else {
+            return (str + ".xml");
+        }
+    }
+  //@@author
 }
