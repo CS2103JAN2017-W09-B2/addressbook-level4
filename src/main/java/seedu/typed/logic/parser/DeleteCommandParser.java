@@ -18,14 +18,14 @@ public class DeleteCommandParser {
      */
     public Command parse(String args) {
 
-       /* Optional<Integer> index = ParserUtil.parseIndex(args);
+        /* Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         return new DeleteCommand(index.get());*/
 
-       String trimmedArgs = args.trim();
+        String trimmedArgs = args.trim();
 
         if (trimmedArgs.equals("all")) {
             return new DeleteCommand();
@@ -34,7 +34,7 @@ public class DeleteCommandParser {
         IndexRangeUtil range = new IndexRangeUtil(args);
         if (range.isValid()) {
             return new DeleteCommand(range.getStartIndex(),
-                                       range.getEndIndex());
+                    range.getEndIndex());
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteCommand.MESSAGE_USAGE));
