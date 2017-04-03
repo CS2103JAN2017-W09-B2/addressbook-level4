@@ -52,6 +52,7 @@ import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.schedule.ScheduleElement;
+import seedu.typed.storage.Storage;
 import seedu.typed.storage.temp.Session;
 
 public class LogicManagerTest {
@@ -65,6 +66,7 @@ public class LogicManagerTest {
     private Model model;
     private Logic logic;
     private Config config;
+    private Storage storage;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -92,7 +94,7 @@ public class LogicManagerTest {
         //String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         //String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         //logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), new Session());
-        logic = new LogicManager(model, new Session(), config);
+        logic = new LogicManager(model, new Session(), config, storage);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
@@ -356,7 +358,8 @@ public class LogicManagerTest {
         expectedTM.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
+                                                       threeTasks.get(1).getName().getValue()),
                 expectedTM, expectedTM.getTaskList());
     }
 

@@ -90,6 +90,12 @@ public class TestTask implements ReadOnlyTask {
         return se;
     }
 
+    @Override
+    public boolean haveDeadline() {
+        return !getDate().isEmpty();
+    }
+    //@@author
+
     //@@author A0141094M
     public String getAddCommand() {
         ScheduleElement se = this.getSE();
@@ -101,5 +107,18 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
     //@@author
+
+    @Override
+    public boolean isEvent() {
+        return !from.isEmpty();
+    }
+    @Override
+    public boolean isDeadline() {
+        return !this.getDate().isEmpty();
+    }
+    @Override
+    public boolean isFloating() {
+        return (!haveDeadline() && !haveDuration());
+    }
 
 }

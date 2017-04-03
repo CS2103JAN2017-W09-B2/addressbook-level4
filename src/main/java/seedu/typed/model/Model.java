@@ -1,9 +1,11 @@
 package seedu.typed.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.commons.util.Pair;
 import seedu.typed.logic.commands.util.Type;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
@@ -28,6 +30,12 @@ public interface Model {
     int getNumberUncompletedTasks();
 
     int getTotalTasks();
+
+    int getNumberEvents();
+
+    int getNumberDeadlines();
+
+    int getNumberFloatingTasks();
 
     //@@author A0143853A
     Task getTaskAt(int index);
@@ -85,7 +93,7 @@ public interface Model {
     //@@author A0139379M
     void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException;
     //@@author
-    void completeTask(int filteredTaskListIndex) throws DuplicateTaskException;
+    void completeTaskAt(int filteredTaskListIndex) throws DuplicateTaskException;
     // =========== ModelManager Util Methods =======================
     // =============================================================
     /**
@@ -123,6 +131,10 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+    //@@author A0141094M
+    void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords);
+    //@@author
+
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -131,4 +143,27 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    //@@author A0143853A
+    void uncompleteTaskAtForUndo(int taskManagerIndex) throws DuplicateTaskException;
+
+    void completeTaskAtForRedo(int taskManagerIndex) throws DuplicateTaskException;
+
+    void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
+            throws DuplicateTaskException;
+
+    void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex, ArrayList<Pair<Integer, Task>> list)
+            throws TaskNotFoundException;
+
+    void deleteTaskAt(int index);
+
+    void uncompleteTasksAtForUndo(ArrayList<Integer> list) throws DuplicateTaskException;
+
+    void completeTasksAtForRedo(ArrayList<Integer> list) throws DuplicateTaskException;
+
+    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
+
+    void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
+
+    //@@author
 }

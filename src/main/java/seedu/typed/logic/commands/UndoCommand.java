@@ -1,7 +1,9 @@
 package seedu.typed.logic.commands;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
+import seedu.typed.commons.util.Pair;
 import seedu.typed.commons.util.TripleUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
@@ -24,20 +26,30 @@ public class UndoCommand extends Command {
                                                + "Parameters: [NUMBER]\n"
                                                + "Example: " + COMMAND_WORD + " 2";
     public static final String MESSAGE_SUCCESS = "Undone successfully!";
-    public static final String MESSAGE_MULTIPLE_SUCCESS = "Undone successfully %1s commands!";
-    public static final String MESSAGE_PARTIAL_SUCCESS = "Undone successfully %1s commands only!";
+    public static final String MESSAGE_ALL_SUCCESS = "Undone all successfully!";
+    public static final String MESSAGE_SINGLE_SUCCESS = "Undone successfully 1 command!";
+    public static final String MESSAGE_MULTIPLE_SUCCESS = "Undone successfully %1$s commands!";
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Undone successfully %1$s commands only!";
+    public static final String MESSAGE_SINGLE_PARTIAL_SUCCESS = "Redone successfully 1 command only!";
     public static final String MESSAGE_NO_PREV_COMMAND = "There is no command to undo!";
     public static final String MESSAGE_ERROR = "Cannot undo previous command!";
 
     private int numberOfCmdsToUndo;
+    private String type;
 
 
     public UndoCommand() {
         numberOfCmdsToUndo = 1;
+        type = "no number";
     }
 
     public UndoCommand(int num) {
         numberOfCmdsToUndo = num;
+        if (num == -1) {
+            type = "all";
+        } else {
+            type = "number";
+        }
     }
 
     @Override
@@ -45,6 +57,11 @@ public class UndoCommand extends Command {
         assert model != null;
 
         int maxNumberToUndo = session.getUndoStack().size();
+
+        if (numberOfCmdsToUndo == -1) {
+            numberOfCmdsToUndo = maxNumberToUndo;
+        }
+
         if (maxNumberToUndo == 0) {
             throw new CommandException(MESSAGE_NO_PREV_COMMAND);
         }
@@ -59,18 +76,45 @@ public class UndoCommand extends Command {
         }
 
         session.updateValidCommandsHistory(commandText);
-        if (numberOfCmdsToUndo == 1) {
+        switch (type) {
+
+        case "no number":
             return new CommandResult(MESSAGE_SUCCESS);
-        } else if (actualNumberOfCmdsToUndo < numberOfCmdsToUndo) {
+
+        case "all":
+            return new CommandResult(MESSAGE_ALL_SUCCESS);
+
+        case "number":
+            return commandResultBasedOnNumber(maxNumberToUndo);
+
+        default:
+            return new CommandResult(MESSAGE_SUCCESS);
+
+        }
+    }
+
+    private CommandResult commandResultBasedOnNumber(int maxNumber) {
+
+        int actualNumber = numberOfCmdsToUndo;
+        if (numberOfCmdsToUndo > maxNumber) {
+            actualNumber = maxNumber;
+        }
+
+        if (numberOfCmdsToUndo == 1) {
+            return new CommandResult(MESSAGE_SINGLE_SUCCESS);
+        } else if ((actualNumber < numberOfCmdsToUndo)
+                   && (actualNumber == 1)) {
+            return new CommandResult(MESSAGE_SINGLE_PARTIAL_SUCCESS);
+        } else if (actualNumber < numberOfCmdsToUndo) {
             return new CommandResult(String.format(MESSAGE_PARTIAL_SUCCESS,
-                                                   actualNumberOfCmdsToUndo));
+                                                   actualNumber));
         } else {
             return new CommandResult(String.format(MESSAGE_MULTIPLE_SUCCESS,
                                                    numberOfCmdsToUndo));
         }
-
     }
 
+    @SuppressWarnings("unchecked")
     private void executeUndoCommand() throws CommandException {
         Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popUndoStack();
 
@@ -83,13 +127,14 @@ public class UndoCommand extends Command {
             switch(command) {
 
             case CommandTypeUtil.TYPE_ADD_TASK:
-                model.addTask(index, (Task) change);
+                ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = (ArrayList<Pair<Integer, Task>>) change;
+                model.addTasksForUndo(listOfIndicesAndTasks);
                 toPush.setFirst(CommandTypeUtil.TYPE_DELETE_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
 
             case CommandTypeUtil.TYPE_DELETE_TASK:
-                model.deleteTask((ReadOnlyTask) change);
+                model.deleteTaskAt(index);
                 toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
@@ -104,6 +149,12 @@ public class UndoCommand extends Command {
             case CommandTypeUtil.TYPE_CLEAR:
                 model.resetData((ReadOnlyTaskManager) change);
                 toPush.setThird(new TaskManager());
+                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                break;
+
+            case CommandTypeUtil.TYPE_COMPLETE:
+                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) change;
+                model.uncompleteTasksAtForUndo(listOfIndices);
                 session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
                 break;
 

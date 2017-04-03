@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import seedu.typed.logic.parser.FindUtil;
+import seedu.typed.model.tag.Tag;
+import seedu.typed.model.tag.UniqueTagList;
 
 /**
  * Helper functions for handling strings.
@@ -14,6 +16,7 @@ public class StringUtil {
     private static final String WHITESPACE_DELIMITER = "\\s+";
     private static final String UNSIGNED_INTEGER_VALIDATION_REGEX = "^0*[1-9]\\d*$";
 
+    //@@author A0141094M
     /**
      * Returns true if the {@code sentence} contains the {@code query} or a similar {@code query}.
      * Ignores case, and both full word match or similar word match are allowed. <br>
@@ -48,6 +51,31 @@ public class StringUtil {
         }
         return false;
     }
+
+    /**
+     * Returns true if the {@code tags} contain the {@code query} or a similar {@code query}.
+     * Ignores case, and both exact tag match or similar tag match are allowed.
+     * @param tags
+     *          cannot be null
+     * @param query
+     *          cannot be null, cannot be empty, must be a single word
+     * @return
+     */
+    public static boolean isFuzzyKeywordSearchIgnoreCase(UniqueTagList tags, String query) {
+        assert tags != null : "Tags parameter cannot be null";
+        assert query != null : "Query parameter cannot be null";
+        String trimmedQuery = query.trim();
+        assert !trimmedQuery.isEmpty() : "Query parameter cannot be empty";
+        assert trimmedQuery.split(WHITESPACE_DELIMITER).length == 1 : "Query parameter should be a single word";
+        for (Tag tag : tags) {
+            String tagWord = tag.getValue();
+            if (FindUtil.isFuzzyTagMatchIgnoreCase(query, tagWord)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //@@author
 
     /**
      * Returns a detailed message of the t, including the stack trace.
