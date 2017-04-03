@@ -9,7 +9,7 @@ import seedu.typed.model.task.DateTime;
  * expression.
  * @author: YIM CHIA HUI
  **/
-public abstract class TimeExpression {
+public interface TimeExpression {
 
     /**
      * Checks if date falls within TimeExpression
@@ -18,6 +18,6 @@ public abstract class TimeExpression {
      * @params DateTime date
      * @return True if TimeExpression includes date
      **/
-    public abstract boolean includes(DateTime date);
+    public boolean includes(DateTime date);
 
 }

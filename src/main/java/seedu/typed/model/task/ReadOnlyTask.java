@@ -1,6 +1,7 @@
 package seedu.typed.model.task;
 
 import seedu.typed.model.tag.UniqueTagList;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * A read-only immutable interface for a Task in the TaskManager.
@@ -10,16 +11,8 @@ import seedu.typed.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-
-    Date getDate();
-
-    //@author A0141094M
-    Date getFrom();
-
-    Date getTo();
-
+    ScheduleElement getSE();
     Notes getNotes();
-    //@@author
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -45,15 +38,16 @@ public interface ReadOnlyTask {
                 && other.getName().getValue().equals(this.getName().getValue()) // state
                 // checks here
                 // onwards
-                && other.getDate().getValue().equals(this.getDate().getValue())
-                //@@author A0141094M
-                && other.getNotes().getValue().equals(this.getNotes().getValue())
-                && other.getFrom().getValue().equals(this.getFrom().getValue())
-                && other.getTo().getValue().equals(this.getTo().getValue())
-                //@@author
+                && isScheduleElementSame(other.getSE())
                 && other.getTags().equals(this.getTags())
                 && (other.getIsCompleted() == this.getIsCompleted()));
     }
+
+    //@@author A0141094M
+    default boolean isScheduleElementSame(ScheduleElement otherSE) {
+        return this.getSE().toString().equals(otherSE.toString());
+    }
+    //@@author
 
     /**
      * Formats the task as text, showing all task details.
@@ -61,20 +55,12 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ").append(getName())
-        //@@author A0141094M
         .append(" Notes: ").append(getNotes().toString())
-        .append(" Date: ").append(getDate().toString())
-        .append(" From: ").append(getFrom().toString())
-        .append(" To: ").append(getTo().toString())
-        //@@author
+        .append(getSE().toString())
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    boolean haveDuration();
-
-    boolean haveDeadline();
 
 }

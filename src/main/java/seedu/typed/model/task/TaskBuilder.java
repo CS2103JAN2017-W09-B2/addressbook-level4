@@ -1,5 +1,6 @@
 package seedu.typed.model.task;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
+import seedu.typed.schedule.ScheduleElement;
 
 //@@author A0139379M
 /**
@@ -23,53 +25,30 @@ public class TaskBuilder {
 
     private Name name;
     private Notes notes;
-    private Date date;
-    private Date from;
-    private Date to;
+    private ScheduleElement se;
     private UniqueTagList tags;
     private boolean isCompleted;
 
     public TaskBuilder() {
         this.tags = new UniqueTagList();
+        this.notes = new Notes();
     }
 
-    //@@author A0141094M
-    public TaskBuilder(ReadOnlyTask task) throws IllegalValueException {
-        this.name = new Name(task.getName().getValue());
-        if (task.getNotes() == null) {
-            this.notes = new Notes(null);
-        } else {
-            this.notes = new Notes(task.getNotes().getValue());
-        }
-        if (task.getDate() == null) {
-            this.date = new Date(null);
-        } else {
-            this.date = new Date(task.getDate().getValue());
-        }
-        if (task.getFrom() == null) {
-            this.from = new Date(null);
-        } else {
-            this.from = new Date(task.getFrom().getValue());
-        }
-        if (task.getTo() == null) {
-            this.to = new Date(null);
-        } else {
-            this.to = new Date(task.getTo().getValue());
-        }
+    public TaskBuilder(ReadOnlyTask task) {
+        this.name = task.getName();
+        this.notes = task.getNotes();
+        this.se = task.getSE();
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }
-    //@@author
-
     public TaskBuilder setName(String name) throws IllegalValueException {
         this.name = new Name(name);
         return this;
     }
 
-    public TaskBuilder setName(Name name) throws IllegalValueException {
+    public TaskBuilder setName(Name name) {
         assert name != null;
-
-        this.name = new Name(name.getValue());
+        this.name = name;
         return this;
     }
 
@@ -85,36 +64,33 @@ public class TaskBuilder {
     }
     //@@author
 
-    public TaskBuilder setDate(String date) throws IllegalValueException {
-        this.date = new Date(date);
+    public TaskBuilder setSE(ScheduleElement se) {
+        this.se = se;
+        return this;
+    }
+    public TaskBuilder setDeadline(DateTime date) {
+        this.se = ScheduleElement.makeDeadline(date);
         return this;
     }
 
-    public TaskBuilder setDate(Date date) throws IllegalValueException {
-        assert date != null;
+    public TaskBuilder setDeadline(LocalDateTime date) {
+        this.se = ScheduleElement.makeDeadline(new DateTime(date));
+        return this;
+    }
 
-        this.date = new Date(date.getValue());
+    public TaskBuilder setEvent(DateTime startDate, DateTime endDate) {
+        this.se = ScheduleElement.makeEvent(startDate, endDate);
+        return this;
+    }
+
+    public TaskBuilder setEvent(LocalDateTime startDate, LocalDateTime endDate) {
+        this.se = ScheduleElement.makeEvent(new DateTime(startDate), new DateTime(endDate));
         return this;
     }
 
     //@@author A0141094M
-    public TaskBuilder setFrom(String from) throws IllegalValueException {
-        this.from = new Date(from);
-        return this;
-    }
-
-    public TaskBuilder setFrom(Date from) {
-        this.from = from;
-        return this;
-    }
-
-    public TaskBuilder setTo(String to) throws IllegalValueException {
-        this.to = new Date(to);
-        return this;
-    }
-
-    public TaskBuilder setTo(Date to) {
-        this.to = to;
+    public TaskBuilder setFloating() {
+        this.se = ScheduleElement.makeFloating();
         return this;
     }
     //@@author
@@ -144,7 +120,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, notes, date, from, to, tags, isCompleted);
+        return new Task(name, notes, se, tags, isCompleted);
     }
 
 }

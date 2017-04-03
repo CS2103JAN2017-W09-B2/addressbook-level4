@@ -9,7 +9,7 @@ import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -17,6 +17,7 @@ import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -32,9 +33,10 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 buy 10 broccolis by 06/03/2017";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
+    public static final String MESSAGE_EDIT_DATE_FAILURE = "You have entered invalid date formats.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
 
     private static final String MESSAGE_TASK_NOT_FOUND = "Task to edit not found.";
 
@@ -59,10 +61,6 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -98,6 +96,7 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
+    //@@author A0141094M
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -106,24 +105,43 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException {
         assert taskToEdit != null;
-
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
-        //@@author A0141094M
-        Date updatedFrom = editTaskDescriptor.getFrom().orElseGet(taskToEdit::getFrom);
-        Date updatedTo = editTaskDescriptor.getTo().orElseGet(taskToEdit::getTo);
         Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
-        //@@author
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        ScheduleElement updatedSe;
 
+        if (hasOnlyDeadlineField(editTaskDescriptor)) {
+            updatedSe = new ScheduleElement(editTaskDescriptor.getDate().get(),
+                    taskToEdit.getSE().getStartDate(), taskToEdit.getSE().getEndDate());
+        } else if (hasOnlyFromAndToFields(editTaskDescriptor)) {
+            updatedSe = new ScheduleElement(taskToEdit.getSE().getDate(),
+                    editTaskDescriptor.getFrom().get(), editTaskDescriptor.getTo().get());
+        } else if (hasNoDeadlineAndNoFromToFields(editTaskDescriptor)) {
+            updatedSe = taskToEdit.getSE();
+        } else {
+            throw new IllegalValueException(MESSAGE_EDIT_DATE_FAILURE);
+        }
         return new TaskBuilder()
                 .setName(updatedName)
                 .setNotes(updatedNotes)
-                .setDate(updatedDate)
-                .setFrom(updatedFrom)
-                .setTo(updatedTo)
+                .setSE(updatedSe)
                 .setTags(updatedTags)
                 .build();
+    }
+
+    private static boolean hasOnlyFromAndToFields(EditTaskDescriptor edt) {
+        return !edt.getDate().isPresent()
+                && edt.getFrom().isPresent() && edt.getTo().isPresent();
+    }
+
+    private static boolean hasOnlyDeadlineField(EditTaskDescriptor edt) {
+        return edt.getDate().isPresent()
+                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
+    }
+
+    private static boolean hasNoDeadlineAndNoFromToFields(EditTaskDescriptor edt) {
+        return !edt.getDate().isPresent()
+                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
     }
 
     /**
@@ -132,12 +150,10 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
-        //@@author A0141094M
-        private Optional<Date> from = Optional.empty();
-        private Optional<Date> to = Optional.empty();
+        private Optional<DateTime> date = Optional.empty();
+        private Optional<DateTime> from = Optional.empty();
+        private Optional<DateTime> to = Optional.empty();
         private Optional<Notes> notes = Optional.empty();
-        //@@author
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {
@@ -146,11 +162,9 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
-            //@@author A0141094M
             this.from = toCopy.getFrom();
             this.to = toCopy.getTo();
             this.notes = toCopy.getNotes();
-            //@@author
             this.tags = toCopy.getTags();
         }
 
@@ -171,34 +185,39 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDate(Optional<Date> date) {
+        public void setDate(Optional<DateTime> date) {
             assert date != null;
 
             this.date = date;
         }
 
-        public Optional<Date> getDate() {
+        public Optional<DateTime> getDate() {
             return date;
         }
 
-        //@@author A0141094M
-
-        public void setFrom(Optional<Date> from) {
+        public void setFrom(Optional<DateTime> from) {
             assert from != null;
             this.from = from;
         }
 
-        public Optional<Date> getFrom() {
+        public Optional<DateTime> getFrom() {
             return from;
         }
 
-        public void setTo(Optional<Date> to) {
+        public void setTo(Optional<DateTime> to) {
             assert to != null;
             this.to = to;
         }
 
-        public Optional<Date> getTo() {
+        public Optional<DateTime> getTo() {
             return to;
+        }
+
+        public ScheduleElement getSE() {
+            DateTime deadline = date.orElse(null);
+            DateTime startDateTime = from.orElse(null);
+            DateTime endDateTime = to.orElse(null);
+            return new ScheduleElement(deadline, startDateTime, endDateTime);
         }
 
         public void setNotes(Optional<Notes> notes) {
@@ -210,11 +229,8 @@ public class EditCommand extends Command {
             return notes;
         }
 
-        //@@author
-
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
-
             this.tags = tags;
         }
 
@@ -222,4 +238,5 @@ public class EditCommand extends Command {
             return tags;
         }
     }
+    //@@author
 }

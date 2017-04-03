@@ -13,7 +13,7 @@ import seedu.typed.model.task.DateTime;
  * true either on January or December
  **/
 
-public class DayInMonthTE extends TimeExpression {
+public class DayInMonthTE implements TimeExpression {
     private int count;
     private int dayIndex;
 

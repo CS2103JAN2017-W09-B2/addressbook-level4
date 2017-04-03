@@ -3,9 +3,10 @@ package seedu.typed.testutil;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  *
@@ -38,22 +39,17 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withDate(String date) throws IllegalValueException {
-        this.task.setDate(new Date(date));
+    public TaskBuilder withDeadline(DateTime date) {
+        this.task.setSE(ScheduleElement.makeDeadline(date));
+        return this;
+    }
+
+    public TaskBuilder withEvent(DateTime startDate, DateTime endDate) {
+        this.task.setSE(ScheduleElement.makeEvent(startDate, endDate));
         return this;
     }
 
     //@@author A0141094M
-    public TaskBuilder withFrom(String from) throws IllegalValueException {
-        this.task.setFrom(new Date(from));
-        return this;
-    }
-
-    public TaskBuilder withTo(String to) throws IllegalValueException {
-        this.task.setTo(new Date(to));
-        return this;
-    }
-
     public TaskBuilder withNotes(String notes) throws IllegalValueException {
         this.task.setNotes(new Notes(notes));
         return this;

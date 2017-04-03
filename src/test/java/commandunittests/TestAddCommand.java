@@ -1,13 +1,14 @@
 package commandunittests;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.AddCommand;
 //@@author A0139379M
 public class TestAddCommand extends AddCommand {
-    public TestAddCommand(String name, String notes, String date,
-            String from, String to, Set<String> tags) throws IllegalValueException {
+    public TestAddCommand(String name, String notes, LocalDateTime date,
+            LocalDateTime from, LocalDateTime to, Set<String> tags) throws IllegalValueException {
         super(name, notes, date, from, to, tags);
         this.setData(new ModelStub(), new SessionStub(), "", config, storage); //TODO Change String
 

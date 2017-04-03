@@ -11,6 +11,7 @@ import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * JAXB-friendly version of the Task.
@@ -20,15 +21,12 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String date;
+    private String dateTime;
     //@@author A0141094M
     @XmlElement(required = true)
     private String notes;
-    @XmlElement(required = true)
-    private String from;
-    @XmlElement(required = true)
-    private String to;
     //@@author
+
     @XmlElement(required = true)
     private boolean isCompleted;
 
@@ -50,13 +48,10 @@ public class XmlAdaptedTask {
      *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
+        System.out.println("whaddap");
         name = source.getName().getValue();
-        date = source.getDate().getValue();
-        //@@author A0141094M
+        dateTime = source.getSE().toString();
         notes = source.getNotes().getValue();
-        from = source.getFrom().getValue();
-        to = source.getTo().getValue();
-        //@@author
         isCompleted = source.getIsCompleted();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -77,15 +72,13 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+        ScheduleElement se = new ScheduleElement();
+        se = se.parseDateString(dateTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new TaskBuilder()
                 .setName(this.name)
-                .setDate(this.date)
-                //@@author A0141094M
+                .setSE(se)
                 .setNotes(this.notes)
-                .setFrom(this.from)
-                .setTo(this.to)
-                //@@author
                 .isCompleted(this.isCompleted)
                 .setTags(tags)
                 .build();

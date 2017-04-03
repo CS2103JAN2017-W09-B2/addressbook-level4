@@ -1,7 +1,9 @@
 package seedu.typed.model.task;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.model.tag.UniqueTagList;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * Represents a Task in the task manager. Guarantees: details are present and
@@ -11,9 +13,7 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Notes notes;
-    private Date date;
-    private Date from;
-    private Date to;
+    private ScheduleElement se;
 
     private boolean isCompleted;
 
@@ -22,32 +22,51 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Notes notes, Date date, Date from, Date to, UniqueTagList tags, boolean isCompleted) {
-        // commented this out!! allow date tags be null
-        //assert !CollectionUtil.isAnyNull(name, date, tags);
+    public Task(Name name, Notes notes, DateTime date, DateTime startDate,
+            DateTime endDate, UniqueTagList tags, boolean isCompleted) {
+        assert !CollectionUtil.isAnyNull(name, tags);
         assert name != null;
-
+        if (startDate != null && endDate != null) {
+            // both startDate, endDate not null => event
+            this.se = ScheduleElement.makeEvent(startDate, endDate);
+        } else if (date != null) {
+            // date not null => deadline
+            this.se = ScheduleElement.makeDeadline(date);
+        } else {
+            // all nulls => floating task
+            this.se = ScheduleElement.makeFloating();
+        }
         this.name = name;
         this.notes = notes;
-        this.date = date;
-        this.from = from;
-        this.to = to;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
+        this.tags = new UniqueTagList(tags);
         this.isCompleted = isCompleted;
-        // changes
-        // in the arg list
+    }
+
+    public Task(Name name, Notes notes, ScheduleElement se, UniqueTagList tags, boolean isCompleted) {
+        this.name = name;
+        this.notes = notes;
+        this.se = se;
+        this.tags = tags;
+        this.isCompleted = isCompleted;
     }
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getNotes(), source.getDate(),
-                source.getFrom(), source.getTo(), source.getTags(), source.getIsCompleted());
+        this(source.getName(), source.getNotes(), source.getSE(), source.getTags(), source.getIsCompleted());
     }
 
-    public void setName(Name name) throws IllegalValueException {
-        assert name != null;
-        this.name = new Name(name.getValue());
+    public void setSE(ScheduleElement se) {
+        this.se = se;
+    }
+
+    @Override
+    public ScheduleElement getSE() {
+        return se;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
     }
 
     @Override
@@ -56,53 +75,13 @@ public class Task implements ReadOnlyTask {
     }
 
     //@@author A0141094M
-    public void setNotes(Notes notes) throws IllegalValueException {
-        assert notes != null;
-        this.notes = new Notes(notes.getValue());
+    public void setNotes(Notes notes) {
+        this.notes = notes;
     }
 
     @Override
     public Notes getNotes() {
         return notes;
-    }
-    //@@author
-
-    public void setDate(Date date) throws IllegalValueException {
-        assert date != null;
-        this.date = new Date(date.getValue());
-    }
-
-    @Override
-    public Date getDate() {
-        return date;
-    }
-
-    //@@author A0141094M
-    public void setFrom(Date from) throws IllegalValueException {
-        assert from != null;
-        this.from = new Date(from.getValue());
-    }
-
-    @Override
-    public Date getFrom() {
-        return from;
-    }
-
-    public void setTo(Date to) throws IllegalValueException {
-        assert to != null;
-        this.to = new Date(to.getValue());
-    }
-
-    @Override
-    public Date getTo() {
-        return to;
-    }
-    //@@author
-
-    //@@author A0139392X
-    @Override
-    public boolean haveDuration() {
-        return (!this.getFrom().isEmpty());
     }
     //@@author
 
@@ -136,9 +115,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setNotes(replacement.getNotes());
-        this.setDate(replacement.getDate());
-        this.setFrom(replacement.getFrom());
-        this.setTo(replacement.getTo());
+        this.setSE(replacement.getSE());
         this.setTags(replacement.getTags());
         this.setIsCompleted(replacement.getIsCompleted());
     }
@@ -155,21 +132,19 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0141094M
     @Override
     public boolean isEvent() {
-        return !from.isEmpty();
+        return se.isEvent();
     }
 
     @Override
     public boolean isDeadline() {
-        return !this.getDate().isEmpty();
+        return se.isDeadline();
     }
     @Override
     public boolean isFloating() {
-        return (!haveDeadline() && !haveDuration());
+        return se.isFloating();
     }
-    @Override
-    public boolean haveDeadline() {
-        return !getDate().isEmpty();
-    }
+    //@@author
 }

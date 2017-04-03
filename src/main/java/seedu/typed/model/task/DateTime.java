@@ -9,7 +9,7 @@ import java.time.Month;
  * It provides other static methods such as getting a new DateTime object one week,
  * one month or one year from now. The time zone and current time is based on User's
  * system default clock.
- *
+ * Guarantees: immutable;
  * @author YIM CHIA HUI
  *
  */
@@ -17,7 +17,7 @@ public class DateTime {
 
     private static final long LONG_ONE = (long) 1.0;
 
-    private LocalDateTime localDateTime;
+    private final LocalDateTime localDateTime;
 
     public DateTime(LocalDateTime localDateTime) {
         super();
@@ -25,15 +25,24 @@ public class DateTime {
     }
 
     public DateTime() {
-        this.localDateTime = LocalDateTime.now();
+        this.localDateTime = null;
+    }
+
+    public static DateTime parseDateString(String date) {
+        // assume in dd/mm/yyyy format
+        String[] dates = date.trim().split("-");
+        for (int i = 0; i < dates.length; i++) {
+            System.out.println(dates[i] + " " + Integer.valueOf(dates[i]));
+        }
+        System.out.println(dates[0]);
+        int year = Integer.valueOf(dates[0]);
+        int month = Integer.valueOf(dates[1]);
+        int day = Integer.valueOf(dates[2]);
+        return DateTime.getDateTime(year, month, day, 0, 0);
     }
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
-    }
-
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
     }
 
     public boolean equals(DateTime other) {
@@ -100,9 +109,20 @@ public class DateTime {
     public static DateTime getDateTime(int year, Month month, int day, int hr, int min) {
         return new DateTime(LocalDateTime.of(year, month, day, hr, min));
     }
+
+    private static DateTime getDateTime(int year, int month, int day, int hr, int min) {
+        return new DateTime(LocalDateTime.of(year, month, day, hr, min));
+    }
+
+    //@@author A0141094M
     @Override
     public String toString() {
-        return localDateTime.toLocalDate().toString();
+        if (localDateTime ==  null) {
+            return " ";
+        } else {
+            return localDateTime.toLocalDate().toString();
+        }
     }
+    //@@author
 
 }

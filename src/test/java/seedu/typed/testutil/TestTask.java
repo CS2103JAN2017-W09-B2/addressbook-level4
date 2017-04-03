@@ -2,10 +2,10 @@ package seedu.typed.testutil;
 
 
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
 import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Notes;
 import seedu.typed.model.task.ReadOnlyTask;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * A mutable task object. For testing only.
@@ -13,11 +13,9 @@ import seedu.typed.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Date date;
+    private ScheduleElement se;
     //@@author A0141094M
     private Notes notes;
-    private Date from;
-    private Date to;
     //@@author
     private UniqueTagList tags;
     private boolean isCompleted;
@@ -31,11 +29,9 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.date = taskToCopy.getDate();
+        this.se = taskToCopy.getSE();
         //@@author A0141094M
         this.notes = taskToCopy.getNotes();
-        this.from = taskToCopy.getFrom();
-        this.to = taskToCopy.getTo();
         //@@author
         this.tags = taskToCopy.getTags();
     }
@@ -44,21 +40,13 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setSE(ScheduleElement se) {
+        this.se = se;
     }
 
     //@@author A0141094M
     public void setNotes(Notes notes) {
         this.notes = notes;
-    }
-
-    public void setFrom(Date from) {
-        this.from = from;
-    }
-
-    public void setTo(Date to) {
-        this.to = to;
     }
     //@@author
 
@@ -75,25 +63,10 @@ public class TestTask implements ReadOnlyTask {
         return name;
     }
 
-    @Override
-    public Date getDate() {
-        return date;
-    }
-
     //@@author A0141094M
     @Override
     public Notes getNotes() {
         return notes;
-    }
-
-    @Override
-    public Date getFrom() {
-        return from;
-    }
-
-    @Override
-    public Date getTo() {
-        return to;
     }
     //@@author
 
@@ -112,39 +85,36 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    //@@author A0139392X
     @Override
-    public boolean haveDuration() {
-        return !from.isEmpty();
+    public ScheduleElement getSE() {
+        return se;
     }
-
-    @Override
-    public boolean haveDeadline() {
-        return !getDate().isEmpty();
-    }
-    //@@author
 
     //@@author A0141094M
     public String getAddCommand() {
+        ScheduleElement se = this.getSE();
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().getValue() + " ");
-        sb.append("by " + this.getDate().getValue() + " ");
+        sb.append("by " + se.getDate().toString() + " ");
+        //sb.append(se.toString());
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
-    //@@author
 
     @Override
     public boolean isEvent() {
-        return !from.isEmpty();
+        return se.isEvent();
     }
+
     @Override
     public boolean isDeadline() {
-        return !this.getDate().isEmpty();
+        return se.isDeadline();
     }
+
     @Override
     public boolean isFloating() {
-        return (!haveDeadline() && !haveDuration());
+        return se.isFloating();
     }
+    //@@author
 
 }
