@@ -63,8 +63,4 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
-    boolean haveDuration();
-
-    boolean haveDeadline();
-
 }

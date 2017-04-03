@@ -132,21 +132,19 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0141094M
     @Override
     public boolean isEvent() {
-        return !from.isEmpty();
+        return se.isEvent();
     }
 
     @Override
     public boolean isDeadline() {
-        return !this.getDate().isEmpty();
+        return se.isDeadline();
     }
     @Override
     public boolean isFloating() {
-        return (!haveDeadline() && !haveDuration());
+        return se.isFloating();
     }
-    @Override
-    public boolean haveDeadline() {
-        return !getDate().isEmpty();
-    }
+    //@@author
 }
