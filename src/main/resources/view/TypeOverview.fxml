@@ -9,7 +9,7 @@
    <children>
       <Text fx:id="title" fill="WHITE" layoutX="30.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Overview" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
-            <Font name="System Bold" size="23.0" />
+            <Font name="Helvetica Bold" size="23.0" />
          </font>
       </Text>
       <Circle fx:id="overdueCircle" fill="RED" layoutX="20.0" layoutY="45.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
@@ -18,39 +18,39 @@
       <Circle fx:id="floatingCircle" fill="CORNFLOWERBLUE" layoutX="47.0" layoutY="195.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0" />
       <Text fx:id="overdueTitle" fill="WHITE" layoutX="37.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overdue Tasks" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="50.0">
          <font>
-            <Font size="16.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
       <Text fx:id="deadlineTitle" fill="WHITE" layoutX="37.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline Tasks" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="100.0">
          <font>
-            <Font size="16.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
       <Text fx:id="durationTitle" fill="WHITE" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration Tasks" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="150.0">
          <font>
-            <Font size="16.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
       <Text fx:id="floatingTitle" fill="WHITE" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Untimed Tasks" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="200.0">
          <font>
-            <Font size="16.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
       <Text fx:id="overdueNumber" fill="RED" layoutX="125.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$first" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Helvetica" size="17.0" />
          </font></Text>
       <Text fx:id="deadlineNumber" fill="LIGHTPINK" layoutX="119.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$second" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Helvetica" size="17.0" />
          </font></Text>
       <Text fx:id="durationNumber" fill="GREENYELLOW" layoutX="109.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$third" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="170.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Helvetica" size="17.0" />
          </font></Text>
       <Text fx:id="floatingNumber" fill="CORNFLOWERBLUE" layoutX="116.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$forth" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="220.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Helvetica" size="17.0" />
          </font></Text>
    </children>
 </AnchorPane>

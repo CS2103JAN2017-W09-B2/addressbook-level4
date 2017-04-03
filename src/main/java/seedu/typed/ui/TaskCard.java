@@ -15,7 +15,8 @@ import seedu.typed.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    private final Image stampComplete = new Image("/images/tick.png");
+    private final Image stampComplete = new Image("/images/done.png");
+    private final Image checkbox = new Image("/images/checkbox.png");
 
     @FXML
     private AnchorPane cardPane;
@@ -24,7 +25,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label date;
+    private Text date;
     @FXML
     private FlowPane tags;
     @FXML
@@ -53,6 +54,8 @@ public class TaskCard extends UiPart<Region> {
 
         if (task.getIsCompleted()) {
             stamp.setImage(stampComplete);
+        } else {
+            stamp.setImage(checkbox);
         }
 
         initTags(task);

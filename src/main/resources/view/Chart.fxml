@@ -8,11 +8,11 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="201.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <PieChart fx:id="chart" labelsVisible="false" layoutX="-9.0" legendVisible="false" prefHeight="201.0" prefWidth="225.0" styleClass="data0" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0" />
-      <Circle fx:id="blockOut" fill="WHITE" layoutX="91.0" layoutY="100.0" radius="80.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="20.0" />
-      <Text fx:id="percentage" layoutX="58.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <PieChart fx:id="chart" labelsVisible="false" layoutX="-9.0" legendVisible="false" prefHeight="178.0" prefWidth="200.0" styleClass="data0" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0" />
+      <Circle fx:id="blockOut" fill="WHITE" layoutX="91.0" layoutY="89.0" radius="68.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="21.0" />
+      <Text fx:id="percentage" layoutX="60.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="70.0">
          <font>
-            <Font size="31.0" />
+            <Font name="Helvetica Neue Bold" size="30.0" />
          </font>
       </Text>
    </children>
