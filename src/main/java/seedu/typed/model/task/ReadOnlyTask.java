@@ -32,11 +32,16 @@ public interface ReadOnlyTask {
                 && other.getName().getValue().equals(this.getName().getValue()) // state
                 // checks here
                 // onwards
-                && other.getSE().equals(this.getSE())
-                //@@author
+                && isScheduleElementSame(other.getSE())
                 && other.getTags().equals(this.getTags())
                 && (other.getIsCompleted() == this.getIsCompleted()));
     }
+
+    //@@author A0141094M
+    default boolean isScheduleElementSame(ScheduleElement otherSE) {
+        return this.getSE().toString().equals(otherSE.toString());
+    }
+    //@@author
 
     /**
      * Formats the task as text, showing all task details.

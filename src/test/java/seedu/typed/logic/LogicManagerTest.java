@@ -176,7 +176,6 @@ public class LogicManagerTest {
         // Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
         assertEquals(expectedTaskManager, latestSavedTaskManager);
-
     }
 
     @Test
@@ -235,6 +234,12 @@ public class LogicManagerTest {
         expectedTM.addTask(toBeAdded);
 
         // execute command and verify result
+        System.out.println("(1) helper.genAddCmd(tobeadded): " + helper.generateAddCommand(toBeAdded));
+        System.out.println("(2) String.format(blah): " + String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded.getName()));
+        for (ReadOnlyTask task : expectedTM.getTaskList()) {
+            System.out.println(task.toString());
+        }
+
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded.getName()),
                 expectedTM, expectedTM.getTaskList());
@@ -252,7 +257,6 @@ public class LogicManagerTest {
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
-
     }
 
     @Test
@@ -430,7 +434,7 @@ public class LogicManagerTest {
         //@@author A0141094M
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
-            DateTime date = DateTime.getDateTime(1111, Month.NOVEMBER, 11, 0, 0);
+            DateTime date = DateTime.getDateTime(2011, Month.NOVEMBER, 11, 0, 0);
             Notes notes = new Notes("");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -449,7 +453,7 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            DateTime seedDate = DateTime.getDateTime(0000, Month.JANUARY, seed, 0, 0);
+            DateTime seedDate = DateTime.getDateTime(2020, Month.JANUARY, seed, 0, 0);
             return new TaskBuilder()
                     .setName("Task " + seed)
                     .setDeadline(seedDate)
@@ -465,11 +469,13 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
             cmd.append("add ");
             cmd.append(task.getName().toString());
-            cmd.append(se.toString());
+            cmd.append(" by ").append(se.getDate());
+            //cmd.append(se.toString());
             UniqueTagList tags = task.getTags();
             for (Tag t : tags) {
                 cmd.append(" #").append(t.tagName);
             }
+            System.out.println("add command that was generated is : " + cmd.toString());
             return cmd.toString();
         }
         //@@author
@@ -554,7 +560,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new TaskBuilder()
                     .setName(name)
-                    .setDeadline(DateTime.getDateTime(1111, Month.NOVEMBER, 11, 0, 0))
+                    .setDeadline(DateTime.getDateTime(2011, Month.NOVEMBER, 11, 0, 0))
                     .setNotes("")
                     .addTags("tag")
                     .build();

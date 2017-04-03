@@ -28,7 +28,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author A0141094M
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
+        String detailsToEdit = "Meet Bobby by 03/19/2017 #husband";
         int taskManagerIndex = 1;
         DateTime testDate = DateTime.getDateTime(2017, Month.MARCH, 19, 0, 0);
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -65,12 +65,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Elle");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Meet Belle";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Belle").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }

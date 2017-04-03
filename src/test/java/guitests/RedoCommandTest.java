@@ -45,7 +45,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     public void redo_undoneEditCommand_success()
             throws IllegalValueException {
         TestTask[] expectedList = td.getTypicalTasks();
-        String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
+        String detailsToEdit = "Meet Bobby by 03/19/2017 #husband";
         int taskManagerIndex = 1;
         DateTime testDate = DateTime.getDateTime(2017, Month.MARCH, 19, 0, 0);
         TestTask editedTask = new TaskBuilder().withName("Meet Bobby").withDeadline(testDate)

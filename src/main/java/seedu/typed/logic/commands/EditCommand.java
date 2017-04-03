@@ -111,11 +111,13 @@ public class EditCommand extends Command {
         ScheduleElement updatedSe;
 
         if (hasOnlyDeadlineField(editTaskDescriptor)) {
-            updatedSe = ScheduleElement.makeDeadline(editTaskDescriptor.getDate().get());
+            updatedSe = new ScheduleElement(editTaskDescriptor.getDate().get(),
+                    taskToEdit.getSE().getStartDate(), taskToEdit.getSE().getEndDate());
         } else if (hasOnlyFromAndToFields(editTaskDescriptor)) {
-            updatedSe = ScheduleElement.makeEvent(editTaskDescriptor.getFrom().get(), editTaskDescriptor.getTo().get());
+            updatedSe = new ScheduleElement(taskToEdit.getSE().getDate(),
+                    editTaskDescriptor.getFrom().get(), editTaskDescriptor.getTo().get());
         } else if (hasNoDeadlineAndNoFromToFields(editTaskDescriptor)) {
-            updatedSe = ScheduleElement.makeFloating();
+            updatedSe = taskToEdit.getSE();
         } else {
             throw new IllegalValueException(MESSAGE_EDIT_DATE_FAILURE);
         }
@@ -209,6 +211,13 @@ public class EditCommand extends Command {
 
         public Optional<DateTime> getTo() {
             return to;
+        }
+
+        public ScheduleElement getSE() {
+            DateTime deadline = date.orElse(null);
+            DateTime startDateTime = from.orElse(null);
+            DateTime endDateTime = to.orElse(null);
+            return new ScheduleElement(deadline, startDateTime, endDateTime);
         }
 
         public void setNotes(Optional<Notes> notes) {

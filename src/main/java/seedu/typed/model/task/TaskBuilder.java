@@ -54,7 +54,6 @@ public class TaskBuilder {
 
     //@@author A0141094M
     public TaskBuilder setNotes(String notes) throws IllegalValueException {
-        assert notes!= null;
         this.notes = new Notes(notes);
         return this;
     }
