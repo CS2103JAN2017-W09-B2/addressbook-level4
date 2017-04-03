@@ -2,18 +2,16 @@ package seedu.typed.commons.util;
 
 //@@author A0143853A
 /**
- * Stores three items.
+ * Stores two items.
  */
 
-public class TripleUtil<F, S, T> {
+public class Pair<F, S> {
     private F first;
     private S second;
-    private T third;
 
-    public TripleUtil(F first, S second, T third) {
+    public Pair(F first, S second) {
         this.first = first;
         this.second = second;
-        this.third = third;
     }
 
     public F getFirst() {
@@ -24,10 +22,6 @@ public class TripleUtil<F, S, T> {
         return second;
     }
 
-    public T getThird() {
-        return third;
-    }
-
     public void setFirst(F first) {
         this.first = first;
     }
@@ -36,9 +30,6 @@ public class TripleUtil<F, S, T> {
         this.second = second;
     }
 
-    public void setThird(T third) {
-        this.third = third;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -46,12 +37,11 @@ public class TripleUtil<F, S, T> {
             return true;
         }
 
-        if (obj instanceof TripleUtil) {
+        if (obj instanceof Pair) {
             @SuppressWarnings("unchecked")
-            TripleUtil<F, S, T> triple = (TripleUtil<F, S, T>) obj;
-            return first.equals(triple.getFirst())
-                   && second.equals(triple.getSecond())
-                   && third.equals(triple.getThird());
+            Pair<F, S> pair = (Pair<F, S>) obj;
+            return first.equals(pair.getFirst())
+                   && second.equals(pair.getSecond());
         } else {
             return false;
         }

@@ -298,5 +298,14 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 17;
+}
+
+.data0.chart-pie
+{
+-fx-pie-color: #00BFFF;
+
+}
+.data1.chart-pie{
+-fx-pie-color: #D3D3D3;
 }

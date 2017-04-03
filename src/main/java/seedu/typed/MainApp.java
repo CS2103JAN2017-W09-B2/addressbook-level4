@@ -54,6 +54,8 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing Typed ]===========================");
         super.init();
 
+        session = new Session();
+
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
@@ -63,11 +65,9 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        session = new Session();
+        logic = new LogicManager(model, session, config, storage);
 
-        logic = new LogicManager(model, session, config);
-
-        ui = new UiManager(logic, config, userPrefs, session);
+        ui = new UiManager(logic, config, userPrefs, session, model);
 
         initEventsCenter();
     }

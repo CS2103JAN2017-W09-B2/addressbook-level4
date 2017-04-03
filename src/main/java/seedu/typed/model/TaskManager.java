@@ -109,10 +109,14 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(tasks);
     }
 
+    @Override
     public void printData() {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("tasks: " + i + " " + tasks.getTaskAt(i).toString());
         }
+        System.out.println("Number of Deadline Tasks : " + this.getNumberDeadlines());
+        System.out.println("Number of Floating Tasks : " + this.getNumberFloatingTasks());
+        System.out.println("Number of Event Tasks : " + this.getNumberEvents());
     }
 
     //// task-level operations
@@ -135,16 +139,19 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(task);
         tasks.add(index, task);
     }
+    //@@author
 
     //@@author A0143853A
     public int getIndexOf(Task task) throws TaskNotFoundException {
         return tasks.indexOf(task);
     }
+    //@@author
 
     //@@author A0143853A
     public Task getTaskAt(int index) {
         return tasks.getTaskAt(index);
     }
+    //@@author
 
     /**
      * Updates the task in the list at position {@code index} with
@@ -163,12 +170,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new TaskBuilder(editedReadOnlyTask).build();
-        // TODO: the tags master list will be updated even though the below line
-        // fails.
-        // This can cause the tags master list to have additional tags that are
-        // not
-        // tagged to any task
-        // in the task list.
         tasks.updateTask(index, editedTask);
         syncMasterTagListWith(editedTask);
     }
@@ -204,12 +205,16 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+            throw new TaskNotFoundException();
         }
+    }
+
+    public void removeTaskAt(int index) {
+        tasks.remove(index);
     }
 
     //// tag-level operations
@@ -252,17 +257,21 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(tasks, tags);
     }
 
-    public void completeTask(int taskManagerIndex) throws DuplicateTaskException {
-        Task completedTask = tasks.getTaskAt(taskManagerIndex);
-        if (!completedTask.getIsCompleted()) {
-            completedTask.setIsCompleted(true);
-            tasks.updateTask(taskManagerIndex, completedTask);
-        }
+    public void completeTaskAt(int taskManagerIndex) throws DuplicateTaskException {
+        tasks.completeTaskAt(taskManagerIndex);
     }
 
-    public int getNumCompletedTasks() {
+
+    //@@author A0143853A
+    public void uncompleteTaskAt(int taskManagerIndex) throws DuplicateTaskException {
+        tasks.uncompleteTaskAt(taskManagerIndex);
+    }
+    //@@author
+
+    public int getNumberCompletedTasks() {
         int num = 0;
-        for (int i = 0; i <= 0; i++) {
+        int total = tasks.size();
+        for (int i = 0; i < total; i++) {
             if (tasks.getTaskAt(i).getIsCompleted()) {
                 num++;
             }
@@ -270,8 +279,43 @@ public class TaskManager implements ReadOnlyTaskManager {
         return num;
     }
 
-    public int getNumUncompletedTasks() {
-        return tasks.size() - getNumCompletedTasks();
+    public int getNumberUncompletedTasks() {
+        return tasks.size() - getNumberCompletedTasks();
+    }
+
+    public int getNumberFloatingTasks() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isFloating()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getNumberEvents() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isEvent()) {
+                count++;
+            }
+        }
+        return count;
+
+    }
+
+    public int getNumberDeadlines() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (tasks.getTaskAt(i).isDeadline()) {
+                count++;
+            }
+        }
+        return count;
+
     }
 
 }

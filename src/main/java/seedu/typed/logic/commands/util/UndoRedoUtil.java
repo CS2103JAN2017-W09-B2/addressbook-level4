@@ -70,6 +70,11 @@ public class UndoRedoUtil {
             undoStack.push(toPush);
             break;
 
+        case CommandTypeUtil.TYPE_COMPLETE:
+            redoStack.clear();
+            undoStack.push(toPush);
+            break;
+
         case CommandTypeUtil.TYPE_FIND_TASK:
             break;
 

@@ -10,7 +10,7 @@ public class TestAddCommand extends AddCommand {
     public TestAddCommand(String name, String notes, LocalDateTime date,
             LocalDateTime from, LocalDateTime to, Set<String> tags) throws IllegalValueException {
         super(name, notes, date, from, to, tags);
-        this.setData(new ModelStub(), new SessionStub(), "", config); //TODO Change String
+        this.setData(new ModelStub(), new SessionStub(), "", config, storage); //TODO Change String
 
     }
 

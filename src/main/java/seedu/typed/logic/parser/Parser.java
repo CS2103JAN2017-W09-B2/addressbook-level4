@@ -16,6 +16,7 @@ import seedu.typed.logic.commands.CompleteCommand;
 import seedu.typed.logic.commands.DeleteCommand;
 import seedu.typed.logic.commands.EditCommand;
 import seedu.typed.logic.commands.ExitCommand;
+import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.FindCommand;
 import seedu.typed.logic.commands.HelpCommand;
 import seedu.typed.logic.commands.HistoryCommand;
@@ -75,14 +76,26 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(args);
 
+        case "complete":
+            return new CompleteCommandParser().parse(args);
+
+        case "do":
+            return new CompleteCommandParser().parse(args);
+
         case CompleteCommand.COMMAND_WORD:
             return new CompleteCommandParser().parse(args);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(args);
 
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(args);
+
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(args);
+
+        case "remove":
+            return new DeleteCommandParser().parse(args);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(args);
@@ -111,8 +124,8 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(args);
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(args);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

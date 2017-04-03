@@ -12,7 +12,7 @@ import seedu.typed.logic.commands.UndoCommand;
  */
 public class UndoCommandParser {
 
-    public static String POSITIVE_INTEGER_REGEX = "[1-9]+[0-9]*";
+    public static final String POSITIVE_INTEGER_REGEX = "[1-9]+[0-9]*";
     /**
      * Parses the given {@code String} of arguments in the context of the
      * UndoCommand and returns an UndoCommand object for execution.
@@ -22,6 +22,8 @@ public class UndoCommandParser {
 
         if (trimmedArgs.equals("")) {
             return new UndoCommand();
+        } else if (trimmedArgs.equals("all")) {
+            return new UndoCommand(-1);
         } else if (trimmedArgs.matches(POSITIVE_INTEGER_REGEX)) {
             int num = Integer.parseInt(trimmedArgs);
             return new UndoCommand(num);
