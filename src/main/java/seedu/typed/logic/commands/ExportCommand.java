@@ -48,11 +48,9 @@ public class ExportCommand extends Command {
         switch (this.type) {
         case 1: // if the input is a path
             try {
-                String userHomeDirectory = System.getProperty("user.home");
-
                 String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/") + 1, this.fileName.length());
                 if (FileUtil.isValidName(onlyName)) {
-                    File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
+                    File fileToCreate = new File(this.fileName);
 
                     // Forms the directories if the directories are missing
                     fileToCreate.getParentFile().mkdirs();
