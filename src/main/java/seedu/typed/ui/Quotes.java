@@ -106,13 +106,8 @@ public class Quotes extends UiPart<Region> {
         quotesDatabase.add(pair(seventh, seventhAuthor));
     }
 
-<<<<<<< HEAD
-    private StringPair<String, String> Pair(String quote, String author) {
+    private StringPair<String, String> pair(String quote, String author) {
         return new StringPair<String, String>(quote, author);
-=======
-    private Pair<String, String> pair(String quote, String author) {
-        return new Pair<String, String>(quote, author);
->>>>>>> d1b41e6417c89c3eed400e78300b6f321d9338cf
     }
 }
 //@@author
