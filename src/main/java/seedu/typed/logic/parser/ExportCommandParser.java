@@ -7,23 +7,23 @@ import java.util.regex.Matcher;
 
 import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.Command;
+import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
-import seedu.typed.logic.commands.SaveCommand;
 
 //@@author A0139392X
 /**
- * Parses input argument and save the file.
+ * Parses input argument and exports the file.
  */
-public class SaveCommandParser {
+public class ExportCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * SaveCommand and returns an SaveCommand object for execution.
+     * ExportCommand and returns an SaveCommand object for execution.
      */
     public Command parse(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
@@ -31,17 +31,17 @@ public class SaveCommandParser {
 
         // if there are whitespace, invalid input by user
         if ((keywords.length) != 1) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
         String fileName = keywords[0];
 
         if (isAPath(fileName)) {
-            return new SaveCommand(1, createProperExtension(fileName));
+            return new ExportCommand(1, createProperExtension(fileName));
         } else if (FileUtil.isValidName(fileName)) {
-            return new SaveCommand(2, createProperExtension(fileName));
+            return new ExportCommand(2, createProperExtension(fileName));
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
     }
 

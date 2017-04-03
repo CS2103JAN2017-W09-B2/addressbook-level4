@@ -14,23 +14,23 @@ import seedu.typed.logic.commands.exceptions.CommandException;
  * If only given filename, save the file to the same directory.
  * If given a path, save the file to that path.
  */
-public class SaveCommand extends Command {
-    public static final String COMMAND_WORD = "save";
+public class ExportCommand extends Command {
+    public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_SUCCESS = "Typed saved to %1$s";
 
-    public static final String MESSAGE_SAVE_ERROR = "Unable to save to the location.";
+    public static final String MESSAGE_SAVE_ERROR = "Unable to export to the location.";
 
     public static final String MESSAGE_FILENAME_INVALID = "Filename invalid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Saves the task manager to the location specified, or as a new name.\n"
+            + ": Exports the task manager to the location specified, or as a new name.\n"
             + "Example: " + COMMAND_WORD + " Desktop/typed.xml";
 
     private final String fileName;
     private final int type;
 
-    public SaveCommand(int type, String fileName) {
+    public ExportCommand(int type, String fileName) {
         this.fileName = fileName;
         this.type = type;
     }
