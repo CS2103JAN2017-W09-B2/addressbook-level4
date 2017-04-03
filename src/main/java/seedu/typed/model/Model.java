@@ -145,15 +145,25 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     //@@author A0143853A
-    void uncompleteTaskAtForUndoRedo(int taskManagerIndex) throws DuplicateTaskException;
+    void uncompleteTaskAtForUndo(int taskManagerIndex) throws DuplicateTaskException;
 
-    void completeTaskAtForUndoRedo(int taskManagerIndex) throws DuplicateTaskException;
+    void completeTaskAtForRedo(int taskManagerIndex) throws DuplicateTaskException;
 
     void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
             throws DuplicateTaskException;
 
     void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex, ArrayList<Pair<Integer, Task>> list)
             throws TaskNotFoundException;
+
+    void deleteTaskAt(int index);
+
+    void uncompleteTasksAtForUndo(ArrayList<Integer> list) throws DuplicateTaskException;
+
+    void completeTasksAtForRedo(ArrayList<Integer> list) throws DuplicateTaskException;
+
+    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
+
+    void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
 
     //@@author
 }
