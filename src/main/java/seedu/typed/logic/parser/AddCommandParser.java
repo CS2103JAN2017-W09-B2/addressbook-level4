@@ -4,12 +4,12 @@ package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.typed.logic.parser.CliSyntax.PREFIX_EVERY;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TO;
-import static seedu.typed.logic.parser.CliSyntax.PREFIX_EVERY;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
