@@ -27,7 +27,7 @@ public class DateTime {
     public DateTime() {
         this.localDateTime = null;
     }
-
+    
     public static DateTime parseDateString(String date) {
         // assume in dd/mm/yyyy format
         String[] dates = date.trim().split("-");
@@ -86,14 +86,65 @@ public class DateTime {
         return new DateTime(nextYear);
     }
      */
+    
+    public int getDayIndex() {
+        return this.localDateTime.getDayOfWeek().getValue();
+    }
+    
+    public int getDay() {
+        return this.localDateTime.getDayOfMonth();
+    }
+    
+    public int getWeekCount() {
+        int daysFromMonthStart = this.localDateTime.getDayOfMonth();
+        return weekInMonth(daysFromMonthStart);
+    }
+    
+    public int getMonth() {
+        return this.localDateTime.getMonthValue();
+    }
+    
+    public int getYear() {
+        return this.localDateTime.getYear();
+    }
+    
+    private int weekInMonth(int dayNumber) {
+        return ((dayNumber - 1) / 7) + 1;
+    }
+    public static boolean isLeapYear(int year) {
+        if (year % 4 != 0) {
+            return false;
+        } else if (year % 400 == 0) {
+            return true;
+        } else if (year % 100 == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+
+    private int daysLeftInMonth() {
+        int days = localDateTime.getMonth().length(isLeapYear(localDateTime.getYear()));
+        return days - localDateTime.getDayOfMonth();
+    }
 
     public DateTime tomorrow() {
         LocalDateTime nextDay = this.localDateTime.plusDays(LONG_ONE);
         return new DateTime(nextDay);
     }
+    public DateTime nextDays(int count) {
+        LocalDateTime nextDays = this.localDateTime.plusDays((long) count);
+        return new DateTime(nextDays);
+    }
     public DateTime nextWeek() {
         LocalDateTime nextWeek = this.localDateTime.plusWeeks(LONG_ONE);
         return new DateTime(nextWeek);
+    }
+    
+    public DateTime nextWeeks(int count) {
+        LocalDateTime nextFewWeeks = this.localDateTime.plusWeeks((long) count);
+        return new DateTime(nextFewWeeks);
     }
 
     public DateTime nextMonth() {
@@ -105,12 +156,16 @@ public class DateTime {
         LocalDateTime nextYear = this.localDateTime.plusYears(LONG_ONE);
         return new DateTime(nextYear);
     }
+    
+    public static DateTime getToday() {
+        return new DateTime(LocalDateTime.now());
+    }
 
     public static DateTime getDateTime(int year, Month month, int day, int hr, int min) {
         return new DateTime(LocalDateTime.of(year, month, day, hr, min));
     }
 
-    private static DateTime getDateTime(int year, int month, int day, int hr, int min) {
+    public static DateTime getDateTime(int year, int month, int day, int hr, int min) {
         return new DateTime(LocalDateTime.of(year, month, day, hr, min));
     }
 

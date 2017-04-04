@@ -27,6 +27,8 @@ public interface ReadOnlyTask {
     boolean isDeadline();
 
     boolean isFloating();
+    
+    boolean isRecurring();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override
@@ -45,7 +47,7 @@ public interface ReadOnlyTask {
 
     //@@author A0141094M
     default boolean isScheduleElementSame(ScheduleElement otherSE) {
-        return this.getSE().toString().equals(otherSE.toString());
+        return this.getSE() == otherSE;
     }
     //@@author
 
@@ -57,6 +59,7 @@ public interface ReadOnlyTask {
         builder.append(" Name: ").append(getName())
         .append(" Notes: ").append(getNotes().toString())
         .append(getSE().toString())
+        .append(getSE().teToString())
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");
         getTags().forEach(builder::append);
