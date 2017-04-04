@@ -165,5 +165,11 @@ public interface Model {
 
     void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
 
+    int getNumberUncompletedEvents();
+
+    int getNumberUncompletedDeadlines();
+
+    int getNumberUncompletedFloatingTasks();
+
     //@@author
 }
