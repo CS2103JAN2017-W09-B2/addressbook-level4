@@ -17,16 +17,15 @@ import seedu.typed.schedule.ScheduleElement;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    private final Image stampComplete = new Image("/images/tick.png");
+    private final Image stampComplete = new Image("/images/doneInvert.png");
+    private final Image checkbox = new Image("/images/checkbox.png");
 
     @FXML
     private AnchorPane cardPane;
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
-    private Label date;
+    private Text date;
     @FXML
     private FlowPane tags;
     @FXML
@@ -38,24 +37,27 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().getValue());
-        id.setText(displayedIndex + ". ");
+        name.setText(displayedIndex + ". " + task.getName().getValue());
 
         ScheduleElement se = task.getSE();
         date.setText(se.toString() + se.teToString());
 
         if (task.isEvent()) {
-            taskType.setFill(Color.GREENYELLOW);
+            taskType.setFill(Color.SEAGREEN);
         } else if (task.isDeadline()) {
-            taskType.setFill(Color.LIGHTPINK);
+            taskType.setFill(Color.ORANGE);
+        } else if (task.isFloating()) {
+            taskType.setFill(Color.DODGERBLUE);
         } else {
-            taskType.setFill(Color.CORNFLOWERBLUE);
+            taskType.setFill(Color.RED);
         }
 
         notes.setText(task.getNotes().toString());
 
         if (task.getIsCompleted()) {
             stamp.setImage(stampComplete);
+        } else {
+            stamp.setImage(checkbox);
         }
 
         initTags(task);

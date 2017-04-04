@@ -24,8 +24,8 @@ public class ImportCommand extends Command {
             + " C:\\Users\\(username)\\Desktop\\typed.xml";
 
     public static final String MESSAGE_SUCCESS = "Task manager imported! \n" + "Source: %1$s";
-    public static final String MESSAGE_ERROR = "Did you specify the location correctly?\n + "
-            + "Typed is unable to import from the path given";
+    public static final String MESSAGE_ERROR = "Did you specify the location correctly?\n"
+            + "Typed is unable to import from the path given.";
 
     private final String location;
 

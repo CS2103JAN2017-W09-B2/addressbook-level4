@@ -8,26 +8,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="cardPane" prefHeight="105.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="cardPane" prefHeight="120.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Label fx:id="id" text="N" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
+		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="373.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
 			<font>
 				<Font size="25.0" />
 			</font>
 		</Label>
-		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="330.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0">
+		<FlowPane fx:id="tags" alignment="CENTER_LEFT" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" />
+		<Text fx:id="notes" fill="#2291da" layoutX="50.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notes" wrappingWidth="393.95556640625" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
 			<font>
-				<Font size="25.0" />
-			</font>
-		</Label>
-		<FlowPane fx:id="tags" alignment="CENTER_RIGHT" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-		<Label fx:id="date" text="\$date" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
-		<Text fx:id="notes" fill="#2291da" layoutX="16.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notes" wrappingWidth="393.95556640625" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0">
-			<font>
-				<Font size="11.0" />
+				<Font size="15.0" />
 			</font>
 		</Text>
-      <ImageView fx:id="stamp" fitHeight="50.0" fitWidth="50.0" layoutX="-2.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="44.0" />
-      <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="18.0" />
+      <ImageView fx:id="stamp" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
+      <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+      <Text fx:id="date" layoutX="146.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="60.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
 	</children>
 </AnchorPane>
