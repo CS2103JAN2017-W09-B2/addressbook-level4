@@ -72,5 +72,13 @@ public class RangeEachYearTE implements TimeExpression {
         int month = date.getLocalDateTime().getMonthValue();
         return (month > startMonth && month < endMonth);
     }
+     
+    /*
+     * Represents every day in the year, every year
+     */
+    public static RangeEachYearTE year() {
+        // From Jan 1st to Dec 31st
+        return new RangeEachYearTE(1, 12, 1, 31);
+    }
 
 }

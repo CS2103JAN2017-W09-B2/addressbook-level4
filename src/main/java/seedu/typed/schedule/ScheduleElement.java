@@ -141,5 +141,29 @@ public class ScheduleElement implements TimeExpression {
         }
     }
     //@@author
-
+    
+    /**
+     * Need to be able to create time expression accordingly to fit the recurrence
+     */
+    
+    /*
+     * TimeExpression representing the recurring event everyday
+     */
+    public TimeExpression recurEveryDay() {
+        return RangeEachYearTE.year();
+    }
+    
+    /*
+     * TimeExpression representing the recurring event every week
+     */
+    public TimeExpression recurEveryWeek(int dayIndex) {
+        return DayInMonthTE.weekly(dayIndex);
+    }
+    
+    /*
+     * TimeExpression representing the recurring event every month
+     */
+    public TimeExpression recurEveryMonth(int count, int dayIndex) {
+        return DayInMonthTE.monthly(count, dayIndex);
+    }
 }

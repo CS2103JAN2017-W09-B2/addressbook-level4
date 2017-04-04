@@ -77,5 +77,52 @@ public class DayInMonthTE implements TimeExpression {
         this.count = count;
         this.dayIndex = dayIndex;
     }
+    
+    /*
+     * Represent every day in a week
+     * @param count represents which week is it (1st week, 2nd week)
+     */
+    public static UnionTE week(int count) {
+        UnionTE unionTE = new UnionTE();
+        for (int dayIndex = 1; dayIndex <= 7; dayIndex++) {
+            DayInMonthTE te = new DayInMonthTE(count, dayIndex);
+            unionTE.addTE(te);
+        }
+        return unionTE;
+    }
+    
+    /*
+     * Represent every day in a month
+     * It will match every single day in a week
+     */
+    public static TimeExpression month() {
+        UnionTE unionTE = new UnionTE();
+        for (int count = -1; count <= 4; count++) {
+            TimeExpression week = DayInMonthTE.week(count);
+            unionTE.addTE(week);
+        }
+        return unionTE;
+    }
+    
+    /*
+     * Represent a single day every week
+     * It will match up to 5 similar days (monday, tuesday ...)
+     * in a month
+     */
+    public static TimeExpression weekly(int dayIndex) {
+        UnionTE unionTE = new UnionTE();
+        for (int count = -1; count <= 4; count++) {
+            TimeExpression week = new DayInMonthTE(count, dayIndex);
+            unionTE.addTE(week);
+        }
+        return unionTE;
+    }
+    /*
+     * Represent a day in a month 
+     * It will match only a single day in a month
+     */
+    public static TimeExpression monthly(int count, int dayIndex) {
+        return new DayInMonthTE(count, dayIndex);
+    }
 
 }
