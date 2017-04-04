@@ -9,12 +9,18 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 
 public class CompleteCommand extends Command {
-    //@@author A0139379M
-    public static final String COMMAND_WORD = "finish";
+    //@@author A0141094M
+    public static final String FINISH_COMMAND_WORD = "finish";
+    public static final String MARK_COMMAND_WORD = "mark";
+    public static final String DONE_COMMAND_WORD = "done";
+    public static final String CHECK_COMMAND_WORD = "check";
+    public static final String COMPLETE_COMMAND_WORD = "complete";
+    //@@author
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a Task as completed "
+    //@@author A0139379M
+    public static final String MESSAGE_USAGE = FINISH_COMMAND_WORD + ": Marks a Task as completed "
             + "by the index number used in the last task listing.\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + FINISH_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: %1$s";
     public static final String MESSAGE_COMPLETED_TASKS_SUCCESS = "Completed %1$d tasks!";

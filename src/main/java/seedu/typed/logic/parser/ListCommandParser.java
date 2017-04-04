@@ -23,7 +23,7 @@ public class ListCommandParser {
     private static final String UNDONE_STRING = "undone";
     private static final String DEADLINE_STRING = "deadline";
     private static final String FLOATING_STRING = "floating";
-    
+
     private static final Object DURATION_STRING = "duration";
 
     /**
