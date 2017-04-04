@@ -10,12 +10,7 @@
 
 <AnchorPane fx:id="cardPane" prefHeight="120.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Label fx:id="id" text="N" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
-			<font>
-				<Font size="25.0" />
-			</font>
-		</Label>
-		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="330.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="10.0">
+		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="373.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
 			<font>
 				<Font size="25.0" />
 			</font>

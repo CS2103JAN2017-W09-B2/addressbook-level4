@@ -17,15 +17,13 @@ import seedu.typed.schedule.ScheduleElement;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    private final Image stampComplete = new Image("/images/done.png");
+    private final Image stampComplete = new Image("/images/doneInvert.png");
     private final Image checkbox = new Image("/images/checkbox.png");
 
     @FXML
     private AnchorPane cardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
     @FXML
     private Text date;
     @FXML
@@ -39,8 +37,7 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().getValue());
-        id.setText(displayedIndex + ". ");
+        name.setText(displayedIndex +". " + task.getName().getValue());
 
         ScheduleElement se = task.getSE();
         date.setText(se.toString());
