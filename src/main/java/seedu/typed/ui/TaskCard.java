@@ -43,11 +43,13 @@ public class TaskCard extends UiPart<Region> {
         date.setText(se.toString());
 
         if (task.isEvent()) {
-            taskType.setFill(Color.GREENYELLOW);
+            taskType.setFill(Color.SEAGREEN);
         } else if (task.isDeadline()) {
-            taskType.setFill(Color.LIGHTPINK);
+            taskType.setFill(Color.ORANGE);
+        } else if (task.isFloating()) {
+            taskType.setFill(Color.DODGERBLUE);
         } else {
-            taskType.setFill(Color.CORNFLOWERBLUE);
+            taskType.setFill(Color.RED);
         }
 
         notes.setText(task.getNotes().toString());
