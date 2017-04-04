@@ -37,7 +37,7 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(displayedIndex +". " + task.getName().getValue());
+        name.setText(displayedIndex + ". " + task.getName().getValue());
 
         ScheduleElement se = task.getSE();
         date.setText(se.toString());
