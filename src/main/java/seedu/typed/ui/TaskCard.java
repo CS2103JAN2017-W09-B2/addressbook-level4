@@ -40,7 +40,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(displayedIndex + ". " + task.getName().getValue());
 
         ScheduleElement se = task.getSE();
-        date.setText(se.toString());
+        date.setText(se.toString() + se.teToString());
 
         if (task.isEvent()) {
             taskType.setFill(Color.SEAGREEN);

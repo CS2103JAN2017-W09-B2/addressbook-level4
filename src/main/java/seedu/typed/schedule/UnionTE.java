@@ -27,6 +27,10 @@ public class UnionTE implements TimeExpression {
         return false;
     }
 
+    public UnionTE() {
+        this.elements = new ArrayList<>();
+    }
+
     public UnionTE(TimeExpression te1, TimeExpression te2) {
         this.elements = new ArrayList<>();
         this.elements.add(te1);
@@ -38,5 +42,26 @@ public class UnionTE implements TimeExpression {
         for (int i = 0; i < te.length; i++) {
             this.elements.add(te[i]);
         }
+    }
+
+    public void addTE(TimeExpression te) {
+        this.elements.add(te);
+    }
+
+    @Override
+    public DateTime nextDeadlineOccurrence(DateTime dateTime) {
+        // returns the next occurrence of either of the time expression
+        // choose the earliest occurrence
+        DateTime earliestSoFar = elements.get(0).nextDeadlineOccurrence(dateTime);
+        DateTime current = earliestSoFar;
+        for (int i = 1; i < elements.size(); i++) {
+            current = elements.get(i).nextDeadlineOccurrence(dateTime);
+            System.out.println(earliestSoFar.toString());
+            if (earliestSoFar.isAfter(current)) {
+                // current is not after earliest so far
+                earliestSoFar = current;
+            }
+        }
+        return earliestSoFar;
     }
 }

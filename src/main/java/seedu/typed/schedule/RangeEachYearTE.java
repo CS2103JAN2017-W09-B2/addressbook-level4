@@ -69,8 +69,43 @@ public class RangeEachYearTE implements TimeExpression {
     }
 
     private boolean monthsInclude(DateTime date) {
-        int month = date.getLocalDateTime().getMonthValue();
+        int month = date.getMonth();
         return (month > startMonth && month < endMonth);
+    }
+
+    /*
+     * Represents every day in the year, every year
+     */
+    public static RangeEachYearTE year() {
+        // From Jan 1st to Dec 31st
+        return new RangeEachYearTE(1, 12, 1, 31);
+    }
+
+    @Override
+    public DateTime nextDeadlineOccurrence(DateTime date) {
+        int day = date.getDay();
+        int month = date.getMonth();
+        int year = date.getYear();
+
+        if (month < startMonth || month > endMonth) {
+            // next occurrence is startMonth
+            if (month < startMonth) {
+                // current year
+                return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
+            } else {
+                // next year start Month
+                return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
+            }
+        } else {
+            // month is in the start month to end month period
+            if (day < startDay || day > endDay) {
+                // start month start date
+                return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
+            } else {
+                // next year
+                return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
+            }
+        }
     }
 
 }
