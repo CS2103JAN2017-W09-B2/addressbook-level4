@@ -60,7 +60,7 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     private String getEvery(ArgumentTokenizer argsTokenizer) {
         if (isEveryPresent(argsTokenizer)) {
             return argsTokenizer.getValue(PREFIX_EVERY).get();
@@ -110,7 +110,7 @@ public class AddCommandParser {
     private boolean isByPresent(ArgumentTokenizer argsTokenizer) {
         return argsTokenizer.getValue(PREFIX_DATE).isPresent();
     }
-    
+
     private boolean isEveryPresent(ArgumentTokenizer argsTokenizer) {
         return argsTokenizer.getValue(PREFIX_EVERY).isPresent();
     }

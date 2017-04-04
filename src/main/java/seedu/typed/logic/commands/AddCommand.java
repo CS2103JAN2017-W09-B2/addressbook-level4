@@ -53,7 +53,7 @@ public class AddCommand extends Command {
                 .setTags(tags)
                 .build();
     }
-    
+
 
     public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
             LocalDateTime to, Set<String> tags) throws IllegalValueException {

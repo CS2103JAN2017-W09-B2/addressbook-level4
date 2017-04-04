@@ -151,7 +151,7 @@ public class Task implements ReadOnlyTask {
     public boolean isRecurring() {
         return se.isRecurring();
     }
-    
+
     public ScheduleElement updateDate() {
         return this.se.updateDate();
     }

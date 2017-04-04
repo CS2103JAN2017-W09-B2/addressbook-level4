@@ -31,7 +31,7 @@ public class IntersectionTE implements TimeExpression {
             this.elements.add(te[i]);
         }
     }
-    
+
     public void addTE(TimeExpression te) {
         this.elements.add(te);
     }
@@ -44,7 +44,7 @@ public class IntersectionTE implements TimeExpression {
         }
         return true;
     }
-    
+
     /**
      * next deadline occurrence just needs to keep iterating through
      * the next deadline occurrence of one of the time expression

@@ -27,7 +27,7 @@ public interface ReadOnlyTask {
     boolean isDeadline();
 
     boolean isFloating();
-    
+
     boolean isRecurring();
 
     /**

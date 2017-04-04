@@ -26,7 +26,7 @@ public class UnionTE implements TimeExpression {
         }
         return false;
     }
-    
+
     public UnionTE() {
         this.elements = new ArrayList<>();
     }
@@ -43,7 +43,7 @@ public class UnionTE implements TimeExpression {
             this.elements.add(te[i]);
         }
     }
-    
+
     public void addTE(TimeExpression te) {
         this.elements.add(te);
     }

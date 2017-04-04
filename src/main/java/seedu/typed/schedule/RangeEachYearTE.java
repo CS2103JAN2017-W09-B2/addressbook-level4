@@ -80,13 +80,13 @@ public class RangeEachYearTE implements TimeExpression {
         // From Jan 1st to Dec 31st
         return new RangeEachYearTE(1, 12, 1, 31);
     }
-    
+
     @Override
     public DateTime nextDeadlineOccurrence(DateTime date) {
         int day = date.getDay();
         int month = date.getMonth();
         int year = date.getYear();
-        
+
         if (month < startMonth || month > endMonth) {
             // next occurrence is startMonth
             if (month < startMonth) {
