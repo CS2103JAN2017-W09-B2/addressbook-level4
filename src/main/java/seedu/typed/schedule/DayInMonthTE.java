@@ -14,7 +14,7 @@ import seedu.typed.model.task.DateTime;
  **/
 
 public class DayInMonthTE implements TimeExpression {
-    private int count;
+    private int weekCount;
     private int dayIndex;
 
     /**
@@ -31,7 +31,7 @@ public class DayInMonthTE implements TimeExpression {
      * @return true if the week count matches the week count of the date
      */
     private boolean weekMatches(DateTime date) {
-        if (count > 0) {
+        if (weekCount > 0) {
             return weekFromStartMatches(date);
         } else {
             return weekFromEndMatches(date);
@@ -39,7 +39,7 @@ public class DayInMonthTE implements TimeExpression {
     }
     private boolean weekFromEndMatches(DateTime date) {
         int daysFromMonthEnd = daysLeftInMonth(date);
-        return weekInMonth(daysFromMonthEnd) == Math.abs(count);
+        return weekInMonth(daysFromMonthEnd) == Math.abs(weekCount);
     }
     private int daysLeftInMonth(DateTime date) {
         LocalDateTime dateTime = date.getLocalDateTime();
@@ -47,7 +47,7 @@ public class DayInMonthTE implements TimeExpression {
         return days - dateTime.getDayOfMonth();
     }
     private boolean weekFromStartMatches(DateTime date) {
-        return this.weekInMonth(date.getLocalDateTime().getDayOfMonth()) == count;
+        return this.weekInMonth(date.getLocalDateTime().getDayOfMonth()) == weekCount;
     }
     private boolean dayMatches(DateTime date) {
         return date.getLocalDateTime().getDayOfWeek().getValue() == dayIndex;
@@ -69,41 +69,41 @@ public class DayInMonthTE implements TimeExpression {
     }
     /**
      * For example, DayInMonthTE(1, 3) would refer to every first Wednesday
-     * @param count represents which week is it (negative numbers count from the back of the month
+     * @param weekCount represents which week is it (negative numbers count from the back of the month
      * whereas positive numbers count from the front)
      * @param dayIndex represents which day of the week (Monday = 1 to Sunday = 7)
      */
-    public DayInMonthTE(int count, int dayIndex) {
-        this.count = count;
+    public DayInMonthTE(int weekCount, int dayIndex) {
+        this.weekCount = weekCount;
         this.dayIndex = dayIndex;
     }
-    
+
     /*
      * Represent every day in a week
-     * @param count represents which week is it (1st week, 2nd week)
+     * @param weekCount represents which week is it (1st week, 2nd week)
      */
-    public static UnionTE week(int count) {
+    public static UnionTE week(int weekCount) {
         UnionTE unionTE = new UnionTE();
         for (int dayIndex = 1; dayIndex <= 7; dayIndex++) {
-            DayInMonthTE te = new DayInMonthTE(count, dayIndex);
+            DayInMonthTE te = new DayInMonthTE(weekCount, dayIndex);
             unionTE.addTE(te);
         }
         return unionTE;
     }
-    
+
     /*
      * Represent every day in a month
      * It will match every single day in a week
      */
     public static TimeExpression month() {
         UnionTE unionTE = new UnionTE();
-        for (int count = -1; count <= 4; count++) {
-            TimeExpression week = DayInMonthTE.week(count);
+        for (int weekCount = -1; weekCount <= 4; weekCount++) {
+            TimeExpression week = DayInMonthTE.week(weekCount);
             unionTE.addTE(week);
         }
         return unionTE;
     }
-    
+
     /*
      * Represent a single day every week
      * It will match up to 5 similar days (monday, tuesday ...)
@@ -111,8 +111,8 @@ public class DayInMonthTE implements TimeExpression {
      */
     public static TimeExpression weekly(int dayIndex) {
         UnionTE unionTE = new UnionTE();
-        for (int count = -1; count <= 4; count++) {
-            TimeExpression week = new DayInMonthTE(count, dayIndex);
+        for (int weekCount = 1; weekCount <= 5; weekCount++) {
+            TimeExpression week = new DayInMonthTE(weekCount, dayIndex);
             unionTE.addTE(week);
         }
         return unionTE;
@@ -123,6 +123,62 @@ public class DayInMonthTE implements TimeExpression {
      */
     public static TimeExpression monthly(int count, int dayIndex) {
         return new DayInMonthTE(count, dayIndex);
+    }
+    @Override
+    public DateTime nextDeadlineOccurrence(DateTime date) {
+        int dayIndex = date.getDayIndex();
+        int weekCount = date.getWeekCount();
+        int month = date.getMonth();
+        int year = date.getYear();
+        int weekDiff = this.weekCount - weekCount;
+        int dayDiff = this.dayIndex - dayIndex;
+        // find the minimum number of days to reach same dayIndex and weekCount
+        // assumes this.weekCount is positive first
+        if (weekDiff > 0) {
+            // it's next few weeks...
+            if (dayDiff > 0) {
+                // next few weeks + few days
+                DateTime nextFewWeeks = date.nextWeeks(weekDiff);
+                return nextFewWeeks.nextDays(dayDiff);
+            } else if (dayDiff < 0) {
+                // next few weeks - 1 week + few days
+                DateTime nextFewWeeks = date.nextWeeks(weekDiff);
+                return nextFewWeeks.nextDays(dayDiff);
+            } else {
+                // same dayIndex so next occurrence is few weeks later
+                return date.nextWeeks(weekDiff);
+            }
+        } else if (weekDiff < 0) {
+            // it's actually before us so need nex month
+            // finish up the month and get the next deadline
+            if (month == 12) {
+                year++;
+                month = 1;
+            } else {
+                month++;
+            }
+            DateTime firstDayOfNextMonth = DateTime.getDateTime(year, month, 1, 0, 0);
+            return nextDeadlineOccurrence(firstDayOfNextMonth);
+        } else {
+            // same week
+            if (dayDiff > 0) {
+                // next few days
+                return date.nextDays(dayDiff);
+            } else if (dayDiff < 0) {
+                // next week - dayDiff
+                DateTime nextFewWeeks = date.nextWeek();
+                return nextFewWeeks.nextDays(dayDiff);
+            } else {
+                // same week same day
+                // return next week if included in time expression
+                DateTime nextWeek = date.nextWeek();
+                if (this.includes(nextWeek)) {
+                    return nextWeek;
+                } else {
+                    return nextDeadlineOccurrence(nextWeek);
+                }
+            }
+        }
     }
 
 }
