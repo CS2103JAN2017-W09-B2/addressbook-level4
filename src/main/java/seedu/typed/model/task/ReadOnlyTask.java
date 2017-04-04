@@ -47,7 +47,7 @@ public interface ReadOnlyTask {
 
     //@@author A0141094M
     default boolean isScheduleElementSame(ScheduleElement otherSE) {
-        return this.getSE() == otherSE;
+        return this.getSE().toString().equals(otherSE.toString());
     }
     //@@author
 

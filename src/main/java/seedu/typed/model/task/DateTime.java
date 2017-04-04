@@ -3,6 +3,7 @@ package seedu.typed.model.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 //@@author A0139379M
 /**
  * DateTime represents our Date and Time in TaskManager using Java's LocalDateTime
@@ -27,7 +28,7 @@ public class DateTime {
     public DateTime() {
         this.localDateTime = null;
     }
-    
+
     public static DateTime parseDateString(String date) {
         // assume in dd/mm/yyyy format
         String[] dates = date.trim().split("-");
@@ -86,28 +87,28 @@ public class DateTime {
         return new DateTime(nextYear);
     }
      */
-    
+
     public int getDayIndex() {
         return this.localDateTime.getDayOfWeek().getValue();
     }
-    
+
     public int getDay() {
         return this.localDateTime.getDayOfMonth();
     }
-    
+
     public int getWeekCount() {
         int daysFromMonthStart = this.localDateTime.getDayOfMonth();
         return weekInMonth(daysFromMonthStart);
     }
-    
+
     public int getMonth() {
         return this.localDateTime.getMonthValue();
     }
-    
+
     public int getYear() {
         return this.localDateTime.getYear();
     }
-    
+
     private int weekInMonth(int dayNumber) {
         return ((dayNumber - 1) / 7) + 1;
     }
@@ -122,12 +123,6 @@ public class DateTime {
             return true;
         }
     }
-    
-
-    private int daysLeftInMonth() {
-        int days = localDateTime.getMonth().length(isLeapYear(localDateTime.getYear()));
-        return days - localDateTime.getDayOfMonth();
-    }
 
     public DateTime tomorrow() {
         LocalDateTime nextDay = this.localDateTime.plusDays(LONG_ONE);
@@ -141,7 +136,7 @@ public class DateTime {
         LocalDateTime nextWeek = this.localDateTime.plusWeeks(LONG_ONE);
         return new DateTime(nextWeek);
     }
-    
+
     public DateTime nextWeeks(int count) {
         LocalDateTime nextFewWeeks = this.localDateTime.plusWeeks((long) count);
         return new DateTime(nextFewWeeks);
@@ -156,7 +151,7 @@ public class DateTime {
         LocalDateTime nextYear = this.localDateTime.plusYears(LONG_ONE);
         return new DateTime(nextYear);
     }
-    
+
     public static DateTime getToday() {
         return new DateTime(LocalDateTime.now());
     }
@@ -167,6 +162,17 @@ public class DateTime {
 
     public static DateTime getDateTime(int year, int month, int day, int hr, int min) {
         return new DateTime(LocalDateTime.of(year, month, day, hr, min));
+    }
+
+    public static int duration(DateTime date, DateTime other) {
+        Long duration;
+        if (date.isAfter(other)) {
+            duration = other.getLocalDateTime().until(date.getLocalDateTime(), ChronoUnit.DAYS);
+            return duration.intValue();
+        } else {
+            duration = date.getLocalDateTime().until(other.getLocalDateTime(), ChronoUnit.DAYS);
+            return duration.intValue();
+        }
     }
 
     //@@author A0141094M
