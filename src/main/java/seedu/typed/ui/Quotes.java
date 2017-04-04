@@ -47,7 +47,6 @@ public class Quotes extends UiPart<Region> {
         initializeDatabase();
 
         int randomNumber = randomizedNumber();
-        System.out.println(randomNumber);
 
         quote.setText(quotesDatabase.get(randomNumber).getElem1());
         author.setText("~ " + quotesDatabase.get(randomNumber).getElem2());

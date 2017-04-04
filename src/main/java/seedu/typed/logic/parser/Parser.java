@@ -20,6 +20,7 @@ import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.FindCommand;
 import seedu.typed.logic.commands.HelpCommand;
 import seedu.typed.logic.commands.HistoryCommand;
+import seedu.typed.logic.commands.ImportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
