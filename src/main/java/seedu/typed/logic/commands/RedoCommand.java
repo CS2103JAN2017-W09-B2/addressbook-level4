@@ -20,12 +20,12 @@ import seedu.typed.model.task.TaskBuilder;
  */
 public class RedoCommand extends Command {
 
-    public static final String COMMAND_WORD = "redo";
+    public static final String REDO_COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the previous undone command "
+    public static final String MESSAGE_USAGE = REDO_COMMAND_WORD + ": Redoes the previous undone command "
                                                + "in the current session.\n"
                                                + "Parameters: [NUMBER]\n"
-                                               + "Example: " + COMMAND_WORD + " 2";
+                                               + "Example: " + REDO_COMMAND_WORD + " 2";
     public static final String MESSAGE_SUCCESS = "Redone successfully!";
     public static final String MESSAGE_ALL_SUCCESS = "Redone all successfully!";
     public static final String MESSAGE_SINGLE_SUCCESS = "Redone successfully 1 command!";

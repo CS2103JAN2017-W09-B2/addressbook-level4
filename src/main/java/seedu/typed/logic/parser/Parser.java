@@ -71,65 +71,132 @@ public class Parser {
     private Command parseValidUserInput(final String commandWord, final String args) {
         assert commandWord != null;
 
-        switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
+        if (isAddCommandWord(commandWord)) {
             return new AddCommandParser().parse(args);
-
-        case "complete":
-            return new CompleteCommandParser().parse(args);
-
-        case "do":
-            return new CompleteCommandParser().parse(args);
-
-        case CompleteCommand.COMMAND_WORD:
-            return new CompleteCommandParser().parse(args);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(args);
-
-        case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(args);
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(args);
-
-        case "remove":
-            return new DeleteCommandParser().parse(args);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(args);
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommandParser().parse(args);
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommandParser().parse(args);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(args);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(args);
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case ExportCommand.COMMAND_WORD:
-            return new ExportCommandParser().parse(args);
-
-        default:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+        if (isCompleteCommandWord(commandWord)) {
+            return new CompleteCommandParser().parse(args);
+        }
+        if (isEditCommandWord(commandWord)) {
+            return new EditCommandParser().parse(args);
+        }
+        if (isHelpCommandWord(commandWord)) {
+            return new HelpCommand();
+        }
+        if (isExitCommandWord(commandWord)) {
+            return new ExitCommand();
+        }
+        if (isListCommandWord(commandWord)) {
+            return new ListCommandParser().parse(args);
+        }
+        if (isFindCommandWord(commandWord)) {
+            return new FindCommandParser().parse(args);
+        }
+        if (isDeleteCommandWord(commandWord)) {
+            return new DeleteCommandParser().parse(args);
+        }
+        if (isClearCommandWord(commandWord)) {
+            return new ClearCommand();
+        }
+        if (isSaveCommand(commandWord)) {
+            return new SaveCommandParser().parse(args);
+        }
+        if (isSelectCommand(commandWord)) {
+            return new SelectCommandParser().parse(args);
+        }
+        if (isUndoCommand(commandWord)) {
+            return new UndoCommandParser().parse(args);
+        }
+        if (isRedoCommand(commandWord)) {
+            return new RedoCommandParser().parse(args);
+        }
+        if (isHistoryCommand(commandWord)) {
+            return new HistoryCommand();
+        }
+        if (isExportCommand(commandWord)) {
+            return new ExportCommandParser().parse(args);
+        }
+        return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    private boolean isExportCommand(String commandWord) {
+        return commandWord.equals(ExportCommand.EXPORT_COMMAND_WORD);
+    }
+
+    private boolean isHistoryCommand(String commandWord) {
+        return commandWord.equals(HistoryCommand.HISTORY_COMMAND_WORD) ||
+                commandWord.equals(HistoryCommand.LOG_COMMAND_WORD) ||
+                commandWord.equals(HistoryCommand.HIST_COMMAND_WORD);
+    }
+
+    private boolean isRedoCommand(String commandWord) {
+        return commandWord.equals(RedoCommand.REDO_COMMAND_WORD);
+    }
+
+    private boolean isUndoCommand(String commandWord) {
+        return commandWord.equals(UndoCommand.UNDO_COMMAND_WORD);
+    }
+
+    private boolean isSelectCommand(String commandWord) {
+        return commandWord.equals(SelectCommand.SELECT_COMMAND_WORD);
+    }
+
+    private boolean isSaveCommand(String commandWord) {
+        return commandWord.equals(SaveCommand.SAVE_COMMAND_WORD);
+    }
+
+    private boolean isClearCommandWord(String commandWord) {
+        return commandWord.equals(ClearCommand.CLEAR_COMMAND_WORD) ||
+                commandWord.equals(ClearCommand.EMPTY_COMMAND_WORD);
+    }
+
+    private boolean isDeleteCommandWord(String commandWord) {
+        return commandWord.equals(DeleteCommand.DELETE_COMMAND_WORD) ||
+                commandWord.equals(DeleteCommand.DEL_COMMAND_WORD) ||
+                commandWord.equals(DeleteCommand.REMOVE_COMMAND_WORD);
+    }
+
+    private boolean isFindCommandWord(String commandWord) {
+        return commandWord.equals(FindCommand.FIND_COMMAND_WORD) ||
+                commandWord.equals(FindCommand.SEARCH_COMMAND_WORD) ||
+                commandWord.equals(FindCommand.QUERY_COMMAND_WORD);
+    }
+
+    private boolean isListCommandWord(String commandWord) {
+        return commandWord.equals(ListCommand.LIST_COMMAND_WORD) ||
+                commandWord.equals(ListCommand.FILTER_COMMAND_WORD) ||
+                commandWord.equals(ListCommand.SHOW_COMMAND_WORD);
+    }
+
+    private boolean isExitCommandWord(String commandWord) {
+        return commandWord.equals(ExitCommand.EXIT_COMMAND_WORD) ||
+                commandWord.equals(ExitCommand.QUIT_COMMAND_WORD) ||
+                commandWord.equals(ExitCommand.LOGOUT_COMMAND_WORD);
+    }
+
+    private boolean isHelpCommandWord(String commandWord) {
+        return commandWord.equals(HelpCommand.HELP_COMMAND_WORD) ||
+                commandWord.equals(HelpCommand.MAN_COMMAND_WORD);
+    }
+
+    private boolean isEditCommandWord(String commandWord) {
+        return commandWord.equals(EditCommand.EDIT_COMMAND_WORD) ||
+                commandWord.equals(EditCommand.UDPATE_COMMAND_WORD) ||
+                commandWord.equals(EditCommand.CHANGE_COMMAND_WORD);
+    }
+
+    private boolean isCompleteCommandWord(String commandWord) {
+        return commandWord.equals(CompleteCommand.COMPLETE_COMMAND_WORD) ||
+                commandWord.equals(CompleteCommand.FINISH_COMMAND_WORD) ||
+                commandWord.equals(CompleteCommand.DONE_COMMAND_WORD) ||
+                commandWord.equals(CompleteCommand.CHECK_COMMAND_WORD) ||
+                commandWord.equals(CompleteCommand.MARK_COMMAND_WORD);
+    }
+
+    private boolean isAddCommandWord(String commandWord) {
+        return commandWord.equals(AddCommand.ADD_COMMAND_WORD) ||
+                commandWord.equals(AddCommand.CREATE_COMMAND_WORD) ||
+                commandWord.equals(AddCommand.DO_COMMAND_WORD);
     }
 
     private String getEmptyUserInputMessage() {
@@ -149,5 +216,6 @@ public class Parser {
         return matcher.matches();
     }
 
-
 }
+//@@author
+

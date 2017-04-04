@@ -17,10 +17,14 @@ import seedu.typed.schedule.ScheduleElement;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    //@@author A0141094M
+    public static final String ADD_COMMAND_WORD = "add";
+    public static final String CREATE_COMMAND_WORD = "create";
+    public static final String DO_COMMAND_WORD = "do";
+    //@@author
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [by DATE] [on DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = ADD_COMMAND_WORD + ": Adds a task to the task manager. "
+            + "Parameters: NAME [by DATE] [on DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + ADD_COMMAND_WORD
             + " buy 5 broccolis by tomorrow #survival #grocery ";
 
     public static final String MESSAGE_SUCCESS = "%1$s added";
@@ -28,6 +32,7 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
 
+    //@@author A0141094M
     /**
      * Creates an AddCommand using raw values.
      *
@@ -51,6 +56,7 @@ public class AddCommand extends Command {
                 .setTags(tags)
                 .build();
     }
+    //@@author
 
     @Override
     public CommandResult execute() throws CommandException {

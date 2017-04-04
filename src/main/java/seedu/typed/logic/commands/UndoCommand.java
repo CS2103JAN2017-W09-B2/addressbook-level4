@@ -19,12 +19,12 @@ import seedu.typed.model.task.TaskBuilder;
  */
 public class UndoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
+    public static final String UNDO_COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the previous add/delete/edit/clear command "
+    public static final String MESSAGE_USAGE = UNDO_COMMAND_WORD + ": Undoes the previous add/delete/edit/clear command "
                                                + "in the current session.\n"
                                                + "Parameters: [NUMBER]\n"
-                                               + "Example: " + COMMAND_WORD + " 2";
+                                               + "Example: " + UNDO_COMMAND_WORD + " 2";
     public static final String MESSAGE_SUCCESS = "Undone successfully!";
     public static final String MESSAGE_ALL_SUCCESS = "Undone all successfully!";
     public static final String MESSAGE_SINGLE_SUCCESS = "Undone successfully 1 command!";
