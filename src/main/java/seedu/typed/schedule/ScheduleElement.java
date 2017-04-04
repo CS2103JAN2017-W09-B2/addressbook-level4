@@ -89,7 +89,7 @@ public class ScheduleElement implements TimeExpression {
         this.rule = "";
     }
     /**
-     * Representation of an event in our TaskManager
+     * Representation of an event in our TaskManager..
      * @param startDate
      * @param endDate
      */
