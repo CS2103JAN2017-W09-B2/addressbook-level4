@@ -50,6 +50,9 @@ public class AddCommandParser {
             if (hasBothByAndOnFields(argsTokenizer) || isBothDeadlineTaskAndEventTask(argsTokenizer)) {
                 return new IncorrectCommand(getIncorrectAddMessage());
             }
+            if (every == null) {
+                return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags);
+            }
             return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags, every);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(getIncorrectAddMessage());
