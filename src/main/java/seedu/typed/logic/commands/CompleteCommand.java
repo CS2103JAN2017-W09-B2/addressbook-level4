@@ -15,6 +15,7 @@ public class CompleteCommand extends Command {
     public static final String DONE_COMMAND_WORD = "done";
     public static final String CHECK_COMMAND_WORD = "check";
     public static final String COMPLETE_COMMAND_WORD = "complete";
+    public static final String END_COMMAND_WORD = "end";
     //@@author
 
     //@@author A0139379M

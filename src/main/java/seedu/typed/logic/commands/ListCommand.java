@@ -12,6 +12,7 @@ public class ListCommand extends Command {
     public static final String LIST_COMMAND_WORD = "list";
     public static final String FILTER_COMMAND_WORD = "filter";
     public static final String SHOW_COMMAND_WORD = "show";
+    public static final String LS_COMMAND_WORD = "ls";
 
     public static final String MESSAGE_USAGE = LIST_COMMAND_WORD + ": Lists all undone and upcoming tasks by default, "
             + "or by the CATEGORY if specified. Valid CATEGORYs are: untimed, deadline, duration, done, undone and all."
