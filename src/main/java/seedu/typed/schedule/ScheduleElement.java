@@ -253,13 +253,10 @@ public class ScheduleElement implements TimeExpression {
         return DayInMonthTE.monthly(weekCount, dayIndex);
     }
 
-    public TimeExpression recurEveryMonth(int startWeekCount, int startDayIndex,
-            int endWeekCount, int endDayIndex) {
+    public TimeExpression recurEventEveryMonth(int startDay, int endDay) {
         UnionTE unionTE = new UnionTE();
-        for (int weekCount = startWeekCount; weekCount <= endWeekCount; weekCount++) {
-            for (int index = startDayIndex; index <= endDayIndex; index++) {
-                unionTE.addTE(DayInMonthTE.monthly(weekCount, index));
-            }
+        for (int month = 1; month <= 12; month++) {
+            unionTE.addTE(new RangeEachYearTE(month, month, startDay, endDay));
         }
         return unionTE;
 
@@ -289,11 +286,9 @@ public class ScheduleElement implements TimeExpression {
             int duration = DateTime.duration(startDate, endDate);
             int startDayIndex = startDate.getDayIndex();
             int startDay = startDate.getDay();
-            int startWeekCount = startDate.getWeekCount();
             int startMonth = startDate.getMonth();
 
             int endDay = endDate.getDay();
-            int endWeekCount = endDate.getWeekCount();
             int endDayIndex = endDate.getDayIndex();
             int endMonth = endDate.getMonth();
 
@@ -317,7 +312,7 @@ public class ScheduleElement implements TimeExpression {
             case "month" :
                 System.out.println("every month");
                 if (duration >= 0 && duration <= 30) {
-                    return this.recurEveryMonth(startDayIndex, startWeekCount, endDayIndex, endWeekCount);
+                    return this.recurEventEveryMonth(startDay, endDay);
                 } else {
                     throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
                 }

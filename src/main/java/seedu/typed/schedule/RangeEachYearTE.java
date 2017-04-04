@@ -80,26 +80,31 @@ public class RangeEachYearTE implements TimeExpression {
         // From Jan 1st to Dec 31st
         return new RangeEachYearTE(1, 12, 1, 31);
     }
-
+    
     @Override
     public DateTime nextDeadlineOccurrence(DateTime date) {
-        // just need to check if the date is at the edge case of the month
         int day = date.getDay();
         int month = date.getMonth();
         int year = date.getYear();
-        if (month > startMonth && month < endMonth) {
-            if (day > startDay && day < endDay) {
-                return date.nextDays(1);
-            } else if (day < startDay) {
-                return date.nextDays(startDay - day);
+        
+        if (month < startMonth || month > endMonth) {
+            // next occurrence is startMonth
+            if (month < startMonth) {
+                // current year
+                return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
             } else {
-                // day > endDay
+                // next year start Month
                 return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
             }
-        } else if (month < startMonth) {
-            return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
         } else {
-            return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
+            // month is in the start month to end month period
+            if (day < startDay || day > endDay) {
+                // start month start date
+                return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
+            } else {
+                // next year
+                return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
+            }
         }
     }
 
