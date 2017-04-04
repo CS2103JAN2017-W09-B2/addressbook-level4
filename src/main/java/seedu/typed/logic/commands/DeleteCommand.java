@@ -17,12 +17,17 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
  * manager.
  */
 public class DeleteCommand extends Command {
-    public static final String COMMAND_WORD = "delete";
+    //@@author A0141094M
+    public static final String DELETE_COMMAND_WORD = "delete";
+    public static final String DEL_COMMAND_WORD = "del";
+    public static final String REMOVE_COMMAND_WORD = "remove";
+    public static final String RM_COMMAND_WORD = "rm";
+    //@@author
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = DELETE_COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer) | RANGE\n"
-            + "Example: " + COMMAND_WORD + " 1 to 2";
+            + "Example: " + DELETE_COMMAND_WORD + " 1 to 2";
 
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";

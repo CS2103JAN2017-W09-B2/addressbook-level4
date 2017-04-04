@@ -24,13 +24,17 @@ import seedu.typed.schedule.ScheduleElement;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    //@@author A0141094M
+    public static final String EDIT_COMMAND_WORD = "edit";
+    public static final String UDPATE_COMMAND_WORD = "update";
+    public static final String CHANGE_COMMAND_WORD = "change";
+    //@@author
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = EDIT_COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [by DATE] [#TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 buy 10 broccolis by 06/03/2017";
+            + "Example: " + EDIT_COMMAND_WORD + " 1 buy 10 broccolis by 06/03/2017";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";

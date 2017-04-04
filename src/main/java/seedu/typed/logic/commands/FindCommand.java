@@ -12,11 +12,13 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String FIND_COMMAND_WORD = "find";
+    public static final String SEARCH_COMMAND_WORD = "search";
+    public static final String QUERY_COMMAND_WORD = "query";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
+    public static final String MESSAGE_USAGE = FIND_COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords or tags (not case-sensitive).\n"
-            + "Example: " + COMMAND_WORD + " broccoli #green #healthy";
+            + "Example: " + FIND_COMMAND_WORD + " broccoli #green #healthy";
 
     private final Set<String> keywords;
     private final Set<String> tagKeywords;
