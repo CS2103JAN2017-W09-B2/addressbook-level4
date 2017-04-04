@@ -307,7 +307,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 count++;
             }
         }
-        return count;   
+        return count;
     }
 
     public int getNumberEvents() {
@@ -330,7 +330,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 count++;
             }
         }
-        return count;   
+        return count;
     }
 
     public int getNumberDeadlines() {
@@ -353,7 +353,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 count++;
             }
         }
-        return count;   
+        return count;
     }
 
 
