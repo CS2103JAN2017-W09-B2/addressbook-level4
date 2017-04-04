@@ -77,6 +77,7 @@ public class TaskListPanelHandle extends GuiHandle {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
+            System.out.println(startPosition + 1);
             if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
@@ -117,6 +118,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); // Allow a bit of time for the list to be updated
+        System.out.println("checkpt 4:" + getListView().getItems());
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                 .filter(p -> p.getName().getValue().equals(name)).findAny();
         if (!task.isPresent()) {
