@@ -117,4 +117,9 @@ public class TestTask implements ReadOnlyTask {
     }
     //@@author
 
+    @Override
+    public boolean isRecurring() {
+        return se.isRecurring();
+    }
+
 }

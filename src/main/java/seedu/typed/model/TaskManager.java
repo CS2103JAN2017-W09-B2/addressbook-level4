@@ -17,7 +17,6 @@ import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
-import seedu.typed.model.task.TaskTest;
 import seedu.typed.model.task.UniqueTaskList;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
@@ -298,7 +297,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return count;
     }
-    
+
     public int getNumberUncompletedFloatingTasks() {
         int size = tasks.size();
         int count = 0;
@@ -308,7 +307,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 count++;
             }
         }
-        return count;   
+        return count;
     }
 
     public int getNumberEvents() {
@@ -321,7 +320,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return count;
     }
-    
+
     public int getNumberUncompletedEvents() {
         int size = tasks.size();
         int count = 0;
@@ -331,7 +330,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 count++;
             }
         }
-        return count;   
+        return count;
     }
 
     public int getNumberDeadlines() {
@@ -344,7 +343,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return count;
     }
-    
+
     public int getNumberUncompletedDeadlines() {
         int size = tasks.size();
         int count = 0;
@@ -354,7 +353,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 count++;
             }
         }
-        return count;   
+        return count;
     }
 
 
