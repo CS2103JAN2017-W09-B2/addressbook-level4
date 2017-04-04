@@ -127,7 +127,7 @@ public class TaskTest {
     //@@author A0141094M
     @Test
     public void toString_valid_success() {
-        assertEquals(test.toString(), " Name: Meet John Notes:  By: 2017-04-01 Completed: false Tags: ");
+        assertEquals(test.toString(), " Name: Meet John Notes:  By: Apr 01, 2017 00:00 Completed: false Tags: ");
     }
     //@@author
 }

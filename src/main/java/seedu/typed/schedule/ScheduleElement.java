@@ -16,7 +16,6 @@ public class ScheduleElement implements TimeExpression {
     private final String BY_DISPLAY_IDENTIFIER = "By:";
     private final String FROM_DISPLAY_IDENTIFIER = "From:";
     private final String TO_DISPLAY_IDENTIFIER = "To:";
-    private final String WHITESPACE_DELIMITER_REGEX = "\\s+";
 
     public ScheduleElement() {
         this.date = null;
@@ -64,18 +63,17 @@ public class ScheduleElement implements TimeExpression {
             return makeFloating();
         }
         if (dateInput.contains(BY_DISPLAY_IDENTIFIER)) {
-            String[] dateTime = dateInput.trim().split(WHITESPACE_DELIMITER_REGEX);
+            String[] dateTime = dateInput.trim().split(BY_DISPLAY_IDENTIFIER);
             LocalDateTime deadline = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
             return makeDeadline(DateTimeParser.getDateTimeFromLocalDateTime(deadline));
         }
         if (dateInput.contains(FROM_DISPLAY_IDENTIFIER) && dateInput.contains(TO_DISPLAY_IDENTIFIER)) {
-            String[] dateTime = dateInput.trim().split(WHITESPACE_DELIMITER_REGEX);
-            if (!dateTime[1].equals(TO_DISPLAY_IDENTIFIER)) {
-                LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
-                LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[3]);
-                return makeEvent(DateTimeParser.getDateTimeFromLocalDateTime(startDateTime),
-                        DateTimeParser.getDateTimeFromLocalDateTime(endDateTime));
-            }
+            String[] dateTime = dateInput.trim().split(TO_DISPLAY_IDENTIFIER);
+            LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[0]
+                    .replaceAll(FROM_DISPLAY_IDENTIFIER, ""));
+            LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
+            return makeEvent(DateTimeParser.getDateTimeFromLocalDateTime(startDateTime),
+                    DateTimeParser.getDateTimeFromLocalDateTime(endDateTime));
         }
         return makeFloating();
     }

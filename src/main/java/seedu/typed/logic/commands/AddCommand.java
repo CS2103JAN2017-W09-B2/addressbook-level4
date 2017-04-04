@@ -40,6 +40,7 @@ public class AddCommand extends Command {
         if (date == null && from != null && to != null) {
             se = new ScheduleElement(new DateTime(from), new DateTime(to));
         } else if (date != null && from == null && to == null) {
+            System.out.println(date.getMinute() + " " + date.getHour());
             se = new ScheduleElement(new DateTime(date));
         } else {
             se = new ScheduleElement();
