@@ -3,7 +3,9 @@ package seedu.typed.model.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
 //@@author A0139379M
 /**
  * DateTime represents our Date and Time in TaskManager using Java's LocalDateTime
@@ -181,7 +183,7 @@ public class DateTime {
         if (localDateTime ==  null) {
             return " ";
         } else {
-            return localDateTime.toLocalDate().toString();
+            return localDateTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm"));
         }
     }
     //@@author

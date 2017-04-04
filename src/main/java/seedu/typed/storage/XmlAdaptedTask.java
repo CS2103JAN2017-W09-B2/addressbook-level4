@@ -48,7 +48,6 @@ public class XmlAdaptedTask {
      *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        System.out.println("whaddap");
         name = source.getName().getValue();
         dateTime = source.getSE().toString();
         notes = source.getNotes().getValue();

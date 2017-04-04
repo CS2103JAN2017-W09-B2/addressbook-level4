@@ -47,6 +47,18 @@ public class AddCommandParser {
             LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(startString);
             LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(endString);
 
+            if (deadline != null && DateTimeParser.isTimeInferred(deadline)) {
+                deadlineDateTime = deadlineDateTime.withHour(23).withMinute(59).withSecond(59).withNano(59);
+            }
+            // if i add a event starting from today and it's alr past 00:00, what will i do?
+            if (startString != null && DateTimeParser.isTimeInferred(startString)) {
+                startDateTime = startDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
+            }
+            if (endString != null && DateTimeParser.isTimeInferred(endString)) {
+                endDateTime = endDateTime.withHour(23).withMinute(59).withSecond(59).withNano(59);
+            }
+
+
             if (hasBothByAndOnFields(argsTokenizer) || isBothDeadlineTaskAndEventTask(argsTokenizer)) {
                 return new IncorrectCommand(getIncorrectAddMessage());
             }
