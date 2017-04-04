@@ -13,25 +13,25 @@
          </font>
       </Text>
       <Circle fx:id="overdueCircle" fill="RED" layoutX="20.0" layoutY="45.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="48.0" />
-      <Circle fx:id="deadlineCircle" fill="LIGHTPINK" layoutX="65.0" layoutY="100.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="98.0" />
-      <Circle fx:id="durationCircle" fill="GREENYELLOW" layoutX="65.0" layoutY="150.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="148.0" />
-      <Circle fx:id="floatingCircle" fill="CORNFLOWERBLUE" layoutX="47.0" layoutY="195.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="198.0" />
-      <Text fx:id="overdueTitle" fill="#757272" layoutX="37.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overdue" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <Circle fx:id="deadlineCircle" fill="ORANGE" layoutX="65.0" layoutY="100.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="98.0" />
+      <Circle fx:id="durationCircle" fill="SEAGREEN" layoutX="65.0" layoutY="150.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="148.0" />
+      <Circle fx:id="floatingCircle" fill="DODGERBLUE" layoutX="47.0" layoutY="195.0" radius="10.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="198.0" />
+      <Text fx:id="overdueTitle" fill="#545151" layoutX="37.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overdue" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
          <font>
             <Font name="Helvetica" size="19.0" />
          </font>
       </Text>
-      <Text fx:id="deadlineTitle" fill="#757272" layoutX="37.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
+      <Text fx:id="deadlineTitle" fill="#545151" layoutX="37.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
          <font>
             <Font name="Helvetica" size="19.0" />
          </font>
       </Text>
-      <Text fx:id="durationTitle" fill="#757272" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="150.0">
+      <Text fx:id="durationTitle" fill="#545151" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font name="Helvetica" size="19.0" />
          </font>
       </Text>
-      <Text fx:id="floatingTitle" fill="#757272" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Untimed" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="200.0">
+      <Text fx:id="floatingTitle" fill="#545151" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Untimed" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font name="Helvetica" size="19.0" />
          </font>
@@ -40,15 +40,15 @@
          <font>
             <Font name="Helvetica" size="25.0" />
          </font></Text>
-      <Text fx:id="deadlineNumber" fill="LIGHTPINK" layoutX="119.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$second" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="120.0">
+      <Text fx:id="deadlineNumber" fill="ORANGE" layoutX="119.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$second" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="120.0">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font></Text>
-      <Text fx:id="durationNumber" fill="GREENYELLOW" layoutX="109.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$third" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0">
+      <Text fx:id="durationNumber" fill="SEAGREEN" layoutX="109.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$third" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font></Text>
-      <Text fx:id="floatingNumber" fill="CORNFLOWERBLUE" layoutX="116.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$forth" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0">
+      <Text fx:id="floatingNumber" fill="DODGERBLUE" layoutX="116.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$forth" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font></Text>

@@ -9,32 +9,32 @@
    <children>
       <Text fx:id="completedTitle" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="10.0">
          <font>
-            <Font name="Helvetica Bold" size="22.0" />
+            <Font name="Helvetica Bold" size="19.0" />
          </font>
       </Text>
       <Text fx:id="pendingTitle" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ongoing" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0">
          <font>
-            <Font name="Helvetica Bold" size="22.0" />
+            <Font name="Helvetica Bold" size="19.0" />
          </font>
       </Text>
       <Text fx:id="completedCount" fill="#1912d6" layoutX="149.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$first" textAlignment="RIGHT" AnchorPane.bottomAnchor="110.0" AnchorPane.rightAnchor="70.0">
          <font>
-            <Font name="Helvetica" size="25.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
       <Text fx:id="pendingCount" fill="#1912d6" layoutX="149.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$second" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="70.0">
          <font>
-            <Font name="Helvetica" size="25.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
       <Label fx:id="firstLabel" layoutX="143.0" layoutY="239.0" text="tasks" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="120.0">
          <font>
-            <Font name="Helvetica Light" size="20.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="secondLabel" layoutX="127.0" layoutY="309.0" text="tasks" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="15.0">
+      <Label fx:id="secondLabel" layoutX="127.0" layoutY="309.0" text="tasks" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="120.0">
          <font>
-            <Font name="Helvetica Light" size="20.0" />
+            <Font name="Helvetica" size="17.0" />
          </font>
       </Label>
    </children>
