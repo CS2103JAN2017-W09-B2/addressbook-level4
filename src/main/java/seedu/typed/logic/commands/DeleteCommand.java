@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
     public static final String DELETE_COMMAND_WORD = "delete";
     public static final String DEL_COMMAND_WORD = "del";
     public static final String REMOVE_COMMAND_WORD = "remove";
+    public static final String RM_COMMAND_WORD = "rm";
     //@@author
 
     public static final String MESSAGE_USAGE = DELETE_COMMAND_WORD
