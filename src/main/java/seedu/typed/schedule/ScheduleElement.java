@@ -32,6 +32,22 @@ public class ScheduleElement implements TimeExpression {
         this.te = null;
     }
     //@@author
+    
+    public ScheduleElement(DateTime startDate, DateTime endDate, String every) {
+        // handle every recurrence
+        // create relevant time expression
+        this.date = null;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.te = this.recurEveryDay();
+    }
+    
+    public ScheduleElement(DateTime date, String every) {
+        this.date = date;
+        this.startDate = null;
+        this.endDate = null;
+        this.te = this.recurEveryDay();
+    }
 
     /**
      * Representation of a deadline in our TaskManager
@@ -166,4 +182,10 @@ public class ScheduleElement implements TimeExpression {
     public TimeExpression recurEveryMonth(int count, int dayIndex) {
         return DayInMonthTE.monthly(count, dayIndex);
     }
+    
+    /*
+     * Parses recurrence rule into what we want
+     * For example, monday will correspond to dayIndex of 1
+     */
+    public 
 }

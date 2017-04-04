@@ -9,6 +9,7 @@ import static seedu.typed.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.typed.logic.parser.CliSyntax.PREFIX_EVERY;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
@@ -31,7 +32,7 @@ public class AddCommandParser {
     public Command parse(String args) {
         try {
             ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE, PREFIX_ON,
-                    PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
+                    PREFIX_FROM, PREFIX_TO, PREFIX_EVERY, PREFIX_TAG);
             argsTokenizer.tokenize(args);
 
             String name = argsTokenizer.getPreamble().get();
@@ -39,6 +40,8 @@ public class AddCommandParser {
             String deadline = getDeadline(argsTokenizer);
             String startString = getFrom(argsTokenizer);
             String endString = getTo(argsTokenizer);
+            String every = getEvery(argsTokenizer);
+            System.out.println(every); // tuesday, stuff
             Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
             LocalDateTime deadlineDateTime = DateTimeParser.getLocalDateTimeFromString(deadline);
             LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(startString);
@@ -47,11 +50,19 @@ public class AddCommandParser {
             if (hasBothByAndOnFields(argsTokenizer) || isBothDeadlineTaskAndEventTask(argsTokenizer)) {
                 return new IncorrectCommand(getIncorrectAddMessage());
             }
-            return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags);
+            return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags, every);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(getIncorrectAddMessage());
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    private String getEvery(ArgumentTokenizer argsTokenizer) {
+        if (isEveryPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_EVERY).get();
+        } else {
+            return null;
         }
     }
 
@@ -95,6 +106,10 @@ public class AddCommandParser {
 
     private boolean isByPresent(ArgumentTokenizer argsTokenizer) {
         return argsTokenizer.getValue(PREFIX_DATE).isPresent();
+    }
+    
+    private boolean isEveryPresent(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_EVERY).isPresent();
     }
 
     private boolean isOnPresent(ArgumentTokenizer argsTokenizer) {
