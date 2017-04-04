@@ -9,10 +9,13 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
  */
 public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = "help";
+    //@@author A0141094M
+    public static final String HELP_COMMAND_WORD = "help";
+    public static final String MAN_COMMAND_WORD = "man";
+    //@@author
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n" + "Example: "
-            + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = HELP_COMMAND_WORD + ": Shows program usage instructions.\n" + "Example: "
+            + HELP_COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 

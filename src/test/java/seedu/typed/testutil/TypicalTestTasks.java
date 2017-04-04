@@ -15,17 +15,17 @@ public class TypicalTestTasks {
 
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
-    public DateTime testDate1 = DateTime.getDateTime(2018, Month.JANUARY, 1, 0, 0);
-    public DateTime testDate2 = DateTime.getDateTime(2018, Month.JANUARY, 2, 0, 0);
-    public DateTime testDate3 = DateTime.getDateTime(2018, Month.JANUARY, 3, 0, 0);
+    public DateTime testDate1 = DateTime.getDateTime(2018, Month.JANUARY, 1, 1, 0);
+    public DateTime testDate2 = DateTime.getDateTime(2018, Month.JANUARY, 2, 2, 0);
+    public DateTime testDate3 = DateTime.getDateTime(2018, Month.JANUARY, 3, 3, 0);
 
-    public DateTime testDate4 = DateTime.getDateTime(2018, Month.JANUARY, 4, 0, 0);
-    public DateTime testDate5 = DateTime.getDateTime(2018, Month.JANUARY, 5, 0, 0);
-    public DateTime testDate6 = DateTime.getDateTime(2018, Month.JANUARY, 6, 0, 0);
+    public DateTime testDate4 = DateTime.getDateTime(2018, Month.JANUARY, 4, 4, 0);
+    public DateTime testDate5 = DateTime.getDateTime(2018, Month.JANUARY, 5, 5, 0);
+    public DateTime testDate6 = DateTime.getDateTime(2018, Month.JANUARY, 6, 6, 0);
 
-    public DateTime testDate7 = DateTime.getDateTime(2018, Month.JANUARY, 7, 0, 0);
-    public DateTime testDate8 = DateTime.getDateTime(2018, Month.JANUARY, 8, 0, 0);
-    public DateTime testDate9 = DateTime.getDateTime(2018, Month.JANUARY, 9, 0, 0);
+    public DateTime testDate7 = DateTime.getDateTime(2018, Month.JANUARY, 7, 7, 0);
+    public DateTime testDate8 = DateTime.getDateTime(2018, Month.JANUARY, 8, 8, 0);
+    public DateTime testDate9 = DateTime.getDateTime(2018, Month.JANUARY, 9, 9, 0);
 
     public TypicalTestTasks() {
         try {

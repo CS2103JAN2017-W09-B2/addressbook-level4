@@ -28,6 +28,8 @@ public interface ReadOnlyTask {
 
     boolean isFloating();
 
+    boolean isRecurring();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)
@@ -57,6 +59,7 @@ public interface ReadOnlyTask {
         builder.append(" Name: ").append(getName())
         .append(" Notes: ").append(getNotes().toString())
         .append(getSE().toString())
+        .append(getSE().teToString())
         .append(" Completed: ").append(getIsCompleted())
         .append(" Tags: ");
         getTags().forEach(builder::append);

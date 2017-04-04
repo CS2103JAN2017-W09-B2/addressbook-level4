@@ -4,6 +4,7 @@ package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.typed.logic.parser.CliSyntax.PREFIX_EVERY;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_ON;
@@ -31,7 +32,7 @@ public class AddCommandParser {
     public Command parse(String args) {
         try {
             ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE, PREFIX_ON,
-                    PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
+                    PREFIX_FROM, PREFIX_TO, PREFIX_EVERY, PREFIX_TAG);
             argsTokenizer.tokenize(args);
 
             String name = argsTokenizer.getPreamble().get();
@@ -39,19 +40,44 @@ public class AddCommandParser {
             String deadline = getDeadline(argsTokenizer);
             String startString = getFrom(argsTokenizer);
             String endString = getTo(argsTokenizer);
+            String every = getEvery(argsTokenizer);
+            System.out.println(every); // tuesday, stuff
             Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
             LocalDateTime deadlineDateTime = DateTimeParser.getLocalDateTimeFromString(deadline);
             LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(startString);
             LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(endString);
 
+            if (deadline != null && DateTimeParser.isTimeInferred(deadline)) {
+                deadlineDateTime = deadlineDateTime.withHour(23).withMinute(59).withSecond(59).withNano(59);
+            }
+            // if i add a event starting from today and it's alr past 00:00, what will i do?
+            if (startString != null && DateTimeParser.isTimeInferred(startString)) {
+                startDateTime = startDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
+            }
+            if (endString != null && DateTimeParser.isTimeInferred(endString)) {
+                endDateTime = endDateTime.withHour(23).withMinute(59).withSecond(59).withNano(59);
+            }
+
+
             if (hasBothByAndOnFields(argsTokenizer) || isBothDeadlineTaskAndEventTask(argsTokenizer)) {
                 return new IncorrectCommand(getIncorrectAddMessage());
             }
-            return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags);
+            if (every == null) {
+                return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags);
+            }
+            return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags, every);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(getIncorrectAddMessage());
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+    }
+
+    private String getEvery(ArgumentTokenizer argsTokenizer) {
+        if (isEveryPresent(argsTokenizer)) {
+            return argsTokenizer.getValue(PREFIX_EVERY).get();
+        } else {
+            return null;
         }
     }
 
@@ -95,6 +121,10 @@ public class AddCommandParser {
 
     private boolean isByPresent(ArgumentTokenizer argsTokenizer) {
         return argsTokenizer.getValue(PREFIX_DATE).isPresent();
+    }
+
+    private boolean isEveryPresent(ArgumentTokenizer argsTokenizer) {
+        return argsTokenizer.getValue(PREFIX_EVERY).isPresent();
     }
 
     private boolean isOnPresent(ArgumentTokenizer argsTokenizer) {

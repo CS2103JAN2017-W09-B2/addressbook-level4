@@ -70,18 +70,22 @@ public class ModelManager extends ComponentManager implements Model {
     public int getNumberCompletedTasks() {
         return taskManager.getNumberCompletedTasks();
     }
+
     @Override
     public int getNumberUncompletedTasks() {
         return taskManager.getNumberUncompletedTasks();
     }
+
     @Override
     public int getTotalTasks() {
         return getNumberCompletedTasks() + getNumberUncompletedTasks();
     }
+
     @Override
     public int getNumberEvents() {
         return taskManager.getNumberEvents();
     }
+
     @Override
     public int getNumberDeadlines() {
         return taskManager.getNumberDeadlines();
@@ -89,6 +93,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public int getNumberFloatingTasks() {
         return taskManager.getNumberFloatingTasks();
+    }
+
+    @Override
+    public int getNumberUncompletedEvents() {
+        return taskManager.getNumberUncompletedEvents();
+    }
+
+    @Override
+    public int getNumberUncompletedDeadlines() {
+        return taskManager.getNumberUncompletedDeadlines();
+    }
+
+    @Override
+    public int getNumberUncompletedFloatingTasks() {
+        return taskManager.getNumberUncompletedFloatingTasks();
     }
     //@@author A0143853A
     @Override
