@@ -77,7 +77,7 @@ public class Quotes extends UiPart<Region> {
                 + "you were never able to do before.";
         String firstAuthor = "Franz Kafka";
 
-        String second = "If you spend too much time thinking about a thing, you’ll never get it done.";
+        String second = "If you spend too much time thinking about a thing, you'll never get it done.";
         String secondAuthor = "Bruce Lee";
 
         String third = "There is no substitute for hard work.";
