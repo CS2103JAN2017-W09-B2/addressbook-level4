@@ -102,9 +102,9 @@ public class ScheduleElement implements TimeExpression {
     }
 
     /**
-     * 
+     *
      * @param every
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public ScheduleElement(String rule) throws IllegalValueException {
         this.te = parseDeadlineRecurrenceRule(rule);
@@ -231,7 +231,7 @@ public class ScheduleElement implements TimeExpression {
         return DayInMonthTE.weekly(dayIndex);
     }
     /**
-     * 
+     *
      * TimeExpression representing the recurring event every week
      * Assumes that the event is less than a week to recur
      * @param startDayIndex

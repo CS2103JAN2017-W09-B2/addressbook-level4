@@ -297,7 +297,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return count;
     }
-    
+
     public int getNumberUncompletedFloatingTasks() {
         int size = tasks.size();
         int count = 0;
@@ -320,7 +320,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return count;
     }
-    
+
     public int getNumberUncompletedEvents() {
         int size = tasks.size();
         int count = 0;
@@ -343,7 +343,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return count;
     }
-    
+
     public int getNumberUncompletedDeadlines() {
         int size = tasks.size();
         int count = 0;

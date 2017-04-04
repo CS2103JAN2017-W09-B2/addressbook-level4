@@ -118,7 +118,7 @@ public class DayInMonthTE implements TimeExpression {
         return unionTE;
     }
     /*
-     * Represent a day in a month 
+     * Represent a day in a month
      * It will match only a single day in a month
      */
     public static TimeExpression monthly(int count, int dayIndex) {

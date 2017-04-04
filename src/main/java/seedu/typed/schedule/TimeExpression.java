@@ -21,7 +21,7 @@ public interface TimeExpression {
     public boolean includes(DateTime date);
 
     /**
-     * Returns the next DateTime 
+     * Returns the next DateTime
      * where it falls within the TimeExpression
      * @param date
      * @return the next occurring DateTime object where
