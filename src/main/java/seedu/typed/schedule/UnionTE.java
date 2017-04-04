@@ -14,7 +14,7 @@ import seedu.typed.model.task.DateTime;
  * @author YIM CHIA HUI
  *
  */
-public class UnionTE extends TimeExpression {
+public class UnionTE implements TimeExpression {
     private ArrayList<TimeExpression> elements;
 
     @Override

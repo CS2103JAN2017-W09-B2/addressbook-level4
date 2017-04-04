@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,12 +24,9 @@ import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 public class TaskBuilderTest {
     private TaskBuilder testBuilder1 = new TaskBuilder();
     private Name name;
-    private Date date;
-    //@@author A0141094M
+    private DateTime date;
     private Notes notes;
-    private Date from;
-    private Date to;
-    //@@author
+    //private ScheduleElement se;
     private UniqueTagList tags, tagTest;
     private Set<String> tagSet;
     private Task testTask;
@@ -35,16 +34,17 @@ public class TaskBuilderTest {
     public void setUp() {
         try {
             name = new Name("Meet John");
-            date = new Date("12/12/2017");
+
+            date = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
             //@@author A0141094M
             notes = new Notes("");
-            from = new Date("");
-            to = new Date("");
+            //DateTime from = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
+            //DateTime to = DateTime.getDateTime(2017, Month.APRIL, 4, 0, 0);
             //@@author
             tags = new UniqueTagList();
             tagTest = new UniqueTagList();
             tags.add(new Tag("friends"));
-            testTask = new Task(name, notes, date, from, to, tags, false);
+            testTask = new Task(name, notes, date, null, null, tags, false);
             tagSet = new HashSet<String>();
             tagSet.add("friends");
             tagSet.add("work");
@@ -69,17 +69,16 @@ public class TaskBuilderTest {
     }
     @Test
     public void setDate_validDate_success() throws IllegalValueException {
-        assertTrue(testBuilder1.setDate(date).setName(name)
-                .build().getDate().equals(date));
+        DateTime testDate = testBuilder1
+                .setDeadline(date).setName(name).build().getSE().getDate();
+        assertTrue(date.equals(testDate));
     }
     @Test
-    public void setDate_validString_success() {
-        try {
-            assertTrue(testBuilder1.setDate("12/12/2017").setName(name)
-                    .build().getDate().equals(date));
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
+    public void setDate_validLocalDateTime_success() {
+        LocalDateTime test = LocalDateTime.of(2017, Month.APRIL, 1, 0, 0, 0);
+        Task testTask = testBuilder1.setDeadline(test).setName(name).build();
+        DateTime testDate = testTask.getSE().getDate();
+        assertTrue(date.equals(testDate));
     }
     @Test
     public void addTags_validTag_success() {

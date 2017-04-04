@@ -32,7 +32,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     @Test
     public void undo_editCommand_success()
             throws IllegalArgumentException, IllegalValueException {
-        String detailsToEdit = "Meet Bobby by 19/03/2017 #husband";
+        String detailsToEdit = "Meet Bobby by 03/19/2017 #husband";
         commandBox.runCommand("edit 1 " + detailsToEdit);
         assertUndoSuccess();
     }

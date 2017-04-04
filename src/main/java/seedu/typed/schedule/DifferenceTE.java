@@ -10,7 +10,7 @@ import seedu.typed.model.task.DateTime;
  * that are last monday but not holidays(defined to match all the holidays possible)
  * @author YIM CHIA HUI
  */
-public class DifferenceTE extends TimeExpression {
+public class DifferenceTE implements TimeExpression {
     private TimeExpression included;
     private TimeExpression excluded;
 
@@ -18,7 +18,7 @@ public class DifferenceTE extends TimeExpression {
         this.included = included;
         this.excluded = excluded;
     }
-
+    @Override
     public boolean includes(DateTime date) {
         return included.includes(date) && !excluded.includes(date);
     }

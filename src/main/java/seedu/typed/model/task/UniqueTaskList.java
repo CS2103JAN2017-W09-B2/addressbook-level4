@@ -146,6 +146,14 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
+    //@@author A0143853A
+    public void remove(int index) {
+        assert ((index >= 0)
+                && (index < internalList.size()));
+        internalList.remove(index);
+    }
+    //@@author
+
     public void setTasks(UniqueTaskList replacement) {
         internalList.setAll(replacement.internalList);
     }

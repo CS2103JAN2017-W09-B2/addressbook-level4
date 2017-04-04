@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +32,7 @@ import seedu.typed.commons.util.FileUtil;
 import seedu.typed.commons.util.XmlUtil;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.tag.Tag;
+import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -74,20 +76,24 @@ public class TestUtil {
             Task[] tasks = new Task[taskNumber];
             String[] names = new String[] {"Meet Ali Muster", "Meet Boris Mueller", "Meet Carl Kurz", "Meet Daniel Meier",
                 "Meet Elle Meyer", "Meet Fiona Kunz", "Meet George Best", "Meet Hoon Meier", "Meet Ida Mueller"};
-            String[] dates = new String[] {"30/01/2018", "31/01/2018", "03/01/2018", "04/01/2018", "05/01/2018", "06/01/2018",
-                "07/01/2018", "08/01/2018", "09/01/2018"};
+            DateTime[] dates = new DateTime[] {
+                DateTime.getDateTime(2018, Month.JANUARY, 30, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 31, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 3, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 4, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 5, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 6, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 7, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 8, 0, 0),
+                DateTime.getDateTime(2018, Month.JANUARY, 9, 0, 0)};
             //@@author A0141094M
-            String[] froms = new String[] {"", "", "", "", "", "", "", "", ""};
-            String[] tos = new String[] {"", "", "", "", "", "", "", "", ""};
             String[] notes = new String[] {"", "", "", "", "", "", "", "", ""};
             //@@author
             for (int i = 0; i < taskNumber; i++) {
                 tasks[i] = new TaskBuilder()
                         .setName(names[i])
-                        .setDate(dates[i])
+                        .setDeadline(dates[i])
                         //@@author A0141094M
-                        .setFrom(froms[i])
-                        .setTo(tos[i])
                         .setNotes(notes[i])
                         //@@author
                         .build();

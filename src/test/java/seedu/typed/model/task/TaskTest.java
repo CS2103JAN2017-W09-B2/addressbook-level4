@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.Month;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,12 +27,11 @@ public class TaskTest {
     private Name name2;
     private Tag tag;
     private Tag tag2;
-    private Date nullDate;
-    private Date date;
+    private DateTime date;
     //@@author A0141094M
     private Notes notes;
-    private Date from;
-    private Date to;
+    private DateTime from;
+    private DateTime to;
     //@@author
     private Task test;
     private UniqueTagList tagList;
@@ -42,18 +43,17 @@ public class TaskTest {
     public void setUp() {
         try {
             nullName = null;
-            nullDate = null;
             tag = new Tag("work");
             tag2 = new Tag("friends");
             name = new Name("Meet John");
             name2 = new Name("Meet Honey");
-            date = new Date("12/12/2017");
+            date = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
             //@@author A0141094M
             notes = new Notes("");
-            from = new Date("");
-            to = new Date("");
+            from = DateTime.getDateTime(2017, Month.APRIL, 4, 0, 0);
+            to = DateTime.getDateTime(2017, Month.APRIL, 7, 0, 0);
             //@@author
-            test = new Task(name, notes, date, from, to, new UniqueTagList(), false);
+            test = new Task(name, notes, date, null, null, new UniqueTagList(), false);
             tagList = new UniqueTagList();
             tagList2 = new UniqueTagList();
             tagList2.add(tag2);
@@ -64,13 +64,13 @@ public class TaskTest {
     }
     @Test
     public void equals_same_success() throws IllegalValueException {
-        Task test = new TaskBuilder().setName(name).setDate("").setFrom("").setTo("").setNotes("").build();
+        Task test = new TaskBuilder().setName(name).setDeadline(date).setNotes("").build();
         assertTrue(test.equals(test));
     }
     @Test
     public void equals_notSameButSimilar_success() throws IllegalValueException {
         Task test2 = new TaskBuilder().setName(name).setTags(new UniqueTagList())
-                .setDate(date).setFrom("").setTo("").setNotes("").build();
+                .setDeadline(date).setNotes("").build();
         assertTrue(test.equals(test2));
     }
     @Test
@@ -98,21 +98,8 @@ public class TaskTest {
     @Test
     public void setName_nameNull_assertError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
-        Task test = new TaskBuilder().setName(name).build();
-        test.setName(nullName);
-    }
-
-    @Test
-    public void setDate_dateNull_assertError() throws IllegalValueException {
-        thrown.expect(AssertionError.class);
-        Task test = new TaskBuilder().setName(name).build();
-        test.setDate(nullDate);
-    }
-    @Test
-    public void setDate_valid_success() throws IllegalValueException {
-        Task test = new TaskBuilder().setName(name).build();
-        test.setDate(date);
-        assertTrue(test.getDate().equals(date));
+        Task test = new TaskBuilder().setName(nullName).build();
+        test.setName(name);
     }
     @Test
     public void getTags_valid_success() throws IllegalValueException {
@@ -140,7 +127,7 @@ public class TaskTest {
     //@@author A0141094M
     @Test
     public void toString_valid_success() {
-        assertEquals(test.toString(), " Name: Meet John Notes:  Date: 12/12/2017 From:  To:  Completed: false Tags: ");
+        assertEquals(test.toString(), " Name: Meet John Notes:  By: 2017-04-01 Completed: false Tags: ");
     }
     //@@author
 }

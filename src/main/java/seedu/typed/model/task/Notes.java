@@ -23,21 +23,24 @@ public class Notes {
      */
     public Notes(String notes) throws IllegalValueException {
         if (notes == null) {
-            this.value = "";
-        } else {
-            String trimmedNotes = notes.trim();
-            if (!trimmedNotes.isEmpty() && !isValidNotes(trimmedNotes)) {
-                throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
-            }
-            this.value = trimmedNotes;
+            notes = "";
         }
+        String trimmedNotes = notes.trim();
+        if (!trimmedNotes.isEmpty() && !isValidNotes(trimmedNotes)) {
+            throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
+        }
+        this.value = trimmedNotes;
+    }
+
+    public Notes() {
+        this.value = "";
     }
 
     /**
-    *
-    * @param test
-    * @return true if a given notes is a valid task notes.
-    */
+     *
+     * @param test
+     * @return true if a given notes is a valid task notes.
+     */
     public static boolean isValidNotes(String test) {
         return test.matches(NOTES_VALIDATION_REGEX);
     }
@@ -52,7 +55,7 @@ public class Notes {
         return other == this // short circuit if same object
                 || (other instanceof Notes // instanceof handles nulls
                         && this.value.equals(((Notes) other).getValue())); // state
-                                                                           // check
+        // check
     }
 
     @Override

@@ -12,6 +12,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.parser.Parser;
 import seedu.typed.model.Model;
 import seedu.typed.model.task.ReadOnlyTask;
+import seedu.typed.storage.Storage;
 import seedu.typed.storage.temp.Session;
 
 /**
@@ -24,12 +25,14 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Parser parser;
     private final Session session;
     private final Config config;
+    private final Storage storage;
 
-    public LogicManager(Model model, Session session, Config config) {
+    public LogicManager(Model model, Session session, Config config, Storage storage) {
         this.model = model;
         this.session = session;
         this.config = config;
         this.parser = new Parser();
+        this.storage = storage;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         session.updateAllCommandsHistory(commandText);
         Command command = parser.parseInput(commandText);
-        command.setData(model, session, commandText, config);
+        command.setData(model, session, commandText, config, storage);
 
         return command.execute();
     }

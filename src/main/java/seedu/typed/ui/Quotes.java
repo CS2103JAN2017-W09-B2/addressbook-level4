@@ -32,7 +32,7 @@ public class Quotes extends UiPart<Region> {
     @FXML
     private ImageView quotationHolder;
 
-    private ArrayList<Pair<String, String>> quotesDatabase;
+    private ArrayList<StringPair> quotesDatabase;
 
     public Quotes(AnchorPane placeholder) {
         super(FXML);
@@ -43,11 +43,10 @@ public class Quotes extends UiPart<Region> {
 
         quotationHolder.setImage(quotationLogo);
 
-        quotesDatabase = new ArrayList<Pair<String, String>>();
+        quotesDatabase = new ArrayList<StringPair>();
         initializeDatabase();
 
         int randomNumber = randomizedNumber();
-        System.out.println(randomNumber);
 
         quote.setText(quotesDatabase.get(randomNumber).getElem1());
         author.setText("~ " + quotesDatabase.get(randomNumber).getElem2());
@@ -97,17 +96,17 @@ public class Quotes extends UiPart<Region> {
         String seventh = "Your mind is for having ideas, not holding them.";
         String seventhAuthor = "David Allen";
 
-        quotesDatabase.add(Pair(first, firstAuthor));
-        quotesDatabase.add(Pair(second, secondAuthor));
-        quotesDatabase.add(Pair(third, thirdAuthor));
-        quotesDatabase.add(Pair(forth, forthAuthor));
-        quotesDatabase.add(Pair(fifth, fifthAuthor));
-        quotesDatabase.add(Pair(sixth, sixthAuthor));
-        quotesDatabase.add(Pair(seventh, seventhAuthor));
+        quotesDatabase.add(pair(first, firstAuthor));
+        quotesDatabase.add(pair(second, secondAuthor));
+        quotesDatabase.add(pair(third, thirdAuthor));
+        quotesDatabase.add(pair(forth, forthAuthor));
+        quotesDatabase.add(pair(fifth, fifthAuthor));
+        quotesDatabase.add(pair(sixth, sixthAuthor));
+        quotesDatabase.add(pair(seventh, seventhAuthor));
     }
 
-    private Pair<String, String> Pair(String quote, String author) {
-        return new Pair<String, String>(quote, author);
+    private StringPair pair(String quote, String author) {
+        return new StringPair(quote, author);
     }
 }
 //@@author

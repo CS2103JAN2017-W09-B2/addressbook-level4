@@ -12,7 +12,7 @@ import seedu.typed.model.task.DateTime;
  * @author YIM CHIA HUI
  *
  */
-public class RangeEachYearTE extends TimeExpression {
+public class RangeEachYearTE implements TimeExpression {
 
     private int startMonth;
     private int endMonth;

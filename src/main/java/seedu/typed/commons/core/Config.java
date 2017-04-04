@@ -1,7 +1,10 @@
 package seedu.typed.commons.core;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
+
+import seedu.typed.commons.util.ConfigUtil;
 
 /**
  * Config values used by the app
@@ -55,6 +58,11 @@ public class Config {
 
     public void setTaskManagerName(String taskManagerName) {
         this.taskManagerName = taskManagerName;
+    }
+
+    public void updateTaskManagerFilePath(String filePath) throws IOException {
+        this.setTaskManagerFilePath(filePath);
+        ConfigUtil.saveConfig(this, Config.DEFAULT_CONFIG_FILE);
     }
 
     @Override

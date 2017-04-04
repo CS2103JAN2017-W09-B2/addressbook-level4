@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import seedu.typed.model.task.ReadOnlyTask;
+import seedu.typed.schedule.ScheduleElement;
+
 //@@author A0139392X
 public class TaskCard extends UiPart<Region> {
 
@@ -39,14 +41,15 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().getValue());
         id.setText(displayedIndex + ". ");
+
+        ScheduleElement se = task.getSE();
+        date.setText(se.toString());
+
         if (task.isEvent()) {
-            date.setText(task.getFrom().getValue() + " to " + task.getTo().getValue());
             taskType.setFill(Color.GREENYELLOW);
         } else if (task.isDeadline()) {
-            date.setText(task.getDate().getValue());
             taskType.setFill(Color.LIGHTPINK);
         } else {
-            date.setText("");
             taskType.setFill(Color.CORNFLOWERBLUE);
         }
 

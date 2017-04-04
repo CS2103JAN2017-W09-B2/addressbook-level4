@@ -12,7 +12,7 @@ import seedu.typed.logic.commands.RedoCommand;
  */
 public class RedoCommandParser {
 
-    public static String POSITIVE_INTEGER_REGEX = "[1-9]+[0-9]*";
+    public static final String POSITIVE_INTEGER_REGEX = "[1-9]+[0-9]*";
     /**
      * Parses the given {@code String} of arguments in the context of the
      * RedoCommand and returns an RedoCommand object for execution.
