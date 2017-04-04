@@ -53,7 +53,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         System.out.println("chckpt 1: " + taskToAdd.getName().getValue());
         System.out.println("chckpt 2: " + taskListPanel.getTaskIndex(taskToAdd));
         System.out.println("chckpt 3: " + taskListPanel.navigateToTask(taskToAdd.getName().getValue()));
-        TaskCardHandle addedCard = taskListPanel.navigateToTask((taskListPanel.getTaskIndex(taskToAdd) + 1) + ". " + taskToAdd.getName().getValue());
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().getValue());
         assertMatching(taskToAdd, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
