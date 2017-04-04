@@ -117,7 +117,16 @@ public class Parser {
         if (isExportCommand(commandWord)) {
             return new ExportCommandParser().parse(args);
         }
+        if (isImportCommand(commandWord)) {
+            return new ImportCommandParser().parse(args);
+        }
         return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    private boolean isImportCommand(String commandWord) {
+        return commandWord.equals(ImportCommand.IMPORT_COMMAND_WORD) ||
+                commandWord.equals(ImportCommand.LOAD_COMMAND_WORD) ||
+                commandWord.equals(ImportCommand.OPEN_COMMAND_WORD);
     }
 
     private boolean isExportCommand(String commandWord) {
