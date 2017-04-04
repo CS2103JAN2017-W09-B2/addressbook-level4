@@ -8,7 +8,11 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
  */
 public class HistoryCommand extends Command {
 
-    public static final String COMMAND_WORD = "history";
+    //@@author A0141094M
+    public static final String HISTORY_COMMAND_WORD = "history";
+    public static final String HIST_COMMAND_WORD = "hist";
+    public static final String LOG_COMMAND_WORD = "log";
+    //@@author
 
     public static final String MESSAGE_SUCCESS = "Listed history of past commands in current session";
 
