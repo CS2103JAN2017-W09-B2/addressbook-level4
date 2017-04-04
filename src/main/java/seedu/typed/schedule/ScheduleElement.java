@@ -17,7 +17,7 @@ public class ScheduleElement implements TimeExpression {
     private final String BY_DISPLAY_IDENTIFIER = "By:";
     private final String FROM_DISPLAY_IDENTIFIER = "From:";
     private final String TO_DISPLAY_IDENTIFIER = "To:";
-  
+
     private final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
     private final String FREQUENCY = "day|week|month|year";
     private final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
