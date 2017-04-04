@@ -21,7 +21,8 @@ public class UndoCommand extends Command {
 
     public static final String UNDO_COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = UNDO_COMMAND_WORD + ": Undoes the previous add/delete/edit/clear command "
+    public static final String MESSAGE_USAGE = UNDO_COMMAND_WORD + ": Undoes the previous "
+                                               + "add/delete/edit/clear command "
                                                + "in the current session.\n"
                                                + "Parameters: [NUMBER]\n"
                                                + "Example: " + UNDO_COMMAND_WORD + " 2";
