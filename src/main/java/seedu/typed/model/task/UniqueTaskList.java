@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.DuplicateDataException;
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.schedule.ScheduleElement;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -117,7 +118,19 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void completeTaskAt(int index) throws DuplicateTaskException {
         Task taskToComplete = internalList.get(index);
-        if (!taskToComplete.getIsCompleted()) {
+        if (taskToComplete.isRecurring()) {
+            if (!taskToComplete.getIsCompleted()) {
+                // create a completed task clone and add into task list
+                // set current task into next occurring date
+                System.out.println("recurring adding");
+                Task taskToCopy = new TaskBuilder(taskToComplete).isCompleted(true).build();
+                internalList.add(taskToCopy);
+                taskToComplete.setIsCompleted(false);
+                ScheduleElement updatedSE = taskToComplete.updateDate();
+                Task updatedTask = new TaskBuilder(taskToComplete).setSE(updatedSE).build();
+                updateTask(index, updatedTask);
+            }
+        } else {
             taskToComplete.setIsCompleted(true);
         }
     }

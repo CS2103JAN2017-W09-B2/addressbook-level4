@@ -147,4 +147,12 @@ public class Task implements ReadOnlyTask {
         return se.isFloating();
     }
     //@@author
+    @Override
+    public boolean isRecurring() {
+        return se.isRecurring();
+    }
+    
+    public ScheduleElement updateDate() {
+        return this.se.updateDate();
+    }
 }
