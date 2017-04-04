@@ -9,7 +9,7 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
-    <AnchorPane fx:id="mainPane">
-      <Text fx:id="resultDisplay" fill="#c62513e5" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <AnchorPane fx:id="mainPane" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
+      <Text fx:id="resultDisplay" fill="#c62513e5" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </AnchorPane>
 </AnchorPane>
