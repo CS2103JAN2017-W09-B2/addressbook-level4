@@ -183,5 +183,17 @@ public class FileUtil {
             return (str + ".xml");
         }
     }
+
+    /*
+     * Returns true if the file is of an xml extension
+     */
+    public static boolean isXML(String filePath) {
+        if (filePath.contains(".")) {
+            String afterDot = filePath.substring(filePath.lastIndexOf("."));
+            return afterDot.equalsIgnoreCase(".xml");
+        } else {
+            return false;
+        }
+    }
   //@@author
 }

@@ -20,6 +20,7 @@ import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.FindCommand;
 import seedu.typed.logic.commands.HelpCommand;
 import seedu.typed.logic.commands.HistoryCommand;
+import seedu.typed.logic.commands.ImportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
@@ -117,6 +118,9 @@ public class Parser {
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(args);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -1,3 +1,4 @@
+//@@author A0139392X
 package seedu.typed.logic.commands;
 
 import java.io.File;
@@ -9,7 +10,6 @@ import java.io.IOException;
 import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
 
-//@@author A0139392X
 /*
  * If only given filename, save the file to the same directory.
  * If given a path, save the file to that path.
@@ -17,7 +17,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_SUCCESS = "Typed saved to %1$s";
+    public static final String MESSAGE_SUCCESS = "Typed exported to %1$s";
 
     public static final String MESSAGE_SAVE_ERROR = "Unable to export to the location.";
 
@@ -25,7 +25,7 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the task manager to the location specified, or as a new name.\n"
-            + "Example: " + COMMAND_WORD + " Desktop/typed.xml";
+            + "Example: " + COMMAND_WORD + " C:\\Users\\(username)\\Desktop\\typed.xml";
 
     private final String fileName;
     private final int type;
@@ -48,11 +48,9 @@ public class ExportCommand extends Command {
         switch (this.type) {
         case 1: // if the input is a path
             try {
-                String userHomeDirectory = System.getProperty("user.home");
-
                 String onlyName = this.fileName.substring(this.fileName.lastIndexOf("/") + 1, this.fileName.length());
                 if (FileUtil.isValidName(onlyName)) {
-                    File fileToCreate = new File(userHomeDirectory + "/" + this.fileName);
+                    File fileToCreate = new File(this.fileName);
 
                     // Forms the directories if the directories are missing
                     fileToCreate.getParentFile().mkdirs();
