@@ -9,7 +9,11 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_WORD = "exit";
+    //@@author A0141094M
+    public static final String EXIT_COMMAND_WORD = "exit";
+    public static final String QUIT_COMMAND_WORD = "quit";
+    public static final String LOGOUT_COMMAND_WORD = "logout";
+    //@@author
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Task Manager as requested ...";
 

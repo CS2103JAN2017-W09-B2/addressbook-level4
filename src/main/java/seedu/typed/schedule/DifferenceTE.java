@@ -22,4 +22,17 @@ public class DifferenceTE implements TimeExpression {
     public boolean includes(DateTime date) {
         return included.includes(date) && !excluded.includes(date);
     }
+    @Override
+    public DateTime nextDeadlineOccurrence(DateTime date) {
+        boolean notFound = true;
+        DateTime nextOccurrence = included.nextDeadlineOccurrence(date);
+        while (notFound) {
+            // if nextOccurrence fulfils time expression and is after given date
+            if (includes(nextOccurrence) && nextOccurrence.isAfter(date)) {
+                break;
+            }
+            nextOccurrence = included.nextDeadlineOccurrence(nextOccurrence);
+        }
+        return nextOccurrence;
+    }
 }
