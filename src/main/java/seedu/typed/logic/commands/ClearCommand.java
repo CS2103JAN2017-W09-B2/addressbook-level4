@@ -9,8 +9,10 @@ import seedu.typed.model.TaskManager;
  * Clears the task manager.
  */
 public class ClearCommand extends Command {
-
-    public static final String COMMAND_WORD = "clear";
+    //@@author A0141094M
+    public static final String CLEAR_COMMAND_WORD = "clear";
+    public static final String EMPTY_COMMAND_WORD = "empty";
+    //@@author
     public static final String MESSAGE_SUCCESS = "Task manager has been cleared!";
     public static final String MESSAGE_FAILURE = "Task manager cannot be cleared!";
 
