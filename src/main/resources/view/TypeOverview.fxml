@@ -7,31 +7,31 @@
 
 <AnchorPane minHeight="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="title" fill="WHITE" layoutX="30.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Overview" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Text fx:id="title" fill="#757272" layoutX="30.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Overview" underline="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="Helvetica Bold" size="23.0" />
          </font>
       </Text>
-      <Circle fx:id="overdueCircle" fill="RED" layoutX="20.0" layoutY="45.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
-      <Circle fx:id="deadlineCircle" fill="LIGHTPINK" layoutX="65.0" layoutY="100.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
-      <Circle fx:id="durationCircle" fill="GREENYELLOW" layoutX="65.0" layoutY="150.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
-      <Circle fx:id="floatingCircle" fill="CORNFLOWERBLUE" layoutX="47.0" layoutY="195.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0" />
-      <Text fx:id="overdueTitle" fill="WHITE" layoutX="37.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overdue Tasks" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="50.0">
+      <Circle fx:id="overdueCircle" fill="RED" layoutX="20.0" layoutY="45.0" radius="9.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+      <Circle fx:id="deadlineCircle" fill="LIGHTPINK" layoutX="65.0" layoutY="100.0" radius="9.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
+      <Circle fx:id="durationCircle" fill="GREENYELLOW" layoutX="65.0" layoutY="150.0" radius="9.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
+      <Circle fx:id="floatingCircle" fill="CORNFLOWERBLUE" layoutX="47.0" layoutY="195.0" radius="9.0" stroke="#00000080" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0" />
+      <Text fx:id="overdueTitle" fill="#757272" layoutX="37.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overdue Tasks" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="50.0">
          <font>
             <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="deadlineTitle" fill="WHITE" layoutX="37.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline Tasks" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="100.0">
+      <Text fx:id="deadlineTitle" fill="#757272" layoutX="37.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline Tasks" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="100.0">
          <font>
             <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="durationTitle" fill="WHITE" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration Tasks" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="150.0">
+      <Text fx:id="durationTitle" fill="#757272" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration Tasks" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font name="Helvetica" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="floatingTitle" fill="WHITE" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Untimed Tasks" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="200.0">
+      <Text fx:id="floatingTitle" fill="#757272" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Untimed Tasks" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font name="Helvetica" size="17.0" />
          </font>
