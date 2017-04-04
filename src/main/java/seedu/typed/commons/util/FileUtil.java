@@ -190,11 +190,7 @@ public class FileUtil {
     public static boolean isXML(String filePath) {
         if (filePath.contains(".")) {
             String afterDot = filePath.substring(filePath.lastIndexOf("."));
-            if (afterDot.equalsIgnoreCase(".xml")) {
-                return true;
-            } else {
-                return false;
-            }
+            return afterDot.equalsIgnoreCase(".xml");
         } else {
             return false;
         }
