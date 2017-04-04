@@ -21,11 +21,12 @@ public class AddCommand extends Command {
     public static final String ADD_COMMAND_WORD = "add";
     public static final String CREATE_COMMAND_WORD = "create";
     public static final String DO_COMMAND_WORD = "do";
+    public static final String NEW_COMMAND_WORD = "new";
     //@@author
 
     public static final String MESSAGE_USAGE = ADD_COMMAND_WORD + ": Adds a task to the task manager. "
             + "Parameters: NAME [by DATE] [on DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + ADD_COMMAND_WORD
-            + " buy 5 broccolis by tomorrow #survival #grocery ";
+            + " buy 5 broccolis by tmr #survival #grocery ";
 
     public static final String MESSAGE_SUCCESS = "%1$s added";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
