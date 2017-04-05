@@ -102,6 +102,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public boolean isOverdue() {
+        return se.isOverdue();
+    }
+
+    @Override
     public boolean isEvent() {
         return se.isEvent();
     }
