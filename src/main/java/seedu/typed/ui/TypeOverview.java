@@ -73,9 +73,9 @@ public class TypeOverview extends UiPart<Region> {
     }
 
     void initialize() {
-        int pendingFloating = model.getNumberFloatingTasks();
-        int pendingDeadline = model.getNumberDeadlines();
-        int pendingDuration = model.getNumberEvents();
+        int pendingFloating = model.getNumberUncompletedFloatingTasks();
+        int pendingDeadline = model.getNumberUncompletedDeadlines();
+        int pendingDuration = model.getNumberUncompletedEvents();
 
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
@@ -86,9 +86,9 @@ public class TypeOverview extends UiPart<Region> {
     }
     @Subscribe
     private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
-        int pendingFloating = model.getNumberFloatingTasks();
-        int pendingDeadline = model.getNumberDeadlines();
-        int pendingDuration = model.getNumberEvents();
+        int pendingFloating = model.getNumberUncompletedFloatingTasks();
+        int pendingDeadline = model.getNumberUncompletedDeadlines();
+        int pendingDuration = model.getNumberUncompletedEvents();
 
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
