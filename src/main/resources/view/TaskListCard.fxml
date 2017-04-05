@@ -28,5 +28,6 @@
             <Font size="15.0" />
          </font>
       </Text>
+      <ImageView fx:id="recurring" fitHeight="30.0" fitWidth="30.0" layoutX="431.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="12.95556640625" AnchorPane.topAnchor="45.0" />
 	</children>
 </AnchorPane>

@@ -19,6 +19,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
     private final Image stampComplete = new Image("/images/doneInvert.png");
     private final Image checkbox = new Image("/images/checkbox.png");
+    private final Image recurringLogo = new Image("/images/recurring.png");
 
     @FXML
     private AnchorPane cardPane;
@@ -34,6 +35,8 @@ public class TaskCard extends UiPart<Region> {
     private Circle taskType;
     @FXML
     private ImageView stamp;
+    @FXML
+    private ImageView recurring;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -58,6 +61,10 @@ public class TaskCard extends UiPart<Region> {
             stamp.setImage(stampComplete);
         } else {
             stamp.setImage(checkbox);
+        }
+
+        if (task.isRecurring()) {
+            recurring.setImage(recurringLogo);
         }
 
         initTags(task);
