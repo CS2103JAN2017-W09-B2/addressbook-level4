@@ -23,15 +23,11 @@
 		</Text>
       <ImageView fx:id="stamp" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
       <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
-      <Text fx:id="date" layoutX="146.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="60.0">
+      <Text fx:id="date" layoutX="59.0" layoutY="106.501953125" strokeType="OUTSIDE" strokeWidth="0.0" text="date" AnchorPane.bottomAnchor="10.333984375" AnchorPane.leftAnchor="59.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-<<<<<<< HEAD
-      <ImageView fx:id="recurring" fitHeight="30.0" fitWidth="30.0" layoutX="431.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0" />
-=======
       <ImageView fx:id="recurring" fitHeight="30.0" fitWidth="30.0" layoutX="431.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="12.95556640625" AnchorPane.topAnchor="45.0" />
->>>>>>> 25032cb40a582c97e46c6dec4eca53a34b8bb04a
 	</children>
 </AnchorPane>
