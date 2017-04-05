@@ -134,6 +134,11 @@ public class Task implements ReadOnlyTask {
 
     //@@author A0141094M
     @Override
+    public boolean isOverdue() {
+        return se.isOverdue();
+    }
+
+    @Override
     public boolean isEvent() {
         return se.isEvent();
     }
