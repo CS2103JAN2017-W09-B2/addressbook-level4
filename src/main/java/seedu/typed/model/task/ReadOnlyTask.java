@@ -30,6 +30,8 @@ public interface ReadOnlyTask {
 
     boolean isRecurring();
 
+    boolean isOverdue();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)
