@@ -104,7 +104,7 @@ public class DateTimeTest {
     @Test
     public void toString_AprilFool_success() {
         System.out.println(aprilFoolDay.toString());
-        assertTrue((aprilFoolDay.toString()).equals("Apr 01, 2017 00:00"));
+        assertTrue((aprilFoolDay.toString()).equals("Saturday, Apr 01, 2017 00:00"));
     }
 
 

@@ -12,9 +12,6 @@ public class HelpCommand extends Command {
     //@@author A0141094M
     public static final String HELP_COMMAND_WORD = "help";
     public static final String MAN_COMMAND_WORD = "man";
-    //@@author
-
-    //@@author A0143853A
     public static final String SOS_COMMAND_WORD = "sos";
     //@@author
 

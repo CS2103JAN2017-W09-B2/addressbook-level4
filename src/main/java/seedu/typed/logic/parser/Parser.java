@@ -177,7 +177,8 @@ public class Parser {
         return commandWord.equals(ListCommand.LIST_COMMAND_WORD) ||
                 commandWord.equals(ListCommand.FILTER_COMMAND_WORD) ||
                 commandWord.equals(ListCommand.SHOW_COMMAND_WORD) ||
-                commandWord.equals(ListCommand.LS_COMMAND_WORD);
+                commandWord.equals(ListCommand.LS_COMMAND_WORD) ||
+                commandWord.equals(ListCommand.DISPLAY_COMMAND_WORD);
     }
 
     private boolean isExitCommandWord(String commandWord) {

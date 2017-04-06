@@ -11,7 +11,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     @Test
     public void selectTask_nonEmptyList() {
 
-        assertSelectionInvalid(11); // invalid index
+        assertSelectionInvalid(20); // invalid index
         assertNoTaskSelected();
 
         assertSelectionSuccess(1); // first task in the list

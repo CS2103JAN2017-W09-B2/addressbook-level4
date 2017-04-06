@@ -129,16 +129,13 @@ public class ScheduleElement implements TimeExpression {
         }
         if (dateInput.contains(BY_DISPLAY_IDENTIFIER)) {
             String[] dateTime = dateInput.trim().split(BY_DISPLAY_IDENTIFIER);
-            LocalDateTime deadline = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
-            return makeDeadline(DateTimeParser.getDateTimeFromLocalDateTime(deadline));
+            return makeDeadline(DateTimeParser.getDateTimeFromString(dateTime[1]));
         }
         if (dateInput.contains(FROM_DISPLAY_IDENTIFIER) && dateInput.contains(TO_DISPLAY_IDENTIFIER)) {
             String[] dateTime = dateInput.trim().split(TO_DISPLAY_IDENTIFIER);
-            LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[0]
-                    .replaceAll(FROM_DISPLAY_IDENTIFIER, ""));
-            LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(dateTime[1]);
-            return makeEvent(DateTimeParser.getDateTimeFromLocalDateTime(startDateTime),
-                    DateTimeParser.getDateTimeFromLocalDateTime(endDateTime));
+            dateTime[0] = dateTime[0].replaceAll(FROM_DISPLAY_IDENTIFIER, "");
+            return makeEvent(DateTimeParser.getDateTimeFromString(dateTime[0]),
+                    DateTimeParser.getDateTimeFromString(dateTime[1]));
         }
         return makeFloating();
     }
@@ -428,8 +425,6 @@ public class ScheduleElement implements TimeExpression {
     public boolean isOverdue() {
         DateTime now = new DateTime(LocalDateTime.now());
         if (isDeadline()) {
-            System.out.println("huh");
-            System.out.println(now.toString());
             return now.isAfter(date);
         } else if (isEvent()) {
             return now.isAfter(endDate);

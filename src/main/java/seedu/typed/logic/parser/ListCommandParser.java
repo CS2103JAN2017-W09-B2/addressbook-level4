@@ -3,10 +3,8 @@
 package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.typed.logic.parser.CliSyntax.PREFIX_SPACE;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.Command;
@@ -31,16 +29,10 @@ public class ListCommandParser {
      * ListCommand and returns a ListCommand object for execution.
      */
     public Command parse(String args) {
-        // ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_WITH);
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_SPACE);
-        argsTokenizer.tokenize(args);
         try {
             String type = ALL_STRING; // default is show all
-            // Optional<String> value = argsTokenizer.getValue(PREFIX_WITH);
-            Optional<String> value = argsTokenizer.getValue(PREFIX_SPACE);
-            if (value.isPresent() && !value.get().isEmpty()) {
-                String[] split = value.get().split(" ");
-                String lowered = split[0].toLowerCase();
+            if (args != null && !args.isEmpty()) {
+                String lowered = args.trim().toLowerCase();
                 if (lowered.equals(ALL_STRING)
                         || lowered.equals(DONE_STRING)
                         || lowered.equals(DEADLINE_STRING)
