@@ -356,5 +356,17 @@ public class TaskManager implements ReadOnlyTaskManager {
         return count;
     }
 
-
+    //@@author A0139392X
+    public int getNumberOverdue() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            Task task = tasks.getTaskAt(i);
+            if (task.isOverdue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    //@@author
 }
