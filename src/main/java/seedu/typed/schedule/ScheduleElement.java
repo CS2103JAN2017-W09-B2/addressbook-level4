@@ -1,5 +1,7 @@
 package seedu.typed.schedule;
 
+import java.time.LocalDateTime;
+
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.parser.DateTimeParser;
 import seedu.typed.model.task.DateTime;
@@ -423,8 +425,6 @@ public class ScheduleElement implements TimeExpression {
     public boolean isOverdue() {
         DateTime now = new DateTime(LocalDateTime.now());
         if (isDeadline()) {
-            System.out.println("huh");
-            System.out.println(now.toString());
             return now.isAfter(date);
         } else if (isEvent()) {
             return now.isAfter(endDate);
