@@ -23,6 +23,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_WITH = new Prefix(" with ");
     //@@author
 
+    //@@author A0143853A
+    public static final Prefix PREFIX_SPACE = new Prefix(" ");
+    //@@author
+
     /* Patterns definitions */
     // one or more keywords separated by whitespace
     public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)");

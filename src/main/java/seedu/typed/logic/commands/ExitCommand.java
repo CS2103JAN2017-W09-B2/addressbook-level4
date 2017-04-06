@@ -15,7 +15,11 @@ public class ExitCommand extends Command {
     public static final String LOGOUT_COMMAND_WORD = "logout";
     //@@author
 
+    //@@author A0143853A
+    public static final String BYE_COMMAND_WORD = "bye";
+    //@@author
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Task Manager as requested ...";
+
 
     @Override
     public CommandResult execute() {

@@ -183,7 +183,8 @@ public class Parser {
     private boolean isExitCommandWord(String commandWord) {
         return commandWord.equals(ExitCommand.EXIT_COMMAND_WORD) ||
                 commandWord.equals(ExitCommand.QUIT_COMMAND_WORD) ||
-                commandWord.equals(ExitCommand.LOGOUT_COMMAND_WORD);
+                commandWord.equals(ExitCommand.LOGOUT_COMMAND_WORD) ||
+                commandWord.equals(ExitCommand.BYE_COMMAND_WORD);
     }
 
     private boolean isHelpCommandWord(String commandWord) {
