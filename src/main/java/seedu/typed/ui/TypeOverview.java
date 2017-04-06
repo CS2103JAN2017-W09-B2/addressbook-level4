@@ -1,7 +1,5 @@
 package seedu.typed.ui;
 
-import java.time.LocalDateTime;
-
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
@@ -79,8 +77,6 @@ public class TypeOverview extends UiPart<Region> {
         int pendingDeadline = model.getNumberUncompletedDeadlines();
         int pendingDuration = model.getNumberUncompletedEvents();
         int pendingOverdue = model.getNumberOverdue();
-
-        System.out.println(LocalDateTime.now());
 
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");

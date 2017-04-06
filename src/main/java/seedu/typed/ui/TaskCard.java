@@ -68,6 +68,7 @@ public class TaskCard extends UiPart<Region> {
         }
 
         initTags(task);
+
     }
     //@@author
 
