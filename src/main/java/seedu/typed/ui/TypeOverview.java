@@ -86,7 +86,7 @@ public class TypeOverview extends UiPart<Region> {
         deadlineNumber.setText(pendingDeadline + "");
         durationNumber.setText(pendingDuration + "");
 
-        overdueNumber.setText(pendingOverdue + "");
+        overdueNumber.setText("0");
     }
     @Subscribe
     private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
@@ -98,7 +98,7 @@ public class TypeOverview extends UiPart<Region> {
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
         durationNumber.setText(pendingDuration + "");
-        overdueNumber.setText(pendingOverdue + "");
+        overdueNumber.setText("0");
     }
 }
 //@@author
