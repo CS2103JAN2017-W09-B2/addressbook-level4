@@ -110,6 +110,12 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager.getNumberUncompletedFloatingTasks();
     }
     //@@author A0143853A
+
+    @Override
+    public int getNumberOverdue() {
+        return taskManager.getNumberOverdue();
+    }
+
     @Override
     public int getIndexOfTask(Task task) throws TaskNotFoundException {
         return taskManager.getIndexOf(task);
@@ -313,6 +319,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
+        // updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
@@ -320,6 +327,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void copyData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.copyData(newData);
+        // updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
     //@@author

@@ -76,26 +76,25 @@ public class TypeOverview extends UiPart<Region> {
         int pendingFloating = model.getNumberUncompletedFloatingTasks();
         int pendingDeadline = model.getNumberUncompletedDeadlines();
         int pendingDuration = model.getNumberUncompletedEvents();
+        int pendingOverdue = model.getNumberOverdue();
 
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
         durationNumber.setText(pendingDuration + "");
 
-        //TO FIX
-        overdueNumber.setText("0");
+        overdueNumber.setText(pendingOverdue + "");
     }
     @Subscribe
     private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
         int pendingFloating = model.getNumberUncompletedFloatingTasks();
         int pendingDeadline = model.getNumberUncompletedDeadlines();
         int pendingDuration = model.getNumberUncompletedEvents();
+        int pendingOverdue = model.getNumberOverdue();
 
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
         durationNumber.setText(pendingDuration + "");
-
-        //TO FIX
-        overdueNumber.setText("0");
+        overdueNumber.setText(pendingOverdue + "");
     }
 }
 //@@author

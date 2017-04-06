@@ -420,5 +420,18 @@ public class ScheduleElement implements TimeExpression {
         }
     }
 
+    public boolean isOverdue() {
+        DateTime now = new DateTime(LocalDateTime.now());
+        if (isDeadline()) {
+            System.out.println("huh");
+            System.out.println(now.toString());
+            return now.isAfter(date);
+        } else if (isEvent()) {
+            return now.isAfter(endDate);
+        } else {
+            return false;
+        }
+    }
+
 
 }

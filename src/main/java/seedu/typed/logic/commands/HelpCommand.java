@@ -15,10 +15,15 @@ public class HelpCommand extends Command {
     public static final String SOS_COMMAND_WORD = "sos";
     //@@author
 
+    //@@author A0143853A
+    public static final String SOS_COMMAND_WORD = "sos";
+    //@@author
+
     public static final String MESSAGE_USAGE = HELP_COMMAND_WORD + ": Shows program usage instructions.\n" + "Example: "
             + HELP_COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+
 
     @Override
     public CommandResult execute() {

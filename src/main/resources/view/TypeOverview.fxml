@@ -26,12 +26,12 @@
             <Font name="Helvetica" size="19.0" />
          </font>
       </Text>
-      <Text fx:id="durationTitle" fill="#e1dede" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0">
+      <Text fx:id="durationTitle" fill="#e1dede" layoutX="37.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0">
          <font>
             <Font name="Helvetica" size="19.0" />
          </font>
       </Text>
-      <Text fx:id="floatingTitle" fill="#e1dede" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Untimed" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0">
+      <Text fx:id="floatingTitle" fill="#e1dede" layoutX="37.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0">
          <font>
             <Font name="Helvetica" size="19.0" />
          </font>

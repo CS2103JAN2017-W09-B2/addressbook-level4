@@ -121,6 +121,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         System.out.println("Number of Uncompleted Deadline : " + this.getNumberUncompletedDeadlines());
         System.out.println("Number of Uncompleted Floating : " + this.getNumberUncompletedFloatingTasks());
         System.out.println("Number of Uncompleted Event : " + this.getNumberUncompletedEvents());
+        System.out.println("Number of Overdued : " + this.getNumberOverdue());
     }
 
     //// task-level operations
@@ -356,5 +357,17 @@ public class TaskManager implements ReadOnlyTaskManager {
         return count;
     }
 
-
+    //@@author A0139392X
+    public int getNumberOverdue() {
+        int size = tasks.size();
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            Task task = tasks.getTaskAt(i);
+            if (task.isOverdue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    //@@author
 }

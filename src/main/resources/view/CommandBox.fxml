@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
+<?import seedu.typed.ui.CustomTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" onKeyPressed="#handleKeyPressed" promptText="input command here">
+   <CustomTextField fx:id="commandTextField" onAction="#handleCommandInputChanged" onKeyPressed="#handleKeyPressed" promptText="input command here">
       <font>
          <Font size="21.0" />
-      </font></TextField>
+      </font></CustomTextField>
 </AnchorPane>
