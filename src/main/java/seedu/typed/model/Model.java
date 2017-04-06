@@ -172,4 +172,8 @@ public interface Model {
     int getNumberUncompletedFloatingTasks();
 
     //@@author
+
+    //@@author A0139392X
+    int getNumberOverdue();
+    //@@author
 }

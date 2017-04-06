@@ -3,7 +3,9 @@ package seedu.typed.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.core.Messages;
+import seedu.typed.commons.events.ui.JumpToListRequestEvent;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
@@ -89,6 +91,11 @@ public class EditCommand extends Command {
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, index, taskToEditCopy);
             session.updateValidCommandsHistory(commandText);
             //@@author
+
+            //@@author A0139392X
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            //@@author
+
         } catch (DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException tnfe) {
