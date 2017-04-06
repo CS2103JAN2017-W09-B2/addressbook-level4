@@ -19,8 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TO = new Prefix(" to ");
     public static final Prefix PREFIX_EVERY = new Prefix(" every ");
     public static final Prefix PREFIX_TAG = new Prefix(" #");
-
-    public static final Prefix PREFIX_WITH = new Prefix(" with ");
     //@@author
 
     /* Patterns definitions */
