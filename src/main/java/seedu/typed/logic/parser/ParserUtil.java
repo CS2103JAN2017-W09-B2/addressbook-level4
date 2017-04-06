@@ -78,8 +78,8 @@ public class ParserUtil {
      */
     public static Optional<DateTime> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(DateTimeParser.getDateTimeFromLocalDateTime
-                (DateTimeParser.getLocalDateTimeFromString(date.get()))) : Optional.empty();
+        return date.isPresent() ? Optional.of(DateTimeParser.getDateTimeFromString(date.get()))
+                : Optional.empty();
     }
     //@@author
 
