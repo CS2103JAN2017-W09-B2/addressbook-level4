@@ -45,14 +45,14 @@ public class TaskCard extends UiPart<Region> {
         ScheduleElement se = task.getSE();
         date.setText(se.toString() + se.teToString());
 
-        if (task.isEvent()) {
+        if (task.isOverdue()) {
+            taskType.setFill(Color.RED);
+        } else if (task.isEvent()) {
             taskType.setFill(Color.SEAGREEN);
         } else if (task.isDeadline()) {
             taskType.setFill(Color.ORANGE);
         } else if (task.isFloating()) {
             taskType.setFill(Color.DODGERBLUE);
-        } else {
-            taskType.setFill(Color.RED);
         }
 
         notes.setText(task.getNotes().toString());

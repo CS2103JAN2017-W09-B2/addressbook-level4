@@ -3,6 +3,8 @@ package seedu.typed.logic.commands;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import seedu.typed.commons.core.EventsCenter;
+import seedu.typed.commons.events.ui.JumpToListRequestEvent;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
@@ -93,6 +95,11 @@ public class AddCommand extends Command {
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
             session.updateValidCommandsHistory(commandText);
             //@@author
+
+            //@@author A0139392X
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(0));
+            //@@author
+
             String name = toAdd.getName().toString();
             return new CommandResult(String.format(MESSAGE_SUCCESS, name));
         } catch (DuplicateTaskException e) {
