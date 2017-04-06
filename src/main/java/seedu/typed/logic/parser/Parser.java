@@ -189,7 +189,8 @@ public class Parser {
 
     private boolean isHelpCommandWord(String commandWord) {
         return commandWord.equals(HelpCommand.HELP_COMMAND_WORD) ||
-                commandWord.equals(HelpCommand.MAN_COMMAND_WORD);
+                commandWord.equals(HelpCommand.MAN_COMMAND_WORD) ||
+                commandWord.equals(HelpCommand.SOS_COMMAND_WORD);
     }
 
     private boolean isEditCommandWord(String commandWord) {
