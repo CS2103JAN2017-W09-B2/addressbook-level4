@@ -177,18 +177,21 @@ public class Parser {
         return commandWord.equals(ListCommand.LIST_COMMAND_WORD) ||
                 commandWord.equals(ListCommand.FILTER_COMMAND_WORD) ||
                 commandWord.equals(ListCommand.SHOW_COMMAND_WORD) ||
-                commandWord.equals(ListCommand.LS_COMMAND_WORD);
+                commandWord.equals(ListCommand.LS_COMMAND_WORD) ||
+                commandWord.equals(ListCommand.DISPLAY_COMMAND_WORD);
     }
 
     private boolean isExitCommandWord(String commandWord) {
         return commandWord.equals(ExitCommand.EXIT_COMMAND_WORD) ||
                 commandWord.equals(ExitCommand.QUIT_COMMAND_WORD) ||
-                commandWord.equals(ExitCommand.LOGOUT_COMMAND_WORD);
+                commandWord.equals(ExitCommand.LOGOUT_COMMAND_WORD) ||
+                commandWord.equals(ExitCommand.BYE_COMMAND_WORD);
     }
 
     private boolean isHelpCommandWord(String commandWord) {
         return commandWord.equals(HelpCommand.HELP_COMMAND_WORD) ||
-                commandWord.equals(HelpCommand.MAN_COMMAND_WORD);
+                commandWord.equals(HelpCommand.MAN_COMMAND_WORD) ||
+                commandWord.equals(HelpCommand.SOS_COMMAND_WORD);
     }
 
     private boolean isEditCommandWord(String commandWord) {
