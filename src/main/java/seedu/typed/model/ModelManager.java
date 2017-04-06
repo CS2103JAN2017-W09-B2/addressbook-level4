@@ -319,6 +319,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
+        updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
@@ -326,6 +327,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void copyData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.copyData(newData);
+        updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
     //@@author
