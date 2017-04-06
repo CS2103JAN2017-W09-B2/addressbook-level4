@@ -67,7 +67,6 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             resetPointer();
-            commandTextField.clear();
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
