@@ -1,7 +1,5 @@
 package seedu.typed.ui;
 
-import java.time.LocalDateTime;
-
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
@@ -80,13 +78,11 @@ public class TypeOverview extends UiPart<Region> {
         int pendingDuration = model.getNumberUncompletedEvents();
         int pendingOverdue = model.getNumberOverdue();
 
-        System.out.println(LocalDateTime.now());
-
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
         durationNumber.setText(pendingDuration + "");
 
-        overdueNumber.setText("0");
+        overdueNumber.setText(pendingOverdue + "");
     }
     @Subscribe
     private void handleNewResultAvailableEvent(TaskManagerChangedEvent event) {
@@ -98,7 +94,7 @@ public class TypeOverview extends UiPart<Region> {
         floatingNumber.setText(pendingFloating + "");
         deadlineNumber.setText(pendingDeadline + "");
         durationNumber.setText(pendingDuration + "");
-        overdueNumber.setText("0");
+        overdueNumber.setText(pendingOverdue + "");
     }
 }
 //@@author
