@@ -121,6 +121,9 @@ public class TaskManager implements ReadOnlyTaskManager {
         System.out.println("Number of Uncompleted Deadline : " + this.getNumberUncompletedDeadlines());
         System.out.println("Number of Uncompleted Floating : " + this.getNumberUncompletedFloatingTasks());
         System.out.println("Number of Uncompleted Event : " + this.getNumberUncompletedEvents());
+        
+
+        System.out.println("Number of Overdued : " + this.getNumberOverdue());
     }
 
     //// task-level operations
