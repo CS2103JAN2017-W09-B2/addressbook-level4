@@ -205,7 +205,7 @@ public class ScheduleElement implements TimeExpression {
     }
 
     public String teToString() {
-        return " Every " + this.rule;
+        return "";
     }
     //@@author
 
