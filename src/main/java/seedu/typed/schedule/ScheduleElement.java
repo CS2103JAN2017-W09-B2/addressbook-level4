@@ -195,13 +195,16 @@ public class ScheduleElement implements TimeExpression {
     //@@author A0141094M
     @Override
     public String toString() {
+        String display = " ";
         if (isEvent()) {
-            return " From: " + this.startDate + " To: " + this.endDate;
+            display = display + " From: " + this.startDate + " To: " + this.endDate;
         } else if (isDeadline()) {
-            return " By: " + this.date;
-        } else {
-            return " ";
+            display = display + " By: " + this.date;
         }
+        if (isRecurring()) {
+            display = display + " Every: " + this.rule;
+        }
+        return display;
     }
 
     public String teToString() {
