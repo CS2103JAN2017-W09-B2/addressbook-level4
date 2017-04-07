@@ -15,11 +15,9 @@ public class CustomTextField extends TextField {
             toDisplay = "<html><font color=\"red\">add</font></html>";
            // this.setStyle("-fx-text-inner-color: red;");
             this.setText("<pre style='color:#000020;background:#f6f8ff;'>red</pre>");*/
-            super.replaceText(start, end, text);
-       /* } else {
+        super.replaceText(start, end, text);
+        /* } else {
             super.replaceText(start, end, text);
         }*/
     }
-
-
 }
