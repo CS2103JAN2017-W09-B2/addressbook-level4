@@ -19,8 +19,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_TO = new Prefix(" to ");
     public static final Prefix PREFIX_EVERY = new Prefix(" every ");
     public static final Prefix PREFIX_TAG = new Prefix(" #");
+    //@@author
 
-    public static final Prefix PREFIX_WITH = new Prefix(" with ");
+    //@@author A0143853A
+    public static final Prefix PREFIX_SPACE = new Prefix(" ");
     //@@author
 
     /* Patterns definitions */

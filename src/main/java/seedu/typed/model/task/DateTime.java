@@ -183,8 +183,12 @@ public class DateTime {
         if (localDateTime ==  null) {
             return " ";
         } else {
-            return localDateTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm"));
+            return localDateTime.format(DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm"));
         }
+    }
+
+    public boolean isAfterNow() {
+        return localDateTime.isAfter(LocalDateTime.now());
     }
     //@@author
 

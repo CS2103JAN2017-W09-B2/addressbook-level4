@@ -18,7 +18,8 @@ import seedu.typed.model.task.DateTime;
  * Currently assumes date contains only one date, not multiple.
  */
 public class DateTimeParser {
-    private static final String MESSAGE_FOR_INVALID_DATE_FORMAT = "The date you entered is invalid or ambiguous. ";
+    private static final String MESSAGE_FOR_INVALID_DATE_FORMAT = "The date you entered is invalid or ambiguous. "
+            + "Try again with more specific dates! ";
     private static final String VALID_TIME_REGEX = "[0-2][0-3][0-5][0-9]";
 
 
@@ -63,7 +64,6 @@ public class DateTimeParser {
             return null;
         }
         DateGroup dateGroup = getDateGroupFromString(date);
-        //System.out.println(dateGroup.isTimeInferred());
         Instant instant = dateGroup.getDates().get(0).toInstant();
         return LocalDateTime.ofInstant(instant, getSystemDefaultTimeZone());
     }
