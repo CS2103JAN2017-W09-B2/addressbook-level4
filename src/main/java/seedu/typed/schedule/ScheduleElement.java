@@ -14,13 +14,13 @@ public class ScheduleElement implements TimeExpression {
     private final TimeExpression te; // representation of the recurrence
     private final String rule;
     //@@author A0141094M
-    private final String BY_DISPLAY_IDENTIFIER = "By:";
-    private final String FROM_DISPLAY_IDENTIFIER = "From:";
-    private final String TO_DISPLAY_IDENTIFIER = "To:";
+    public static final String BY_DISPLAY_IDENTIFIER = "By:";
+    public static final String FROM_DISPLAY_IDENTIFIER = "From:";
+    public static final String TO_DISPLAY_IDENTIFIER = "To:";
 
-    private final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
-    private final String FREQUENCY = "day|week|month|year";
-    private final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
+    public static final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
+    public static final String FREQUENCY = "day|week|month|year";
+    public static final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
 
     public ScheduleElement() {
         this.date = null;
@@ -195,14 +195,14 @@ public class ScheduleElement implements TimeExpression {
     //@@author A0141094M
     @Override
     public String toString() {
-        String display = " ";
+        String display = "";
         if (isEvent()) {
-            display = display + " From: " + this.startDate + " To: " + this.endDate;
+            display = " From: " + this.startDate + " To: " + this.endDate;
         } else if (isDeadline()) {
-            display = display + " By: " + this.date;
+            display = " By: " + this.date;
         }
         if (isRecurring()) {
-            display = display + " Every: " + this.rule;
+            display = " Every: " + this.rule;
         }
         return display;
     }
