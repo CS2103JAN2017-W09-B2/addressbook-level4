@@ -32,6 +32,8 @@ Before you get started with me, you should have Java version `1.8.0_60` or later
 2. Copy the file to the folder you want to use as my new home.
 3. Experiment with **[3. Features](#3-features)** below and try out basic features.
 
+    <img src="images/UiExplain.png" width="600"> <br>
+
 ## 2. Returning to *Typed*
 
 I am always happy to see you again!<br>
@@ -336,36 +338,60 @@ Format: `finish all`
 *e.g. finish all* <br>
 
 
-### 3.10. Showing History
+### 3.10. Importing to Typed
 
-#### <a name="history"></a>3.10.1. Showing History : `history`
+#### <a name="import"></a>3.10.1. Import From A Filepath : `import FILEPATH`
 
-Format: `history`
+Format: `import FILEPATH`
 
-> Note: Support for this has not been implemented. <br>
-> `history` shows you a list of all executed actions in the current session.
+> You can import the file to Typed! <br>
+> Imported file must be a XML file.
 
-*e.g. history* <br>
+*e.g. For Windows: import C:\Users\Public\Desktop\typed.xml*<br>
+*e.g. For MacOS: import /Users/(username)/Desktop/typed.xml*<br>
 
 
-### 3.11. Saving Your Data
+### <a name="export"></a>3.11. Exporting Your Data
 
-#### 3.11.1. Saving Your Data to the Current File: 
+#### <a name="exportFilename"></a>3.11.1. Export File to Same Working Directory : `export FILENAME`
+
+Format: `export FILENAME`
+
+> You can export the file to the same working directory you are on! <br>
+> Exported file will be saved as a XML file. <br>
+
+*e.g. export typed.xml* <br>
+
+#### <a name="exportFilepath"></a>3.11.2. Export File to Different Directory : `export FILEPATH`
+
+Format: `export FILEPATH`
+
+> You can export the file to the directory you want! <br>
+> Exported file will be saved as a XML file. <br>
+
+*e.g. For Windows: export C:\Users\Public\Desktop\typed.xml*<br>
+*e.g. For MacOS: export /Users/(username)/Desktop/typed.xml*<br>
+
+
+### 3.12. Saving Your Data
+
+#### 3.12.1. Saving Your Data to the Current File: 
 
 > Good news! Your data is automatically saved.
 
-#### <a name="saveFilename"></a>3.11.2. Saving Your Data to Another File : `save FILENAME`
+#### <a name="saveFilepath"></a>3.12.2. Saving Your Data to Another File : `save FILEPATH`
 
-Format: `save FILENAME`
+Format: `save FILEPATH`
 
-> `save FILENAME` saves all your data to a new file specified by FILENAME. <br>
-> FILENAME will be saved as a xml file.
+> `save FILEPATH` saves all your data to a new file specified by FILEPATH. <br>
+> The file will be saved as a XML file.
+> Unlike [Export](#export), changes made to the task manager after `save FILEDIRECTORY` will be updated on that file and not the default file directory.<br> 
 
-*e.g. save mynewtasks.xml* <br>
-*e.g. save mynewtasks* <br>
+*e.g. For Windows: save C:\Users\Public\Desktop\typed.xml*<br>
+*e.g. For MacOS: save /Users/(username)/Desktop/typed.xml*<br>
 
 
-### 3.12. Exiting *Typed*
+### 3.13. Exiting *Typed*
 
 #### <a name="exit"></a>3.12.1. Exiting *Typed* : `exit`
 
@@ -390,8 +416,9 @@ Command | Format |
 `undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
 `redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
 `finish` | [finish INDEX](#completeOne) <br> [finish INDEX to INDEX](#completeRange) <br> [finish all](#completeAll) |
-`history` | [history](#history) |
-`save` | [save FILENAME](#saveFilename) |
+`import` | [import FILEPATH](#import) |
+`export` | [export FILENAME](#exportFilename) <br> [export FILEPATH](#exportFilepath) |
+`save` | [save FILEPATH](#saveFilepath) |
 `exit` | [exit](#exit) |
 
 ## 5. FAQ
