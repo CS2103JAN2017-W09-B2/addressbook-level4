@@ -6,109 +6,106 @@ package seedu.typed.logic.parser;
  */
 public class FindUtil {
 
+    static final String QUERY_CANNOT_BE_EMPTY_MESSAGE = "query cannot be empty";
+    static final String QUERY_LEN_SHOULD_BE_ONE_MESSAGE = "query parameter should be a single word";
+    static final String QUERY_LEN_SHOULD_BE_LESS_THAN_ONE_MESSAGE = "query parameter should be empty or a single word";
+    static final String TAG_LEN_SHOULD_BE_ONE_MESSAGE = "tag parameter should be a single word";
+    static final String QUERY_CANNOT_BE_NULL_MESSAGE = "query cannot be null";
+    static final String STR_CANNOT_BE_NULL_MESSAGE = "str cannot be null";
+    private static final String QUERY_LEN_MUST_BE_POSITIVE_INT_MESSAGE = "length of query must be a positive int";
+    private static final String STR_LEN_MUST_BE_POSITIVE_INT_MESSAGE = "length of str must be a positive int";
+    private static final String WHITESPACE_DELIMITER = "\\s+";
     private static final int MAX_EDIT_DISTANCE = 2; // lower distance = higher similarity
     private static final int MAX_EDIT_DISTANCE_STRICT = 1;
-    private static final String WHITESPACE_DELIMITER = "\\s+";
+
 
     /**
-     * Checks if specified strings are an exact match.
+     * Checks if {@code query} and {@code str} are an exact match, ignoring case.
      */
-    public static boolean isExactWordMatchIgnoreCase(String str, String word) {
-        assert str != null : "str cannot be null";
-        assert word != null : "word cannot be null";
-        assert !word.isEmpty() : "word cannot be empty";
-        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+    public static boolean isExactWordMatchIgnoreCase(String str, String query) {
+        assertCheckStrAndQuery(str, query);
         str = str.toLowerCase();
-        word = word.toLowerCase();
-        return str.equals(word);
+        query = query.toLowerCase();
+        return str.equals(query);
     }
 
     /**
-     * Checks if specified strings are substring match.
+     * Checks if {@code query} is a substring of {@code str}, ignoring case.
      */
-    public static boolean isSubstringWordMatchIgnoreCase(String str, String word) {
-        assert str != null : "str cannot be null";
-        assert word != null : "word cannot be null";
-        assert !word.isEmpty() : "word cannot be empty";
-        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+    public static boolean isSubstringWordMatchIgnoreCase(String str, String query) {
+        assertCheckStrAndQuery(str, query);
         str = str.toLowerCase();
-        word = word.toLowerCase();
-        return str.contains(word);
+        query = query.toLowerCase();
+        return str.contains(query);
     }
 
     /**
-     * Checks if specified strings are similar.
+     * Checks if {@code query} is a fuzzy match to {@code str}, ignoring case.
      * @param str non-null string
-     * @param word non-null, non-empty string that contains a single word
-     * @return isFuzzyMatch boolean indicating if str and word are a fuzzy match, i.e. similar
+     * @param query non-null, non-empty string that contains a single word
+     * @return isFuzzyMatch boolean indicating if str and query are a fuzzy match, i.e. similar
      */
-    public static boolean isFuzzyWordMatchIgnoreCase(String str, String word) {
-        assert str != null : "str cannot be null";
-        assert word != null : "word cannot be null";
-        assert !word.isEmpty() : "word cannot be empty";
-        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+    public static boolean isFuzzyWordMatchIgnoreCase(String str, String query) {
+        assertCheckStrAndQuery(str, query);
         str = str.toLowerCase();
-        word = word.toLowerCase();
+        query = query.toLowerCase();
         if (str.length() <= 2) {
-            return isExactWordMatchIgnoreCase(str, word);
+            return isExactWordMatchIgnoreCase(str, query);
         } else if (str.length() <= 4) {
-            return computeMinEditDistance(str, word) <= MAX_EDIT_DISTANCE_STRICT;
+            return computeMinEditDistance(str, query) <= MAX_EDIT_DISTANCE_STRICT;
         } else {
-            return computeMinEditDistance(str, word) <= MAX_EDIT_DISTANCE || isSubstringWordMatchIgnoreCase(str, word);
+            return computeMinEditDistance(str, query) <= MAX_EDIT_DISTANCE || isSubstringWordMatchIgnoreCase(str, query);
         }
     }
 
     /**
-     * Checks if specified strings are similar.
-     * @param str non-null string
-     * @param tag non-null, non-empty string that contains a single word
+     * Checks if specified {@code str} is a similar match to any stored tags, ignoring case.
+     * @param tag non-null string that contains a single word
+     * @param query non-null string that contains a single word
+     *          empty string always returns true
      * @return isFuzzyMatch boolean indicating if str and word are a fuzzy match, i.e. similar
      */
-    public static boolean isFuzzyTagMatchIgnoreCase(String str, String tag) {
-        assert str != null : "str cannot be null";
-        assert tag != null : "tag cannot be null";
-        assert !tag.isEmpty() : "tag cannot be empty";
-        assert tag.split(WHITESPACE_DELIMITER).length == 1 : "tag parameter should be a single word";
-        str = str.toLowerCase();
+    public static boolean isFuzzyTagMatchIgnoreCase(String tag, String query) {
+        assert tag != null : STR_CANNOT_BE_NULL_MESSAGE;
+        assert query != null : QUERY_CANNOT_BE_NULL_MESSAGE;
+        assert tag.split(WHITESPACE_DELIMITER).length == 1 : TAG_LEN_SHOULD_BE_ONE_MESSAGE;
+        assert query.split(WHITESPACE_DELIMITER).length <= 1 : QUERY_LEN_SHOULD_BE_LESS_THAN_ONE_MESSAGE;
         tag = tag.toLowerCase();
-        if (str.length() == 0) {
+        query = query.toLowerCase();
+        if (query.length() == 0) {
             return true;
-        } else if (str.length() <= 2) {
-            return isExactWordMatchIgnoreCase(str, tag);
-        } else if (str.length() <= 4) {
-            return computeMinEditDistance(str, tag) <= MAX_EDIT_DISTANCE_STRICT;
+        }
+        if (tag.length() <= 4) {
+            return isExactWordMatchIgnoreCase(tag, query);
         } else {
-            return computeMinEditDistance(str, tag) <= MAX_EDIT_DISTANCE || isSubstringWordMatchIgnoreCase(str, tag);
+            return computeMinEditDistance(tag, query) <= MAX_EDIT_DISTANCE_STRICT || isSubstringWordMatchIgnoreCase(tag, query);
         }
     }
 
     /**
      * Computes the minimum edit distance between specified strings as a measure of similarity.
      * @param str non-null string
-     * @param word non-null, non-empty string that contains a single word
-     * @return minimumEditDistance an int representation of how similar str and word are
+     * @param query non-null, non-empty string that contains a single word
+     * @return minimumEditDistance an int representation of how similar str and query are
      */
-    private static int computeMinEditDistance(String str, String word) {
-        assert str != null : "str cannot be null";
-        assert word != null : "word cannot be null";
-        assert !word.isEmpty() : "word cannot be empty";
-        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+    public static int computeMinEditDistance(String str, String query) {
+        assertCheckStrAndQuery(str, query);
         int lenStr = str.length();
-        int lenWord = word.length();
-        return computeLevenshtein(initDistance(lenStr, lenWord), str, word);
+        int lenWord = query.length();
+        return computeLevenshtein(initDistance(lenStr, lenWord), str, query);
     }
 
     /**
      * Initializes the minimum edit distance table by padding the first row and column.
      * @param lenStr length of str where str cannot be null
-     * @param lenWord length of word where word cannot be null, empty, and must contain a single word
+     * @param lenQuery length of query where query cannot be null, empty, and must contain a single word
      * @return editDistance an int array containing the initialized distances
      */
-    private static int[][] initDistance(int lenStr, int lenWord) {
-        assert lenStr >= 0 : "length of str must be a positive int";
-        assert lenWord >= 0 : "length of word must be a positive int";
-        int[][] editDistance = new int[lenStr + 1][lenWord + 1];
-        for (int c = 0; c < lenWord + 1; c++) {
+    private static int[][] initDistance(int lenStr, int lenQuery) {
+        assert lenStr >= 0 : STR_LEN_MUST_BE_POSITIVE_INT_MESSAGE;
+        assert lenQuery >= 0 : QUERY_LEN_MUST_BE_POSITIVE_INT_MESSAGE;
+        int[][] editDistance = new int[lenStr + 1][lenQuery + 1];
+        for (int c = 0; c < lenQuery + 1; c++) {
             editDistance[0][c] = c;
         }
         for (int r = 0; r < lenStr + 1; r++) {
@@ -121,20 +118,17 @@ public class FindUtil {
      * Computes the edit distance of given indices using Levenshtein's operations.
      * @param distance an array containing initialized distances
      * @param str non-null string
-     * @param word non-null, non-empty string that contains a single word
+     * @param query non-null, non-empty string that contains a single word
      * @return minimumEditDistance an int representation of how similar str and word are
      */
-    private static int computeLevenshtein(int[][] distance, String str, String word) {
-        assert str != null : "str cannot be null";
-        assert word != null : "word cannot be null";
-        assert !word.isEmpty() : "word cannot be empty";
-        assert word.split(WHITESPACE_DELIMITER).length == 1 : "word parameter should be a single word";
+    private static int computeLevenshtein(int[][] distance, String str, String query) {
+        assertCheckStrAndQuery(str, query);
         for (int i = 1; i < distance.length; i++) {
             for (int j = 1; j < distance[0].length; j++) {
                 int a = distance[i - 1][j] + 1;
                 int b = distance[i][j - 1] + 1;
                 int c = distance[i - 1][j - 1];
-                if (str.charAt(i - 1) != word.charAt(j - 1)) {
+                if (str.charAt(i - 1) != query.charAt(j - 1)) {
                     c += 1;
                 }
                 distance[i][j] = Math.min(a, Math.min(b, c));
@@ -143,4 +137,16 @@ public class FindUtil {
         return distance[distance.length - 1][distance[0].length - 1];
     }
 
+    /**
+     * Checks that str is not null, and query is not null, not empty, and is a single word.
+     */
+    private static void assertCheckStrAndQuery(String str, String query) {
+        assert str != null : STR_CANNOT_BE_NULL_MESSAGE;
+        assert query != null : QUERY_CANNOT_BE_NULL_MESSAGE;
+        assert !query.isEmpty() : QUERY_CANNOT_BE_EMPTY_MESSAGE;
+        assert query.split(WHITESPACE_DELIMITER).length == 1 : QUERY_LEN_SHOULD_BE_ONE_MESSAGE;
+    }
+
 }
+//@@author
+

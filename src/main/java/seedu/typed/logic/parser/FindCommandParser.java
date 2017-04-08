@@ -48,10 +48,16 @@ public class FindCommandParser {
         }
     }
 
+    /*
+     * Returns the message for an incorrect Find command.
+     */
     private String getIncorrectFindMessage() {
         return String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
     }
 
+    /*
+     * Checks if {@code word} is a tag.
+     */
     private boolean isWordATag(String word) {
         assert word != null;
         assert !word.isEmpty();
@@ -59,3 +65,4 @@ public class FindCommandParser {
     }
 
 }
+//@@author
