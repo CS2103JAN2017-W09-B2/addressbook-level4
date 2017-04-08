@@ -183,7 +183,7 @@ public class DayInMonthTETest {
     public void week_secondTuesdayOfMarch_firstWeek_false() {
         assertFalse(firstWeek.includes(secondTuesdayOfMarch));
     }
-    
+
     // weekly tests
     @Test
     public void weekly_secondMondayOfMarch_everyMonday_true() {
@@ -205,7 +205,7 @@ public class DayInMonthTETest {
     public void weekly_firstTuesdayOfMarch_everyTuesday_true() {
         assertTrue(everyTuesday.includes(firstTuesdayOfMarch));
     }
-    
+
     // monthly tests
     // In particular, recur a given date every month
     @Test
@@ -215,7 +215,7 @@ public class DayInMonthTETest {
         assertTrue(firstMondayEveryMonth.includes(firstMondayOfJan2018));
         assertFalse(firstMondayEveryMonth.includes(firstTuesdayOfMarch));
     }
-    
+
     @Test
     public void isLeapYear_2000_true() {
         assertTrue(DayInMonthTE.isLeapYear(2000));

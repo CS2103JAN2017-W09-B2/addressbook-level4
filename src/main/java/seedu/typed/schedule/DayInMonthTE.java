@@ -158,7 +158,7 @@ public class DayInMonthTE implements TimeExpression {
                 DateTime nextFewDays = date.nextDays(dayDiff);
                 if (!includes(nextFewDays)) {
                     // first wednesday comes before first monday
-                    // first sunday comes before first monday also 
+                    // first sunday comes before first monday also
                     // so need next month
                     System.out.println(date.toString());
                     return nextDeadlineOccurrence(firstDayOfNextMonth);

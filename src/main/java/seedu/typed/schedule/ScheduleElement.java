@@ -131,7 +131,7 @@ public class ScheduleElement implements TimeExpression {
     /**
      * Representation of a deadline when only recurrence is specified
      * but date is not specified
-     * Example: Add task every monday 
+     * Example: Add task every monday
      * This will set task deadline starting from the upcoming monday
      * @param every
      * @throws IllegalValueException
@@ -378,7 +378,7 @@ public class ScheduleElement implements TimeExpression {
      * TimeExpression representing the recurring deadline every year
      * @param weekCount week of the month
      * @param dayIndex the day of the week
-     * @param monthCount 
+     * @param monthCount
      * @return TimeExpression that recurs on this day every year
      */
     private TimeExpression recurEveryYear(int weekCount, int dayIndex, int monthCount) {

@@ -39,7 +39,7 @@ public class SetTimeExpressionsTest {
 
     // Test Cases for UnionTE @ testing logical OR
     private UnionTE everyLastSunOrJulyToDec = new UnionTE(everyLastSun, julyToDec);
-    
+
     // Test Case for UnionTE nextDeadlineOccurrence
     private UnionTE firstWedOrFirstSun = new UnionTE(everyFirstWed, everyFirstSun);
     private DateTime firstMonInMar = DateTime.getDateTime(2017, Month.MARCH, 06, 0, 0);
@@ -64,17 +64,16 @@ public class SetTimeExpressionsTest {
     private DateTime mar26 = DateTime.getDateTime(2017, Month.MARCH, 26, 0, 0);
     // 26 April 2017
     private DateTime apr26 = DateTime.getDateTime(2017, Month.APRIL, 26, 0, 0);
-    
+
     private UnionTE eitherJanOrFebOrMar = new UnionTE(jan, feb, mar);
 
     // Test Case for DifferenceTE nextDeadlineOccurrence
     private DifferenceTE firstWedExceptFirstMon = new DifferenceTE(everyFirstWed, everyFirstMon);
     // Every last Wednesday except June
     private DifferenceTE lastWedExceptJun = new DifferenceTE(everyLastWed, jun);
-    
 
     private IntersectionTE firstWedAndMarToJun = new IntersectionTE(everyFirstWed, marchToJune);
-    
+
     @Test
     public void includes_AprilFoolDay_everyLastSunOrJulyToDec_false() {
         assertFalse(everyLastSunOrJulyToDec.includes(aprilFoolDay));
@@ -115,11 +114,11 @@ public class SetTimeExpressionsTest {
     public void includes_firstMonInJun_lastWedExceptJun_false() {
         assertFalse(lastWedExceptJun.includes(firstMonInJun));
     }
-    
+
     // Testing for nextDeadlineOccurrence in UnionTE
     // need to test it is indeed the earliest next occurrence after DATE within the union of TEs
     // format of test is nextDeadlineOccurrence_DATE_UNIONTE_OUTCOME
-    
+
     @Test
     public void nextDeadlineOccurrence_firstThurs_firstWedOrFirstSun_firstSun() {
         assertTrue(firstWedOrFirstSun.nextDeadlineOccurrence(firstThurs).equals(firstSun));
@@ -135,21 +134,20 @@ public class SetTimeExpressionsTest {
         // in this particular weird example, nextFirstSun actually occur first
         assertTrue(firstWedOrFirstSun.nextDeadlineOccurrence(secondSun).equals(nextFirstSun));
     }
-    
 
     // ================== DifferenceTE Tests =======================
     // =============================================================
-    
+
     // Testing of nextDeadlineOccurrence in DifferenceTE
-    
+
     @Test
     public void nextDeadlineOccurrence_firstMon_firstWedExceptFirstMon_firstWedInApr() {
         // in this particular test case, firstWed of march is before firstMon of March
         assertTrue(firstWedExceptFirstMon.nextDeadlineOccurrence(firstMonInMar).equals(firstWedInApr));
     }
-    
+
     // Testing of nextDeadlineOccurrence in IntersectionTE
-    
+
     @Test
     public void nextDeadlineOccurrence_firstMon_firstWedAndMarToJun_firstWedInApr() {
         // in this particular case, the next occurrence of first wednesday and within march to june is first wed of april

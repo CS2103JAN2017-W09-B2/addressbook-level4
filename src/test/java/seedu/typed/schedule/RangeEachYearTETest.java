@@ -26,14 +26,14 @@ public class RangeEachYearTETest {
     private RangeEachYearTE april18toOct25 = new RangeEachYearTE(4, 10, 18, 25);
     private RangeEachYearTE jan21toApril17 = new RangeEachYearTE(1, 4, 21, 17);
     private RangeEachYearTE april19toOct25 = new RangeEachYearTE(4, 10, 19, 25);
-    
+
     private DateTime beforeApril18 = DateTime.getDateTime(2017, Month.APRIL, 17, 0, 0);
     private DateTime afterApril18 = DateTime.getDateTime(2017, Month.APRIL, 19, 0, 0);
     private DateTime afterOct25 = DateTime.getDateTime(2017, Month.OCTOBER, 26, 0, 0);
     private DateTime monthAfterOct25 = DateTime.getDateTime(2017, Month.NOVEMBER, 25, 0, 0);
     private DateTime onOct25 = DateTime.getDateTime(2017, Month.OCTOBER, 25, 0, 0);
     private DateTime beforeApril = DateTime.getDateTime(2017, Month.MARCH, 10, 0, 0);
-    
+
     private DateTime testDate18042017 = DateTime.getDateTime(2017, Month.APRIL, 18, 0, 0);
     private DateTime testDate18042018 = DateTime.getDateTime(2018, Month.APRIL, 18, 0, 0);
     private DateTime testDate20042017 = DateTime.getDateTime(2017, Month.APRIL, 20, 0, 0);
@@ -71,7 +71,7 @@ public class RangeEachYearTETest {
     public void includes_aprilFoolDay_April19toOct25_false() {
         assertFalse(april19toOct25.includes(goodFridayDay));
     }
-    
+
     // nextDeadlineOccurrence testing in this format
     // nextDeadlineOccurrence_CONDITIONS_RECURRENCE_OUTCOME
     @Test
