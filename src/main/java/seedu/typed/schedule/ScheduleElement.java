@@ -281,14 +281,11 @@ public class ScheduleElement implements TimeExpression {
     public ScheduleElement updateDate() {
         if (isDeadline()) {
             DateTime updatedDate = nextDeadlineOccurrence(this.date);
-            System.out.println(updatedDate.toString());
             return new ScheduleElement(updatedDate, this.startDate, this.endDate, this.te, this.rule);
         } else if (isEvent()) {
             int days = DateTime.duration(startDate, endDate);
             DateTime updatedStartDate = nextDeadlineOccurrence(this.endDate);
             DateTime updatedEndDate = updatedStartDate.nextDays(days);
-            System.out.println(updatedStartDate.toString());
-            System.out.println(updatedEndDate.toString());
             return new ScheduleElement(this.date, updatedStartDate, updatedEndDate, this.te, this.rule);
         } else {
             return null;
