@@ -150,7 +150,8 @@ public class SetTimeExpressionsTest {
 
     @Test
     public void nextDeadlineOccurrence_firstMon_firstWedAndMarToJun_firstWedInApr() {
-        // in this particular case, the next occurrence of first wednesday and within march to june is first wed of april
+        // in this particular case, the next occurrence of first wednesday and
+        // within march to june is first wed of april
         assertTrue(firstWedAndMarToJun.nextDeadlineOccurrence(firstMonInMar).equals(firstWedInApr));
     }
 }
