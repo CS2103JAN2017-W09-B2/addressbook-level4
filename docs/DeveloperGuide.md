@@ -110,7 +110,7 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram in [**`Logic`**](#logic-component) section below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.<br>
+For example, the `Logic` component (see the class diagram in [**`Logic`**](#logicComponent) section below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.<br>
 
 #### Events-Driven nature of the design
 
@@ -154,7 +154,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
+### <a name="logicComponent"></a>2.3. Logic component
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
