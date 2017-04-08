@@ -62,10 +62,6 @@ Format: `help` <br>
 
 *e.g. help* <br>
 
-#### <a name="specificHelp"></a>3.1.2. Help for Specific Command : `help COMMAND`
-
-Format: `help COMMAND` <br>
-> `help COMMAND` shows you a detailed explanation of the command's usage information.<br>
 
 ### 3.2. Adding a Task
 
@@ -103,9 +99,11 @@ Format: `add TITLE every FREQUENCY`
 > Note: Support for this has not been implemented. <br>
 > `add TITLE every FREQUENCY` adds an automatically recurring task according to the specified FREQUENCY. <br>
 > You may indicate either `day`, `month` or `year` when specifying FREQUENCY. <br>
-> The recurrence will be calculated beginning from the day you enter the task.
+> The recurrence will be calculated beginning from the day you enter the task unless otherwise specified.
 
-*e.g. add boss' birthday every year* <br>
+*e.g. add boss' birthday on 9th apr every year* <br>
+
+<img src="images/addRecurring.png" width="600"> <br>
 
 #### <a name="addTaskDuration"></a>3.2.5. Adding a Task with a Duration: `add TITLE from DATE to DATE`
 
@@ -125,6 +123,8 @@ Format: `add TITLE #TAG ..`
 
 *e.g. add plank for 2 minutes #fit* <br>
 *e.g. add write minutes by 25/12/2017 #work #urgent #bosssays* <br>
+
+<img src="images/addTags.png" width="600"> <br>
 
 
 ### 3.3. Listing Tasks
@@ -146,6 +146,9 @@ Format: `list TYPE`
 > Valid formats for TYPE include timed, untimed, done, undone and all.
 
 *e.g. list done* <br>
+
+<img src="images/listDone.png" width="600"> <br>
+
 
 ### 3.4. Editing a Task
 
@@ -407,7 +410,7 @@ Format: `exit`
 
 Command | Format |
 -------- | :-------- |
-`help` | [help](#help) <br> [help COMMAND](#specificHelp)|
+`help` | [help](#help) |
 `add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE on DATE](#addTitleByOn) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addTaskDuration) <br> [add TASK #TAG ..](#addTaskTag)|
 `list` | [list](#list) <br> [list TYPE](#listType)|
 `edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
