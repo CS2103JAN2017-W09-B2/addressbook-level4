@@ -20,6 +20,7 @@ public class ListCommandParser {
     private static final String DONE_STRING = "done";
     private static final String UNDONE_STRING = "undone";
     private static final String DEADLINE_STRING = "deadline";
+    private static final String UNTIMED_STRING = "untimed";
     //private static final String FLOATING_STRING = "floating";
 
     private static final Object DURATION_STRING = "duration";
@@ -37,6 +38,7 @@ public class ListCommandParser {
                         || lowered.equals(DONE_STRING)
                         || lowered.equals(DEADLINE_STRING)
                         || lowered.equals(UNDONE_STRING)
+                        || lowered.equals(UNTIMED_STRING)
                         || lowered.equals(DURATION_STRING)) {
                     type = lowered;
                 }

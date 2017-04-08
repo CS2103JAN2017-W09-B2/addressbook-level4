@@ -372,6 +372,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredTaskList(Expression expression) {
+        taskManager.sort();
         filteredTasks.setPredicate(expression::satisfies);
     }
 
@@ -458,7 +459,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowUntimed() {
         //todo
-        filteredTasks.setPredicate(null);
+        //filteredTasks.setPredicate(null);
+        //System.out.println("mmm");
+        //FXCollections.sort(filteredTasks, DateTimeComparator);
+        this.taskManager.sort();
     }
     //@@author
 
@@ -567,6 +571,4 @@ public class ModelManager extends ComponentManager implements Model {
             return task.getIsCompleted();
         }
     }
-    //@@author
-
 }

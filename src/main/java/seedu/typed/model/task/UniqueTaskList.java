@@ -1,5 +1,6 @@
 package seedu.typed.model.task;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -224,5 +225,18 @@ public class UniqueTaskList implements Iterable<Task> {
     public int size() {
         return this.internalList.size();
     }
+    
+    public void sort() {
+        FXCollections.sort(internalList, DateTimeComparator);
+    }
+
+    private static Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
+
+        @Override
+        public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+            return (o1.getSE().compareTo(o2.getSE()));
+        }
+
+    };
 
 }
