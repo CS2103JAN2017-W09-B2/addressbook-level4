@@ -6,7 +6,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.parser.DateTimeParser;
 import seedu.typed.model.task.DateTime;
 
-public class ScheduleElement implements TimeExpression {
+public class ScheduleElement implements TimeExpression, Comparable<ScheduleElement> {
 
     private final DateTime date; // deadlines, duedates...
     private final DateTime startDate; // start time of the event
@@ -433,6 +433,44 @@ public class ScheduleElement implements TimeExpression {
             return now.isAfter(endDate);
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public int compareTo(ScheduleElement other) {
+        // floating tasks are lowest
+        // otherwise sort deadlines using date and events using startdate
+        // either this or other are floating or both are floating
+        if (this.isFloating() && other.isFloating()) {
+            return 0;
+        }
+        if (this.isFloating() && !other.isFloating()) {
+            return 1;
+        }
+        if (!this.isFloating() && other.isFloating()) {
+            return -1;
+        }
+        // deadlines or events cases
+        DateTime thisDate;
+        DateTime otherDate;
+        if (this.isDeadline()) {
+            thisDate = this.date;
+        } else {
+            thisDate = this.startDate;
+        }
+        if (other.isDeadline()) {
+            otherDate = other.date;
+        } else {
+            otherDate = other.startDate;
+        }
+        if (thisDate.isAfter(otherDate)) {
+            // is date is later than the other date => show it later
+            // lower priority as we want to show deadlines due soon
+            return 1;
+        } else if (!thisDate.isAfter(otherDate)) {
+            return -1;
+        } else {
+            return 0;
         }
     }
 
