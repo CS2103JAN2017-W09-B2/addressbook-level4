@@ -225,7 +225,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public int size() {
         return this.internalList.size();
     }
-    
+
     public void sort() {
         FXCollections.sort(internalList, DateTimeComparator);
     }

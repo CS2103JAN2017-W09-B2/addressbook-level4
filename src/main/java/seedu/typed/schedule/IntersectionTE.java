@@ -25,13 +25,6 @@ public class IntersectionTE implements TimeExpression {
         this.elements.add(te1);
     }
 
-    public IntersectionTE(TimeExpression... te) {
-        this.elements = new ArrayList<>();
-        for (int i = 0; i < te.length; i++) {
-            this.elements.add(te[i]);
-        }
-    }
-
     public void addTE(TimeExpression te) {
         this.elements.add(te);
     }

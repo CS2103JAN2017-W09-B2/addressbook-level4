@@ -370,7 +370,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         return count;
     }
     //@@author
-    
+
     public void sort() {
         tasks.sort();
     }
