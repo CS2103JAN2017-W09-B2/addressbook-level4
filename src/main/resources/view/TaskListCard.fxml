@@ -23,7 +23,7 @@
 		</Text>
       <ImageView fx:id="stamp" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
       <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
-      <Text fx:id="date" layoutX="59.0" layoutY="106.501953125" strokeType="OUTSIDE" strokeWidth="0.0" text="date" AnchorPane.bottomAnchor="10.333984375" AnchorPane.leftAnchor="59.0">
+      <Text fx:id="date" layoutX="59.0" layoutY="106.501953125" strokeType="OUTSIDE" strokeWidth="0.0" text="date" AnchorPane.bottomAnchor="10.333984375" AnchorPane.leftAnchor="53.0">
          <font>
             <Font size="15.0" />
          </font>
