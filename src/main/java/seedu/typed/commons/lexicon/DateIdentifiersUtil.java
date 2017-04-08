@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public class DateIdentifiersUtil {
 
-    static String DATE_IDENTIFIER_BY = "by";
-    static String DATE_IDENTIFIER_ON = "on";
-    static String DATE_IDENTIFIER_FROM = "from";
-    static String DATE_IDENTIFIER_TO = "to";
-    static String DATE_IDENTIFIER_EVERY = "every";
+    public static final String DATE_IDENTIFIER_BY = "by";
+    public static final String DATE_IDENTIFIER_ON = "on";
+    public static final String DATE_IDENTIFIER_FROM = "from";
+    public static final String DATE_IDENTIFIER_TO = "to";
+    public static final String DATE_IDENTIFIER_EVERY = "every";
 
 
     public static ArrayList<String> getAllDateIdentifiers() {

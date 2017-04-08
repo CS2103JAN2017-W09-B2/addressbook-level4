@@ -49,7 +49,7 @@ public class TaskTest {
             name2 = new Name("Meet Honey");
             date = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
             //@@author A0141094M
-            notes = new Notes("");
+            notes = new Notes();
             from = DateTime.getDateTime(2017, Month.APRIL, 4, 0, 0);
             to = DateTime.getDateTime(2017, Month.APRIL, 7, 0, 0);
             //@@author
