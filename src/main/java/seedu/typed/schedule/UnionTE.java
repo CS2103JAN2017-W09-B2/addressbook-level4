@@ -54,9 +54,9 @@ public class UnionTE implements TimeExpression {
         // choose the earliest occurrence
         DateTime earliestSoFar = elements.get(0).nextDeadlineOccurrence(dateTime);
         DateTime current = earliestSoFar;
+        System.out.println(current.toString());
         for (int i = 1; i < elements.size(); i++) {
             current = elements.get(i).nextDeadlineOccurrence(dateTime);
-            System.out.println(earliestSoFar.toString());
             if (earliestSoFar.isAfter(current)) {
                 // current is not after earliest so far
                 earliestSoFar = current;
