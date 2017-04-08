@@ -125,6 +125,30 @@ public class DateTime {
             return true;
         }
     }
+    
+    public static int getLastDayOfMonth(int month) {
+        int numDays = 0;
+        int year = LocalDateTime.now().getYear();
+        switch (month) {
+        case 1: case 3: case 5:
+        case 7: case 8: case 10:
+        case 12:
+            numDays = 31;
+            break;
+        case 4: case 6:
+        case 9: case 11:
+            numDays = 30;
+            break;
+        case 2:
+            if (isLeapYear(year)) {
+                numDays = 29;
+            } else {
+                numDays = 28;
+            }
+            break;
+        }
+        return numDays;
+    }
 
     public DateTime tomorrow() {
         LocalDateTime nextDay = this.localDateTime.plusDays(LONG_ONE);
