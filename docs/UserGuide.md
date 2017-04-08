@@ -30,23 +30,17 @@ Before you get started with me, you should have Java version `1.8.0_60` or later
 
 1. Download the latest `typed.jar` from the **[releases](../../../releases)** tab.
 2. Copy the file to the folder you want to use as my new home.
-3. Press the Ctrl+Shift+T key to launch me. I will welcome you in just a few seconds.
-4. Walk through the tutorial to try out basic features, or experiment with **[3. Features](#3-features)** below.
+3. Experiment with **[3. Features](#3-features)** below and try out basic features.
 
 ## 2. Returning to *Typed*
 
-I am always happy to see you again! Forget the tutorial you saw the first time, and get ready for a productive day. <br>
+I am always happy to see you again!<br>
 
-1. You will be greeted with a view of today's focus. This view includes events happening today, tasks due today, as well as your overdue tasks. <br>
+1. You will be greeted with a view of default view, with all your undone tasks sorted by deadline. On the left, you will be able to see the overview of each individual type of tasks on hand: overdue, tasks with deadline, events and floating tasks.<br>
 
-    <img src="images/TodayScreen.png" width="600"> <br>
-    
-2. Let me know when you are done viewing today's focus by pressing <kbd>Enter</kbd>. 
-3. This brings you to the default view, with all your undone tasks sorted by priority.<br>
+    <img src="images/UiDefault.png" width="600"> <br>
 
-    <img src="images/DefaultUi.png" width="600"> <br>
-
-4. Start typing any command and press <kbd>Enter</kbd> to execute it. 
+2. Start typing any command and press <kbd>Enter</kbd> to execute it. 
 
 ## 3. Features
 
@@ -211,7 +205,6 @@ Format: `find KEYWORD ..`
 
 Format: `find #TAG ..`
 
-> Note: Support for this has not been implemented. <br>
 > `find #TAG ..` finds all your tasks tagged with #TAG. <br>
 > Fuzzy find is used to include similar words, e.g. `#work` will match `#werk`. <br>
 > The search is not case sensitive, e.g `#boss` will match `#Boss`. <br>
