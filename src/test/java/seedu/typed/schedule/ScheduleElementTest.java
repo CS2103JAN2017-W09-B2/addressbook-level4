@@ -11,12 +11,10 @@ import seedu.typed.model.task.DateTime;
 
 public class ScheduleElementTest {
 
-    DateTime christmas = DateTime.getDateTime(2017, Month.DECEMBER, 25, 0, 0);
-    DateTime firstApril = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
-    ScheduleElement testDeadline = new ScheduleElement(firstApril);
-    ScheduleElement testEvent = new ScheduleElement(firstApril, christmas);
-    DateTime apr3rd = DateTime.getDateTime(2017, Month.APRIL, 3, 0, 0);
-    DateTime apr5th = DateTime.getDateTime(2017, Month.APRIL, 5, 0, 0);
+    private DateTime christmas = DateTime.getDateTime(2017, Month.DECEMBER, 25, 0, 0);
+    private DateTime firstApril = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
+    private ScheduleElement testDeadline = new ScheduleElement(firstApril);
+    private ScheduleElement testEvent = new ScheduleElement(firstApril, christmas);
 
 
     @Test
