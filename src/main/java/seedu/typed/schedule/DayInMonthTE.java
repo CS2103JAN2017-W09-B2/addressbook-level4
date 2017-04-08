@@ -79,7 +79,7 @@ public class DayInMonthTE implements TimeExpression {
     }
 
     /*
-     * Represent every day in a week
+     * Represent every day in a given weekCount
      * @param weekCount represents which week is it (1st week, 2nd week)
      */
     public static UnionTE week(int weekCount) {
@@ -87,19 +87,6 @@ public class DayInMonthTE implements TimeExpression {
         for (int dayIndex = 1; dayIndex <= 7; dayIndex++) {
             DayInMonthTE te = new DayInMonthTE(weekCount, dayIndex);
             unionTE.addTE(te);
-        }
-        return unionTE;
-    }
-
-    /*
-     * Represent every day in a month
-     * It will match every single day in a week
-     */
-    public static TimeExpression month() {
-        UnionTE unionTE = new UnionTE();
-        for (int weekCount = -1; weekCount <= 4; weekCount++) {
-            TimeExpression week = DayInMonthTE.week(weekCount);
-            unionTE.addTE(week);
         }
         return unionTE;
     }
@@ -132,6 +119,13 @@ public class DayInMonthTE implements TimeExpression {
         int year = date.getYear();
         int weekDiff = this.weekCount - weekCount;
         int dayDiff = this.dayIndex - dayIndex;
+        if (month == 12) {
+            year++;
+            month = 1;
+        } else {
+            month++;
+        }
+        DateTime firstDayOfNextMonth = DateTime.getDateTime(year, month, 1, 0, 0);
         // find the minimum number of days to reach same dayIndex and weekCount
         // assumes this.weekCount is positive first
         if (weekDiff > 0) {
@@ -151,19 +145,26 @@ public class DayInMonthTE implements TimeExpression {
         } else if (weekDiff < 0) {
             // it's actually before us so need nex month
             // finish up the month and get the next deadline
-            if (month == 12) {
-                year++;
-                month = 1;
+            if (includes(firstDayOfNextMonth)) {
+                return firstDayOfNextMonth;
             } else {
-                month++;
+                return nextDeadlineOccurrence(firstDayOfNextMonth);
             }
-            DateTime firstDayOfNextMonth = DateTime.getDateTime(year, month, 1, 0, 0);
-            return nextDeadlineOccurrence(firstDayOfNextMonth);
         } else {
             // same week
+            // need to check if wednesday is really after monday BECAUSE 1 MARCH IS WEDNESDAY BUT 6 MARCH IS MONDAY :(
             if (dayDiff > 0) {
                 // next few days
-                return date.nextDays(dayDiff);
+                DateTime nextFewDays = date.nextDays(dayDiff);
+                if (!includes(nextFewDays)) {
+                    // first wednesday comes before first monday
+                    // first sunday comes before first monday also 
+                    // so need next month
+                    System.out.println(date.toString());
+                    return nextDeadlineOccurrence(firstDayOfNextMonth);
+                } else {
+                    return date.nextDays(dayDiff);
+                }
             } else if (dayDiff < 0) {
                 // next week - dayDiff
                 DateTime nextFewWeeks = date.nextWeek();
@@ -180,5 +181,4 @@ public class DayInMonthTE implements TimeExpression {
             }
         }
     }
-
 }
