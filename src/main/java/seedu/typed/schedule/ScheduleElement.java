@@ -308,7 +308,7 @@ public class ScheduleElement implements TimeExpression {
     }
 
     public String teToString() {
-        return "";
+        return this.rule;
     }
     //@@author
 
