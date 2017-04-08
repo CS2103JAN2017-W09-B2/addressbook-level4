@@ -1,4 +1,4 @@
-//@@author A0141094M
+//@@author A0141094M-unused
 
 package seedu.typed.logic.parser;
 
@@ -6,8 +6,6 @@ import java.util.Optional;
 
 /**
  * Validates format of parsed date. Empty dates are considered valid.
- * @author Peixuan
- *
  */
 
 public class DateValidator extends ArgumentValidator {
@@ -19,4 +17,4 @@ public class DateValidator extends ArgumentValidator {
     }
 
 }
-
+//@@author
