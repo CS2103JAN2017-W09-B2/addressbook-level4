@@ -1,6 +1,9 @@
 package seedu.typed.commons.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -79,8 +82,11 @@ public class FileUtil {
 
     //@@author A0139392X
     /*
-     * Assumes file exists and writes from src to dest. If dest file does not exist yet,
-     * it will be created.
+     * If src file exists, writes from src to dest.
+     * Will create src file if it does not exist yet.
+     * @throws IOException
+     *      if src file does not exist
+     *
      */
     public static void transferToFile(File src, File dest) throws IOException {
         writeToFile(dest, readFromFile(src));
@@ -174,13 +180,20 @@ public class FileUtil {
         if (str.contains(".")) {
             String beforeDot = str.substring(0, str.lastIndexOf("."));
             String afterDot = str.substring(str.lastIndexOf("."));
-            if (afterDot.equalsIgnoreCase("xml")) {
-                return beforeDot;
-            } else {
-                return (beforeDot + ".xml");
-            }
+            return appendXmlIfMissing(beforeDot, afterDot);
         } else {
             return (str + ".xml");
+        }
+    }
+
+    /*
+     * Appends .xml to the back if missing
+     */
+    private static String appendXmlIfMissing(String beforeDot, String afterDot) {
+        if (afterDot.equalsIgnoreCase("xml")) {
+            return beforeDot;
+        } else {
+            return (beforeDot + ".xml");
         }
     }
 
@@ -195,5 +208,31 @@ public class FileUtil {
             return false;
         }
     }
-  //@@author
+
+    /*
+     * Copies the file from toCopyFrom to fileToCreate.
+     *
+     * @param File toCopyFrom
+     *          A source file containing the contents that will be copied over.
+     *        File fileToCreate
+     *          A file that will hold the contents that are being copied over.
+     */
+    public static void writingFile(File toCopyFrom, File fileToCreate) throws FileNotFoundException, IOException {
+        fileToCreate.createNewFile();
+
+        FileInputStream fis = new FileInputStream(toCopyFrom);
+        FileOutputStream fos = new FileOutputStream(fileToCreate);
+
+        int length;
+
+        byte[] buffer = new byte[1024];
+
+        while ((length = fis.read(buffer)) != (-1)) {
+            fos.write(buffer, 0, length);
+        }
+
+        fis.close();
+        fos.close();
+    }
+    //@@author
 }

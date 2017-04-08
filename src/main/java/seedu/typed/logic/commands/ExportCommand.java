@@ -2,9 +2,6 @@
 package seedu.typed.logic.commands;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import seedu.typed.commons.util.FileUtil;
@@ -55,7 +52,7 @@ public class ExportCommand extends Command {
                     // Forms the directories if the directories are missing
                     fileToCreate.getParentFile().mkdirs();
 
-                    writingFile(toCopyFrom, fileToCreate);
+                    FileUtil.writingFile(toCopyFrom, fileToCreate);
 
                     return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
                 } else {
@@ -79,32 +76,6 @@ public class ExportCommand extends Command {
         default:
             throw new CommandException(MESSAGE_FILENAME_INVALID);
         }
-    }
-
-    /*
-     * Copies the file from toCopyFrom to fileToCreate.
-     *
-     * @param File toCopyFrom
-     *          A source file containing the contents that will be copied over.
-     *        File fileToCreate
-     *          A file that will hold the contents that are being copied over.
-     */
-    private void writingFile(File toCopyFrom, File fileToCreate) throws FileNotFoundException, IOException {
-        fileToCreate.createNewFile();
-
-        FileInputStream fis = new FileInputStream(toCopyFrom);
-        FileOutputStream fos = new FileOutputStream(fileToCreate);
-
-        int length;
-
-        byte[] buffer = new byte[1024];
-
-        while ((length = fis.read(buffer)) != (-1)) {
-            fos.write(buffer, 0, length);
-        }
-
-        fis.close();
-        fos.close();
     }
 }
 //@@author
