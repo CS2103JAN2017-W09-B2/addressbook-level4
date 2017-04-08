@@ -521,47 +521,6 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
         }
     }
 
-    public DateTime nextDeadlineOccurrence() {
-        return this.nextDeadlineOccurrence(DateTime.getToday());
-    }
-
-    @Override
-    public DateTime nextDeadlineOccurrence(DateTime dateTime) {
-        return this.te.nextDeadlineOccurrence(dateTime);
-    }
-
-    public boolean isRecurring() {
-        return rule != "";
-    }
-
-    public ScheduleElement updateDate() {
-        if (isDeadline()) {
-            DateTime updatedDate = nextDeadlineOccurrence(this.date);
-            System.out.println(updatedDate.toString());
-            return new ScheduleElement(updatedDate, this.startDate, this.endDate, this.te, this.rule);
-        } else if (isEvent()) {
-            int days = DateTime.duration(startDate, endDate);
-            DateTime updatedStartDate = nextDeadlineOccurrence(this.endDate);
-            DateTime updatedEndDate = updatedStartDate.nextDays(days);
-            System.out.println(updatedStartDate.toString());
-            System.out.println(updatedEndDate.toString());
-            return new ScheduleElement(this.date, updatedStartDate, updatedEndDate, this.te, this.rule);
-        } else {
-            return null;
-        }
-    }
-
-    public boolean isOverdue() {
-        DateTime now = new DateTime(LocalDateTime.now());
-        if (isDeadline()) {
-            return now.isAfter(date);
-        } else if (isEvent()) {
-            return now.isAfter(endDate);
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public int compareTo(ScheduleElement other) {
         // floating tasks are lowest
