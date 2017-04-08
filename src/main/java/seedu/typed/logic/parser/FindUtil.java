@@ -54,7 +54,8 @@ public class FindUtil {
         } else if (str.length() <= 4) {
             return computeMinEditDistance(str, query) <= MAX_EDIT_DISTANCE_STRICT;
         } else {
-            return computeMinEditDistance(str, query) <= MAX_EDIT_DISTANCE || isSubstringWordMatchIgnoreCase(str, query);
+            return computeMinEditDistance(str, query) <= MAX_EDIT_DISTANCE
+                    || isSubstringWordMatchIgnoreCase(str, query);
         }
     }
 
@@ -78,7 +79,8 @@ public class FindUtil {
         if (tag.length() <= 4) {
             return isExactWordMatchIgnoreCase(tag, query);
         } else {
-            return computeMinEditDistance(tag, query) <= MAX_EDIT_DISTANCE_STRICT || isSubstringWordMatchIgnoreCase(tag, query);
+            return computeMinEditDistance(tag, query) <= MAX_EDIT_DISTANCE_STRICT
+                    || isSubstringWordMatchIgnoreCase(tag, query);
         }
     }
 
