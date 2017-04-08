@@ -29,11 +29,11 @@ public class Notes {
         if (!trimmedNotes.isEmpty() && !isValidNotes(trimmedNotes)) {
             throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
         }
-        this.value = trimmedNotes;
+        value = trimmedNotes;
     }
 
     public Notes() {
-        this.value = "";
+        value = "";
     }
 
     /**
