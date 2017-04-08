@@ -17,7 +17,7 @@ public class StringUtilTest {
     public ExpectedException thrown = ExpectedException.none();
 
     // ---------------- Tests for isUnsignedPositiveInteger
-    // --------------------------------------
+    // -------------------------------------------------------------------
 
     @Test
     public void isUnsignedPositiveInteger() {
@@ -41,10 +41,8 @@ public class StringUtilTest {
         assertFalse(StringUtil.isUnsignedInteger("+1"));
 
         // EP: numbers with white space
-        assertFalse(StringUtil.isUnsignedInteger(" 10 ")); // Leading/trailing
-                                                           // spaces
-        assertFalse(StringUtil.isUnsignedInteger("1 0")); // Spaces in the
-                                                          // middle
+        assertFalse(StringUtil.isUnsignedInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isUnsignedInteger("1 0")); // Spaces in the middle
 
         // EP: valid numbers, should return true
         assertTrue(StringUtil.isUnsignedInteger("1")); // Boundary value
@@ -54,7 +52,7 @@ public class StringUtilTest {
     //@@author A0141094M
 
     // ---------------- Tests for isFuzzyKeywordSearchIgnoreCase
-    // --------------------------------------
+    // -----------------------------------------------------------------------
 
     /*
      * Invalid equivalence partitions for word: null, empty, multiple words

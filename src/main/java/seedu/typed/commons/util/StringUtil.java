@@ -12,6 +12,11 @@ import seedu.typed.model.tag.UniqueTagList;
  */
 public class StringUtil {
 
+    private static final String TAGS_CANNOT_BE_NULL = "Tags parameter cannot be null";
+    private static final String QUERY_SHOULD_BE_A_SINGLE_WORD_MESSAGE = "Query parameter should be a single word";
+    private static final String QUERY_CANNOT_BE_EMPTY_MESSAGE = "Query parameter cannot be empty";
+    private static final String SENTENCE_CANNOT_BE_NULL_MESSAGE = "Sentence parameter cannot be null";
+    private static final String QUERY_CANNOT_BE_NULL_MESSAGE = "Query parameter cannot be null";
     private static final String NEWLINE_DELIMITER = "\n";
     private static final String WHITESPACE_DELIMITER = "\\s+";
     private static final String UNSIGNED_INTEGER_VALIDATION_REGEX = "^0*[1-9]\\d*$";
@@ -20,30 +25,14 @@ public class StringUtil {
     /**
      * Returns true if the {@code sentence} contains the {@code query} or a similar {@code query}.
      * Ignores case, and both full word match or similar word match are allowed. <br>
-     * examples:
-     *
-     * <pre>
-     *       containsFuzzyWordIgnoreCase("ABc def", "abc") == true // a full word match
-     *       containsFuzzyWordIgnoreCase("ABc def", "DEF") == true // a full word match
-     *       containsFuzzyWordIgnoreCase("ABc def", "dfg") == true // a similar match
-     *       containsFuzzyWordIgnoreCase("ABc def", "zzz") == false //not a full word match and not a similar match
-     * </pre>
-     *
-     * @param sentence
-     *            cannot be null
-     * @param query
-     *            cannot be null, cannot be empty, must be a single word
+     * @param sentence cannot be null
+     * @param query cannot be null, cannot be empty, must be a single word
      */
     public static boolean isFuzzyKeywordSearchIgnoreCase(String sentence, String query) {
-        assert query != null : "Query parameter cannot be null";
-        assert sentence != null : "Sentence parameter cannot be null";
-
-        String trimmedQuery = query.trim();
-        assert !trimmedQuery.isEmpty() : "Query parameter cannot be empty";
-        assert trimmedQuery.split(WHITESPACE_DELIMITER).length == 1 : "Query parameter should be a single word";
-
+        assert sentence != null : SENTENCE_CANNOT_BE_NULL_MESSAGE;
+        assert query != null : QUERY_CANNOT_BE_NULL_MESSAGE;
+        String trimmedQuery = trimQuery(query);
         String[] wordsInSentence = sentence.split(WHITESPACE_DELIMITER);
-
         for (String word : wordsInSentence) {
             if (FindUtil.isFuzzyWordMatchIgnoreCase(word, trimmedQuery)) {
                 return true;
@@ -55,25 +44,30 @@ public class StringUtil {
     /**
      * Returns true if the {@code tags} contain the {@code query} or a similar {@code query}.
      * Ignores case, and both exact tag match or similar tag match are allowed.
-     * @param tags
-     *          cannot be null
-     * @param query
-     *          cannot be null, cannot be empty, must be a single word
-     * @return
+     * @param tags cannot be null
+     * @param query cannot be null, cannot be empty, must be a single word
      */
     public static boolean isFuzzyKeywordSearchIgnoreCase(UniqueTagList tags, String query) {
-        assert tags != null : "Tags parameter cannot be null";
-        assert query != null : "Query parameter cannot be null";
-        String trimmedQuery = query.trim();
-        assert !trimmedQuery.isEmpty() : "Query parameter cannot be empty";
-        assert trimmedQuery.split(WHITESPACE_DELIMITER).length == 1 : "Query parameter should be a single word";
+        assert tags != null : TAGS_CANNOT_BE_NULL;
+        assert query != null : QUERY_CANNOT_BE_NULL_MESSAGE;
+        String trimmedQuery = trimQuery(query);
         for (Tag tag : tags) {
             String tagWord = tag.getValue();
-            if (FindUtil.isFuzzyTagMatchIgnoreCase(query, tagWord)) {
+            if (FindUtil.isFuzzyTagMatchIgnoreCase(tagWord, trimmedQuery)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Trims {@code query} and checks that the trimmed query is non-empty and is a single word.
+     */
+    private static String trimQuery(String query) {
+        String trimmedQuery = query.trim();
+        assert !trimmedQuery.isEmpty() : QUERY_CANNOT_BE_EMPTY_MESSAGE;
+        assert trimmedQuery.split(WHITESPACE_DELIMITER).length == 1 : QUERY_SHOULD_BE_A_SINGLE_WORD_MESSAGE;
+        return trimmedQuery;
     }
     //@@author
 
