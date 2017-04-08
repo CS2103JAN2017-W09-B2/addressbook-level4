@@ -18,15 +18,16 @@ import seedu.typed.model.task.DateTime;
  * Currently assumes date contains only one date, not multiple.
  */
 public class DateTimeParser {
+
     private static final String MESSAGE_FOR_INVALID_DATE_FORMAT = "The date you entered is invalid or ambiguous. "
             + "Try again with more specific dates! ";
-    private static final String VALID_TIME_REGEX = "[0-2][0-3][0-5][0-9]";
-
 
     private static Parser natty = new Parser();
 
     /**
-     * Returns a date in its Date equivalent.
+     * Returns a {@code date} in its Date equivalent.
+     * @param {@code date} String containing a {@code date}, cannot be null
+     * @return a Date instance of the {@code date} parsed
      */
     public static Date getDateFromString(String date) throws IllegalValueException {
         assert date != null;
@@ -36,7 +37,7 @@ public class DateTimeParser {
 
     /**
      * Returns a date in its DateTime equivalent.
-     * @param ldt LocalDateTime
+     * @param {@code ldt} LocalDateTime representing a valid date and time, may be null
      * @return a DateTime instance of the LocalDateTime parsed
      */
     public static DateTime getDateTimeFromLocalDateTime(LocalDateTime ldt) {
@@ -44,8 +45,8 @@ public class DateTimeParser {
     }
 
     /**
-     * Returns a date in its DateTime equivalent.
-     * @param ldt LocalDateTime
+     * Returns a {@code date} in its DateTime equivalent.
+     * @param {@code date} String containing a {@code date}, may be null
      * @return a DateTime instance of the LocalDateTime parsed
      * @throws IllegalValueException
      */
@@ -54,10 +55,10 @@ public class DateTimeParser {
     }
 
     /**
-     * Returns a date in its LocalDateTime equivalent.
-     * @param date non-null String containing a date
-     * @return a LocalDateTime instance of the parsed date
-     * @throws IllegalValueException if date is in an invalid or ambiguous format
+     * Returns a {@code date} in its LocalDateTime equivalent.
+     * @param {@code date} String containing a {@code date}, may be null
+     * @return a LocalDateTime instance of the parsed {@code date}
+     * @throws IllegalValueException if {@code date} is in an invalid or ambiguous format
      */
     public static LocalDateTime getLocalDateTimeFromString(String date) throws IllegalValueException {
         if (date == null) {
@@ -68,19 +69,23 @@ public class DateTimeParser {
         return LocalDateTime.ofInstant(instant, getSystemDefaultTimeZone());
     }
 
+    /**
+     * Checks if natty parser inferred time in given {@code date}.
+     * @param {@code date} String containing a date, may be null
+     * @return true if time is inferred, false if time is specified in {@code date}
+     * @throws IllegalValueException if {@code date} is in an invalid or ambiguous format
+     */
     public static boolean isTimeInferred(String date) throws IllegalValueException {
-        System.out.println(getDateGroupFromString(date).isTimeInferred());
         return getDateGroupFromString(date).isTimeInferred();
     }
 
     /**
-     * Parses the specified date using natty.
-     * @param date non-null String containing a date
-     * @return the natty-parsed date
-     * @throws IllegalValueException if date is in an invalid or ambiguous format
+     * Parses the {@code date} using natty.
+     * @param {@code date} String containing a date, may be null
+     * @return DateGroup from the natty-parsed {@code date}
+     * @throws IllegalValueException if {@code date} is in an invalid or ambiguous format
      */
     public static DateGroup getDateGroupFromString(String date) throws IllegalValueException {
-        //assert date != null;
         List<DateGroup> dateGroup = natty.parse(date);
         if (!isEmptyDateGroup(dateGroup)) {
             return dateGroup.get(0);
@@ -89,32 +94,7 @@ public class DateTimeParser {
     }
 
     /**
-     * Wrapper class pre-natty parsing that checks if the raw date string contains a time.
-     * @param date
-     * @return
-     * @throws IllegalValueException
-     */
-    private static boolean containsTimeInString(String date) throws IllegalValueException {
-        boolean hasTimeInString = false;
-        String[] dateArgs = date.split(" ");
-        for (String arg : dateArgs) {
-            hasTimeInString |= isGroupOfFourDigits(arg);
-        }
-        return hasTimeInString;
-    }
-
-    private static boolean isGroupOfFourDigits(String arg) {
-        arg = arg.replaceAll(".", "").replaceAll(":", "");
-        return VALID_TIME_REGEX.matches(arg);
-    }
-
-    private static boolean isGroupOfThreeDigits(String arg) {
-        arg = "0" + arg.replaceAll(".", "").replaceAll(":", "");
-        return isGroupOfFourDigits(arg);
-    }
-
-    /**
-     * Checks if specified DateGroup is empty.
+     * Checks if the specified {@code DateGroup} is empty.
      */
     private static boolean isEmptyDateGroup(List<DateGroup> dateGroup) {
         return dateGroup.isEmpty() || dateGroup.get(0).getDates().isEmpty();
