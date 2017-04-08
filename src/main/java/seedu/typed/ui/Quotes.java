@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.commons.events.ui.NewResultAvailableEvent;
+import seedu.typed.commons.util.StringPairUtil;
 
 public class Quotes extends UiPart<Region> {
 
@@ -32,7 +33,7 @@ public class Quotes extends UiPart<Region> {
     @FXML
     private ImageView quotationHolder;
 
-    private ArrayList<StringPair> quotesDatabase;
+    private ArrayList<StringPairUtil> quotesDatabase;
 
     public Quotes(AnchorPane placeholder) {
         super(FXML);
@@ -43,7 +44,7 @@ public class Quotes extends UiPart<Region> {
 
         quotationHolder.setImage(quotationLogo);
 
-        quotesDatabase = new ArrayList<StringPair>();
+        quotesDatabase = new ArrayList<StringPairUtil>();
         initializeDatabase();
 
         int randomNumber = randomizedNumber();
@@ -105,8 +106,8 @@ public class Quotes extends UiPart<Region> {
         quotesDatabase.add(pair(seventh, seventhAuthor));
     }
 
-    private StringPair pair(String quote, String author) {
-        return new StringPair(quote, author);
+    private StringPairUtil pair(String quote, String author) {
+        return new StringPairUtil(quote, author);
     }
 }
 //@@author
