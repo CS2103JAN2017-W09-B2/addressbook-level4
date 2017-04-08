@@ -6,9 +6,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.parser.DateTimeParser;
 import seedu.typed.model.task.DateTime;
 
-<<<<<<< HEAD
 public class ScheduleElement implements TimeExpression, Comparable<ScheduleElement> {
-=======
 //@@author A0139379M
 /**
  * ScheduleElement is a class that handles time and recurrence
@@ -18,8 +16,6 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
  * The dates, timeexpression and rule are final. Guarantees immutable
  * @author YIM CHIA HUI
  */
-public class ScheduleElement implements TimeExpression {
->>>>>>> 3eea7f5879d0d06b30a13c6e2c4d45de91fad0b0
 
     private final DateTime date; // deadlines, duedates...
     private final DateTime startDate; // start time of the event
@@ -524,7 +520,6 @@ public class ScheduleElement implements TimeExpression {
             throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
         }
     }
-<<<<<<< HEAD
 
     public DateTime nextDeadlineOccurrence() {
         return this.nextDeadlineOccurrence(DateTime.getToday());
@@ -604,8 +599,4 @@ public class ScheduleElement implements TimeExpression {
             return 0;
         }
     }
-
-
-=======
->>>>>>> 3eea7f5879d0d06b30a13c6e2c4d45de91fad0b0
 }
