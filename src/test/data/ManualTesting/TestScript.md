@@ -26,7 +26,7 @@ Command to type | What should happen |
 ------- | :--------------
 `>> help` | Our user guide will open up in a new window.
 
-## Searching through Undone To-Dos: `find|query|search` command
+## Searching through _Typed_: `find|query|search` command
 
 To search through this list of tasks, you can use the `find` command:
 
@@ -36,7 +36,7 @@ Command to type | What should happen |
 `>> find #life` | Only tasks, completed or uncompleted, with tag of "life" will be showed. This is an exact find so tag of "lif" will not be showed.
 `>> find 2103 jeffrey` | All tasks containing or similar to either "2103" or "jeffrey" will appear. Currently it will be sorted based on the dates they are due.
 
-## Listing To-Dos: `list|filter|show|ls|display` command
+## Listing Tasks: `list|filter|show|ls|display` command
 
 To browse through the list of tasks based on what you need to see, you can use `list` command:
 
@@ -85,7 +85,7 @@ Command to type | What should happen |
 `>> delete 1 to 5` | The tasks with the indices of "1", "2", "3", "4" and "5" will be deleted. The rest of the tasks will be shifted accordingly. This will delete a range of tasks from start index 1 to end index 5.
 `>> delete all` | The tasks you see now will be deleted. It does not delete all of the tasks in _Typed_ but only the tasks you see on your current view.
 
-## Editing To-Dos: `edit TO DO` command
+## Editing Tasks: `edit TO DO` command
 
 Command to type | What should happen |
 ------- | :--------------
@@ -134,7 +134,7 @@ Command to type | What should happen |
 `>> redo 3` | The most recent 3 of these `undo` command would be reverted.
 `>> redo all` | The most recent of all these `undo` command would be reverted.
 
-## Clearing To-Do List: `clear` command
+## Clearing Task List: `clear` command
 `clear` command does a permanent delete of all the tasks in _Typed_ including completed tasks as well.
 
 Command to type | What should happen |
