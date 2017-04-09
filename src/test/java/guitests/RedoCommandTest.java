@@ -26,8 +26,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand("undo");
 
-        // assertRedoSuccess(expectedList);
-        assertTrue(true);
+        assertRedoSuccess(expectedList);
     }
 
     @Test
@@ -39,8 +38,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("delete 1");
         commandBox.runCommand("undo");
 
-        // assertRedoSuccess(expectedList);
-        assertTrue(true);
+        assertRedoSuccess(expectedList);
     }
 
     @Test
@@ -57,8 +55,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit " + taskManagerIndex + " " + detailsToEdit);
         commandBox.runCommand("undo");
 
-        // assertRedoSuccess(expectedList);
-        assertTrue(true);
+        assertRedoSuccess(expectedList);
     }
 
     @Test
@@ -94,8 +91,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
             throws IllegalArgumentException, IllegalValueException {
         TestTask[] expectedList = td.getTypicalTasks();
 
-        // assertRedoFailure(expectedList);
-        assertTrue(true);
+        assertRedoFailure(expectedList);
     }
 
     @Test
@@ -107,8 +103,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand(taskToAdd.getAddCommand());
 
-        // assertRedoFailure(expectedList);
-        assertTrue(true);
+        assertRedoFailure(expectedList);
     }
 
     private void assertRedoSuccess(TestTask[] expectedList)

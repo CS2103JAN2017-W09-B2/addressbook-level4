@@ -26,11 +26,10 @@ public class ScheduleElement implements TimeExpression {
     private final String BY_DISPLAY_IDENTIFIER = "By:";
     private final String FROM_DISPLAY_IDENTIFIER = "From:";
     private final String TO_DISPLAY_IDENTIFIER = "To:";
-
-    public static final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
-    public static final String FREQUENCY = "day|week|month|year";
-    public static final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
-
+    //@@author
+    private final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
+    private final String FREQUENCY = "day|week|month|year";
+    private final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
 
     // =========== ScheduleElement Constructors ====================
     // =============================================================
@@ -38,6 +37,7 @@ public class ScheduleElement implements TimeExpression {
     /**
      * Representation of a floating task
      */
+    //@@author A0141094M
     public ScheduleElement() {
         this.date = null;
         this.startDate = null;

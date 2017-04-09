@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +26,7 @@ public class Quotes extends UiPart<Region> {
     private AnchorPane mainPane;
 
     @FXML
-    private Text quote;
+    private Label quote;
 
     @FXML
     private Text author;

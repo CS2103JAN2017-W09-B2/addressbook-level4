@@ -11,6 +11,8 @@ import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
+
+    //@@author A0141094M
     public static Task[] getSampleTasks() {
         try {
             int taskNumber = 6;
@@ -24,18 +26,14 @@ public class SampleDataUtil {
                 DateTime.getDateTime(2017, Month.JANUARY, 20, 0, 0),
                 DateTime.getDateTime(2017, Month.JANUARY, 20, 0, 0),
                 DateTime.getDateTime(2017, Month.JANUARY, 20, 0, 0)};
-            //@@author A0141094M
             String[] notes = new String[] {"", "", "", "", "", ""};
-            //@@author
             String[] tags = new String[] {"friends", "colleagues", "neighbours", "family",
                 "classmates", "colleagues"};
             for (int i = 0; i < taskNumber; i++) {
                 tasks[i] = new TaskBuilder()
                         .setName(names[i])
-                        //@@author A0141094M
                         .setNotes(notes[i])
                         .setDeadline(dates[i])
-                        //@@author
                         .addTags(tags[i])
                         .build();
             }
@@ -44,6 +42,7 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
+    //@@author
 
     public static ReadOnlyTaskManager getSampleTaskManager() {
         try {

@@ -69,7 +69,6 @@ public class DateTimeParser {
     }
 
     public static boolean isTimeInferred(String date) throws IllegalValueException {
-        System.out.println(getDateGroupFromString(date).isTimeInferred());
         return getDateGroupFromString(date).isTimeInferred();
     }
 
