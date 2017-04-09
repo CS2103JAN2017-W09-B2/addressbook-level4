@@ -15,6 +15,7 @@
 	-fx-text-fill: #000000;
 	-fx-opacity: 0.9;
 }
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
