@@ -3,7 +3,7 @@ package seedu.typed.logic.commands;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import seedu.typed.commons.util.TripleUtil;
+import seedu.typed.commons.util.Triple;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.ReadOnlyTaskManager;
@@ -115,9 +115,9 @@ public class RedoCommand extends Command {
 
     @SuppressWarnings("unchecked")
     private void executeRedoCommand() throws CommandException {
-        Optional<TripleUtil<String, Integer, Object>> optionalTriple = session.popRedoStack();
+        Optional<Triple<String, Integer, Object>> optionalTriple = session.popRedoStack();
 
-        TripleUtil<String, Integer, Object> toPush = optionalTriple.get();
+        Triple<String, Integer, Object> toPush = optionalTriple.get();
         String command = toPush.getFirst();
         int index = toPush.getSecond();
         Object change = toPush.getThird();

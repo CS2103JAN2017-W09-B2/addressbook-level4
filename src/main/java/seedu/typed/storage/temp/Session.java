@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Stack;
 
-import seedu.typed.commons.util.TripleUtil;
+import seedu.typed.commons.util.Triple;
 import seedu.typed.logic.commands.util.HistoryUtil;
 import seedu.typed.logic.commands.util.UndoRedoUtil;
 
@@ -17,13 +17,13 @@ import seedu.typed.logic.commands.util.UndoRedoUtil;
 
 public class Session {
     private HistoryUtil history;
-    private Stack<TripleUtil<String, Integer, Object>> undoStack;
-    private Stack<TripleUtil<String, Integer, Object>> redoStack;
+    private Stack<Triple<String, Integer, Object>> undoStack;
+    private Stack<Triple<String, Integer, Object>> redoStack;
 
     public Session() {
         this.history = new HistoryUtil();
-        this.undoStack = new Stack<TripleUtil<String, Integer, Object>>();
-        this.redoStack = new Stack<TripleUtil<String, Integer, Object>>();
+        this.undoStack = new Stack<Triple<String, Integer, Object>>();
+        this.redoStack = new Stack<Triple<String, Integer, Object>>();
     }
 
     public void updateAllCommandsHistory(String command) {
@@ -53,11 +53,11 @@ public class Session {
         history.clear();
     }
 
-    public Stack<TripleUtil<String, Integer, Object>> getUndoStack() {
+    public Stack<Triple<String, Integer, Object>> getUndoStack() {
         return undoStack;
     }
 
-    public Stack<TripleUtil<String, Integer, Object>> getRedoStack() {
+    public Stack<Triple<String, Integer, Object>> getRedoStack() {
         return redoStack;
     }
 
@@ -65,11 +65,11 @@ public class Session {
         UndoRedoUtil.update(undoStack, redoStack, command, index, toChange);
     }
 
-    public Optional<TripleUtil<String, Integer, Object>> popUndoStack() {
+    public Optional<Triple<String, Integer, Object>> popUndoStack() {
         return UndoRedoUtil.pop(undoStack);
     }
 
-    public Optional<TripleUtil<String, Integer, Object>> popRedoStack() {
+    public Optional<Triple<String, Integer, Object>> popRedoStack() {
         return UndoRedoUtil.pop(redoStack);
     }
 }

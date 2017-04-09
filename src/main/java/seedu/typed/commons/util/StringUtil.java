@@ -12,11 +12,11 @@ import seedu.typed.model.tag.UniqueTagList;
  */
 public class StringUtil {
 
-    private static final String TAGS_CANNOT_BE_NULL = "Tags parameter cannot be null";
-    private static final String QUERY_SHOULD_BE_A_SINGLE_WORD_MESSAGE = "Query parameter should be a single word";
-    private static final String QUERY_CANNOT_BE_EMPTY_MESSAGE = "Query parameter cannot be empty";
-    private static final String SENTENCE_CANNOT_BE_NULL_MESSAGE = "Sentence parameter cannot be null";
-    private static final String QUERY_CANNOT_BE_NULL_MESSAGE = "Query parameter cannot be null";
+    private static final String TAGS_CANNOT_BE_NULL = "Tags parameter cannot be null!";
+    private static final String QUERY_SHOULD_BE_A_SINGLE_WORD_MESSAGE = "Query parameter should be a single word!";
+    private static final String QUERY_CANNOT_BE_EMPTY_MESSAGE = "Query parameter cannot be empty!";
+    private static final String SENTENCE_CANNOT_BE_NULL_MESSAGE = "Sentence parameter cannot be null!";
+    private static final String QUERY_CANNOT_BE_NULL_MESSAGE = "Query parameter cannot be null!";
     private static final String NEWLINE_DELIMITER = "\n";
     private static final String WHITESPACE_DELIMITER = "\\s+";
     private static final String UNSIGNED_INTEGER_VALIDATION_REGEX = "^0*[1-9]\\d*$";

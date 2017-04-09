@@ -231,7 +231,7 @@ public class UniqueTaskList implements Iterable<Task> {
         FXCollections.sort(internalList, DateTimeComparator);
     }
 
-    private static Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
+    private static final Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
 
         @Override
         public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {

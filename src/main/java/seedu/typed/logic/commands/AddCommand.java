@@ -7,7 +7,6 @@ import seedu.typed.commons.core.EventsCenter;
 import seedu.typed.commons.events.ui.JumpToListRequestEvent;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -21,19 +20,19 @@ import seedu.typed.schedule.ScheduleElement;
 public class AddCommand extends Command {
 
     //@@author A0141094M
-    public static final String ADD_COMMAND_WORD = "add";
-    public static final String CREATE_COMMAND_WORD = "create";
-    public static final String DO_COMMAND_WORD = "do";
-    public static final String NEW_COMMAND_WORD = "new";
+    public static final String COMMAND_WORD_ADD = "add";
+    public static final String COMMAND_WORD_CREATE = "create";
+    public static final String COMMAND_WORD_DO = "do";
+    public static final String COMMAND_WORD_NEW = "new";
     //@@author
 
-    public static final String MESSAGE_USAGE = ADD_COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [by DATE] [on DATE] [from DATE to DATE] [#TAG]...\n" + "Example: " + ADD_COMMAND_WORD
-            + " buy 5 broccolis by tmr #survival #grocery ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD_ADD + ": Adds a task to Typed. "
+            + "Parameters: NAME [by DATE] [on DATE] [from DATE [TIME] to DATE [TIME]] [#TAG]...\n"
+            + "Example: " + COMMAND_WORD_ADD
+            + " buy 5 broccolis by tomorrow #survival #grocery ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s added";
-    public static final String MESSAGE_FAILURE = "%1$s cannot be added";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_SUCCESS = "%1$s added!";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists on Typed!";
 
     private final Task toAdd;
 
@@ -57,11 +56,11 @@ public class AddCommand extends Command {
             se = new ScheduleElement();
         }
         this.toAdd = new TaskBuilder()
-                .setName(name)
-                .setNotes(notes)
-                .setSE(se)
-                .setTags(tags)
-                .build();
+                         .setName(name)
+                         .setNotes(notes)
+                         .setSE(se)
+                         .setTags(tags)
+                         .build();
     }
 
     public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
@@ -75,39 +74,44 @@ public class AddCommand extends Command {
             se = new ScheduleElement();
         }
         this.toAdd = new TaskBuilder()
-                .setName(name)
-                .setNotes(notes)
-                .setSE(se)
-                .setTags(tags)
-                .build();
+                         .setName(name)
+                         .setNotes(notes)
+                         .setSE(se)
+                         .setTags(tags)
+                         .build();
     }
     //@@author
 
+    //@@author A0143853A
+    /**
+     * Executes the add command by adding the task to be added
+     * and scrolling to the index of the newly added task.
+     */
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         assert session != null;
 
         try {
-            //@@author A0143853A
             model.addTask(toAdd);
-            int index = model.getIndexOfTask(toAdd);
-            model.getTaskManager().printData();
-            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, index, toAdd);
-            //@@author
 
-            //@@author A0139392X
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(0));
-            //@@author
+            int taskManagerIndex = model.getIndexOfTask(toAdd);
+            session.updateUndoRedoStacks(COMMAND_WORD_ADD, taskManagerIndex, toAdd);
+
+            int filteredListIndex = model.getFilteredTaskList().indexOf(toAdd);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredListIndex));
 
             String name = toAdd.getName().toString();
             return new CommandResult(String.format(MESSAGE_SUCCESS, name));
         } catch (DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException tnfe) {
+            assert false: "Task added must be found!";
+
             String name = toAdd.getName().toString();
             throw new CommandException(String.format(MESSAGE_SUCCESS, name));
         }
     }
+    //@@author
 
 }

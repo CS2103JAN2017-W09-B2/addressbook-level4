@@ -5,12 +5,12 @@ package seedu.typed.commons.util;
  * Stores three items.
  */
 
-public class TripleUtil<F, S, T> {
+public class Triple<F, S, T> {
     private F first;
     private S second;
     private T third;
 
-    public TripleUtil(F first, S second, T third) {
+    public Triple(F first, S second, T third) {
         this.first = first;
         this.second = second;
         this.third = third;
@@ -46,9 +46,9 @@ public class TripleUtil<F, S, T> {
             return true;
         }
 
-        if (obj instanceof TripleUtil) {
+        if (obj instanceof Triple) {
             @SuppressWarnings("unchecked")
-            TripleUtil<F, S, T> triple = (TripleUtil<F, S, T>) obj;
+            Triple<F, S, T> triple = (Triple<F, S, T>) obj;
             return first.equals(triple.getFirst())
                    && second.equals(triple.getSecond())
                    && third.equals(triple.getThird());

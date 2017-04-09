@@ -1,12 +1,12 @@
 package seedu.typed.commons.util;
 
 //@@author A0139392X
-public class StringPairUtil {
+public class StringPair {
 
     private String elem1;
     private String elem2;
 
-    public StringPairUtil(String elem1, String elem2) {
+    public StringPair(String elem1, String elem2) {
         this.setElem1(elem1);
         this.setElem2(elem2);
     }

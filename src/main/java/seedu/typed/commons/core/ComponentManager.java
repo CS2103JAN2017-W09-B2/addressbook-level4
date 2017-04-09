@@ -18,7 +18,7 @@ public abstract class ComponentManager {
 
     public ComponentManager(EventsCenter eventsCenter) {
         this.eventsCenter = eventsCenter;
-        eventsCenter.registerHandler(this);
+        this.eventsCenter.registerHandler(this);
     }
 
     protected void raise(BaseEvent event) {

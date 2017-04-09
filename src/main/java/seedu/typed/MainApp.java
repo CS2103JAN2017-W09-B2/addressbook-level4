@@ -39,7 +39,7 @@ import seedu.typed.ui.UiManager;
 public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    public static final Version VERSION = new Version(1, 0, 0, true);
+    public static final Version VERSION = new Version(0, 5, 0, false);
 
     protected Ui ui;
     protected Logic logic;
@@ -57,6 +57,7 @@ public class MainApp extends Application {
         session = new Session();
 
         config = initConfig(getApplicationParameter("config"));
+
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
@@ -119,12 +120,12 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
-                    + "Using default config properties");
+                    + "Using default config properties.");
             initializedConfig = new Config();
         }
 
         // Update config file in case it was missing to begin with or there are
-        // new/unused fields
+        // new or unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -137,27 +138,27 @@ public class MainApp extends Application {
         assert config != null;
 
         String prefsFilePath = config.getUserPrefsFilePath();
-        logger.info("Using prefs file : " + prefsFilePath);
+        logger.info("Using prefs file: " + prefsFilePath);
 
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
-        } catch (DataConversionException e) {
+        } catch (DataConversionException dce) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
-                    + "Using default user prefs");
+                    + "Using default user prefs.");
             initializedPrefs = new UserPrefs();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+        } catch (IOException ioe) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager.");
             initializedPrefs = new UserPrefs();
         }
 
         // Update prefs file in case it was missing to begin with or there are
-        // new/unused fields
+        // new or unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
-        } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        } catch (IOException ioe) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(ioe));
         }
 
         return initializedPrefs;
@@ -169,7 +170,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting TaskManager " + MainApp.VERSION);
+        logger.info("Starting Typed " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
@@ -189,7 +190,7 @@ public class MainApp extends Application {
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        this.stop();
+        stop();
     }
 
     public static void main(String[] args) {

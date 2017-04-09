@@ -14,7 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.typed.commons.events.model.TaskManagerChangedEvent;
 import seedu.typed.commons.events.ui.NewResultAvailableEvent;
-import seedu.typed.commons.util.StringPairUtil;
+import seedu.typed.commons.util.Pair;
 
 public class Quotes extends UiPart<Region> {
 
@@ -34,7 +34,7 @@ public class Quotes extends UiPart<Region> {
     @FXML
     private ImageView quotationHolder;
 
-    private ArrayList<StringPairUtil> quotesDatabase;
+    private ArrayList<Pair<String, String>> quotesDatabase;
 
     public Quotes(AnchorPane placeholder) {
         super(FXML);
@@ -45,13 +45,13 @@ public class Quotes extends UiPart<Region> {
 
         quotationHolder.setImage(quotationLogo);
 
-        quotesDatabase = new ArrayList<StringPairUtil>();
+        quotesDatabase = new ArrayList<Pair<String, String>>();
         initializeDatabase();
 
         int randomNumber = randomizedNumber();
 
-        quote.setText(quotesDatabase.get(randomNumber).getElem1());
-        author.setText("~ " + quotesDatabase.get(randomNumber).getElem2());
+        quote.setText(quotesDatabase.get(randomNumber).getFirst());
+        author.setText("~ " + quotesDatabase.get(randomNumber).getSecond());
 
         registerAsAnEventHandler(this);
     }
@@ -107,8 +107,8 @@ public class Quotes extends UiPart<Region> {
         quotesDatabase.add(pair(seventh, seventhAuthor));
     }
 
-    private StringPairUtil pair(String quote, String author) {
-        return new StringPairUtil(quote, author);
+    private Pair<String, String> pair(String quote, String author) {
+        return new Pair<String, String>(quote, author);
     }
 }
 //@@author

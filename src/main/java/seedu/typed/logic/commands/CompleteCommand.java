@@ -5,28 +5,30 @@ import java.util.ArrayList;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 
 public class CompleteCommand extends Command {
     //@@author A0141094M
-    public static final String FINISH_COMMAND_WORD = "finish";
-    public static final String MARK_COMMAND_WORD = "mark";
-    public static final String DONE_COMMAND_WORD = "done";
-    public static final String CHECK_COMMAND_WORD = "check";
-    public static final String COMPLETE_COMMAND_WORD = "complete";
-    public static final String END_COMMAND_WORD = "end";
+    public static final String COMMAND_WORD_FINISH = "finish";
+    public static final String COMMAND_WORD_MARK = "mark";
+    public static final String COMMAND_WORD_DONE = "done";
+    public static final String COMMAND_WORD_CHECK = "check";
+    public static final String COMMAND_WORD_COMPLETE = "complete";
+    public static final String COMMAND_WORD_END = "end";
+    //@@author
+
+    //@@author A0143853A
+    public static final String MESSAGE_USAGE = COMMAND_WORD_FINISH + ": Marks task(s) as completed "
+            + "by the index number(s) used in the last task listing.\n"
+            + "Parameters: INDEX or RANGE\n"
+            + "Example: " + COMMAND_WORD_FINISH + " 1 to 3";
     //@@author
 
     //@@author A0139379M
-    public static final String MESSAGE_USAGE = FINISH_COMMAND_WORD + ": Marks a Task as completed "
-            + "by the index number used in the last task listing.\n"
-            + "Example: " + FINISH_COMMAND_WORD + " 1";
-
     public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: %1$s";
     public static final String MESSAGE_COMPLETED_TASKS_SUCCESS = "Completed %1$d tasks!";
-    public static final String MESSAGE_NOT_COMPLETED = "Task does not exist in the task manager";
-    public static final String MESSAGE_ALREADY_COMPLETED = "This task is already completed in the task manager.";
+    public static final String MESSAGE_NOT_COMPLETED = "Task does not exist on Typed!";
+    public static final String MESSAGE_ALREADY_COMPLETED = "This task is already completed on Typed.";
 
     private int startIndex;
     private int endIndex;
@@ -59,8 +61,8 @@ public class CompleteCommand extends Command {
      * Default constructor assumes complete all tasks in filtered task list
      */
     public CompleteCommand() {
-        this.startIndex = -1;
-        this.endIndex = -1;
+        startIndex = -1;
+        endIndex = -1;
     }
 
     @Override
@@ -79,7 +81,7 @@ public class CompleteCommand extends Command {
 
         try {
             model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
-            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_COMPLETE, -1, listOfIndices);
+            session.updateUndoRedoStacks(COMMAND_WORD_COMPLETE, -1, listOfIndices);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }
