@@ -44,7 +44,7 @@ public class CompleteCommand extends Command {
     }
     /**
      * Assumes that startIndex <= endIndex
-     * 
+     *
      * @param startIndex the start index as seen on Typed
      * @param endIndex the end index as seen on Typed
      */

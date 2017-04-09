@@ -104,7 +104,7 @@ public class RangeEachYearTE implements TimeExpression {
         int day = date.getDay();
         int month = date.getMonth();
         int year = date.getYear();
-        
+
         DateTime dayAfterDate = date.nextDays(1);
         DateTime startDate = DateTime.getDateTime(year, startMonth, startDay, 0, 0);
         DateTime yearAfterStartDate = startDate.nextYear();
@@ -150,7 +150,7 @@ public class RangeEachYearTE implements TimeExpression {
                 return dayAfterDate;
             }
         }
-            /*if (day < startDay) {
+        /*if (day < startDay) {
                 // start month start date
                 return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
             } else if (day > endDay && endMonth == month) {

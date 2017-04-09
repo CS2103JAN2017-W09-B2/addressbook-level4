@@ -43,12 +43,7 @@ public class ScheduleElementTest {
     private ScheduleElement testEventRecurYearly;
 
     private ScheduleElement testEveryMonday;
-    private ScheduleElement testEveryTuesday;
-    private ScheduleElement testEveryWednesday;
-    private ScheduleElement testEveryThursday;
-    private ScheduleElement testEveryFriday;
     private ScheduleElement testEverySaturday;
-    private ScheduleElement testEverySunday;
 
     @Before
     public void setUp() {
@@ -68,12 +63,7 @@ public class ScheduleElementTest {
             testEventRecurYearly = new ScheduleElement(firstApril, secondApril, "year");
 
             testEveryMonday = new ScheduleElement("monday");
-            testEveryTuesday = new ScheduleElement("tuesday");
-            testEveryWednesday =new ScheduleElement("wednesday");
-            testEveryThursday = new ScheduleElement("thursday");
-            testEveryFriday = new ScheduleElement("friday");
             testEverySaturday = new ScheduleElement("saturday");
-            testEverySunday = new ScheduleElement("sunday");
 
         } catch (IllegalValueException e) {
             // no exception is expected
@@ -408,7 +398,7 @@ public class ScheduleElementTest {
     public void includes_testEverySaturday_secondApril_false() {
         assertFalse(testEverySaturday.includes(secondApril));
     }
-    
+
     /**
      * NextOccurrence format : nextOccurrence_SCHEDULEELEMENT_DATE_OUTCOME
      * As it is very time sensitive, every time we create a "every saturday"
