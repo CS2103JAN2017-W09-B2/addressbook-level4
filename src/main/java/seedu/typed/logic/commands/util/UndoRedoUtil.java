@@ -4,6 +4,17 @@ import java.util.Optional;
 import java.util.Stack;
 
 import seedu.typed.commons.util.Triple;
+import seedu.typed.logic.commands.AddCommand;
+import seedu.typed.logic.commands.ClearCommand;
+import seedu.typed.logic.commands.CompleteCommand;
+import seedu.typed.logic.commands.DeleteCommand;
+import seedu.typed.logic.commands.EditCommand;
+import seedu.typed.logic.commands.ExitCommand;
+import seedu.typed.logic.commands.FindCommand;
+import seedu.typed.logic.commands.HelpCommand;
+import seedu.typed.logic.commands.ListCommand;
+import seedu.typed.logic.commands.RedoCommand;
+import seedu.typed.logic.commands.UndoCommand;
 
 //@@author A0143853A
 /**
@@ -38,59 +49,55 @@ public class UndoRedoUtil {
                                                                                      toChange);
         switch(command) {
 
-        case CommandTypeUtil.TYPE_UNDO:
+        case UndoCommand.COMMAND_WORD_UNDO:
             toPush = (Triple<String, Integer, Object>) toChange;
             redoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_REDO:
+        case RedoCommand.COMMAND_WORD_REDO:
             toPush = (Triple<String, Integer, Object>) toChange;
             undoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_ADD_TASK:
+        case AddCommand.COMMAND_WORD_ADD:
             redoStack.clear();
-            toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_ADD_TASK));
+            toPush.setFirst(DeleteCommand.COMMAND_WORD_DELETE);
             undoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_DELETE_TASK:
+        case DeleteCommand.COMMAND_WORD_DELETE:
             redoStack.clear();
-            toPush.setFirst(CommandTypeUtil.opposite(CommandTypeUtil.TYPE_DELETE_TASK));
+            toPush.setFirst(AddCommand.COMMAND_WORD_ADD);
             undoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_EDIT_TASK:
-            redoStack.clear();
-            undoStack.push(toPush);
-            break;
-
-        case CommandTypeUtil.TYPE_CLEAR:
+        case EditCommand.COMMAND_WORD_EDIT:
             redoStack.clear();
             undoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_COMPLETE:
+        case ClearCommand.COMMAND_WORD_CLEAR:
             redoStack.clear();
+            toPush.setFirst(ClearCommand.COMMAND_WORD_UNCLEAR);
             undoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_FIND_TASK:
+        case CompleteCommand.COMMAND_WORD_COMPLETE:
+            redoStack.clear();
+            toPush.setFirst(CompleteCommand.COMMAND_WORD_UNCOMPLETE);
+            undoStack.push(toPush);
             break;
 
-        case CommandTypeUtil.TYPE_HELP:
+        case FindCommand.COMMAND_WORD_FIND:
             break;
 
-        case CommandTypeUtil.TYPE_HISTORY:
+        case HelpCommand.COMMAND_WORD_HELP:
             break;
 
-        case CommandTypeUtil.TYPE_LIST_TASK:
+        case ListCommand.COMMAND_WORD_LIST:
             break;
 
-        case CommandTypeUtil.TYPE_SELECT_TASK:
-            break;
-
-        case CommandTypeUtil.TYPE_EXIT:
+        case ExitCommand.COMMAND_WORD_EXIT:
             break;
 
         default:
@@ -98,5 +105,4 @@ public class UndoRedoUtil {
         }
     }
 
-   // TODO write function to check if object is instanceof TripleUtil
 }

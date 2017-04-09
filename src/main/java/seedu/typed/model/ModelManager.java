@@ -143,7 +143,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(int index, Task task) throws DuplicateTaskException {
         taskManager.addTask(index, task);
-        updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
@@ -198,7 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
             newTaskManager.copyDataExcludingIndices(taskManager, listOfIndices);
             taskManager.resetData(newTaskManager);
         }
-        // updateFilteredListToShowDefault();
+
         indicateTaskManagerChanged();
     }
 
@@ -304,7 +303,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         taskManager.updateTask(index, editedTask);
-        updateFilteredListToShowDefault();
+        taskManager.sort();
         indicateTaskManagerChanged();
     }
     //@@author
@@ -316,7 +315,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        updateFilteredListToShowDefault();
+        taskManager.sort();
         indicateTaskManagerChanged();
     }
 

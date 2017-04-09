@@ -12,7 +12,7 @@ import seedu.typed.logic.commands.exceptions.CommandException;
  * If given a path, save the file to that path.
  */
 public class ExportCommand extends Command {
-    public static final String EXPORT_COMMAND_WORD = "export";
+    public static final String COMMAND_WORD_EXPORT = "export";
 
     public static final String MESSAGE_SUCCESS = "Typed exported to %1$s";
 
@@ -20,9 +20,9 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_FILENAME_INVALID = "Filename invalid";
 
-    public static final String MESSAGE_USAGE = EXPORT_COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD_EXPORT
             + ": Exports the task manager to the location specified, or as a new name.\n"
-            + "Example: " + EXPORT_COMMAND_WORD + " C:/Users/(username)/Desktop/typed.xml";
+            + "Example: " + COMMAND_WORD_EXPORT + " C:/Users/(username)/Desktop/typed.xml";
 
     private final String fileName;
     private final int type;

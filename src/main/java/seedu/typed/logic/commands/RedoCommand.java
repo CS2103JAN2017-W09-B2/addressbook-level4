@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import seedu.typed.commons.util.Triple;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.ReadOnlyTaskManager;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -19,12 +18,12 @@ import seedu.typed.model.task.TaskBuilder;
  */
 public class RedoCommand extends Command {
 
-    public static final String REDO_COMMAND_WORD = "redo";
+    public static final String COMMAND_WORD_REDO = "redo";
 
-    public static final String MESSAGE_USAGE = REDO_COMMAND_WORD + ": Redoes the previous undone command "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_REDO + ": Redoes the previous undone command "
                                                + "in the current session.\n"
                                                + "Parameters: [NUMBER]\n"
-                                               + "Example: " + REDO_COMMAND_WORD + " 2";
+                                               + "Example: " + COMMAND_WORD_REDO + " 2";
     public static final String MESSAGE_SUCCESS = "Redone successfully!";
     public static final String MESSAGE_ALL_SUCCESS = "Redone all successfully!";
     public static final String MESSAGE_SINGLE_SUCCESS = "Redone successfully 1 command!";
@@ -33,6 +32,9 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SINGLE_PARTIAL_SUCCESS = "Redone successfully 1 command only!";
     public static final String MESSAGE_NO_COMMAND_TO_REDO = "There is no undo to redo!";
     public static final String MESSAGE_ERROR = "Cannot redo previous undo!";
+
+    private static final int ALL_NUM = -1;
+    private static final int INVALID_INDEX = -1;
 
     private int numberOfCmdsToRedo;
     private String type;
@@ -44,7 +46,7 @@ public class RedoCommand extends Command {
 
     public RedoCommand(int num) {
         numberOfCmdsToRedo = num;
-        if (num == -1) {
+        if (num == ALL_NUM) {
             type = "all";
         } else {
             type = "number";
@@ -57,7 +59,7 @@ public class RedoCommand extends Command {
 
         int maxNumberToRedo = session.getRedoStack().size();
 
-        if (numberOfCmdsToRedo == -1) {
+        if (numberOfCmdsToRedo == ALL_NUM) {
             numberOfCmdsToRedo = maxNumberToRedo;
         }
 
@@ -125,39 +127,41 @@ public class RedoCommand extends Command {
         try {
             switch(command) {
 
-            case CommandTypeUtil.TYPE_ADD_TASK:
+            case AddCommand.COMMAND_WORD_ADD:
                 model.addTask(index, (Task) change);
-                toPush.setFirst(CommandTypeUtil.TYPE_DELETE_TASK);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                toPush.setFirst(DeleteCommand.COMMAND_WORD_DELETE);
+                session.updateUndoRedoStacks(COMMAND_WORD_REDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_DELETE_TASK:
+            case DeleteCommand.COMMAND_WORD_DELETE:
                 TaskManager currTaskManager = new TaskManager(model.getTaskManager());
                 model.resetData((ReadOnlyTaskManager) change);
-                toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
+                toPush.setFirst(AddCommand.COMMAND_WORD_ADD);
                 toPush.setThird(currTaskManager);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateUndoRedoStacks(COMMAND_WORD_REDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_EDIT_TASK:
+            case EditCommand.COMMAND_WORD_EDIT:
                 Task currentTask = new TaskBuilder(model.getTaskAt(index)).build();
                 toPush.setThird(currentTask);
                 model.updateTaskForUndoRedo(index, (ReadOnlyTask) change);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateUndoRedoStacks(COMMAND_WORD_REDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_CLEAR:
+            case ClearCommand.COMMAND_WORD_CLEAR:
                 TaskManager currentTaskManager = new TaskManager();
                 currentTaskManager.copyData(model.getTaskManager());
                 model.resetData((ReadOnlyTaskManager) change);
+                toPush.setFirst(ClearCommand.COMMAND_WORD_UNCLEAR);
                 toPush.setThird(currentTaskManager);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                session.updateUndoRedoStacks(COMMAND_WORD_REDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_COMPLETE:
+            case CompleteCommand.COMMAND_WORD_COMPLETE:
                 ArrayList<Integer> listOfIndices = (ArrayList<Integer>) toPush.getThird();
                 model.completeTasksAtForRedo(listOfIndices);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_REDO, -1, toPush);
+                toPush.setFirst(CompleteCommand.COMMAND_WORD_UNCOMPLETE);
+                session.updateUndoRedoStacks(COMMAND_WORD_REDO, INVALID_INDEX, toPush);
                 break;
 
             default:

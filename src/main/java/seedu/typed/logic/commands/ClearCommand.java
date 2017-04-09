@@ -13,12 +13,14 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD_EMPTY = "empty";
     //@@author
     //@@author A0143853A
+    public static final String COMMAND_WORD_UNCLEAR = "unclear";
     public static final String MESSAGE_USAGE = COMMAND_WORD_CLEAR + ": Clears all tasks on Typed. "
             + "Parameters: NONE\n"
             + "Example: " + COMMAND_WORD_CLEAR;
 
     public static final String MESSAGE_SUCCESS = "Typed has been cleared!";
     public static final String MESSAGE_FAILURE = "Typed cannot be cleared!";
+
 
     @Override
     public CommandResult execute() throws CommandException {

@@ -9,7 +9,6 @@ import seedu.typed.commons.events.ui.JumpToListRequestEvent;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Name;
@@ -27,24 +26,24 @@ import seedu.typed.schedule.ScheduleElement;
 public class EditCommand extends Command {
 
     //@@author A0141094M
-    public static final String EDIT_COMMAND_WORD = "edit";
-    public static final String UDPATE_COMMAND_WORD = "update";
-    public static final String CHANGE_COMMAND_WORD = "change";
+    public static final String COMMAND_WORD_EDIT = "edit";
+    public static final String COMMAND_WORD_UPDATE = "update";
+    public static final String COMMAND_WORD_CHANGE = "change";
     //@@author
 
-    public static final String MESSAGE_USAGE = EDIT_COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_EDIT + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [by DATE] [#TAG]...\n"
-            + "Example: " + EDIT_COMMAND_WORD + " 1 buy 10 broccolis by 06/03/2017";
+            + "Parameters: INDEX [NAME] [by DATE] [#TAG]...\n"
+            + "Example: " + COMMAND_WORD_EDIT + " 1 buy 10 broccolis by 06/03/2017";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected Task.";
-    public static final String MESSAGE_EDIT_DATE_FAILURE = "You have entered invalid date formats.";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_EDIT_TASK_FAILURE = "Cannot edit selected task!";
+    public static final String MESSAGE_EDIT_DATE_FAILURE = "You have entered invalid date formats!";
+    public static final String MESSAGE_NOT_EDITED = "At least one edited field must be provided!";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists on Typed!";
 
-    private static final String MESSAGE_TASK_NOT_FOUND = "Task to edit not found.";
+    private static final String MESSAGE_TASK_NOT_FOUND = "Task to edit not found!";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -86,13 +85,13 @@ public class EditCommand extends Command {
 
         try {
             //@@author A0143853A
-            int index = model.getIndexOfTask(taskToEditCopy);
+            int taskManagerIndex = model.getIndexOfTask(taskToEditCopy);
             model.updateTask(filteredTaskListIndex, editedTask);
-            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, index, taskToEditCopy);
+            session.updateUndoRedoStacks(COMMAND_WORD_EDIT, taskManagerIndex, taskToEditCopy);
             //@@author
 
             //@@author A0139392X
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
             //@@author
 
         } catch (DuplicateTaskException dte) {
@@ -102,7 +101,7 @@ public class EditCommand extends Command {
         } catch (IllegalValueException ive) {
             throw new CommandException(MESSAGE_EDIT_TASK_FAILURE);
         }
-        model.updateFilteredListToShowAll();
+
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
@@ -136,6 +135,7 @@ public class EditCommand extends Command {
                 .setNotes(updatedNotes)
                 .setSE(updatedSe)
                 .setTags(updatedTags)
+                .isCompleted(taskToEdit.getIsCompleted())
                 .build();
     }
 

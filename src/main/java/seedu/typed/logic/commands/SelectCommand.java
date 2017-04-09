@@ -16,12 +16,12 @@ public class SelectCommand extends Command {
 
     public final int targetIndex;
 
-    public static final String SELECT_COMMAND_WORD = "select";
+    public static final String COMMAND_WORD_SELECT = "select";
 
-    public static final String MESSAGE_USAGE = SELECT_COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD_SELECT
             + ": Selects the task identified by the index number used in the last task listing. "
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + SELECT_COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD_SELECT + " 1";
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
 

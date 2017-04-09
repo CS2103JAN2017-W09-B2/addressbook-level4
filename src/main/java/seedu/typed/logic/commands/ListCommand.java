@@ -9,16 +9,16 @@ import seedu.typed.logic.commands.util.CommandTypeUtil;
  */
 public class ListCommand extends Command {
 
-    public static final String LIST_COMMAND_WORD = "list";
-    public static final String FILTER_COMMAND_WORD = "filter";
-    public static final String SHOW_COMMAND_WORD = "show";
-    public static final String LS_COMMAND_WORD = "ls";
-    public static final String DISPLAY_COMMAND_WORD = "display";
+    public static final String COMMAND_WORD_LIST = "list";
+    public static final String COMMAND_WORD_FILTER = "filter";
+    public static final String COMMAND_WORD_SHOW = "show";
+    public static final String COMMAND_WORD_LS = "ls";
+    public static final String COMMAND_WORD_DISPLAY = "display";
 
-    public static final String MESSAGE_USAGE = LIST_COMMAND_WORD + ": Lists all undone and upcoming tasks by default, "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_LIST + ": Lists all undone and upcoming tasks by default, "
             + "or by the CATEGORY if specified. Valid CATEGORYs are: untimed, deadline, duration, done, undone and all."
             + "Parameters: [CATEGORY] \n"
-            + "Example: " + LIST_COMMAND_WORD
+            + "Example: " + COMMAND_WORD_LIST
             + " deadline ";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";

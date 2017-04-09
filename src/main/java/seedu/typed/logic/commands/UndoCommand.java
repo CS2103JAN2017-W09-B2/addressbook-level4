@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import seedu.typed.commons.util.Triple;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.ReadOnlyTaskManager;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.ReadOnlyTask;
@@ -18,13 +17,13 @@ import seedu.typed.model.task.TaskBuilder;
  */
 public class UndoCommand extends Command {
 
-    public static final String UNDO_COMMAND_WORD = "undo";
+    public static final String COMMAND_WORD_UNDO = "undo";
 
-    public static final String MESSAGE_USAGE = UNDO_COMMAND_WORD + ": Undoes the previous "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_UNDO + ": Undoes the previous "
                                                + "add/delete/edit/clear command "
                                                + "in the current session.\n"
                                                + "Parameters: [NUMBER]\n"
-                                               + "Example: " + UNDO_COMMAND_WORD + " 2";
+                                               + "Example: " + COMMAND_WORD_UNDO + " 2";
     public static final String MESSAGE_SUCCESS = "Undone successfully!";
     public static final String MESSAGE_ALL_SUCCESS = "Undone all successfully!";
     public static final String MESSAGE_SINGLE_SUCCESS = "Undone successfully 1 command!";
@@ -33,6 +32,9 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SINGLE_PARTIAL_SUCCESS = "Redone successfully 1 command only!";
     public static final String MESSAGE_NO_PREV_COMMAND = "There is no command to undo!";
     public static final String MESSAGE_ERROR = "Cannot undo previous command!";
+
+    private static final int ALL_NUM = -1;
+    private static final int INVALID_INDEX = -1;
 
     private int numberOfCmdsToUndo;
     private String type;
@@ -45,7 +47,7 @@ public class UndoCommand extends Command {
 
     public UndoCommand(int num) {
         numberOfCmdsToUndo = num;
-        if (num == -1) {
+        if (num == ALL_NUM) {
             type = "all";
         } else {
             type = "number";
@@ -58,7 +60,7 @@ public class UndoCommand extends Command {
 
         int maxNumberToUndo = session.getUndoStack().size();
 
-        if (numberOfCmdsToUndo == -1) {
+        if (numberOfCmdsToUndo == ALL_NUM) {
             numberOfCmdsToUndo = maxNumberToUndo;
         }
 
@@ -125,37 +127,39 @@ public class UndoCommand extends Command {
         try {
             switch(command) {
 
-            case CommandTypeUtil.TYPE_ADD_TASK:
+            case AddCommand.COMMAND_WORD_ADD:
                 TaskManager currentTaskManager = new TaskManager(model.getTaskManager());
                 model.resetData((ReadOnlyTaskManager) change);
-                toPush.setFirst(CommandTypeUtil.TYPE_DELETE_TASK);
+                toPush.setFirst(DeleteCommand.COMMAND_WORD_DELETE);
                 toPush.setThird(currentTaskManager);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                session.updateUndoRedoStacks(COMMAND_WORD_UNDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_DELETE_TASK:
+            case DeleteCommand.COMMAND_WORD_DELETE:
                 model.deleteTaskAt(index);
-                toPush.setFirst(CommandTypeUtil.TYPE_ADD_TASK);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                toPush.setFirst(AddCommand.COMMAND_WORD_ADD);
+                session.updateUndoRedoStacks(COMMAND_WORD_UNDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_EDIT_TASK:
+            case EditCommand.COMMAND_WORD_EDIT:
                 Task currentTask = new TaskBuilder(model.getTaskAt(index)).build();
                 toPush.setThird(currentTask);
                 model.updateTaskForUndoRedo(index, (ReadOnlyTask) change);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                session.updateUndoRedoStacks(COMMAND_WORD_UNDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_CLEAR:
+            case ClearCommand.COMMAND_WORD_UNCLEAR:
                 model.resetData((ReadOnlyTaskManager) change);
+                toPush.setFirst(ClearCommand.COMMAND_WORD_CLEAR);
                 toPush.setThird(new TaskManager());
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                session.updateUndoRedoStacks(COMMAND_WORD_UNDO, INVALID_INDEX, toPush);
                 break;
 
-            case CommandTypeUtil.TYPE_COMPLETE:
+            case CompleteCommand.COMMAND_WORD_UNCOMPLETE:
                 ArrayList<Integer> listOfIndices = (ArrayList<Integer>) change;
                 model.uncompleteTasksAtForUndo(listOfIndices);
-                session.updateUndoRedoStacks(CommandTypeUtil.TYPE_UNDO, -1, toPush);
+                toPush.setFirst(CompleteCommand.COMMAND_WORD_COMPLETE);
+                session.updateUndoRedoStacks(COMMAND_WORD_UNDO, INVALID_INDEX, toPush);
                 break;
 
             default:

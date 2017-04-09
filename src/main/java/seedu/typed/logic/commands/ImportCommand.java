@@ -15,12 +15,12 @@ import seedu.typed.storage.XmlTaskManagerStorage;
  */
 public class ImportCommand extends Command {
 
-    public static final String IMPORT_COMMAND_WORD = "import";
-    public static final String LOAD_COMMAND_WORD = "load";
-    public static final String OPEN_COMMAND_WORD = "open";
+    public static final String COMMAND_WORD_IMPORT = "import";
+    public static final String COMMAND_WORD_LOAD = "load";
+    public static final String COMMAND_WORD_OPEN = "open";
 
-    public static final String MESSAGE_USAGE = IMPORT_COMMAND_WORD + ": Imports the given task manager.\n"
-            + "Example: " + IMPORT_COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD_IMPORT + ": Imports the given task manager.\n"
+            + "Example: " + COMMAND_WORD_IMPORT
             + " C:/Users/(username)/Desktop/typed.xml";
 
     public static final String MESSAGE_SUCCESS = "Task manager imported! \n" + "Source: %1$s";
@@ -36,13 +36,13 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(this.location);
+            XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(location);
 
-            ReadOnlyTaskManager toImport = xmlTaskManagerStorage.readTaskManager(this.location).get();
+            ReadOnlyTaskManager toImport = xmlTaskManagerStorage.readTaskManager(location).get();
 
             model.resetData(toImport);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.location));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, location));
 
         } catch (DataConversionException de) {
             return new CommandResult(MESSAGE_ERROR);

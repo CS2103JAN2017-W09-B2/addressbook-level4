@@ -11,11 +11,11 @@ import seedu.typed.logic.commands.exceptions.CommandException;
  */
 public class SaveCommand extends Command {
 
-    public static final String SAVE_COMMAND_WORD = "save";
+    public static final String COMMAND_WORD_SAVE = "save";
 
-    public static final String MESSAGE_USAGE = SAVE_COMMAND_WORD + ": Changes the storage location"
+    public static final String MESSAGE_USAGE = COMMAND_WORD_SAVE + ": Changes the storage location"
             + " and saves at the new location.\n"
-            + "Example: " + SAVE_COMMAND_WORD
+            + "Example: " + COMMAND_WORD_SAVE
             + " C:/Users/(username)/Desktop/typed.xml";
 
     public static final String MESSAGE_SUCCESS = "Storage location changed! \n" + "New location: %1$s";

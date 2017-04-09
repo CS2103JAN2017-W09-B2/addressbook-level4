@@ -29,6 +29,7 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_COMPLETED_TASKS_SUCCESS = "Completed %1$d tasks!";
     public static final String MESSAGE_NOT_COMPLETED = "Task does not exist on Typed!";
     public static final String MESSAGE_ALREADY_COMPLETED = "This task is already completed on Typed.";
+    public static final String COMMAND_WORD_UNCOMPLETE = "uncomplete";
 
     private int startIndex;
     private int endIndex;
@@ -79,18 +80,26 @@ public class CompleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
+
         try {
             model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
             session.updateUndoRedoStacks(COMMAND_WORD_COMPLETE, -1, listOfIndices);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }
-        return commandResultBasedOnIndicesList(listOfIndices);
+        return commandResultBasedOnListOfIndices(listOfIndices);
     }
     //@@author
 
     //@@author A0143853A
-    private CommandResult commandResultBasedOnIndicesList(ArrayList<Integer> list) {
+    /**
+     * Returns a CommandResult with a message depending on the number of tasks completed.
+     *
+     * @param list
+     *          used to store indices of tasks completed
+     * @return CommandResult
+     */
+    private CommandResult commandResultBasedOnListOfIndices(ArrayList<Integer> list) {
         if (list.size() == 1) {
             int taskIndex = list.get(0);
             String taskName = model.getTaskAt(taskIndex).getName().getValue();
