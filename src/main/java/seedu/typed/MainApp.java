@@ -83,14 +83,14 @@ public class MainApp extends Application {
         try {
             taskManagerOptional = storage.readTaskManager();
             if (!taskManagerOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskManager");
+                logger.info("Data file not found. Will be starting with a sample TaskManager.");
             }
             initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager.");
             initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager.");
             initialData = new TaskManager();
         }
 
