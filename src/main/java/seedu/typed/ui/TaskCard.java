@@ -9,7 +9,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.schedule.ScheduleElement;
 
@@ -26,7 +25,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Text date;
+    private Label id;
+    @FXML
+    private Label date;
     @FXML
     private FlowPane tags;
     @FXML
@@ -40,7 +41,8 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(displayedIndex + ". " + task.getName().getValue());
+        name.setText(task.getName().getValue());
+        id.setText(displayedIndex + ". ");
 
         ScheduleElement se = task.getSE();
         date.setText(se.toString() + se.teToString());

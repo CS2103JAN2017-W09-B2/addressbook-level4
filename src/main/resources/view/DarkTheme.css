@@ -9,11 +9,24 @@
     -fx-opacity: 0.9;
 }
 
+.label-date { 
+	-fx-font-size: 13px;
+	-fx-font-family: "Segoe UI Semibold";
+	-fx-text-fill: #000000;
+	-fx-opacity: 0.9;
+}
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
+}
+
+.label-index { 
+	-fx-font-size: 24px;
+	-fx-font-family: "Segoe UI Semibold";
+	-fx-text-fill: #010504;
+	-fx-opacity: 0.9;
 }
 
 .label-header {
