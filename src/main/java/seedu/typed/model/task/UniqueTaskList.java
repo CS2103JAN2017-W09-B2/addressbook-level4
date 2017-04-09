@@ -226,10 +226,17 @@ public class UniqueTaskList implements Iterable<Task> {
         return this.internalList.size();
     }
 
+    //@@author A0139379M
+    /**
+     * Sorts the internal list based on DateTimeComparator
+     */
     public void sort() {
         FXCollections.sort(internalList, DateTimeComparator);
     }
 
+    /**
+     * DateTimeComparator make use of Schedule Element comparable interface
+     */
     private static Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
 
         @Override
@@ -238,5 +245,6 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
     };
+    //@@author
 
 }

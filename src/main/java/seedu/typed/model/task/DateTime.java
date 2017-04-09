@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
  * one month or one year from now. The time zone and current time is based on User's
  * system default clock.
  * Guarantees: immutable;
+ *
  * @author YIM CHIA HUI
  *
  */
@@ -31,6 +32,12 @@ public class DateTime {
         this.localDateTime = null;
     }
 
+    /**
+     * Parses the dateTime in a certain date format
+     *
+     * @param date assumes to be in dd/mm/yyyy
+     * @return DateTime object which represents the date
+     */
     public static DateTime parseDateString(String date) {
         // assume in dd/mm/yyyy format
         String[] dates = date.trim().split("-");
@@ -45,6 +52,12 @@ public class DateTime {
         return localDateTime;
     }
 
+    /**
+     * Two DateTime object are equal if their internal time are the same
+     *
+     * @param other
+     * @return true if internally they mean the same time
+     */
     public boolean equals(DateTime other) {
         LocalDateTime self = this.localDateTime;
         LocalDateTime others = other.localDateTime;
@@ -65,27 +78,6 @@ public class DateTime {
         LocalDate today = LocalDate.now();
         return this.localDateTime.toLocalDate().equals(today);
     }
-
-    /*
-    public static DateTime getTomorrow() {
-        LocalDateTime nextDay = LocalDateTime.now(defaultClock).plusDays(LONG_ONE);
-        return new DateTime(nextDay);
-    }
-    public static DateTime getNextWeek() {
-        LocalDateTime nextWeek = LocalDateTime.now(defaultClock).plusWeeks(LONG_ONE);
-        return new DateTime(nextWeek);
-    }
-
-    public static DateTime getNextMonth() {
-        LocalDateTime nextMonth = LocalDateTime.now(defaultClock).plusMonths(LONG_ONE);
-        return new DateTime(nextMonth);
-    }
-
-    public static DateTime getNextYear() {
-        LocalDateTime nextYear = LocalDateTime.now(defaultClock).plusYears(LONG_ONE);
-        return new DateTime(nextYear);
-    }
-     */
 
     public int getHour() {
         return this.localDateTime.getHour();
@@ -118,6 +110,7 @@ public class DateTime {
     private int weekInMonth(int dayNumber) {
         return ((dayNumber - 1) / 7) + 1;
     }
+
     public static boolean isLeapYear(int year) {
         if (year % 4 != 0) {
             return false;
@@ -130,6 +123,12 @@ public class DateTime {
         }
     }
 
+    /**
+     * Literally last day of the month which takes in account
+     * of leap years
+     * @param month
+     * @return the last day of the month
+     */
     public static int getLastDayOfMonth(int month) {
         int numDays = 0;
         int year = LocalDateTime.now().getYear();

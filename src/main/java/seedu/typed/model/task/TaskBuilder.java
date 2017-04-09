@@ -15,6 +15,7 @@ import seedu.typed.schedule.ScheduleElement;
  * TaskBuilder helps to build a Task object by being flexible in
  * what attributes a Task object will initialise with. In particular,
  * only a name is compulsory whereas other attributes are optional.
+ *
  * @param ReadOnlyTask An existing task to modify
  * @return Task
  * @author YIM CHIA HUI

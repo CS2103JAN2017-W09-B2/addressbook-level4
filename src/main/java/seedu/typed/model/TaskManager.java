@@ -27,6 +27,7 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
  * .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
+
     private static final String DUPLICATE_TASK_WARNING = "Task Manager should not have duplicate tasks";
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -329,6 +330,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
     //@@author
 
+    //@@author A0139379M
+    // very crude way... but no time for abstraction now :(
     public int getNumberCompletedTasks() {
         int num = 0;
         int total = tasks.size();
@@ -413,6 +416,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         return count;
     }
 
+    public void sort() {
+        tasks.sort();
+    }
+
     //@@author A0139392X
     public int getNumberOverdue() {
         int size = tasks.size();
@@ -427,8 +434,4 @@ public class TaskManager implements ReadOnlyTaskManager {
         return count;
     }
     //@@author
-
-    public void sort() {
-        tasks.sort();
-    }
 }

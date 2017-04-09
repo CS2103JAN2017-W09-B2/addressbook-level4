@@ -468,6 +468,10 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
         }
     }
 
+    /**
+     * Earlier dates are ranked higher; deadlines uses date whereas events using startDate
+     * as comparison. Floating tasks are by default last.
+     */
     @Override
     public int compareTo(ScheduleElement other) {
         // floating tasks are lowest
