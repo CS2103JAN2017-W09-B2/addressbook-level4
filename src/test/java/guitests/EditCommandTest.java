@@ -32,12 +32,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 1;
         DateTime testDate = DateTime.getDateTime(2017, Month.MARCH, 19, 13, 0);
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName(taskManagerIndex +
-                ". Meet Bobby").withDeadline(testDate)
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Bobby").withDeadline(testDate)
                 .withNotes("").withTags("husband").build();
 
-        // assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
     //@@author
 
@@ -49,8 +47,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        // assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -61,8 +58,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        // assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -76,8 +72,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Belle").build();
 
-        // assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test

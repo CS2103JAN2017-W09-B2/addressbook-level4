@@ -160,7 +160,6 @@ public class DayInMonthTE implements TimeExpression {
                     // first wednesday comes before first monday
                     // first sunday comes before first monday also
                     // so need next month
-                    System.out.println(date.toString());
                     return nextDeadlineOccurrence(firstDayOfNextMonth);
                 } else {
                     return date.nextDays(dayDiff);

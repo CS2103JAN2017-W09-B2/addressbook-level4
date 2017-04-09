@@ -482,7 +482,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            System.out.println(task.getIsCompleted());
             return qualifier.run(task);
         }
 

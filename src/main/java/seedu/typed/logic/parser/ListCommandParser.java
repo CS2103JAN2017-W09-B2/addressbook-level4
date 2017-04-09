@@ -41,7 +41,6 @@ public class ListCommandParser {
                     type = lowered;
                 }
             }
-            System.out.println("passing to ListCommand " + type);
             return new ListCommand(type);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));

@@ -7,6 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.logic.commands.AddCommand;
 import seedu.typed.testutil.TestTask;
 import seedu.typed.testutil.TestUtil;
 
@@ -17,27 +18,22 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
-        //System.out.println(td.hoon.getAsText());
-        //assertAddSuccess(taskToAdd, currentList);
-        assertTrue(true);
+        assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         // add another task
         taskToAdd = td.ida;
-        // assertAddSuccess(taskToAdd, currentList);
-        assertTrue(true);
+        assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         // add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());
-        // assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        // assertTrue(taskListPanel.isListMatching(currentList));
-        assertTrue(true);
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         // add to empty list
         commandBox.runCommand("clear");
-        // assertAddSuccess(td.alice);
-        assertTrue(true);
+        assertAddSuccess(td.alice);
 
         // invalid command
         commandBox.runCommand("adds Meet Johnny");
