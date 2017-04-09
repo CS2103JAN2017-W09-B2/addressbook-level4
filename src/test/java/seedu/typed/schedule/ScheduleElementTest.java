@@ -11,7 +11,13 @@ import org.junit.Test;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.task.DateTime;
-
+//@@author A0139379M
+/**
+ * Unit Test for ScheduleElement
+ * which indirectly verifies the validity of Recurrence class
+ * @author YIM CHIA HUI
+ *
+ */
 public class ScheduleElementTest {
 
     private DateTime firstApril = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
@@ -414,27 +420,4 @@ public class ScheduleElementTest {
         DateTime date = testEveryMonday.getDate();
         assertTrue(testEveryMonday.nextOccurrence(date).equals(date.nextDays(7)));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
