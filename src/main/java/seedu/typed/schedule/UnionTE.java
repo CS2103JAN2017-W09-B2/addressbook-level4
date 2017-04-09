@@ -64,4 +64,17 @@ public class UnionTE implements TimeExpression {
         }
         return earliestSoFar;
     }
+
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public TimeExpression getDuplicate() {
+        UnionTE copy = new UnionTE();
+        for (int i = 0; i < elements.size(); i++) {
+            copy.addTE(elements.get(i).getDuplicate());
+        }
+        return copy;
+    }
+    //@@author
 }

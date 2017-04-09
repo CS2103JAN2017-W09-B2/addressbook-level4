@@ -220,4 +220,11 @@ public class DateTime {
     }
     //@@author
 
+    //@@author A0143853A
+    public DateTime getDuplicate() {
+        LocalDateTime copy = localDateTime.plusYears(0);
+        return new DateTime(copy);
+    }
+    //@@author
+
 }

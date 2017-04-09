@@ -173,5 +173,13 @@ public class RangeEachYearTE implements TimeExpression {
             return dayAfterDate;
         }
     }
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public TimeExpression getDuplicate() {
+        return new RangeEachYearTE(startMonth, endMonth, startDay, endDay);
+    }
+    //@@author
 
 }

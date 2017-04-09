@@ -22,7 +22,7 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = EXPORT_COMMAND_WORD
             + ": Exports the task manager to the location specified, or as a new name.\n"
-            + "Example: " + EXPORT_COMMAND_WORD + " C:\\Users\\(username)\\Desktop\\typed.xml";
+            + "Example: " + EXPORT_COMMAND_WORD + " C:/Users/(username)/Desktop/typed.xml";
 
     private final String fileName;
     private final int type;

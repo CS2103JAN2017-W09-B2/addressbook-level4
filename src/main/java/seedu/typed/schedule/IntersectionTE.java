@@ -52,4 +52,16 @@ public class IntersectionTE implements TimeExpression {
         }
         return current;
     }
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public TimeExpression getDuplicate() {
+        IntersectionTE copy = new IntersectionTE();
+        for (int i = 0; i < elements.size(); i++) {
+            copy.addTE(elements.get(i).getDuplicate());
+        }
+        return copy;
+    }
+    //@@author
 }

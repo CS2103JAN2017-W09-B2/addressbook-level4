@@ -46,4 +46,13 @@ public class DifferenceTE implements TimeExpression {
         }
         return nextOccurrence;
     }
+    //@@author
+    @Override
+    public TimeExpression getDuplicate() {
+        return new DifferenceTE(included.getDuplicate(),
+                                excluded.getDuplicate());
+    }
+    //@@author A0143853A
+
+    //@@author
 }

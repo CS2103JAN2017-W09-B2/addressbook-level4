@@ -1,14 +1,12 @@
 package seedu.typed.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.core.UnmodifiableObservableList;
-import seedu.typed.commons.util.Pair;
+import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
+import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.ReadOnlyTask;
-import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0143853A
@@ -59,7 +57,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = new ArrayList<Pair<Integer, Task>>();
+        // ArrayList<Pair<Integer, Task>> listOfIndicesAndTasks = new ArrayList<Pair<Integer, Task>>();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (startIndex == -1) {
@@ -71,22 +69,27 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
+        int numOfTasksToDelete = endIndex - startIndex + 1;
+        String firstTaskName = lastShownList.get(startIndex).getName().getValue();
+
         try {
-            model.deleteTasksAndStoreTasksAndIndices(startIndex, endIndex, listOfIndicesAndTasks);
-            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, -1, listOfIndicesAndTasks);
+            TaskManager oldTaskManager = new TaskManager(model.getTaskManager());
+            model.deleteTasks(startIndex, endIndex);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, -1, oldTaskManager);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task(s) cannot be missing";
+        } catch (IllegalValueException ive) {
+            assert false : "The task manager must be able to be reset";
         }
 
-        return commandResultBasedOnIndicesAndTasksList(listOfIndicesAndTasks);
+        return commandResultBasedOnNumberOfTasks(numOfTasksToDelete, firstTaskName);
     }
 
-    private CommandResult commandResultBasedOnIndicesAndTasksList(ArrayList<Pair<Integer, Task>> list) {
-        if (list.size() == 1) {
-            String taskName = list.get(0).getSecond().getName().getValue();
-            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskName));
+    private CommandResult commandResultBasedOnNumberOfTasks(int num, String firstTaskName) {
+        if (num == 1) {
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, firstTaskName));
         } else {
-            return new CommandResult(String.format(MESSAGE_DELETE_TASKS_SUCCESS, list.size()));
+            return new CommandResult(String.format(MESSAGE_DELETE_TASKS_SUCCESS, num));
         }
     }
 }

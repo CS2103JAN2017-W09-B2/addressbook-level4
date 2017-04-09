@@ -6,6 +6,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.parser.DateTimeParser;
 import seedu.typed.model.task.DateTime;
 
+public class ScheduleElement implements TimeExpression, Comparable<ScheduleElement> {
 //@@author A0139379M
 /**
  * ScheduleElement is a class that handles time and recurrence
@@ -18,20 +19,20 @@ import seedu.typed.model.task.DateTime;
  *
  * @author YIM CHIA HUI
  */
-public class ScheduleElement implements TimeExpression {
 
-    private final DateTime date; // deadlines, duedates...
+    private final DateTime date; // deadlines, due dates...
     private final DateTime startDate; // start time of the event
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence
-    private final String rule; // string representation of the recurrence rule
 
-    private final String BY_DISPLAY_IDENTIFIER = "By:";
-    private final String FROM_DISPLAY_IDENTIFIER = "From:";
-    private final String TO_DISPLAY_IDENTIFIER = "To:";
-    private final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
-    private final String FREQUENCY = "day|week|month|year";
-    private final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
+    private final String rule; // string representation of the recurrence rule
+    private static final String BY_DISPLAY_IDENTIFIER = "By:";
+    private static final String FROM_DISPLAY_IDENTIFIER = "From:";
+    private static final String TO_DISPLAY_IDENTIFIER = "To:";
+
+    public static final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
+    public static final String FREQUENCY = "day|week|month|year";
+    public static final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
 
     // =========== ScheduleElement Constructors ====================
     // =============================================================
@@ -466,4 +467,73 @@ public class ScheduleElement implements TimeExpression {
             throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
         }
     }
+
+    @Override
+    public int compareTo(ScheduleElement other) {
+        // floating tasks are lowest
+        // otherwise sort deadlines using date and events using startdate
+        // either this or other are floating or both are floating
+        if (this.isFloating() && other.isFloating()) {
+            return 0;
+        }
+        if (this.isFloating() && !other.isFloating()) {
+            return 1;
+        }
+        if (!this.isFloating() && other.isFloating()) {
+            return -1;
+        }
+        // deadlines or events cases
+        DateTime thisDate;
+        DateTime otherDate;
+        if (this.isDeadline()) {
+            thisDate = this.date;
+        } else {
+            thisDate = this.startDate;
+        }
+        if (other.isDeadline()) {
+            otherDate = other.date;
+        } else {
+            otherDate = other.startDate;
+        }
+        if (thisDate.isAfter(otherDate)) {
+            // is date is later than the other date => show it later
+            // lower priority as we want to show deadlines due soon
+            return 1;
+        } else if (!thisDate.isAfter(otherDate)) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public ScheduleElement getDuplicate() {
+        DateTime dateCopy = null;
+        DateTime startDateCopy = null;
+        DateTime endDateCopy = null;
+        TimeExpression teCopy = null;
+
+        if (date != null) {
+            dateCopy = date.getDuplicate();
+        }
+        if (startDate != null) {
+            startDateCopy = startDate.getDuplicate();
+        }
+        if (endDate != null) {
+            endDateCopy = endDate.getDuplicate();
+        }
+        if (te != null) {
+            teCopy = te.getDuplicate();
+        }
+
+        return new ScheduleElement(dateCopy,
+                                   startDateCopy,
+                                   endDateCopy,
+                                   teCopy,
+                                   rule);
+    }
+    //@@author
 }

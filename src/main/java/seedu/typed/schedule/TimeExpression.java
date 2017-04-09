@@ -31,5 +31,10 @@ public interface TimeExpression {
      * includes return true
      */
     public DateTime nextOccurrence(DateTime date);
+    //@@author
 
+
+    //@@author A0143853A
+    public TimeExpression getDuplicate();
+    //@@author
 }
