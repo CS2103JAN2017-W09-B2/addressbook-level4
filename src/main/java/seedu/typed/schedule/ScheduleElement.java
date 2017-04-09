@@ -9,8 +9,9 @@ import seedu.typed.model.task.DateTime;
 //@@author A0139379M
 /**
  * ScheduleElement is a class that handles time and recurrence
- * In particular, it would parse the recurrence and determine whether
- * it is recurring every week, or every monday based on the recurring rule.
+ * In particular, it would parse the recurrence rule and base on the
+ * initial dates input and determine whether it is recurring every week,
+ * or every monday based on the recurring rule.
  * It also help to determine whether a task is an event, deadline or floating task.
  * The dates, timeexpression and rule are final. Guarantees immutable
  * @author YIM CHIA HUI
