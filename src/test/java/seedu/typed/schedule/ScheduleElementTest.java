@@ -11,7 +11,13 @@ import org.junit.Test;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.task.DateTime;
-
+//@@author A0139379M
+/**
+ * Unit Test for ScheduleElement
+ * which indirectly verifies the validity of Recurrence class
+ * @author YIM CHIA HUI
+ *
+ */
 public class ScheduleElementTest {
 
     private DateTime firstApril = DateTime.getDateTime(2017, Month.APRIL, 1, 0, 0);
@@ -30,18 +36,21 @@ public class ScheduleElementTest {
 
     private ScheduleElement testFloating;
 
+    // Deadlines specifics
     private ScheduleElement testDeadline;
     private ScheduleElement testDeadlineRecurDaily;
     private ScheduleElement testDeadlineRecurWeekly;
     private ScheduleElement testDeadlineRecurMonthly;
     private ScheduleElement testDeadlineRecurYearly;
 
+    // Event Specifics
     private ScheduleElement testEvent;
     private ScheduleElement testEventRecurDaily;
     private ScheduleElement testEventRecurWeekly;
     private ScheduleElement testEventRecurMonthly;
     private ScheduleElement testEventRecurYearly;
 
+    // No specific dates input recurring tasks
     private ScheduleElement testEveryMonday;
     private ScheduleElement testEverySaturday;
 
@@ -380,22 +389,22 @@ public class ScheduleElementTest {
 
     /**
      * Testing for special add commands like add task every monday (with no date specified)
-     * includes test format : includes_SCHEDULEELEMENT_DATE_OUTCOME
+     * includes test format : includes_SCHEDULEELEMENTForDATE_OUTCOME
      */
     @Test
-    public void includes_testEveryMonday_firstApril_false() {
+    public void includes_testEveryMondayForFirstApril_false() {
         assertFalse(testEveryMonday.includes(firstApril));
     }
     @Test
-    public void includes_testEveryMonday_thirdApril_true() {
+    public void includes_testEveryMondayForThirdApril_true() {
         assertTrue(testEveryMonday.includes(thirdApril));
     }
     @Test
-    public void includes_testEverySaturday_firstApril_true() {
+    public void includes_testEverySaturdayForFirstApril_true() {
         assertTrue(testEverySaturday.includes(firstApril));
     }
     @Test
-    public void includes_testEverySaturday_secondApril_false() {
+    public void includes_testEverySaturdayForSecondApril_false() {
         assertFalse(testEverySaturday.includes(secondApril));
     }
 
@@ -414,27 +423,4 @@ public class ScheduleElementTest {
         DateTime date = testEveryMonday.getDate();
         assertTrue(testEveryMonday.nextOccurrence(date).equals(date.nextDays(7)));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

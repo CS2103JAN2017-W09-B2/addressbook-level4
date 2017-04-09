@@ -12,8 +12,10 @@ import seedu.typed.model.task.DateTime;
  * In particular, it would parse the recurrence rule and base on the
  * initial dates input and determine whether it is recurring every week,
  * or every monday based on the recurring rule.
+ *
  * It also help to determine whether a task is an event, deadline or floating task.
  * The dates, timeexpression and rule are final. Guarantees immutable
+ *
  * @author YIM CHIA HUI
  */
 public class ScheduleElement implements TimeExpression {
@@ -22,11 +24,11 @@ public class ScheduleElement implements TimeExpression {
     private final DateTime startDate; // start time of the event
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence
-    private final String rule;
+    private final String rule; // string representation of the recurrence rule
+
     private final String BY_DISPLAY_IDENTIFIER = "By:";
     private final String FROM_DISPLAY_IDENTIFIER = "From:";
     private final String TO_DISPLAY_IDENTIFIER = "To:";
-    //@@author
     private final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
     private final String FREQUENCY = "day|week|month|year";
     private final String MESSAGE_EVERY_CONSTRAINTS = "Recurring Rule is not supported.";
@@ -37,7 +39,6 @@ public class ScheduleElement implements TimeExpression {
     /**
      * Representation of a floating task
      */
-    //@@author A0141094M
     public ScheduleElement() {
         this.date = null;
         this.startDate = null;
@@ -48,6 +49,7 @@ public class ScheduleElement implements TimeExpression {
 
     /**
      * Constructor with everything to help in copying the values
+     *
      * @param date
      * @param startDate
      * @param endDate
@@ -64,7 +66,8 @@ public class ScheduleElement implements TimeExpression {
     }
 
     /**
-     * TODO Why do we need this? Editing to support changes from floating to other tasks?
+     * Constructor used for Edit Command
+     *
      * @param date
      * @param startDate
      * @param endDate
@@ -79,6 +82,7 @@ public class ScheduleElement implements TimeExpression {
 
     /**
      * Creates a ScheduleElement that supports recurring events
+     *
      * @param startDate
      * @param endDate
      * @param rule
@@ -89,25 +93,26 @@ public class ScheduleElement implements TimeExpression {
         this.date = null;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.te = this.parseEventRecurrenceRule(rule);
+        this.te = parseEventRecurrenceRule(rule);
         this.rule = rule;
     }
     /**
      * Creates a ScheduleElement that supports recurring deadlines
+     *
      * @param date
      * @param rule
      */
     public ScheduleElement(DateTime date, String rule) throws IllegalValueException {
-        System.out.println("huhhuhuh");
         this.date = date;
         this.startDate = null;
         this.endDate = null;
-        this.te = this.parseDeadlineRecurrenceRule(rule);
+        this.te = parseDeadlineRecurrenceRule(rule);
         this.rule = rule;
     }
 
     /**
      * Representation of a deadline in our TaskManager
+     *
      * @param date
      */
     public ScheduleElement(DateTime date) {
@@ -119,6 +124,7 @@ public class ScheduleElement implements TimeExpression {
     }
     /**
      * Representation of an event in our TaskManager..
+     *
      * @param startDate
      * @param endDate
      */
@@ -135,8 +141,9 @@ public class ScheduleElement implements TimeExpression {
      * but date is not specified
      * Example: Add task every monday
      * This will set task deadline starting from the upcoming monday
+     *
      * @param every
-     * @throws IllegalValueException
+     * @throws IllegalValueException if rule is not of the given format
      */
     public ScheduleElement(String rule) throws IllegalValueException {
         this.te = parseDeadlineRecurrenceRule(rule);
@@ -153,15 +160,19 @@ public class ScheduleElement implements TimeExpression {
     public DateTime getDate() {
         return date;
     }
+
     public DateTime getStartDate() {
         return startDate;
     }
+
     public DateTime getEndDate() {
         return endDate;
     }
+
     public TimeExpression getTe() {
         return te;
     }
+
     public String getRule() {
         return rule;
     }
@@ -173,6 +184,7 @@ public class ScheduleElement implements TimeExpression {
 
     /**
      * A helper method to help do a shallow copy of a schedule element
+     *
      * @param date
      * @param startDate
      * @param endDate
@@ -212,15 +224,18 @@ public class ScheduleElement implements TimeExpression {
     public boolean isEvent() {
         return date == null && startDate != null && endDate != null;
     }
+
     public boolean isDeadline() {
         return date != null && startDate == null && endDate == null;
     }
+
     public boolean isFloating() {
         return date == null && startDate == null && endDate == null;
     }
 
     /**
      * Checks whether a certain task is overdue
+     *
      * @return true if the current time is way after the end date of the event
      * or the deadline
      */
@@ -242,6 +257,10 @@ public class ScheduleElement implements TimeExpression {
         }
         return te.includes(date);
     }
+
+    /*
+     * Static Methods to help ease constructing Schedule Elements
+     */
 
     public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate) {
         return new ScheduleElement(startDate, endDate);
@@ -295,6 +314,7 @@ public class ScheduleElement implements TimeExpression {
     /**
      * Facilitates the update of the recurring tasks' dates
      * Specifically, it will get the next occurrence of the deadline/event
+     *
      * @return a scheduleElement with the updated date but with the same occurrence
      */
     public ScheduleElement updateDate() {
@@ -303,13 +323,14 @@ public class ScheduleElement implements TimeExpression {
             return new ScheduleElement(updatedDate, this.startDate, this.endDate, this.te, this.rule);
         } else if (isEvent() && isRecurring()) {
             int days = DateTime.duration(startDate, endDate);
-            DateTime updatedStartDate = nextOccurrence(this.endDate);
+            DateTime updatedStartDate = nextOccurrence(this.endDate); // find next occurrence after end date
             DateTime updatedEndDate = updatedStartDate.nextDays(days);
             int year = updatedEndDate.getYear();
             int month = updatedEndDate.getMonth();
             int day = updatedEndDate.getDay();
             int hr = endDate.getHour();
             int min = endDate.getMin();
+            // needs to correct the end date with the original end date hour and min
             DateTime correctEndDate = DateTime.getDateTime(year, month, day, hr, min);
             return new ScheduleElement(this.date, updatedStartDate, correctEndDate, this.te, this.rule);
         } else {
@@ -338,142 +359,47 @@ public class ScheduleElement implements TimeExpression {
     //@@author
 
     //@@author A0139379M
-    // =========== TimeExpression Utility ==========================
-    // =============================================================
-    // Private Utility methods to faciliate ease of recurrence creation
-    /*
-     * TimeExpression representing the recurring deadline/event everyday
-     * If event, assume that the duration of event is strictly less than a day
-     */
-    private TimeExpression recurEveryDay() {
-        return RangeEachYearTE.year();
-    }
-
-    /*
-     * TimeExpression representing the recurring deadline every week
-     * This is for flexible time expressions where recur every monday for example
-     * @param day of the week
-     */
-    private TimeExpression recurEveryWeek(int dayIndex) {
-        return DayInMonthTE.weekly(dayIndex);
-    }
 
     /**
-     * TimeExpression representing the recurring event every week
-     * Assumes that the event is less than a week to recur
-     * @param startDayIndex
-     * @param endDayIndex
-     * @return TimeExpression which recurs the duration of the event every week
-     */
-    private TimeExpression recurEveryWeek(int startDayIndex, int endDayIndex) {
-        UnionTE unionTE = new UnionTE();
-        for (int dayIndex = startDayIndex; dayIndex <= endDayIndex; dayIndex++) {
-            unionTE.addTE(DayInMonthTE.weekly(dayIndex));
-        }
-        return unionTE;
-    }
-    /**
-     * TimeExpression representing the recurring deadline every month
-     * where it is exactly the same day but 1 month later each occurrence
-     * @param day which day of the month
-     * @return TimeExpression that recurs a deadline exactly 1 month later
-     */
-    private TimeExpression recurEveryMonth(int day) {
-        UnionTE unionTE = new UnionTE();
-        for (int month = 1; month <= 12; month++) {
-            RangeEachYearTE dayInAMonth = new RangeEachYearTE(month, month, day, day);
-            unionTE.addTE(dayInAMonth);
-        }
-        return unionTE;
-    }
-
-    /**
-     * TimeExpression representing recurring events every month
-     * @param startDay of the event
-     * @param endDay of the event
-     * @return a TimeExpression that supports event that recurs every month
-     */
-    private TimeExpression recurEventEveryMonth(int startDay, int endDay) {
-        UnionTE unionTE = new UnionTE();
-        for (int month = 1; month <= 12; month++) {
-            unionTE.addTE(new RangeEachYearTE(month, month, startDay, endDay));
-        }
-        return unionTE;
-    }
-    /**
-     * TimeExpression representing the recurring deadline every year
-     * recurEveryYear(30, 04) next occurrence will be 30th April 1 year later
-     * @param day
-     * @param month
-     * @return TimeExpression that recurs on this exact day every year
-     */
-    private TimeExpression recurEveryYear(int day, int month) {
-        RangeEachYearTE dayInAMonth = new RangeEachYearTE(month, month, day, day);
-        return dayInAMonth;
-    }
-
-    /**
-     * TimeExpression that supports recurrence of event every year
-     * Assumes start month <= end month and in the event where
-     * start month = end month, start day <= end day
-     * @param startDay start day of the month
-     * @param startMonth starting month
-     * @param endDay end day of the month
-     * @param endMonth ending month
-     * @return TimeExpression that recurs this event duration every year
-     */
-    private TimeExpression recurEveryYear(int startDay, int startMonth, int endDay, int endMonth) {
-        return new RangeEachYearTE(startMonth, endMonth, startDay, endDay);
-    }
-
-    /**
-     * Parses the current rule into its respective recurring meaning
-     * This is for events recurrence only
+     * Interprets the recurrence rule in the context of events
+     *
+     * @param rule which specifies the recurrence rule
+     * @return TimeExpression fulfiling the Recurrence rule
+     * @throws IllegalValueException if the duration of the event exceeds recurrence
+     * like an event lasting 1 month can't recur every week.
      */
     private TimeExpression parseEventRecurrenceRule(String rule) throws IllegalValueException {
-        // need to assert the range of the event fits the frequency properly
-        // every day should work only for event of duration less than a day
-        System.out.println("parsing events");
         if (rule.matches(FREQUENCY)) {
             int duration = DateTime.duration(startDate, endDate);
             int startDayIndex = startDate.getDayIndex();
             int startDay = startDate.getDay();
             int startMonth = startDate.getMonth();
-
             int endDay = endDate.getDay();
             int endDayIndex = endDate.getDayIndex();
             int endMonth = endDate.getMonth();
 
             switch (rule.trim()) {
             case "day" :
-                //System.out.println("every day");
                 if (duration == 0) {
-                    // less than a day ok
-                    return this.recurEveryDay();
+                    return Recurrence.recurEveryDay();
                 } else {
                     throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
                 }
             case "week" :
-                //System.out.println("every week");
                 if (duration >= 0 && duration <= 7) {
-                    // within a week
-                    return this.recurEveryWeek(startDayIndex, endDayIndex);
+                    return Recurrence.recurEveryWeek(startDayIndex, endDayIndex);
                 } else {
                     throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
                 }
             case "month" :
-                //System.out.println("every month");
                 if (duration >= 0 && duration <= 30) {
-                    return this.recurEventEveryMonth(startDay, endDay);
+                    return Recurrence.recurEventEveryMonth(startDay, endDay);
                 } else {
                     throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
                 }
             case "year" :
-                //System.out.println("every year");
                 if (duration >= 0 && duration <= 365) {
-                    System.out.println(startDay);
-                    System.out.println(endDay);
-                    return this.recurEveryYear(startDay, startMonth, endDay, endMonth);
+                    return Recurrence.recurEveryYear(startDay, startMonth, endDay, endMonth);
                 } else {
                     throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
                 }
@@ -486,67 +412,50 @@ public class ScheduleElement implements TimeExpression {
     }
 
     /**
-     * Recurrence for deadlines only
-     * Rule should be either a frequency or a particular weekday
-     * Frequency refers to week, year, month etc
-     * Weekday refers to Monday, Tuesday etc
+     * Interprets the recurrence rule in the context of deadlines
+     * Flexible in parsing every monday, every tuesday etc.
+     *
      * @param rule which specifies the recurrence rule
      * @return TimeExpression which supports the recurrence rule
      */
     private TimeExpression parseDeadlineRecurrenceRule(String rule) throws IllegalValueException {
-        System.out.println("parsing deadline");
         if (rule.matches(FREQUENCY)) {
-            // handle frequency
+            // handle frequency like every day, month, week etc
             int dayIndex = date.getDayIndex();
             int day = date.getDay();
             int month = date.getMonth();
-            TimeExpression te;
             switch (rule.trim()) {
             case "day" :
-                te = recurEveryDay();
-                break;
+                return Recurrence.recurEveryDay();
             case "week" :
-                te = recurEveryWeek(dayIndex);
-                break;
+                return Recurrence.recurEveryWeek(dayIndex);
             case "month" :
-                te = recurEveryMonth(day);
-                break;
+                return Recurrence.recurEveryMonth(day);
             case "year" :
-                te = recurEveryYear(day, month);
-                break;
+                return Recurrence.recurEveryYear(day, month);
             default:
                 return null;
             }
-            return te;
         } else if (rule.matches(WEEKDAYS)) {
             // handle weekdays
-            int dayIndex;
             switch (rule.trim()) {
             case "monday" :
-                dayIndex = 1;
-                break;
+                return Recurrence.MONDAY;
             case "tuesday" :
-                dayIndex = 2;
-                break;
+                return Recurrence.TUESDAY;
             case "wednesday" :
-                dayIndex = 3;
-                break;
+                return Recurrence.WEDNESDAY;
             case "thursday" :
-                dayIndex = 4;
-                break;
+                return Recurrence.THURSDAY;
             case "friday" :
-                dayIndex = 5;
-                break;
+                return Recurrence.FRIDAY;
             case "saturday" :
-                dayIndex = 6;
-                break;
+                return Recurrence.SATURDAY;
             case "sunday" :
-                dayIndex = 7;
-                break;
+                return Recurrence.SUNDAY;
             default :
                 return null;
             }
-            return this.recurEveryWeek(dayIndex);
         } else {
             // invalid arguments
             throw new IllegalValueException(MESSAGE_EVERY_CONSTRAINTS);
