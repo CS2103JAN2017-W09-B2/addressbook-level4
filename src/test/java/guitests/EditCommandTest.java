@@ -36,8 +36,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 ". Meet Bobby").withDeadline(testDate)
                 .withNotes("").withTags("husband").build();
 
-        // assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
     //@@author
 
@@ -49,8 +48,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        // assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -61,8 +59,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        // assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -76,8 +73,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Belle").build();
 
-        // assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
-        assertTrue(true);
+        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
