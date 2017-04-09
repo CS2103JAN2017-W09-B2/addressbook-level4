@@ -74,7 +74,6 @@ public class DeleteCommand extends Command {
         try {
             model.deleteTasksAndStoreTasksAndIndices(startIndex, endIndex, listOfIndicesAndTasks);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_DELETE_TASK, -1, listOfIndicesAndTasks);
-            session.updateValidCommandsHistory(commandText);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task(s) cannot be missing";
         }

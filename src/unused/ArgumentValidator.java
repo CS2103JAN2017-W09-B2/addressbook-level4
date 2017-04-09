@@ -1,4 +1,4 @@
-//@@author A0141094M
+//@@author A0141094M-unused
 
 package seedu.typed.logic.parser;
 
@@ -7,14 +7,12 @@ import java.util.Optional;
 import seedu.typed.commons.exceptions.IllegalValueException;
 
 /**
- * @author Peixuan
- *
+ * Validates format of parsed arg.
  */
 
 public abstract class ArgumentValidator {
     protected String validationRegex;
     protected String messageConstraints;
-
     protected Optional<String> arg;
     protected String validArg;
 
@@ -44,4 +42,4 @@ public abstract class ArgumentValidator {
     }
 
 }
-
+//@@author

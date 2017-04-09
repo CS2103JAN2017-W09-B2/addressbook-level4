@@ -19,7 +19,6 @@ import seedu.typed.logic.commands.ExitCommand;
 import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.FindCommand;
 import seedu.typed.logic.commands.HelpCommand;
-import seedu.typed.logic.commands.HistoryCommand;
 import seedu.typed.logic.commands.ImportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
@@ -111,9 +110,6 @@ public class Parser {
         if (isRedoCommand(commandWord)) {
             return new RedoCommandParser().parse(args);
         }
-        if (isHistoryCommand(commandWord)) {
-            return new HistoryCommand();
-        }
         if (isExportCommand(commandWord)) {
             return new ExportCommandParser().parse(args);
         }
@@ -131,12 +127,6 @@ public class Parser {
 
     private boolean isExportCommand(String commandWord) {
         return commandWord.equals(ExportCommand.EXPORT_COMMAND_WORD);
-    }
-
-    private boolean isHistoryCommand(String commandWord) {
-        return commandWord.equals(HistoryCommand.HISTORY_COMMAND_WORD) ||
-                commandWord.equals(HistoryCommand.LOG_COMMAND_WORD) ||
-                commandWord.equals(HistoryCommand.HIST_COMMAND_WORD);
     }
 
     private boolean isRedoCommand(String commandWord) {
@@ -229,7 +219,8 @@ public class Parser {
         return input.isEmpty();
     }
 
-    private boolean isValidUserInput(Matcher matcher) { //include String input?
+    private boolean isValidUserInput(Matcher matcher) {
+        assert matcher != null;
         return matcher.matches();
     }
 

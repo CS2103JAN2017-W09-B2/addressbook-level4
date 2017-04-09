@@ -38,7 +38,6 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        session.updateAllCommandsHistory(commandText);
         Command command = parser.parseInput(commandText);
         command.setData(model, session, commandText, config, storage);
 

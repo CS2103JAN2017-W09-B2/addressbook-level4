@@ -1,4 +1,4 @@
-//@@author A0141094M
+//@@author A0141094M-unused
 
 package seedu.typed.logic.parser;
 
@@ -6,8 +6,6 @@ import java.util.Optional;
 
 /**
  * Validates format of parsed tag.
- * @author Peixuan
- *
  */
 
 public class TagValidator extends ArgumentValidator {
@@ -19,5 +17,4 @@ public class TagValidator extends ArgumentValidator {
     }
 
 }
-
-
+//@@author

@@ -89,7 +89,6 @@ public class EditCommand extends Command {
             int index = model.getIndexOfTask(taskToEditCopy);
             model.updateTask(filteredTaskListIndex, editedTask);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_EDIT_TASK, index, taskToEditCopy);
-            session.updateValidCommandsHistory(commandText);
             //@@author
 
             //@@author A0139392X
