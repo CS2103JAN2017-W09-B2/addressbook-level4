@@ -43,10 +43,10 @@ public class CompleteCommand extends Command {
         endIndex = startIndex;
     }
     /**
-     *
-     * @param startIndex
-     * @param endIndex
      * Assumes that startIndex <= endIndex
+     *
+     * @param startIndex the start index as seen on Typed
+     * @param endIndex the end index as seen on Typed
      */
     public CompleteCommand(int startIndex, int endIndex) {
         assert startIndex > 0;
@@ -80,7 +80,6 @@ public class CompleteCommand extends Command {
         try {
             model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_COMPLETE, -1, listOfIndices);
-            session.updateValidCommandsHistory(commandText);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }

@@ -29,7 +29,6 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_CLEAR, -1, oldTaskManager);
-        session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

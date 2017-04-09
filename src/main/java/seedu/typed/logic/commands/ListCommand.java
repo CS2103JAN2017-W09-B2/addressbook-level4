@@ -33,7 +33,6 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredTaskList(type);
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_LIST_TASK, -1, null);
-        session.updateValidCommandsHistory(commandText);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

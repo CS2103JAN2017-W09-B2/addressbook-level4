@@ -26,18 +26,6 @@ public class Session {
         this.redoStack = new Stack<TripleUtil<String, Integer, Object>>();
     }
 
-    public Stack<TripleUtil<String, Integer, Object>> getUndoStack() {
-        return undoStack;
-    }
-
-    public Stack<TripleUtil<String, Integer, Object>> getRedoStack() {
-        return redoStack;
-    }
-
-    public void updateUndoRedoStacks(String command, Integer index, Object toChange) {
-        UndoRedoUtil.update(undoStack, redoStack, command, index, toChange);
-    }
-
     public void updateAllCommandsHistory(String command) {
         history.addCommand(command);
     }
@@ -61,6 +49,21 @@ public class Session {
     public void listValidCommandsHistory() {
         history.listValidCommands();
     }
+    public void clearHistory() {
+        history.clear();
+    }
+
+    public Stack<TripleUtil<String, Integer, Object>> getUndoStack() {
+        return undoStack;
+    }
+
+    public Stack<TripleUtil<String, Integer, Object>> getRedoStack() {
+        return redoStack;
+    }
+
+    public void updateUndoRedoStacks(String command, Integer index, Object toChange) {
+        UndoRedoUtil.update(undoStack, redoStack, command, index, toChange);
+    }
 
     public Optional<TripleUtil<String, Integer, Object>> popUndoStack() {
         return UndoRedoUtil.pop(undoStack);
@@ -68,9 +71,5 @@ public class Session {
 
     public Optional<TripleUtil<String, Integer, Object>> popRedoStack() {
         return UndoRedoUtil.pop(redoStack);
-    }
-
-    public void clearHistory() {
-        history.clear();
     }
 }

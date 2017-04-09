@@ -34,7 +34,6 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords, tagKeywords);
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_FIND_TASK, -1, null);
-        session.updateValidCommandsHistory(commandText);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

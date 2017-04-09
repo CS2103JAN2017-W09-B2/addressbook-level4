@@ -363,7 +363,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         int count = 0;
         for (int i = 0; i < size; i++) {
             Task task = tasks.getTaskAt(i);
-            if (task.isOverdue()) {
+            if (task.isOverdue() && !task.getIsCompleted()) {
+                // if task is overdue and not completed
                 count++;
             }
         }

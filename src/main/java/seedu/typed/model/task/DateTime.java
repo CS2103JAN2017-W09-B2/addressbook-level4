@@ -87,6 +87,13 @@ public class DateTime {
     }
      */
 
+    public int getHour() {
+        return this.localDateTime.getHour();
+    }
+
+    public int getMin() {
+        return this.localDateTime.getMinute();
+    }
     public int getDayIndex() {
         return this.localDateTime.getDayOfWeek().getValue();
     }

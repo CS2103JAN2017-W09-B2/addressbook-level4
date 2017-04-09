@@ -49,14 +49,14 @@ public class UnionTE implements TimeExpression {
     }
 
     @Override
-    public DateTime nextDeadlineOccurrence(DateTime dateTime) {
+    public DateTime nextOccurrence(DateTime dateTime) {
         // returns the next occurrence of either of the time expression
         // choose the earliest occurrence
-        DateTime earliestSoFar = elements.get(0).nextDeadlineOccurrence(dateTime);
+        DateTime earliestSoFar = elements.get(0).nextOccurrence(dateTime);
         DateTime current = earliestSoFar;
         System.out.println(current.toString());
         for (int i = 1; i < elements.size(); i++) {
-            current = elements.get(i).nextDeadlineOccurrence(dateTime);
+            current = elements.get(i).nextOccurrence(dateTime);
             if (earliestSoFar.isAfter(current)) {
                 // current is not after earliest so far
                 earliestSoFar = current;

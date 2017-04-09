@@ -1,4 +1,4 @@
-//@@author A0141094M
+//@@author A0141094M-unused
 
 package seedu.typed.logic.parser;
 
@@ -6,8 +6,6 @@ import java.util.Optional;
 
 /**
  * Validates format of parsed name.
- * @author Peixuan
- *
  */
 
 public class NameValidator extends ArgumentValidator {
@@ -21,5 +19,5 @@ public class NameValidator extends ArgumentValidator {
     }
 
 }
-
+//@@author
 

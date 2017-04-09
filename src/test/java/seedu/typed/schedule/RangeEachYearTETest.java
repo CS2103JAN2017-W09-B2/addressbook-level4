@@ -38,64 +38,66 @@ public class RangeEachYearTETest {
     private DateTime testDate18042018 = DateTime.getDateTime(2018, Month.APRIL, 18, 0, 0);
     private DateTime testDate20042017 = DateTime.getDateTime(2017, Month.APRIL, 20, 0, 0);
 
+    // Test format: includes_<DATE>In<TimeExpression>_OUTCOME
     @Test
-    public void includes_christmasDay_julyToDec_true() {
+    public void includes_christmasDayInjulyToDec_true() {
         assertTrue(julyToDec.includes(christmasDay));
     }
     @Test
-    public void includes_aprilFoolDay_marchToJune_true() {
+    public void includes_aprilFoolDayInmarchToJune_true() {
         assertTrue(marchToJune.includes(aprilFoolDay));
     }
     @Test
-    public void includes_christmasDay_marchToJune_false() {
+    public void includes_christmasDayInmarchToJune_false() {
         assertFalse(marchToJune.includes(christmasDay));
     }
     @Test
-    public void includes_goodFridayDay_Jan_false() {
+    public void includes_goodFridayDayInJan_false() {
         assertFalse(jan.includes(goodFridayDay));
     }
     @Test
-    public void includes_happyNewYear_Jan_true() {
+    public void includes_happyNewYearInJan_true() {
         assertTrue(jan.includes(happyNewYear));
     }
     // Test for Boundary cases
     @Test
-    public void includes_aprilFoolDay_April18toOct25_true() {
+    public void includes_aprilFoolDayInApril18toOct25_true() {
         assertTrue(april18toOct25.includes(goodFridayDay));
     }
     @Test
-    public void includes_aprilFoolDay_Jan21toApril17_false() {
+    public void includes_aprilFoolDayInJan21toApril17_false() {
         assertFalse(jan21toApril17.includes(goodFridayDay));
     }
     @Test
-    public void includes_aprilFoolDay_April19toOct25_false() {
+    public void includes_aprilFoolDayInApril19toOct25_false() {
         assertFalse(april19toOct25.includes(goodFridayDay));
     }
 
     // nextDeadlineOccurrence testing in this format
-    // nextDeadlineOccurrence_CONDITIONS_RECURRENCE_OUTCOME
+    // nextDeadlineOccurrence_CONDITIONS_OUTCOME
+    // Testing using fixed Recurring event april18toOct25
     @Test
-    public void nextDeadlineOccurrence_beforeOccurrence_Occurrence_OccurrenceStartDate() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(beforeApril).equals(testDate18042017));
+    public void nextDeadlineOccurrence_beforeOccurrence_OccurrenceStartDate() {
+        assertTrue(april18toOct25.nextOccurrence(beforeApril).equals(testDate18042017));
     }
     @Test
-    public void nextDeadlineOccurrence_AfterOccurrence_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(afterOct25).equals(testDate18042018));
+    public void nextDeadlineOccurrence_AfterOccurrence_OccurrenceStartDateNextYear() {
+        assertTrue(april18toOct25.nextOccurrence(afterOct25).equals(testDate18042018));
     }
     @Test
-    public void nextDeadlineOccurrence_AfterOccurrenceNextMonth_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(monthAfterOct25).equals(testDate18042018));
+    public void nextDeadlineOccurrence_AfterOccurrenceNextMonth_OccurrenceStartDateNextYear() {
+        assertTrue(april18toOct25.nextOccurrence(monthAfterOct25).equals(testDate18042018));
     }
     @Test
-    public void nextDeadlineOccurrence_WithinOccurrenceBeforeStartDay_Occurrence_OccurrenceStartDate() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(beforeApril18).equals(testDate18042017));
+    public void nextDeadlineOccurrence_WithinOccurrenceBeforeStartDay_OccurrenceStartDate() {
+        assertTrue(april18toOct25.nextOccurrence(beforeApril18).equals(testDate18042017));
     }
     @Test
-    public void nextDeadlineOccurrence_WithinOccurrenceAfterStartDay_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(afterApril18).equals(testDate20042017));
+    public void nextDeadlineOccurrence_WithinOccurrenceAfterStartDay_OccurrenceStartDateNextYear() {
+        assertTrue(april18toOct25.nextOccurrence(afterApril18).equals(testDate20042017));
     }
     @Test
-    public void nextDeadlineOccurrence_WithinOccurrenceEndDay_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(onOct25).equals(testDate18042018));
+    public void nextDeadlineOccurrence_WithinOccurrenceEndDay_OccurrenceStartDateNextYear() {
+        assertTrue(april18toOct25.nextOccurrence(onOct25).equals(testDate18042018));
     }
 }

@@ -2,7 +2,7 @@ package seedu.typed.logic.commands.util;
 
 import java.util.ArrayList;
 
-//@@author A0143853A
+//@@author A0143853A-unused
 /**
  * Provides a data structure for "history" in Session class.
  *
