@@ -140,15 +140,15 @@ public class ScheduleElement implements TimeExpression {
      * Representation of a deadline when only recurrence is specified
      * but date is not specified
      * Example: Add task every monday
-     * This will set task deadline starting from the upcoming monday
+     * This is used in conjunction with makeDeadline
      *
-     * @param every
+     * @param rule specifies the recurrence rule
      * @throws IllegalValueException if rule is not of the given format
      */
     public ScheduleElement(String rule) throws IllegalValueException {
+        this.date = DateTime.getToday();
         this.te = parseDeadlineRecurrenceRule(rule);
         this.rule = rule;
-        this.date = nextOccurrence(DateTime.getToday());
         this.startDate = null;
         this.endDate = null;
     }
@@ -268,6 +268,11 @@ public class ScheduleElement implements TimeExpression {
 
     public static ScheduleElement makeDeadline(DateTime date) {
         return new ScheduleElement(date);
+    }
+
+    // Constructing schedule elements where date is not specified
+    public static ScheduleElement makeDeadline(String rule) throws IllegalValueException {
+        return (new ScheduleElement(rule)).updateDate();
     }
 
     public static ScheduleElement makeFloating() {
