@@ -21,7 +21,7 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = IMPORT_COMMAND_WORD + ": Imports the given task manager.\n"
             + "Example: " + IMPORT_COMMAND_WORD
-            + " C:\\Users\\(username)\\Desktop\\typed.xml";
+            + " C:/Users/(username)/Desktop/typed.xml";
 
     public static final String MESSAGE_SUCCESS = "Task manager imported! \n" + "Source: %1$s";
     public static final String MESSAGE_ERROR = "Did you specify the location correctly?\n"
