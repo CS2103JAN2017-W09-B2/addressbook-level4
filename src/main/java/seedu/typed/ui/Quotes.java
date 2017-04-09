@@ -50,8 +50,8 @@ public class Quotes extends UiPart<Region> {
 
         int randomNumber = randomizedNumber();
 
-        quote.setText(quotesDatabase.get(3).getElem1());
-        author.setText("~ " + quotesDatabase.get(3).getElem2());
+        quote.setText(quotesDatabase.get(randomNumber).getElem1());
+        author.setText("~ " + quotesDatabase.get(randomNumber).getElem2());
 
         registerAsAnEventHandler(this);
     }
