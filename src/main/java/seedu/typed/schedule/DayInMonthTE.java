@@ -180,19 +180,7 @@ public class DayInMonthTE implements TimeExpression {
         // find the minimum number of days to reach same dayIndex and weekCount
         // assumes this.weekCount is positive first
         if (weekDiff > 0) {
-            // it's next few weeks...
-            if (dayDiff > 0) {
-                // next few weeks + few days
-                DateTime nextFewWeeks = date.nextWeeks(weekDiff);
-                return nextFewWeeks.nextDays(dayDiff);
-            } else if (dayDiff < 0) {
-                // next few weeks - 1 week + few days
-                DateTime nextFewWeeks = date.nextWeeks(weekDiff);
-                return nextFewWeeks.nextDays(dayDiff);
-            } else {
-                // same dayIndex so next occurrence is few weeks later
-                return date.nextWeeks(weekDiff);
-            }
+            return nextOccurrenceInNextFewWeeks(date, weekDiff, dayDiff);
         } else if (weekDiff < 0) {
             // it's actually before us so need nex month
             // finish up the month and get the next deadline
@@ -202,33 +190,70 @@ public class DayInMonthTE implements TimeExpression {
                 return nextOccurrence(firstDayOfNextMonth);
             }
         } else {
-            // same week
-            // need to check if wednesday is really after monday BECAUSE 1 MARCH IS WEDNESDAY BUT 6 MARCH IS MONDAY :(
-            if (dayDiff > 0) {
-                // next few days
-                DateTime nextFewDays = date.nextDays(dayDiff);
-                if (!includes(nextFewDays)) {
-                    // first wednesday comes before first monday
-                    // first sunday comes before first monday also
-                    // so need next month
-                    return nextOccurrence(firstDayOfNextMonth);
-                } else {
-                    return date.nextDays(dayDiff);
-                }
-            } else if (dayDiff < 0) {
-                // next week - dayDiff
-                DateTime nextFewWeeks = date.nextWeek();
-                return nextFewWeeks.nextDays(dayDiff);
+            return nextOccurrenceWithinSameWeek(date, firstDayOfNextMonth, dayDiff);
+        }
+    }
+
+    /**
+     * Helper method to find next occurrence from given date where it is in next few weeks
+     *
+     * @param date nextOccurrence from this date
+     * @param weekDiff weekDifference between this current date's week count and the occurrence week
+     * @param dayDiff day difference between this current date's day and the occurrence day
+     * @return nextOccurrence of the recurring task after date
+     */
+    private DateTime nextOccurrenceInNextFewWeeks(DateTime date, int weekDiff, int dayDiff) {
+        // it's next few weeks...
+        if (dayDiff > 0) {
+            // next few weeks + few days
+            DateTime nextFewWeeks = date.nextWeeks(weekDiff);
+            return nextFewWeeks.nextDays(dayDiff);
+        } else if (dayDiff < 0) {
+            // next few weeks - 1 week + few days
+            DateTime nextFewWeeks = date.nextWeeks(weekDiff);
+            return nextFewWeeks.nextDays(dayDiff);
+        } else {
+            // same dayIndex so next occurrence is few weeks later
+            return date.nextWeeks(weekDiff);
+        }
+    }
+
+    /**
+     * Helper method to obtain next occurrence if it happens within the same week
+     *
+     * @param date
+     * @param nextMonth the next month of date
+     * @param dayDiff
+     * @return nextOccurrence of the recurring task after date
+     */
+    private DateTime nextOccurrenceWithinSameWeek(DateTime date, DateTime nextMonth, int dayDiff) {
+        // same week
+        // need to check if wednesday is really after monday BECAUSE 1 MARCH IS WEDNESDAY BUT 6 MARCH IS MONDAY :(
+        if (dayDiff > 0) {
+            // next few days
+            DateTime nextFewDays = date.nextDays(dayDiff);
+            if (!includes(nextFewDays)) {
+                // first wednesday comes before first monday
+                // first sunday comes before first monday also
+                // so need next month
+                return nextOccurrence(nextMonth);
             } else {
-                // same week same day
-                // return next week if included in time expression
-                DateTime nextWeek = date.nextWeek();
-                if (this.includes(nextWeek)) {
-                    return nextWeek;
-                } else {
-                    return nextOccurrence(nextWeek);
-                }
+                return date.nextDays(dayDiff);
+            }
+        } else if (dayDiff < 0) {
+            // next week - dayDiff
+            DateTime nextFewWeeks = date.nextWeek();
+            return nextFewWeeks.nextDays(dayDiff);
+        } else {
+            // same week same day
+            // return next week if included in time expression
+            DateTime nextWeek = date.nextWeek();
+            if (this.includes(nextWeek)) {
+                return nextWeek;
+            } else {
+                return nextOccurrence(nextWeek);
             }
         }
+
     }
 }

@@ -146,37 +146,31 @@ public class RangeEachYearTE implements TimeExpression {
                 // next year start Month
                 return yearAfterStartDate;
             }
-        } else {
+        } else if (month == startMonth) {
             // month is in the start month to end month period
-            if (month == startMonth) {
-                // if month same as start month, check if it is before start date
-                if (day < startDay) {
-                    return startDate;
-                } else {
-                    // if it's after start date, maybe endMonth is next Month
-                    if (endMonth > startMonth) {
-                        return dayAfterDate;
-                    } else {
-                        // endMonth == startMonth
-                        // check if day < endDay
-                        if (day < endDay) {
-                            return dayAfterDate;
-                        } else {
-                            // day >= endDay means next occurrence is next year
-                            return yearAfterStartDate;
-                        }
-                    }
-                }
-            } else if (month == endMonth) {
-                if (day >= endDay) {
-                    return yearAfterStartDate;
-                } else {
-                    return dayAfterDate;
-                }
+            // if month same as start month, check if it is before start date
+            if (day < startDay) {
+                return startDate;
+            } else if (endMonth > startMonth) {
+                // if it's after start date, maybe endMonth is next Month
+                return dayAfterDate;
+            } else if (day < endDay) {
+                // endMonth == startMonth
+                // check if day < endDay
+                return dayAfterDate;
             } else {
-                // month falls within start month and end month
+                // day >= endDay means next occurrence is next year
+                return yearAfterStartDate;
+            }
+        } else if (month == endMonth) {
+            if (day >= endDay) {
+                return yearAfterStartDate;
+            } else {
                 return dayAfterDate;
             }
+        } else {
+            // month falls within start month and end month
+            return dayAfterDate;
         }
     }
 
