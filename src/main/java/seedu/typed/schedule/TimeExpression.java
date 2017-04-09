@@ -27,6 +27,6 @@ public interface TimeExpression {
      * @return the next occurring DateTime object where
      * includes return true
      */
-    public DateTime nextDeadlineOccurrence(DateTime date);
+    public DateTime nextOccurrence(DateTime date);
 
 }

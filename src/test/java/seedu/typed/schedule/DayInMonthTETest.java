@@ -128,39 +128,39 @@ public class DayInMonthTETest {
 
     @Test
     public void nextDeadlineOccurrence_firstMondayOfMarch_everyFirstMonday_firstMondayOfApril() {
-        assertTrue(everyFirstMonday.nextDeadlineOccurrence(firstMondayOfMarch).equals(firstMondayOfApril));
+        assertTrue(everyFirstMonday.nextOccurrence(firstMondayOfMarch).equals(firstMondayOfApril));
     }
     @Test
     public void nextDeadlineOccurrence_firstMondayOfDec2017_everyFirstMonday_firstMondayOfJan2018() {
-        assertTrue(everyFirstMonday.nextDeadlineOccurrence(firstMondayOfDec2017).equals(firstMondayOfJan2018));
+        assertTrue(everyFirstMonday.nextOccurrence(firstMondayOfDec2017).equals(firstMondayOfJan2018));
     }
     @Test
     public void nextDeadlineOccurrence_firstMondayOfMarch_everyFirstTuesday_firstTuesdayOfMarch() {
-        assertTrue(everyFirstTuesday.nextDeadlineOccurrence(firstMondayOfMarch).equals(firstTuesdayOfMarch));
+        assertTrue(everyFirstTuesday.nextOccurrence(firstMondayOfMarch).equals(firstTuesdayOfMarch));
     }
     @Test
     public void nextDeadlineOccurrence_firstMondayOfMarch_everySecondMonday_secondMondayOfMarch() {
-        assertTrue(everySecondMonday.nextDeadlineOccurrence(firstMondayOfMarch).equals(secondMondayOfMarch));
+        assertTrue(everySecondMonday.nextOccurrence(firstMondayOfMarch).equals(secondMondayOfMarch));
     }
     @Test
     public void nextDeadlineOccurrence_firstTuesdayOfMarch_everySecondMonday_secondMondayOfMarch() {
-        assertTrue(everySecondMonday.nextDeadlineOccurrence(firstTuesdayOfMarch).equals(secondMondayOfMarch));
+        assertTrue(everySecondMonday.nextOccurrence(firstTuesdayOfMarch).equals(secondMondayOfMarch));
     }
     @Test
     public void nextDeadlineOccurrence_firstMondayOfMarch_everySecondTuesday_secondTuesdayOfMarch() {
-        assertTrue(everySecondTuesday.nextDeadlineOccurrence(firstMondayOfMarch).equals(secondTuesdayOfMarch));
+        assertTrue(everySecondTuesday.nextOccurrence(firstMondayOfMarch).equals(secondTuesdayOfMarch));
     }
     @Test
     public void nextDeadlineOccurrence_firstMondayOfMarch_everyFirstWednesday_firstWednesdayOfApril() {
-        assertTrue(everyFirstWednesday.nextDeadlineOccurrence(firstMondayOfMarch).equals(firstWednesdayOfApril));
+        assertTrue(everyFirstWednesday.nextOccurrence(firstMondayOfMarch).equals(firstWednesdayOfApril));
     }
     @Test
     public void nextDeadlineOccurrence_secondSundayOfMarch_everyFirstSunday_firstSundayOfApril() {
-        assertTrue(everyFirstSunday.nextDeadlineOccurrence(secondSundayOfMarch).equals(firstSundayOfApril));
+        assertTrue(everyFirstSunday.nextOccurrence(secondSundayOfMarch).equals(firstSundayOfApril));
     }
     @Test
     public void nextDeadlineOccurrence_firstMondayOfMarch_everyFirstSunday_firstSundayOfApril() {
-        assertTrue(everyFirstSunday.nextDeadlineOccurrence(firstMondayOfMarch).equals(firstSundayOfApril));
+        assertTrue(everyFirstSunday.nextOccurrence(firstMondayOfMarch).equals(firstSundayOfApril));
     }
 
 

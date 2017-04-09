@@ -23,15 +23,15 @@ public class DifferenceTE implements TimeExpression {
         return included.includes(date) && !excluded.includes(date);
     }
     @Override
-    public DateTime nextDeadlineOccurrence(DateTime date) {
+    public DateTime nextOccurrence(DateTime date) {
         boolean notFound = true;
-        DateTime nextOccurrence = included.nextDeadlineOccurrence(date);
+        DateTime nextOccurrence = included.nextOccurrence(date);
         while (notFound) {
             // if nextOccurrence fulfils time expression and is after given date
             if (includes(nextOccurrence) && nextOccurrence.isAfter(date)) {
                 break;
             }
-            nextOccurrence = included.nextDeadlineOccurrence(nextOccurrence);
+            nextOccurrence = included.nextOccurrence(nextOccurrence);
         }
         return nextOccurrence;
     }

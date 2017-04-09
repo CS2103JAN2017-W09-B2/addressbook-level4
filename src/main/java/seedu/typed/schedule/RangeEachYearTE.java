@@ -60,23 +60,30 @@ public class RangeEachYearTE implements TimeExpression {
     }
 
     private boolean endMonthIncludes(DateTime date) {
-        if (date.getLocalDateTime().getMonthValue() != endMonth) {
+        if (date.getMonth() != endMonth) {
             return false;
         }
-        if (endDay == 0) {
+        if (endDay == DateTime.getLastDayOfMonth(endMonth)) {
             return true;
         }
-        return (date.getLocalDateTime().getDayOfMonth() <= endDay);
+        return (date.getDay() <= endDay && date.getDay() >= startDay);
     }
 
     private boolean startMonthIncludes(DateTime date) {
-        if (date.getLocalDateTime().getMonthValue() != startMonth) {
+        System.out.println(date.toString());
+        int day = date.getDay();
+        if (date.getMonth() != startMonth) {
             return false;
         }
         if (startDay == 1) {
-            return true;
+            // check if endMonth == startMonth
+            if (endMonth > startMonth) {
+                return true;
+            } else {
+                return day <= endDay;
+            }
         }
-        return (date.getLocalDateTime().getDayOfMonth() >= startDay);
+        return (day >= startDay && day <= endDay);
     }
 
     private boolean monthsInclude(DateTime date) {
@@ -93,40 +100,75 @@ public class RangeEachYearTE implements TimeExpression {
     }
 
     @Override
-    public DateTime nextDeadlineOccurrence(DateTime date) {
+    public DateTime nextOccurrence(DateTime date) {
         int day = date.getDay();
         int month = date.getMonth();
         int year = date.getYear();
+        
+        DateTime dayAfterDate = date.nextDays(1);
+        DateTime startDate = DateTime.getDateTime(year, startMonth, startDay, 0, 0);
+        DateTime yearAfterStartDate = startDate.nextYear();
 
         if (month < startMonth || month > endMonth) {
             // next occurrence is startMonth
             if (month < startMonth) {
                 // current year
-                return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
+                return startDate;
             } else {
                 // next year start Month
-                return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
+                return yearAfterStartDate;
             }
         } else {
             // month is in the start month to end month period
-            if (day < startDay) {
+            if (month == startMonth) {
+                // if month same as start month, check if it is before start date
+                if (day < startDay) {
+                    return startDate;
+                } else {
+                    // if it's after start date, maybe endMonth is next Month
+                    if (endMonth > startMonth) {
+                        return dayAfterDate;
+                    } else {
+                        // endMonth == startMonth
+                        // check if day < endDay
+                        if (day < endDay) {
+                            return dayAfterDate;
+                        } else {
+                            // day >= endDay means next occurrence is next year
+                            return yearAfterStartDate;
+                        }
+                    }
+                }
+            } else if (month == endMonth) {
+                if (day >= endDay) {
+                    return yearAfterStartDate;
+                } else {
+                    return dayAfterDate;
+                }
+            } else {
+                // month falls within start month and end month
+                return dayAfterDate;
+            }
+        }
+            /*if (day < startDay) {
                 // start month start date
                 return DateTime.getDateTime(year, startMonth, startDay, 0, 0);
             } else if (day > endDay && endMonth == month) {
                 // next occurrence is next year
+                System.out.println("huh");
                 return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
             } else {
                 // within occurrence.. check if next day is within occurrence
                 // if includes nextday, return next day
                 DateTime nextDay = date.nextDays(1);
+                System.out.println(date.toString());
                 if (includes(nextDay)) {
                     return nextDay;
                 } else {
                     // if doesn't include nextday means next occurrence is next year
                     return DateTime.getDateTime(year + 1, startMonth, startDay, 0, 0);
                 }
-            }
-        }
+            }*/
     }
 
 }
