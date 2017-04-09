@@ -48,7 +48,7 @@ public class RangeEachYearTE implements TimeExpression {
     }
 
     /**
-     * Represent a range from startMonth with startDay till endMonth with endDay 
+     * Represent a range from startMonth with startDay till endMonth with endDay
      *
      * @param startMonth Jan = 1 till Dec = 12
      * @param endMonth Jan = 1 till Dec = 12
@@ -70,7 +70,7 @@ public class RangeEachYearTE implements TimeExpression {
     }
 
     /**
-     * Checks if the endMonth includes the date 
+     * Checks if the endMonth includes the date
      *
      * @param date
      * @return true if the endMonth includes the date

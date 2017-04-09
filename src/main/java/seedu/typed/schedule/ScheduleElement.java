@@ -361,7 +361,7 @@ public class ScheduleElement implements TimeExpression {
     //@@author A0139379M
 
     /**
-     * Interprets the recurrence rule in the context of events 
+     * Interprets the recurrence rule in the context of events
      *
      * @param rule which specifies the recurrence rule
      * @return TimeExpression fulfiling the Recurrence rule
@@ -413,7 +413,7 @@ public class ScheduleElement implements TimeExpression {
 
     /**
      * Interprets the recurrence rule in the context of deadlines
-     * Flexible in parsing every monday, every tuesday etc. 
+     * Flexible in parsing every monday, every tuesday etc.
      *
      * @param rule which specifies the recurrence rule
      * @return TimeExpression which supports the recurrence rule
