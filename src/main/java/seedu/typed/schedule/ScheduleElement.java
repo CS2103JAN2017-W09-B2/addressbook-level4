@@ -263,7 +263,8 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
      * Static Methods to help ease constructing Schedule Elements
      */
 
-    public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate, String rule) throws IllegalValueException {
+    public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate,
+            String rule) throws IllegalValueException {
         return new ScheduleElement(startDate, endDate, rule);
     }
 
