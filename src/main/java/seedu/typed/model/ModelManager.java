@@ -226,21 +226,20 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
-
-    @Override
-    public synchronized void completeTasks(int startIndex, int endIndex)
-            throws DuplicateTaskException, IllegalValueException {
-        int num = endIndex - startIndex + 1;
-        for (int i = 0; i < num; i++) {
-            int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
-            taskManager.completeTaskAt(taskManagerIndex);
-            updateFilteredListToShowDefault();
-            indicateTaskManagerChanged();
-        }
-    }
     //@@author
 
     //@@author A0143853A
+    @Override
+    public synchronized void completeTasks(int startIndex, int endIndex)
+            throws DuplicateTaskException, IllegalValueException {
+        for (int curr = startIndex; curr <= endIndex; curr++) {
+            int taskManagerIndex = filteredTasks.getSourceIndex(curr);
+            taskManager.completeTaskAt(taskManagerIndex);
+        }
+        updateFilteredListToShowDefault();
+        indicateTaskManagerChanged();
+    }
+
     @Override
     public synchronized void completeTasksAndStoreIndices(int startIndex, int endIndex,
             ArrayList<Integer> list) throws DuplicateTaskException, IllegalValueException {

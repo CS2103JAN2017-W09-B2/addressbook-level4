@@ -1,6 +1,5 @@
 package seedu.typed.logic.commands;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.typed.commons.util.Triple;
@@ -158,9 +157,10 @@ public class RedoCommand extends Command {
                 break;
 
             case CompleteCommand.COMMAND_WORD_COMPLETE:
-                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) toPush.getThird();
-                model.completeTasksAtForRedo(listOfIndices);
+                TaskManager current = new TaskManager(model.getTaskManager());
+                model.resetData((ReadOnlyTaskManager) change);
                 toPush.setFirst(CompleteCommand.COMMAND_WORD_UNCOMPLETE);
+                toPush.setThird(current);
                 session.updateUndoRedoStacks(COMMAND_WORD_REDO, INVALID_INDEX, toPush);
                 break;
 

@@ -1,6 +1,5 @@
 package seedu.typed.logic.commands;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.typed.commons.util.Triple;
@@ -156,9 +155,10 @@ public class UndoCommand extends Command {
                 break;
 
             case CompleteCommand.COMMAND_WORD_UNCOMPLETE:
-                ArrayList<Integer> listOfIndices = (ArrayList<Integer>) change;
-                model.uncompleteTasksAtForUndo(listOfIndices);
+                TaskManager currTaskManager = new TaskManager(model.getTaskManager());
+                model.resetData((ReadOnlyTaskManager) change);
                 toPush.setFirst(CompleteCommand.COMMAND_WORD_COMPLETE);
+                toPush.setThird(currTaskManager);
                 session.updateUndoRedoStacks(COMMAND_WORD_UNDO, INVALID_INDEX, toPush);
                 break;
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.model.TaskManager;
 import seedu.typed.model.task.ReadOnlyTask;
 
 public class CompleteCommand extends Command {
@@ -22,6 +23,8 @@ public class CompleteCommand extends Command {
             + "by the index number(s) used in the last task listing.\n"
             + "Parameters: INDEX or RANGE\n"
             + "Example: " + COMMAND_WORD_FINISH + " 1 to 3";
+
+    private static final int INVALID_INDEX = -1;
     //@@author
 
     //@@author A0139379M
@@ -82,12 +85,13 @@ public class CompleteCommand extends Command {
 
 
         try {
-            model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
-            session.updateUndoRedoStacks(COMMAND_WORD_COMPLETE, -1, listOfIndices);
+            TaskManager oldTaskManager = new TaskManager(model.getTaskManager());
+            model.completeTasks(startIndex, endIndex);
+            session.updateUndoRedoStacks(COMMAND_WORD_COMPLETE, INVALID_INDEX, oldTaskManager);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }
-        return commandResultBasedOnListOfIndices(listOfIndices);
+        return commandResultBasedOnIndices(startIndex, endIndex);
     }
     //@@author
 
@@ -99,13 +103,14 @@ public class CompleteCommand extends Command {
      *          used to store indices of tasks completed
      * @return CommandResult
      */
-    private CommandResult commandResultBasedOnListOfIndices(ArrayList<Integer> list) {
-        if (list.size() == 1) {
-            int taskIndex = list.get(0);
-            String taskName = model.getTaskAt(taskIndex).getName().getValue();
+    private CommandResult commandResultBasedOnIndices(int startIndex, int endIndex) {
+        int num = endIndex - startIndex + 1;
+        if (num == 1) {
+            String taskName = model.getFilteredTaskList().get(startIndex)
+                                                         .getName().getValue();
             return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, taskName));
         } else {
-            return new CommandResult(String.format(MESSAGE_COMPLETED_TASKS_SUCCESS, list.size()));
+            return new CommandResult(String.format(MESSAGE_COMPLETED_TASKS_SUCCESS, num));
         }
     }
     //@@author
