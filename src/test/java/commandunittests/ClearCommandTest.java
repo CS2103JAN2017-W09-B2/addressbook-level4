@@ -40,7 +40,7 @@ public class ClearCommandTest {
 
 
     @Test
-    public void execute_modelNull_assertError() throws CommandException {
+    public void execute_modelNull_error() throws CommandException {
         testCommand.setModel(null);
         thrown.expect(AssertionError.class);
         testCommand.execute();

@@ -23,15 +23,8 @@ import seedu.typed.model.task.TaskBuilder;
 public class AddCommandTest {
     private TestAddCommand testCommand1;
     private TestAddCommand testCommand2;
-    private TestAddCommand testCommand3;
     private TestAddCommand allPresent;
     private ModelStub testModel;
-    //private TestAddCommand allNulls;
-    //private TestAddCommand dateNull;
-    //private TestAddCommand tagsNull;
-    //private TestAddCommand nameNull;
-    //private TestAddCommand dateTagNulls;
-    // TODO The AddCommand still does not tolerate null values for date, tags
 
 
     @Rule
@@ -40,32 +33,25 @@ public class AddCommandTest {
     @Before
     public void setUp() {
         try {
-            //LocalDateTime rubbish = DateTimeParser.getLocalDateTimeFromString("");
-            LocalDateTime rubbish = null;
+            LocalDateTime nullTime = null;
             LocalDateTime fifthApril = DateTimeParser.getLocalDateTimeFromString("05/04/2017");
             LocalDateTime twelfthDec = DateTimeParser.getLocalDateTimeFromString("12/12/2017");
-            testCommand1 = new TestAddCommand("Meet Joe", "", fifthApril, rubbish, rubbish, new HashSet<String>());
-            testCommand2 = new TestAddCommand("Meet Joe", "", fifthApril, rubbish, rubbish, new HashSet<String>());
-            testCommand3 = new TestAddCommand("Meet Joe", "", fifthApril, rubbish, rubbish, new HashSet<String>());
-            allPresent = new TestAddCommand("Meet Moo", "", twelfthDec, rubbish, rubbish, new HashSet<String>());
+            testCommand1 = new TestAddCommand("Meet Joe", "", fifthApril, nullTime, nullTime, new HashSet<String>());
+            testCommand2 = new TestAddCommand("Meet Joe", "", fifthApril, nullTime, nullTime, new HashSet<String>());
+            allPresent = new TestAddCommand("Meet Moo", "", twelfthDec, nullTime, nullTime, new HashSet<String>());
             testModel = new ModelStub();
             testModel.addTask(new TaskBuilder()
                     .setName("Meet Joe")
                     .setNotes("")
                     .setDeadline(DateTime.getDateTime(2017, Month.APRIL, 5, 0, 0))
                     .build());
-            //dateTagNulls = new TestAddCommand("Meet John", null , null);
-            //allNulls = new TestAddCommand(null, null, null);
-            //dateNull = new TestAddCommand("Meet John", null, new HashSet<String>());
-            //tagsNull = new TestAddCommand("Meet John", "12/12/2012", null);
-            //nameNull = new TestAddCommand(null, "12/12/12", new HashSet<String>());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void execute_modelNull_assertError() {
+    public void execute_modelNull_error() {
         testCommand1.setModel(null);
         thrown.expect(AssertionError.class);
         try {
@@ -76,7 +62,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_sessionNull_assertError() {
+    public void execute_sessionNull_error() {
         testCommand2.setSession(null);
         thrown.expect(AssertionError.class);
         try {
@@ -87,7 +73,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_sessionModelNull_assertError() {
+    public void execute_sessionModelNull_error() {
         testCommand1.setModel(null);
         testCommand1.setSession(null);
         thrown.expect(AssertionError.class);
@@ -99,35 +85,11 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_sessionModelPresent_assertSuccess() {
+    public void execute_sessionModelPresent_success() {
         try {
             allPresent.execute();
         } catch (CommandException e) {
 
         }
     }
-
-    //TODO: fix test
-    /*
-    @Test
-    public void execute_duplicateTasks_exception() {
-        try {
-            testCommand3.setModel(testModel);
-            testCommand3.execute();
-            thrown.expect(UniqueTaskList.DuplicateTaskException.class);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void execute_allPresent_success() {
-        try {
-            assertEquals(allPresent.execute(),
-                    new CommandResult("Task Added!"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-     */
 }
