@@ -70,6 +70,16 @@ public class DateTimeParser {
     }
 
     /**
+     * Checks if natty parser inferred date in given {@code date}.
+     * @param {@code date} String containing a date, may be null
+     * @return true if date is inferred, false if date is specified in {@code date}
+     * @throws IllegalValueException if {@code date} is in an invalid or ambiguous format
+     */
+    public static boolean isDateInferred(String date) throws IllegalValueException {
+        return getDateGroupFromString(date).isDateInferred();
+    }
+
+    /**
      * Checks if natty parser inferred time in given {@code date}.
      * @param {@code date} String containing a date, may be null
      * @return true if time is inferred, false if time is specified in {@code date}
