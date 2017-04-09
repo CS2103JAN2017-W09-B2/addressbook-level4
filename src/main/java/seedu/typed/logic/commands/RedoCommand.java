@@ -75,7 +75,6 @@ public class RedoCommand extends Command {
             executeRedoCommand();
         }
 
-        session.updateValidCommandsHistory(commandText);
         switch (type) {
 
         case "no number":

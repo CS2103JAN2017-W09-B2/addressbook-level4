@@ -80,7 +80,6 @@ public class CompleteCommand extends Command {
         try {
             model.completeTasksAndStoreIndices(startIndex, endIndex, listOfIndices);
             session.updateUndoRedoStacks(CommandTypeUtil.TYPE_COMPLETE, -1, listOfIndices);
-            session.updateValidCommandsHistory(commandText);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }

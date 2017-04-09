@@ -76,7 +76,6 @@ public class UndoCommand extends Command {
             executeUndoCommand();
         }
 
-        session.updateValidCommandsHistory(commandText);
         switch (type) {
 
         case "no number":

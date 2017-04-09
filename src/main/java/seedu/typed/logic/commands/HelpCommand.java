@@ -25,7 +25,6 @@ public class HelpCommand extends Command {
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ShowHelpRequestEvent());
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_HELP, -1, null);
-        session.updateValidCommandsHistory(commandText);
         return new CommandResult(SHOWING_HELP_MESSAGE);
     }
 }
