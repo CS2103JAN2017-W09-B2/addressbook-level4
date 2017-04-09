@@ -49,12 +49,14 @@ public class ExportCommand extends Command {
                 if (FileUtil.isValidName(onlyName)) {
                     File fileToCreate = new File(this.fileName);
 
-                    // Forms the directories if the directories are missing
-                    fileToCreate.getParentFile().mkdirs();
+                    if (!fileToCreate.exists()) {
+                        // Forms the directories if the directories are missing
+                        fileToCreate.getParentFile().mkdirs();
 
-                    FileUtil.writingFile(toCopyFrom, fileToCreate);
+                        FileUtil.writingFile(toCopyFrom, fileToCreate);
 
-                    return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
+                        return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
+                    }
                 } else {
                     throw new CommandException(MESSAGE_FILENAME_INVALID);
                 }
