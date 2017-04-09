@@ -14,6 +14,7 @@ import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
+import seedu.typed.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
@@ -77,7 +78,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 ReadOnlyTask toCopy = iterator.next();
                 addTask((Task) toCopy);
             }
-        } catch (UniqueTaskList.DuplicateTaskException e) {
+        } catch (DuplicateTaskException e) {
             ;
         }
         try {
@@ -87,7 +88,61 @@ public class TaskManager implements ReadOnlyTaskManager {
                 Tag toCopy = iterator.next();
                 addTag(toCopy);
             }
-        } catch (UniqueTagList.DuplicateTagException e) {
+        } catch (DuplicateTagException e) {
+            ;
+        }
+        syncMasterTagListWith(tasks);
+    }
+
+    public void copyDataExcludingIndices(ReadOnlyTaskManager newData, int[] indicesList) {
+        assert newData != null;
+        assert indicesList != null;
+        assert indicesList.length > 0;
+        try {
+            int listCount = 0;
+            int iterCount = 0;
+            int index = indicesList[0];
+
+            ObservableList<ReadOnlyTask> tasksToCopy = newData.getTaskList();
+            Iterator<ReadOnlyTask> iterator = tasksToCopy.iterator();
+            while (iterator.hasNext()) {
+                if (listCount < indicesList.length) {
+                    index = indicesList[listCount];
+                }
+                ReadOnlyTask toCopy = iterator.next();
+                if (index != iterCount) {
+                    Task toAdd = new TaskBuilder(toCopy).build();
+                    addTask(toAdd);
+                } else {
+                    listCount++;
+                }
+                iterCount++;
+            }
+        } catch (DuplicateTaskException e) {
+            ;
+        } catch (IllegalValueException ive) {
+            ;
+        }
+        try {
+            int listCount = 0;
+            int iterCount = 0;
+            int index = indicesList[0];
+
+            ObservableList<Tag> tagsToCopy = newData.getTagList();
+            Iterator<Tag> iterator = tagsToCopy.iterator();
+            while (iterator.hasNext()) {
+                if (listCount < indicesList.length) {
+                    index = indicesList[listCount];
+                }
+                Tag toCopy = iterator.next();
+                if (index != iterCount) {
+                    addTag(toCopy);
+                } else {
+                    listCount++;
+                }
+                iterCount++;
+            }
+        } catch (DuplicateTagException e) {
             ;
         }
         syncMasterTagListWith(tasks);
@@ -262,7 +317,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(tasks, tags);
     }
 
-    public void completeTaskAt(int taskManagerIndex) throws DuplicateTaskException {
+    public void completeTaskAt(int taskManagerIndex)
+            throws DuplicateTaskException, IllegalValueException {
         tasks.completeTaskAt(taskManagerIndex);
     }
 
@@ -371,4 +427,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         return count;
     }
     //@@author
+
+    public void sort() {
+        tasks.sort();
+    }
 }

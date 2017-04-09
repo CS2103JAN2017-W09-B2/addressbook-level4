@@ -256,4 +256,13 @@ public class DayInMonthTE implements TimeExpression {
         }
 
     }
+
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public TimeExpression getDuplicate() {
+        return new DayInMonthTE(weekCount, dayIndex);
+    }
+    //@@author
 }

@@ -12,6 +12,7 @@ import seedu.typed.model.task.DateTime;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.TaskBuilder;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.typed.schedule.ScheduleElement;
 
 /**
@@ -31,6 +32,7 @@ public class AddCommand extends Command {
             + " buy 5 broccolis by tmr #survival #grocery ";
 
     public static final String MESSAGE_SUCCESS = "%1$s added";
+    public static final String MESSAGE_FAILURE = "%1$s cannot be added";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
@@ -88,9 +90,10 @@ public class AddCommand extends Command {
 
         try {
             //@@author A0143853A
-            model.addTask(0, toAdd);
+            model.addTask(toAdd);
+            int index = model.getIndexOfTask(toAdd);
             model.getTaskManager().printData();
-            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, 0, toAdd);
+            session.updateUndoRedoStacks(CommandTypeUtil.TYPE_ADD_TASK, index, toAdd);
             //@@author
 
             //@@author A0139392X
@@ -99,8 +102,11 @@ public class AddCommand extends Command {
 
             String name = toAdd.getName().toString();
             return new CommandResult(String.format(MESSAGE_SUCCESS, name));
-        } catch (DuplicateTaskException e) {
+        } catch (DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException tnfe) {
+            String name = toAdd.getName().toString();
+            throw new CommandException(String.format(MESSAGE_SUCCESS, name));
         }
     }
 
