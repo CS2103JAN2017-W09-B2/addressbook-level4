@@ -112,7 +112,7 @@ public class DayInMonthTE implements TimeExpression {
         return new DayInMonthTE(count, dayIndex);
     }
     @Override
-    public DateTime nextDeadlineOccurrence(DateTime date) {
+    public DateTime nextOccurrence(DateTime date) {
         int dayIndex = date.getDayIndex();
         int weekCount = date.getWeekCount();
         int month = date.getMonth();
@@ -148,7 +148,7 @@ public class DayInMonthTE implements TimeExpression {
             if (includes(firstDayOfNextMonth)) {
                 return firstDayOfNextMonth;
             } else {
-                return nextDeadlineOccurrence(firstDayOfNextMonth);
+                return nextOccurrence(firstDayOfNextMonth);
             }
         } else {
             // same week
@@ -160,7 +160,8 @@ public class DayInMonthTE implements TimeExpression {
                     // first wednesday comes before first monday
                     // first sunday comes before first monday also
                     // so need next month
-                    return nextDeadlineOccurrence(firstDayOfNextMonth);
+                    System.out.println(date.toString());
+                    return nextOccurrence(firstDayOfNextMonth);
                 } else {
                     return date.nextDays(dayDiff);
                 }
@@ -175,7 +176,7 @@ public class DayInMonthTE implements TimeExpression {
                 if (this.includes(nextWeek)) {
                     return nextWeek;
                 } else {
-                    return nextDeadlineOccurrence(nextWeek);
+                    return nextOccurrence(nextWeek);
                 }
             }
         }

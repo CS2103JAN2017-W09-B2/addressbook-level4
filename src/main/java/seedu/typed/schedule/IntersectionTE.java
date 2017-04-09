@@ -44,10 +44,10 @@ public class IntersectionTE implements TimeExpression {
      * as it is the only date it fulfils
      */
     @Override
-    public DateTime nextDeadlineOccurrence(DateTime dateTime) {
-        DateTime current = elements.get(0).nextDeadlineOccurrence(dateTime);
+    public DateTime nextOccurrence(DateTime dateTime) {
+        DateTime current = elements.get(0).nextOccurrence(dateTime);
         while (!includes(current)) {
-            current = elements.get(0).nextDeadlineOccurrence(current);
+            current = elements.get(0).nextOccurrence(current);
         }
         return current;
     }

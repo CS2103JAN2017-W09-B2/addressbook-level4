@@ -76,26 +76,26 @@ public class RangeEachYearTETest {
     // nextDeadlineOccurrence_CONDITIONS_RECURRENCE_OUTCOME
     @Test
     public void nextDeadlineOccurrence_beforeOccurrence_Occurrence_OccurrenceStartDate() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(beforeApril).equals(testDate18042017));
+        assertTrue(april18toOct25.nextOccurrence(beforeApril).equals(testDate18042017));
     }
     @Test
     public void nextDeadlineOccurrence_AfterOccurrence_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(afterOct25).equals(testDate18042018));
+        assertTrue(april18toOct25.nextOccurrence(afterOct25).equals(testDate18042018));
     }
     @Test
     public void nextDeadlineOccurrence_AfterOccurrenceNextMonth_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(monthAfterOct25).equals(testDate18042018));
+        assertTrue(april18toOct25.nextOccurrence(monthAfterOct25).equals(testDate18042018));
     }
     @Test
     public void nextDeadlineOccurrence_WithinOccurrenceBeforeStartDay_Occurrence_OccurrenceStartDate() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(beforeApril18).equals(testDate18042017));
+        assertTrue(april18toOct25.nextOccurrence(beforeApril18).equals(testDate18042017));
     }
     @Test
     public void nextDeadlineOccurrence_WithinOccurrenceAfterStartDay_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(afterApril18).equals(testDate20042017));
+        assertTrue(april18toOct25.nextOccurrence(afterApril18).equals(testDate20042017));
     }
     @Test
     public void nextDeadlineOccurrence_WithinOccurrenceEndDay_Occurrence_OccurrenceStartDateNextYear() {
-        assertTrue(april18toOct25.nextDeadlineOccurrence(onOct25).equals(testDate18042018));
+        assertTrue(april18toOct25.nextOccurrence(onOct25).equals(testDate18042018));
     }
 }
