@@ -23,6 +23,14 @@ public class Recurrence {
     public static final TimeExpression SATURDAY = recurEveryWeek(Day.SAT);
     public static final TimeExpression SUNDAY = recurEveryWeek(Day.SUN);
 
+    /*
+     * TimeExpression representing the recurring deadline/event everyday
+     * If event, assume that the duration of event is strictly less than a day
+     *
+     */
+    public static TimeExpression recurEveryDay() {
+        return RangeEachYearTE.year();
+    }
 
     /*
      * TimeExpression representing the recurring deadline every week
@@ -32,15 +40,6 @@ public class Recurrence {
      */
     private static TimeExpression recurEveryWeek(Day day) {
         return DayInMonthTE.weekly(day.day());
-    }
-
-    /*
-     * TimeExpression representing the recurring deadline/event everyday
-     * If event, assume that the duration of event is strictly less than a day
-     *
-     */
-    public static TimeExpression recurEveryDay() {
-        return RangeEachYearTE.year();
     }
 
     /*
