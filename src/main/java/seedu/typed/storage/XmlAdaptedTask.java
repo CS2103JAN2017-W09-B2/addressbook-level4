@@ -54,7 +54,12 @@ public class XmlAdaptedTask {
         dateTime = source.getSE().toString();
         notes = source.getNotes().getValue();
         isCompleted = source.getIsCompleted();
-        rule = source.getSE().getRule();
+        String seRule = source.getSE().getRule();
+        if (seRule == null) {
+            rule = "";
+        } else {
+            rule = seRule;
+        }
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
