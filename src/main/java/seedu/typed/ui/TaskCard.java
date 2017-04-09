@@ -30,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Text notes;
+    private Label notes;
     @FXML
     private Circle taskType;
     @FXML
