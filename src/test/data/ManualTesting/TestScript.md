@@ -162,5 +162,4 @@ For times, you must follow either of these formats: `HH:MM`, `HHMMh`, `HHam/pm`.
 * You may state relative times such as `Morning`, `Afternoon`, `Evening`, `Night`, `Midnight`
 
 The date must come before the time.
-
 Refer to the section on [input link](?) for more information.
