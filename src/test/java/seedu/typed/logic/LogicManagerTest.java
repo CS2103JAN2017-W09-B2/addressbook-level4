@@ -471,7 +471,6 @@ public class LogicManagerTest {
             for (Tag t : tags) {
                 cmd.append(" #").append(t.tagName);
             }
-            System.out.println("add command that was generated is : " + cmd.toString());
             return cmd.toString();
         }
         //@@author

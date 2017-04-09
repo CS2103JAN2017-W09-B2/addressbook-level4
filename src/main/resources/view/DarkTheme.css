@@ -9,7 +9,7 @@
     -fx-opacity: 0.9;
 }
 
-.label-date { 
+.label-date {
 	-fx-font-size: 13px;
 	-fx-font-family: "Segoe UI Semibold";
 	-fx-text-fill: #000000;
@@ -23,7 +23,7 @@
     -fx-opacity: 1;
 }
 
-.label-index { 
+.label-index {
 	-fx-font-size: 24px;
 	-fx-font-family: "Segoe UI Semibold";
 	-fx-text-fill: #010504;
