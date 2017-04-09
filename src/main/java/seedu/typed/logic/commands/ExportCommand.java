@@ -20,6 +20,9 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_FILENAME_INVALID = "Filename invalid";
 
+    public static final String MESSAGE_DUPLICATE = "There already exists a file with the same filename.\n"
+            + "Please use a different filename.";
+
     public static final String MESSAGE_USAGE = EXPORT_COMMAND_WORD
             + ": Exports the task manager to the location specified, or as a new name.\n"
             + "Example: " + EXPORT_COMMAND_WORD + " C:/Users/(username)/Desktop/typed.xml";
@@ -56,6 +59,8 @@ public class ExportCommand extends Command {
                         FileUtil.writingFile(toCopyFrom, fileToCreate);
 
                         return new CommandResult(String.format(MESSAGE_SUCCESS, this.fileName));
+                    } else {
+                        throw new CommandException(MESSAGE_DUPLICATE);
                     }
                 } else {
                     throw new CommandException(MESSAGE_FILENAME_INVALID);
