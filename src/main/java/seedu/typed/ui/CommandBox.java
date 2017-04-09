@@ -16,7 +16,6 @@ import seedu.typed.commons.util.FxViewUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.storage.temp.Session;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -27,16 +26,14 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
-    private Session session;
 
     private ArrayList<String> commandHistory;
     private int pointer;
 
-    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, Session session) {
+    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
-        this.session = session;
-        this.commandHistory = this.session.getAllCommandsHistory();
+        this.commandHistory = new ArrayList<String>();
         this.pointer = 0;
         addToPlaceholder(commandBoxPlaceholder);
     }
@@ -53,6 +50,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandInputChanged() {
         try {
             String commandInput = commandTextField.getText();
+            updateCommandHistory(commandInput);
             CommandResult commandResult = logic.execute(commandInput);
 
             // process result of the command
@@ -108,6 +106,12 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author A0143853A
+    private void updateCommandHistory(String command) {
+        if (!command.trim().equals("")) {
+            commandHistory.add(command);
+        }
+    }
+
     private void resetPointer() {
         pointer = commandHistory.size();
     }

@@ -21,7 +21,6 @@ import seedu.typed.commons.util.StringUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.model.Model;
 import seedu.typed.model.UserPrefs;
-import seedu.typed.storage.temp.Session;
 
 /**
  * The manager of the UI component.
@@ -36,15 +35,13 @@ public class UiManager extends ComponentManager implements Ui {
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
-    private Session session;
     private Model model;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs, Session session, Model model) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Model model) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
-        this.session = session;
         this.model = model;
     }
 
@@ -57,7 +54,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic, session, model);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, model);
             mainWindow.show(); // This should be called before creating other UI
                                // parts
             mainWindow.fillInnerParts();

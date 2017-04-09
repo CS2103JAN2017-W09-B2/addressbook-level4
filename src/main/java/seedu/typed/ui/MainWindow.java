@@ -17,7 +17,6 @@ import seedu.typed.commons.util.FxViewUtil;
 import seedu.typed.logic.Logic;
 import seedu.typed.model.Model;
 import seedu.typed.model.UserPrefs;
-import seedu.typed.storage.temp.Session;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -37,7 +36,6 @@ public class MainWindow extends UiPart<Region> {
     // private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
-    private Session session;
     private Model model;
 
     /*
@@ -72,14 +70,13 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane quotesPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Session session, Model model) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
         super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.config = config;
-        this.session = session;
         this.model = model;
 
         // Configure the UI
@@ -138,7 +135,7 @@ public class MainWindow extends UiPart<Region> {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         // new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic, session);
+        new CommandBox(getCommandBoxPlaceholder(), logic);
         new Chart(getChartPlaceholder(), model);
         new TaskCounter(getTaskCounterPlaceholder(), model);
         new Quotes(getQuotesPlaceholder());
