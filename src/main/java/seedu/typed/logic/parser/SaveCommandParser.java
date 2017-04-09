@@ -32,7 +32,7 @@ public class SaveCommandParser {
 
         // if there are whitespace, invalid input by user
         if ((keywords.length) != 1) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
 
         String location = keywords[0];
