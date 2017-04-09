@@ -40,12 +40,12 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withDeadline(DateTime date) {
-        this.task.setSE(ScheduleElement.makeDeadline(date));
+        this.task.setSE(new ScheduleElement(date));
         return this;
     }
 
     public TaskBuilder withEvent(DateTime startDate, DateTime endDate) {
-        this.task.setSE(ScheduleElement.makeEvent(startDate, endDate));
+        this.task.setSE(new ScheduleElement(startDate, endDate));
         return this;
     }
 
