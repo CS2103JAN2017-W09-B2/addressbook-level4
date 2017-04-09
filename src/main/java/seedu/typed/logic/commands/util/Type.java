@@ -12,10 +12,10 @@ package seedu.typed.logic.commands.util;
 public enum Type {
     ALL("all"),
     DEADLINE("deadline"),
-    DURATION("duration"),
+    EVENT("event"),
     DONE("done"),
     UNDONE("undone"),
-    UNTIMED("untimed");
+    FLOATING("floating");
 
     private String type;
 

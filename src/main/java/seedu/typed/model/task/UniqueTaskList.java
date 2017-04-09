@@ -124,7 +124,6 @@ public class UniqueTaskList implements Iterable<Task> {
             if (!taskToComplete.getIsCompleted()) {
                 // create a completed task clone and add into task list
                 // set current task into next occurring date
-                System.out.println("recurring adding");
                 Task taskToCopy = new TaskBuilder(taskToComplete).isCompleted(true).build();
                 internalList.add(taskToCopy);
                 taskToComplete.setIsCompleted(false);

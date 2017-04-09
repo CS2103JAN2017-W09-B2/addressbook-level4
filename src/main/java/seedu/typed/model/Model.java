@@ -17,14 +17,18 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public interface Model {
 
-
-    // =========== ModelManager Constructors =======================
-    // =============================================================
     // =========== TaskManager Getters =============================
     // =============================================================
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 
+    // ================ ModelManager Getters =======================
+    // =============================================================
+
+    //@@author A0139379M
+    /* Several getters to get the number of different types of tasks
+     * The method names are self-explanatory.
+     */
     int getNumberCompletedTasks();
 
     int getNumberUncompletedTasks();
@@ -37,11 +41,19 @@ public interface Model {
 
     int getNumberFloatingTasks();
 
-    //@@author A0143853A
-    Task getTaskAt(int index);
+    int getNumberUncompletedEvents();
+
+    int getNumberUncompletedDeadlines();
+
+    int getNumberUncompletedFloatingTasks();
+
+    /** Get only completed and overdue tasks */
+    int getNumberOverdue();
     //@@author
 
     //@@author A0143853A
+    Task getTaskAt(int index);
+
     int getIndexOfTask(Task task) throws TaskNotFoundException;
     //@@author
 
@@ -53,11 +65,26 @@ public interface Model {
     //@@author A0143853A
     /** Adds the given task at the specified index. */
     void addTask(int index, Task task) throws DuplicateTaskException;
+
+
+    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list)
+            throws DuplicateTaskException;
     //@@author
+
     // =========== ModelManager Delete Tasks =======================
     // =============================================================
+
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws TaskNotFoundException;
+
+    void deleteTasks(int startIndex, int endIndex)
+            throws TaskNotFoundException, IllegalValueException;
+
+    void deleteTaskAt(int index);
+    //@@author A0143853A
+    void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list)
+            throws DuplicateTaskException;
+    //@@author
     // =========== ModelManager Update Tasks =======================
     // =============================================================
     /**
@@ -91,10 +118,41 @@ public interface Model {
     //@@author
 
     //@@author A0139379M
+    /**
+     * Mark a range of tasks as completed from startIndex to endIndex 
+     *
+     * @param startIndex start index as seen on the filtered task list
+     * @param endIndex  end index as seen on the filtered task list
+     * @throws DuplicateTaskException
+     * @throws IllegalValueException
+     */
     void completeTasks(int startIndex, int endIndex)
             throws DuplicateTaskException, IllegalValueException;
-    //@@author
+
+    /**
+     * Mark the task at this index as completed 
+     *
+     * @param filteredTaskListIndex
+     * @throws DuplicateTaskException
+     * @throws IllegalValueException
+     */
     void completeTaskAt(int filteredTaskListIndex)
+            throws DuplicateTaskException, IllegalValueException;
+
+    //@@author
+    void uncompleteTaskAtForUndo(int taskManagerIndex)
+            throws DuplicateTaskException, IllegalValueException;
+
+    void completeTaskAtForRedo(int taskManagerIndex)
+            throws DuplicateTaskException, IllegalValueException;
+
+    void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
+            throws DuplicateTaskException, IllegalValueException;
+
+    void uncompleteTasksAtForUndo(ArrayList<Integer> list)
+            throws DuplicateTaskException, IllegalValueException;
+
+    void completeTasksAtForRedo(ArrayList<Integer> list)
             throws DuplicateTaskException, IllegalValueException;
     // =========== ModelManager Util Methods =======================
     // =============================================================
@@ -111,7 +169,7 @@ public interface Model {
 
     // =========== ModelManager Display ============================
     // =============================================================
-    //@@author A0141094M
+    //@@author A0139379M
     void updateFilteredListToShowDeadline();
 
     void updateFilteredListToShowDuration();
@@ -121,67 +179,42 @@ public interface Model {
     void updateFilteredListToShowUndone();
 
     void updateFilteredListToShowUntimed();
-    //@@author
 
     void updateFilteredListToShowDefault();
 
+    /**
+     * Filter the task list based on the type given
+     *
+     * @param type refers to the type of tasks (deadlines, events, completed etc)
+     */
     void updateFilteredTaskList(Type type);
+    //@@author
 
-    void updateFilteredTaskList(String type);
+    //@@author A0141094M
     /**
      * Updates the filter of the filtered task list to filter by the given
      * keywords
+     *
+     * @param keywords filter based on these keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-    //@@author A0141094M
+
+    /**
+     * Updates the filter of filtered task list to filter by the given keywords
+     * or tag keywords
+     * @param keywords keywords to match tasks'names
+     * @param tagKeywords match tags'names
+     */
     void updateFilteredTaskList(Set<String> keywords, Set<String> tagKeywords);
     //@@author
+
+    /** Updates the filter of the filtered task list to show all tasks */
+    void updateFilteredListToShowAll();
+
 
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-
-    /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowAll();
-
-    //@@author A0143853A
-    void uncompleteTaskAtForUndo(int taskManagerIndex)
-            throws DuplicateTaskException, IllegalValueException;
-
-    void completeTaskAtForRedo(int taskManagerIndex)
-            throws DuplicateTaskException, IllegalValueException;
-
-    void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
-            throws DuplicateTaskException, IllegalValueException;
-
-    void deleteTasks(int startIndex, int endIndex)
-            throws TaskNotFoundException, IllegalValueException;
-
-    void deleteTaskAt(int index);
-
-    void uncompleteTasksAtForUndo(ArrayList<Integer> list)
-            throws DuplicateTaskException, IllegalValueException;
-
-    void completeTasksAtForRedo(ArrayList<Integer> list)
-            throws DuplicateTaskException, IllegalValueException;
-
-    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list)
-            throws DuplicateTaskException;
-
-    void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list)
-            throws DuplicateTaskException;
-
-    int getNumberUncompletedEvents();
-
-    int getNumberUncompletedDeadlines();
-
-    int getNumberUncompletedFloatingTasks();
-
-    //@@author
-
-    //@@author A0139392X
-    int getNumberOverdue();
-    //@@author
 }

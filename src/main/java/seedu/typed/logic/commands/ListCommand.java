@@ -3,6 +3,7 @@ package seedu.typed.logic.commands;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.util.CommandTypeUtil;
+import seedu.typed.logic.commands.util.Type;
 
 /**
  * Lists all tasks in the task manager to the user.
@@ -23,10 +24,10 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
-    private final String type;
+    private final Type type;
 
-    public ListCommand(String type) throws IllegalValueException {
-        this.type = type;
+    public ListCommand(String stringType) throws IllegalValueException {
+        this.type = convertToTypeEnum(stringType);
     }
 
     @Override
@@ -34,6 +35,33 @@ public class ListCommand extends Command {
         model.updateFilteredTaskList(type);
         session.updateUndoRedoStacks(CommandTypeUtil.TYPE_LIST_TASK, -1, null);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    public Type convertToTypeEnum(String stringType) {
+        Type type;
+        switch (stringType) {
+        case "deadline":
+            type = Type.DEADLINE;
+            break;
+        case "event":
+            type = Type.EVENT;
+            break;
+        case "done":
+            type = Type.DONE;
+            break;
+        case "undone":
+            type = Type.UNDONE;
+            break;
+        case "floating":
+            type = Type.FLOATING;
+            break;
+        case "all":
+            type = Type.ALL;
+            break;
+        default:
+            type = Type.ALL;
+        }
+        return type;
     }
 }
 //@@author

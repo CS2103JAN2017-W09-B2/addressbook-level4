@@ -60,7 +60,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     // =========== TaskManager Getters =============================
     // =============================================================
-    //Test
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
@@ -109,20 +108,18 @@ public class ModelManager extends ComponentManager implements Model {
     public int getNumberUncompletedFloatingTasks() {
         return taskManager.getNumberUncompletedFloatingTasks();
     }
-    //@@author A0143853A
 
     @Override
     public int getNumberOverdue() {
         return taskManager.getNumberOverdue();
     }
 
+    //@@author A0143853A
     @Override
     public int getIndexOfTask(Task task) throws TaskNotFoundException {
         return taskManager.getIndexOf(task);
     }
-    //@@author
 
-    //@@author A0143853A
     @Override
     public Task getTaskAt(int index) {
         return taskManager.getTaskAt(index);
@@ -198,7 +195,6 @@ public class ModelManager extends ComponentManager implements Model {
             newTaskManager.copyDataExcludingIndices(taskManager, listOfIndices);
             taskManager.resetData(newTaskManager);
         }
-        // updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
@@ -377,66 +373,23 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    //@@author A0139379M
+    /**
+     * Before every call to update filtered task list, sort the task manager first
+     *
+     * @param expression
+     */
     private void updateFilteredTaskList(Expression expression) {
         taskManager.sort();
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     @Override
-    public void updateFilteredTaskList(String type) {
-        switch (type) {
-        case "deadline":
-            updateFilteredListToShowDeadline();
-            break;
-        case "duration":
-            updateFilteredListToShowDuration();
-            break;
-        case "done":
-            updateFilteredListToShowDone();
-            break;
-        case "undone":
-            updateFilteredListToShowUndone();
-            break;
-        case "untimed":
-            updateFilteredListToShowUntimed();
-            break;
-        case "all":
-            updateFilteredListToShowAll();
-            break;
-        default:
-            updateFilteredListToShowDefault();
-        }
-    }
-
-    @Override
     public void updateFilteredTaskList(Type type) {
-        switch (type) {
-        // NOT DONE
-        case DEADLINE:
-            updateFilteredListToShowDeadline();
-            break;
-            // NOT DONE
-        case DURATION:
-            updateFilteredListToShowDuration();
-            break;
-        case DONE:
-            updateFilteredListToShowDone();
-            break;
-        case UNDONE:
-            updateFilteredListToShowUndone();
-            break;
-            // NOT DONE
-        case UNTIMED:
-            updateFilteredListToShowUntimed();
-            break;
-        case ALL:
-            updateFilteredListToShowAll();
-            break;
-        default:
-            updateFilteredListToShowDefault();
-        }
-
+        TaskQualifier taskQualifier = new TaskQualifier(type);
+        updateFilteredTaskList(new PredicateExpression(taskQualifier));
     }
+    //@@author
 
     //@@author A0141094M
 
@@ -501,6 +454,11 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     //@@author A01393793M
+    /**
+     * Expression which takes in a qualifier and negates its qualifier as per logic
+     * @author YIM CHIA HUI
+     *
+     */
     private class Negation implements Expression {
         private final Qualifier qualifier;
 
@@ -574,6 +532,41 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return task.getIsCompleted();
+        }
+    }
+
+    /**
+     * Generic Task Qualifier that qualifies based on the type given
+     *
+     * @author YIM CHIA HUI
+     *
+     */
+    private class TaskQualifier implements Qualifier {
+
+        Type type;
+
+        public TaskQualifier(Type type) {
+            this.type = type;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            switch (type) {
+            case ALL:
+                return true;
+            case DEADLINE:
+                return task.getSE().isDeadline();
+            case EVENT:
+                return task.getSE().isEvent();
+            case FLOATING:
+                return task.getSE().isFloating();
+            case DONE:
+                return task.getIsCompleted();
+            case UNDONE:
+                return !task.getIsCompleted();
+            default:
+                return false;
+            }
         }
     }
 }
