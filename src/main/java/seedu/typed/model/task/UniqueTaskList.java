@@ -117,7 +117,8 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, editedTask);
     }
 
-    public void completeTaskAt(int index) throws DuplicateTaskException {
+    public void completeTaskAt(int index)
+            throws DuplicateTaskException, IllegalValueException {
         Task taskToComplete = internalList.get(index);
         if (taskToComplete.isRecurring()) {
             if (!taskToComplete.getIsCompleted()) {

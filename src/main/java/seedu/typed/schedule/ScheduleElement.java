@@ -22,9 +22,9 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence
     private final String rule;
-    private final String BY_DISPLAY_IDENTIFIER = "By:";
-    private final String FROM_DISPLAY_IDENTIFIER = "From:";
-    private final String TO_DISPLAY_IDENTIFIER = "To:";
+    private static final String BY_DISPLAY_IDENTIFIER = "By:";
+    private static final String FROM_DISPLAY_IDENTIFIER = "From:";
+    private static final String TO_DISPLAY_IDENTIFIER = "To:";
 
     public static final String WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday";
     public static final String FREQUENCY = "day|week|month|year";
@@ -558,4 +558,35 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
             return 0;
         }
     }
+
+    //@@author
+
+    //@@author A0143853A
+    @Override
+    public ScheduleElement getDuplicate() {
+        DateTime dateCopy = null;
+        DateTime startDateCopy = null;
+        DateTime endDateCopy = null;
+        TimeExpression teCopy = null;
+
+        if (date != null) {
+            dateCopy = date.getDuplicate();
+        }
+        if (startDate != null) {
+            startDateCopy = startDate.getDuplicate();
+        }
+        if (endDate != null) {
+            endDateCopy = endDate.getDuplicate();
+        }
+        if (te != null) {
+            teCopy = te.getDuplicate();
+        }
+
+        return new ScheduleElement(dateCopy,
+                                   startDateCopy,
+                                   endDateCopy,
+                                   teCopy,
+                                   rule);
+    }
+    //@@author
 }

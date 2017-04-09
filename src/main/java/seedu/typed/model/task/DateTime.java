@@ -155,7 +155,7 @@ public class DateTime {
         return new DateTime(nextDay);
     }
     public DateTime nextDays(int count) {
-        LocalDateTime nextDays = this.localDateTime.plusDays((long) count);
+        LocalDateTime nextDays = this.localDateTime.plusDays(count);
         return new DateTime(nextDays);
     }
     public DateTime nextWeek() {
@@ -164,7 +164,7 @@ public class DateTime {
     }
 
     public DateTime nextWeeks(int count) {
-        LocalDateTime nextFewWeeks = this.localDateTime.plusWeeks((long) count);
+        LocalDateTime nextFewWeeks = this.localDateTime.plusWeeks(count);
         return new DateTime(nextFewWeeks);
     }
 
@@ -213,6 +213,13 @@ public class DateTime {
 
     public boolean isAfterNow() {
         return localDateTime.isAfter(LocalDateTime.now());
+    }
+    //@@author
+
+    //@@author A0143853A
+    public DateTime getDuplicate() {
+        LocalDateTime copy = localDateTime.plusYears(0);
+        return new DateTime(copy);
     }
     //@@author
 

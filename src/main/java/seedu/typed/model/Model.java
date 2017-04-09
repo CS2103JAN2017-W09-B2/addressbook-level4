@@ -91,9 +91,11 @@ public interface Model {
     //@@author
 
     //@@author A0139379M
-    void completeTasks(int startIndex, int endIndex) throws DuplicateTaskException;
+    void completeTasks(int startIndex, int endIndex)
+            throws DuplicateTaskException, IllegalValueException;
     //@@author
-    void completeTaskAt(int filteredTaskListIndex) throws DuplicateTaskException;
+    void completeTaskAt(int filteredTaskListIndex)
+            throws DuplicateTaskException, IllegalValueException;
     // =========== ModelManager Util Methods =======================
     // =============================================================
     /**
@@ -145,25 +147,31 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     //@@author A0143853A
-    void uncompleteTaskAtForUndo(int taskManagerIndex) throws DuplicateTaskException;
+    void uncompleteTaskAtForUndo(int taskManagerIndex)
+            throws DuplicateTaskException, IllegalValueException;
 
-    void completeTaskAtForRedo(int taskManagerIndex) throws DuplicateTaskException;
+    void completeTaskAtForRedo(int taskManagerIndex)
+            throws DuplicateTaskException, IllegalValueException;
 
     void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
-            throws DuplicateTaskException;
+            throws DuplicateTaskException,IllegalValueException;
 
     void deleteTasks(int startIndex, int endIndex)
             throws TaskNotFoundException, IllegalValueException;
 
     void deleteTaskAt(int index);
 
-    void uncompleteTasksAtForUndo(ArrayList<Integer> list) throws DuplicateTaskException;
+    void uncompleteTasksAtForUndo(ArrayList<Integer> list)
+            throws DuplicateTaskException, IllegalValueException;
 
-    void completeTasksAtForRedo(ArrayList<Integer> list) throws DuplicateTaskException;
+    void completeTasksAtForRedo(ArrayList<Integer> list)
+            throws DuplicateTaskException, IllegalValueException;
 
-    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
+    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list)
+            throws DuplicateTaskException;
 
-    void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list) throws DuplicateTaskException;
+    void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list)
+            throws DuplicateTaskException;
 
     int getNumberUncompletedEvents();
 

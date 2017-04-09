@@ -111,13 +111,16 @@ public class TaskManager implements ReadOnlyTaskManager {
                 }
                 ReadOnlyTask toCopy = iterator.next();
                 if (index != iterCount) {
-                    addTask((Task) toCopy);
+                    Task toAdd = new TaskBuilder(toCopy).build();
+                    addTask(toAdd);
                 } else {
                     listCount++;
                 }
                 iterCount++;
             }
         } catch (DuplicateTaskException e) {
+            ;
+        } catch (IllegalValueException ive) {
             ;
         }
         try {
@@ -314,7 +317,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(tasks, tags);
     }
 
-    public void completeTaskAt(int taskManagerIndex) throws DuplicateTaskException {
+    public void completeTaskAt(int taskManagerIndex)
+            throws DuplicateTaskException, IllegalValueException {
         tasks.completeTaskAt(taskManagerIndex);
     }
 

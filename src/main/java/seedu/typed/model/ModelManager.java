@@ -221,7 +221,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139379M
     @Override
     public synchronized void completeTaskAt(int filteredTaskListIndex)
-            throws DuplicateTaskException {
+            throws DuplicateTaskException, IllegalValueException {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.completeTaskAt(taskManagerIndex);
         updateFilteredListToShowDefault();
@@ -230,7 +230,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void completeTasks(int startIndex, int endIndex)
-            throws DuplicateTaskException {
+            throws DuplicateTaskException, IllegalValueException {
         int num = endIndex - startIndex + 1;
         for (int i = 0; i < num; i++) {
             int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
@@ -244,7 +244,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0143853A
     @Override
     public synchronized void completeTasksAndStoreIndices(int startIndex, int endIndex,
-            ArrayList<Integer> list) throws DuplicateTaskException {
+            ArrayList<Integer> list) throws DuplicateTaskException, IllegalValueException {
         for (int curr = startIndex; curr <= endIndex; curr++) {
             int taskManagerIndex = filteredTasks.getSourceIndex(curr);
             addTaskIndexToListIfUncompleted(taskManagerIndex, list);
@@ -280,7 +280,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void completeTasksAtForRedo(ArrayList<Integer> list)
-            throws DuplicateTaskException {
+            throws DuplicateTaskException, IllegalValueException {
         for (int curr = 0; curr < list.size(); curr++) {
             taskManager.completeTaskAt(list.get(curr));
         }
@@ -290,7 +290,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void completeTaskAtForRedo(int taskManagerIndex)
-            throws DuplicateTaskException {
+            throws DuplicateTaskException, IllegalValueException {
         taskManager.completeTaskAt(taskManagerIndex);
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();

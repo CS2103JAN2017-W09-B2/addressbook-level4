@@ -40,7 +40,7 @@ public class TaskBuilder {
         this.name = new Name(nameToCopy);
         String notesToCopy = task.getNotes().getValue();
         this.notes = new Notes(notesToCopy);
-        this.se = task.getSE();
+        this.se = task.getSE().getDuplicate();
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();
     }

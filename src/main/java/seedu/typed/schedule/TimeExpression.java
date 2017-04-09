@@ -28,5 +28,9 @@ public interface TimeExpression {
      * includes return true
      */
     public DateTime nextDeadlineOccurrence(DateTime date);
+    //@@author
 
+    //@@author A0143853A
+    public TimeExpression getDuplicate();
+    //@@author
 }
