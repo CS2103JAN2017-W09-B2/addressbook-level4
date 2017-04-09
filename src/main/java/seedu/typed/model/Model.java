@@ -154,7 +154,7 @@ public interface Model {
             throws DuplicateTaskException, IllegalValueException;
 
     void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
-            throws DuplicateTaskException,IllegalValueException;
+            throws DuplicateTaskException, IllegalValueException;
 
     void deleteTasks(int startIndex, int endIndex)
             throws TaskNotFoundException, IllegalValueException;
