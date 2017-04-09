@@ -17,7 +17,7 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
  * @author YIM CHIA HUI
  */
 
-    private final DateTime date; // deadlines, duedates...
+    private final DateTime date; // deadlines, due dates...
     private final DateTime startDate; // start time of the event
     private final DateTime endDate; // end time of the event
     private final TimeExpression te; // representation of the recurrence

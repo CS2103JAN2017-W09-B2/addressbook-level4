@@ -152,8 +152,8 @@ public interface Model {
     void completeTasksAndStoreIndices(int startIndex, int endIndex, ArrayList<Integer> list)
             throws DuplicateTaskException;
 
-    void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex, ArrayList<Pair<Integer, Task>> list)
-            throws TaskNotFoundException;
+    void deleteTasks(int startIndex, int endIndex)
+            throws TaskNotFoundException, IllegalValueException;
 
     void deleteTaskAt(int index);
 

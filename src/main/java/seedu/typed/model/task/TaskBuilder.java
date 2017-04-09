@@ -34,9 +34,12 @@ public class TaskBuilder {
         this.notes = new Notes();
     }
 
-    public TaskBuilder(ReadOnlyTask task) {
-        this.name = task.getName();
-        this.notes = task.getNotes();
+    public TaskBuilder(ReadOnlyTask task)
+            throws IllegalValueException {
+        String nameToCopy = task.getName().getValue();
+        this.name = new Name(nameToCopy);
+        String notesToCopy = task.getNotes().getValue();
+        this.notes = new Notes(notesToCopy);
         this.se = task.getSE();
         this.tags = task.getTags();
         this.isCompleted = task.getIsCompleted();

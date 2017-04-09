@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredListToShowDefault();
+        taskManager.sort();
         indicateTaskManagerChanged();
     }
 
@@ -182,17 +182,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0143853A
     @Override
-    public synchronized void deleteTasksAndStoreTasksAndIndices(int startIndex, int endIndex,
-            ArrayList<Pair<Integer, Task>> list) throws TaskNotFoundException {
+    public synchronized void deleteTasks(int startIndex, int endIndex)
+            throws TaskNotFoundException, IllegalValueException {
         int num = endIndex - startIndex + 1;
-        for (int i = 0; i < num; i++) {
+        if (num == 1) {
             int taskManagerIndex = filteredTasks.getSourceIndex(startIndex);
-            Task taskToDelete = taskManager.getTaskAt(taskManagerIndex);
-            Pair<Integer, Task> toAdd = new Pair<Integer, Task>(taskManagerIndex, taskToDelete);
-            list.add(0, toAdd);
             taskManager.removeTaskAt(taskManagerIndex);
+        } else {
+            int[] listOfIndices = new int[num];
+            for (int i = 0; i < num; i++) {
+                int taskManagerIndex = filteredTasks.getSourceIndex(startIndex + i);
+                listOfIndices[i] = taskManagerIndex;
+            }
+            TaskManager newTaskManager = new TaskManager();
+            newTaskManager.copyDataExcludingIndices(taskManager, listOfIndices);
+            taskManager.resetData(newTaskManager);
         }
-        updateFilteredListToShowDefault();
+        // updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
