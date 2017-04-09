@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 
 import seedu.typed.commons.util.FileUtil;
 import seedu.typed.logic.commands.Command;
-import seedu.typed.logic.commands.ExportCommand;
 import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.SaveCommand;
 
@@ -24,7 +23,7 @@ public class SaveCommandParser {
     public Command parse(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
