@@ -34,9 +34,6 @@ public class DateTime {
     public static DateTime parseDateString(String date) {
         // assume in dd/mm/yyyy format
         String[] dates = date.trim().split("-");
-        for (int i = 0; i < dates.length; i++) {
-            System.out.println(dates[i] + " " + Integer.valueOf(dates[i]));
-        }
         System.out.println(dates[0]);
         int year = Integer.valueOf(dates[0]);
         int month = Integer.valueOf(dates[1]);
@@ -126,12 +123,36 @@ public class DateTime {
         }
     }
 
+    public static int getLastDayOfMonth(int month) {
+        int numDays = 0;
+        int year = LocalDateTime.now().getYear();
+        switch (month) {
+        case 1: case 3: case 5:
+        case 7: case 8: case 10:
+        case 12:
+            numDays = 31;
+            break;
+        case 4: case 6:
+        case 9: case 11:
+            numDays = 30;
+            break;
+        case 2:
+            if (isLeapYear(year)) {
+                numDays = 29;
+            } else {
+                numDays = 28;
+            }
+            break;
+        }
+        return numDays;
+    }
+
     public DateTime tomorrow() {
         LocalDateTime nextDay = this.localDateTime.plusDays(LONG_ONE);
         return new DateTime(nextDay);
     }
     public DateTime nextDays(int count) {
-        LocalDateTime nextDays = this.localDateTime.plusDays((long) count);
+        LocalDateTime nextDays = this.localDateTime.plusDays(count);
         return new DateTime(nextDays);
     }
     public DateTime nextWeek() {
@@ -140,7 +161,7 @@ public class DateTime {
     }
 
     public DateTime nextWeeks(int count) {
-        LocalDateTime nextFewWeeks = this.localDateTime.plusWeeks((long) count);
+        LocalDateTime nextFewWeeks = this.localDateTime.plusWeeks(count);
         return new DateTime(nextFewWeeks);
     }
 

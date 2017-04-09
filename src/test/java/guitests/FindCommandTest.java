@@ -14,14 +14,11 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() throws IllegalArgumentException, IllegalValueException {
         assertFindResult("find Z"); // no results
-        // assertFindResult("find Meller", td.benson, td.daniel, td.elle); // multiple
-                                                              // results
-        assertTrue(true);
+        assertFindResult("find Meller", td.benson, td.daniel, td.elle); // multiple results
 
         // find after deleting one result
         commandBox.runCommand("delete 1");
-        // assertFindResult("find Meller", td.daniel, td.elle);
-        assertTrue(true);
+        assertFindResult("find Meller", td.daniel, td.elle);
     }
     //@@author
 
@@ -44,4 +41,5 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(expectedHits.length + " tasks listed!");
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
+
 }

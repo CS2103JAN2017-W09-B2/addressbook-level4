@@ -62,14 +62,12 @@ public class AddCommand extends Command {
                 .build();
     }
 
-
     public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
             LocalDateTime to, Set<String> tags) throws IllegalValueException {
         ScheduleElement se;
         if (date == null && from != null && to != null) {
             se = new ScheduleElement(new DateTime(from), new DateTime(to));
         } else if (date != null && from == null && to == null) {
-            System.out.println(date.getMinute() + " " + date.getHour());
             se = new ScheduleElement(new DateTime(date));
         } else {
             se = new ScheduleElement();

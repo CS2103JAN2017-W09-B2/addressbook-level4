@@ -6,28 +6,28 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="cardPane" prefHeight="120.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="373.0" text="\$first" wrapText="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
+		<Label fx:id="name" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="373.0" styleClass="cell_big_label" stylesheets="@DarkTheme.css" text="\$first" wrapText="true" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
 			<font>
 				<Font size="25.0" />
 			</font>
 		</Label>
 		<FlowPane fx:id="tags" alignment="CENTER_LEFT" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" />
-		<Text fx:id="notes" fill="#2291da" layoutX="50.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notes" wrappingWidth="393.95556640625" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Text>
       <ImageView fx:id="stamp" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
       <Circle fx:id="taskType" fill="DODGERBLUE" layoutX="15.0" layoutY="26.0" radius="8.0" stroke="TRANSPARENT" strokeType="INSIDE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
-      <Text fx:id="date" layoutX="59.0" layoutY="106.501953125" strokeType="OUTSIDE" strokeWidth="0.0" text="date" AnchorPane.bottomAnchor="10.333984375" AnchorPane.leftAnchor="53.0">
+      <ImageView fx:id="recurring" fitHeight="30.0" fitWidth="30.0" layoutX="431.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="12.95556640625" AnchorPane.topAnchor="45.0" />
+      <Label fx:id="notes" layoutX="60.0" layoutY="45.0" styleClass="cell_small_label" stylesheets="@DarkTheme.css" text="notes" textFill="#2291da" wrapText="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="55.0">
          <font>
             <Font size="15.0" />
          </font>
-      </Text>
-      <ImageView fx:id="recurring" fitHeight="30.0" fitWidth="30.0" layoutX="431.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="12.95556640625" AnchorPane.topAnchor="45.0" />
+      </Label>
+      <Label fx:id="id" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="373.0" styleClass="label-index" stylesheets="@DarkTheme.css" text="N" wrapText="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="300.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" styleClass="label-date" stylesheets="@DarkTheme.css" text="\$date" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="55.0" />
 	</children>
 </AnchorPane>
