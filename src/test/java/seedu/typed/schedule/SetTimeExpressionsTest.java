@@ -48,7 +48,7 @@ public class SetTimeExpressionsTest {
     private UnionTE firstWedOrFirstSun = new UnionTE(everyFirstWed, everyFirstSun);
     private UnionTE everyMonday = new UnionTE(everyFirstMon, secondMon, thirdMon, fourthMon, fifthMon);
     private UnionTE eitherJanOrFebOrMar = new UnionTE(jan, feb, mar);
-    
+
     // Various DateTime to check against
     private DateTime firstMonInMar = DateTime.getDateTime(2017, Month.MARCH, 06, 0, 0);
     private DateTime firstThurs = DateTime.getDateTime(2017, Month.MARCH, 02, 0, 0);
@@ -130,7 +130,7 @@ public class SetTimeExpressionsTest {
     public void includes_may1_everyMonday_true() {
         assertTrue(everyMonday.includes(may1));
     }
-    
+
     // Test formats: includes_<DATE>In<TimeExpression>_outcome
     // Unit Testing for IntersectionTE methods
     @Test
