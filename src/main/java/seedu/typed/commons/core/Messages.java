@@ -21,15 +21,19 @@ public class Messages {
     public static final String MESSAGE_EXPORT_USAGE = ExportCommand.EXPORT_COMMAND_WORD
             + ": Exports the task manager to the location specified, or as a new name.\n"
             + "Example: " + ExportCommand.EXPORT_COMMAND_WORD + " C:/Users/(username)/Desktop/typed.xml";
-    public static final String MESSAGE_IMPORT_USAGE = ImportCommand.IMPORT_COMMAND_WORD + ": Imports the given task manager.\n"
+    public static final String MESSAGE_IMPORT_USAGE = ImportCommand.IMPORT_COMMAND_WORD
+            + ": Imports the given task manager.\n"
             + "Example: " + ImportCommand.IMPORT_COMMAND_WORD
             + " C:/Users/(username)/Desktop/typed.xml";
-    public static final String MESSAGE_IMPORT_SUCCESS = "Task manager imported! \n" + "Source: %1$s";
-    public static final String MESSAGE_SAVE_USAGE = SaveCommand.SAVE_COMMAND_WORD + ": Changes the storage location"
+    public static final String MESSAGE_IMPORT_SUCCESS = "Task manager imported! \n"
+            + "Source: %1$s";
+    public static final String MESSAGE_SAVE_USAGE = SaveCommand.SAVE_COMMAND_WORD
+            + ": Changes the storage location"
             + " and saves at the new location.\n"
             + "Example: " + SaveCommand.SAVE_COMMAND_WORD
             + " C:/Users/(username)/Desktop/typed.xml";
-    public static final String MESSAGE_SAVE_SUCCESS = "Storage location changed! \n" + "New location: %1$s";
+    public static final String MESSAGE_SAVE_SUCCESS = "Storage location changed! \n"
+            + "New location: %1$s";
     public static final String MESSAGE_SAVE_ERROR = "Unable to save to new location.";
 
 
