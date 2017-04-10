@@ -2,10 +2,12 @@ package guitests.guihandles;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import guitests.GuiRobot;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -66,7 +68,6 @@ public class TaskListPanelHandle extends GuiHandle {
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
             throws IllegalArgumentException, IllegalValueException {
-        System.out.println(tasks.length + startPosition);
         System.out.println(getListView().getItems().size());
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException(
@@ -173,7 +174,7 @@ public class TaskListPanelHandle extends GuiHandle {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n)
-                                 .isSameTask(task)).findFirst();
+                        .isSameTask(task)).findFirst();
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
