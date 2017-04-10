@@ -429,9 +429,7 @@ Precise Dates | Natural Dates | Relative Dates |
 -------- | :-------- | :-------- |
 12/22/2017 | 22 December 2017 | Today |
 12/22/17 | 22 Dec 2017 | Tomorrow |
-12/22 | Dec 22 | Tmr |
- | | the 22nd of Dec | Yesterday |
- | | 22nd day of Dec | Next Monday |
+12/22 | Dec 22 <br> the 22nd of Dec <br> 22nd day of Dec | Tmr <br> Yesterday <br> Next Monday |
 
 Precise Times | Natural Times | Relative Times |
 -------- | :-------- | :-------- |
