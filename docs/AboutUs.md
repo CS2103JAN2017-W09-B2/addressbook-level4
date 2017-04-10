@@ -9,6 +9,7 @@ Hello from the creators of **Typed**! We like to call ourselves Typedwriters. We
 Role: Chief Technical(ly Not An) Officer (CTO), aka Chief **Typed** Officer <br>
 Responsibilities: Team Lead, Deliverables & Deadlines, Testing <br>
 Component: Logic
+Features implemented: PowerFind, AddCommand Parser, Natural Language Processing, Notes
 
 -----
 
@@ -17,14 +18,16 @@ Component: Logic
 Role: Director of First Impressions <br>
 Responsibilities: Documentation, Design <br>
 Component: GUI
+Features implemented: Save, Export, Import, Progress Circle, Quotes Generator 
 
 -----
 
 #### [Mun Le Yuan](http://github.com/Ley94)
 <img src="images/ley94.jpg" width="150"><br>
-Role: Director of Back Side <br>
+Role: Director of Back End <br>
 Responsibilities: Integration <br>
 Component: Storage
+Features implemented: Undo, Redo, Delete, Util for Range of Indices, Up and Down Keys
 
 -----
 
@@ -33,6 +36,7 @@ Component: Storage
 Role: Director of Unrequited Love<br>
 Responsibilities: Code Quality, Scheduling & Tracking <br>
 Component: Model
+Features implemented: Recurring Tasks, Complete, Command Unit Tests, Sorting of List of Tasks
 
 -----
 
