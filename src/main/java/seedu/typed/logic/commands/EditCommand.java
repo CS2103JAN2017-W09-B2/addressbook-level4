@@ -67,9 +67,11 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
+        //@@author A0141094M
         if (listIndexOutOfBounds(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+        //@@author
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task taskToEditCopy;
@@ -126,16 +128,12 @@ public class EditCommand extends Command {
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         ScheduleElement updatedSe;
 
-        if (hasOnlyDeadlineField(editTaskDescriptor)) {
+        //current implementation only supports changing deadlines and adding deadlines to floating
+        if (taskToEdit.isDeadline() || taskToEdit.isFloating()) {
             updatedSe = new ScheduleElement(editTaskDescriptor.getDate().get(),
                     taskToEdit.getSE().getStartDate(), taskToEdit.getSE().getEndDate());
-        } else if (hasOnlyFromAndToFields(editTaskDescriptor)) {
-            updatedSe = new ScheduleElement(taskToEdit.getSE().getDate(),
-                    editTaskDescriptor.getFrom().get(), editTaskDescriptor.getTo().get());
-        } else if (hasNoDeadlineAndNoFromToFields(editTaskDescriptor)) {
-            updatedSe = taskToEdit.getSE();
         } else {
-            throw new IllegalValueException(MESSAGE_EDIT_DATE_FAILURE);
+            throw new IllegalValueException(MESSAGE_EDIT_TASK_FAILURE);
         }
         return new TaskBuilder()
                 .setName(updatedName)
@@ -144,21 +142,6 @@ public class EditCommand extends Command {
                 .setTags(updatedTags)
                 .isCompleted(taskToEdit.getIsCompleted())
                 .build();
-    }
-
-    private static boolean hasOnlyFromAndToFields(EditTaskDescriptor edt) {
-        return !edt.getDate().isPresent()
-                && edt.getFrom().isPresent() && edt.getTo().isPresent();
-    }
-
-    private static boolean hasOnlyDeadlineField(EditTaskDescriptor edt) {
-        return edt.getDate().isPresent()
-                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
-    }
-
-    private static boolean hasNoDeadlineAndNoFromToFields(EditTaskDescriptor edt) {
-        return !edt.getDate().isPresent()
-                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
     }
 
     /**
@@ -205,11 +188,6 @@ public class EditCommand extends Command {
         }
         public Optional<Name> getName() {
             return name;
-        }
-
-        public void setSE(Optional<ScheduleElement> se) {
-            assert se != null;
-            //this.se = se;
         }
 
         public void setDate(Optional<DateTime> date) {

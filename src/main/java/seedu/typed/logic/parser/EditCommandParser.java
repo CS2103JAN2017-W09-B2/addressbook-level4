@@ -44,17 +44,10 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             //@@author A0141094M
-            //TODO: iron out editTaskDescriptor.isAnyFieldEdited()
             if (argsTokenizer.getValue(PREFIX_BY).isPresent()) {
                 editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_BY)));
             } else if (argsTokenizer.getValue(PREFIX_ON).isPresent()) {
                 editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_ON)));
-            } else {
-                if (argsTokenizer.getValue(PREFIX_FROM).isPresent()) {
-                    editTaskDescriptor.setFrom(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_FROM)));
-                } else if (argsTokenizer.getValue(PREFIX_TO).isPresent()) {
-                    editTaskDescriptor.setTo(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_TO)));
-                }
             }
             //@@author
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
