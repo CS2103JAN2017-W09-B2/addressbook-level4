@@ -7,8 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
-import seedu.typed.testutil.TestTask;
 import seedu.typed.logic.commands.CompleteCommand;
+import seedu.typed.testutil.TestTask;
 
 public class CompleteCommandTest extends TaskManagerGuiTest {
     // GUI not ready as parser not in place
