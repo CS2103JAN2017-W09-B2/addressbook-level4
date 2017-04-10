@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.CompleteCommand;
 import seedu.typed.testutil.TestTask;
@@ -45,7 +44,7 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
         }
         assertCompleteSuccess(startIndex, endIndex);
     }
-    
+
     @Test
     public void execute_invalidIndex_error() {
         int invalidIndex = 0;
