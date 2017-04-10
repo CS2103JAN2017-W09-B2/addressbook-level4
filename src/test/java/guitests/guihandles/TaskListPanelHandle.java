@@ -66,7 +66,6 @@ public class TaskListPanelHandle extends GuiHandle {
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
             throws IllegalArgumentException, IllegalValueException {
-        System.out.println(tasks.length + startPosition);
         System.out.println(getListView().getItems().size());
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException(
@@ -173,7 +172,7 @@ public class TaskListPanelHandle extends GuiHandle {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n)
-                                 .isSameTask(task)).findFirst();
+                        .isSameTask(task)).findFirst();
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {

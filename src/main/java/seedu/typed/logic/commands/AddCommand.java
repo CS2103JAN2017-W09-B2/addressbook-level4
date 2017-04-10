@@ -44,14 +44,14 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
-            LocalDateTime to, Set<String> tags, String every) throws IllegalValueException {
+            LocalDateTime to, Set<String> tags, String rule) throws IllegalValueException {
         ScheduleElement se;
         if (date == null && from != null && to != null) {
-            se = new ScheduleElement(new DateTime(from), new DateTime(to), every);
+            se = new ScheduleElement(new DateTime(from), new DateTime(to), rule);
         } else if (date != null && from == null && to == null) {
-            se = new ScheduleElement(new DateTime(date), every);
-        } else if (every != null) {
-            se = new ScheduleElement(every);
+            se = new ScheduleElement(new DateTime(date), rule);
+        } else if (rule != null) {
+            se = ScheduleElement.makeDeadline(rule);
         } else {
             se = new ScheduleElement();
         }

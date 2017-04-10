@@ -71,8 +71,8 @@ public class ScheduleElementTest {
             testEventRecurMonthly = new ScheduleElement(firstApril, secondApril, "month");
             testEventRecurYearly = new ScheduleElement(firstApril, secondApril, "year");
 
-            testEveryMonday = new ScheduleElement("monday");
-            testEverySaturday = new ScheduleElement("saturday");
+            testEveryMonday = ScheduleElement.makeDeadline("monday");
+            testEverySaturday = ScheduleElement.makeDeadline("saturday");
 
         } catch (IllegalValueException e) {
             // no exception is expected

@@ -129,15 +129,15 @@ Format: `add TITLE #TAG ..`
 
 ### 3.3. Listing Tasks
 
-#### <a name="list"></a>3.3.1. Listing a Task or Event : `list`
+#### <a name="list"></a>3.3.1. Listing Upcoming Tasks : `list`
 
 Format: `list`
 
-> `list` shows you your tasks and events in a similar manner as the default page. <br>
+> `list` shows you your uncompleted tasks starting from those with the nearest deadlines. . <br>
 
 *e.g. list* <br>
 
-#### <a name="listType"></a>3.2.2. Listing a Task : `list TYPE`
+#### <a name="listType"></a>3.2.2. Listing Tasks By Type : `list TYPE`
 
 Format: `list TYPE`
 

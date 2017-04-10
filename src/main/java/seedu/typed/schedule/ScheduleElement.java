@@ -141,15 +141,15 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
      * Representation of a deadline when only recurrence is specified
      * but date is not specified
      * Example: Add task every monday
-     * This will set task deadline starting from the upcoming monday
+     * This is used in conjunction with makeDeadline
      *
-     * @param every
+     * @param rule specifies the recurrence rule
      * @throws IllegalValueException if rule is not of the given format
      */
     public ScheduleElement(String rule) throws IllegalValueException {
+        this.date = DateTime.getToday();
         this.te = parseDeadlineRecurrenceRule(rule);
         this.rule = rule;
-        this.date = nextOccurrence(DateTime.getToday());
         this.startDate = null;
         this.endDate = null;
     }
@@ -203,19 +203,19 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
      * This is to support the conversion from XML file to ScheduleElement objects
      * Returns a ScheduleElement built according to the {@code dateInput}.
      */
-    public ScheduleElement parseDateString(String dateInput) throws IllegalValueException {
+    public ScheduleElement parseDateString(String dateInput, String rule) throws IllegalValueException {
         if (dateInput == null || dateInput.isEmpty()) {
             return makeFloating();
         }
         if (dateInput.contains(BY_DISPLAY_IDENTIFIER)) {
             String[] dateTime = dateInput.trim().split(BY_DISPLAY_IDENTIFIER);
-            return makeDeadline(DateTimeParser.getDateTimeFromString(dateTime[1]));
+            return makeDeadline(DateTimeParser.getDateTimeFromString(dateTime[1]), rule);
         }
         if (dateInput.contains(FROM_DISPLAY_IDENTIFIER) && dateInput.contains(TO_DISPLAY_IDENTIFIER)) {
             String[] dateTime = dateInput.trim().split(TO_DISPLAY_IDENTIFIER);
             dateTime[0] = dateTime[0].replaceAll(FROM_DISPLAY_IDENTIFIER, "");
             return makeEvent(DateTimeParser.getDateTimeFromString(dateTime[0]),
-                    DateTimeParser.getDateTimeFromString(dateTime[1]));
+                    DateTimeParser.getDateTimeFromString(dateTime[1]), rule);
         }
         return makeFloating();
     }
@@ -263,12 +263,26 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
      * Static Methods to help ease constructing Schedule Elements
      */
 
-    public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate) {
-        return new ScheduleElement(startDate, endDate);
+    public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate, String rule)
+            throws IllegalValueException {
+        if (rule.equals("")) {
+            // if there's no recurrence
+            return new ScheduleElement(startDate, endDate);
+        }
+        return new ScheduleElement(startDate, endDate, rule);
     }
 
-    public static ScheduleElement makeDeadline(DateTime date) {
-        return new ScheduleElement(date);
+    public static ScheduleElement makeDeadline(DateTime date, String rule) throws IllegalValueException {
+        if (rule.equals("")) {
+            // if there's no recurrence rule
+            return new ScheduleElement(date);
+        }
+        return new ScheduleElement(date, rule);
+    }
+
+    // Constructing schedule elements where date is not specified
+    public static ScheduleElement makeDeadline(String rule) throws IllegalValueException {
+        return (new ScheduleElement(rule)).updateDate();
     }
 
     public static ScheduleElement makeFloating() {

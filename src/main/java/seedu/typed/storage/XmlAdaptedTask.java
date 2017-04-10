@@ -26,6 +26,8 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String notes;
     //@@author
+    @XmlElement(required = true)
+    private String rule;
 
     @XmlElement(required = true)
     private boolean isCompleted;
@@ -52,6 +54,12 @@ public class XmlAdaptedTask {
         dateTime = source.getSE().toString();
         notes = source.getNotes().getValue();
         isCompleted = source.getIsCompleted();
+        String seRule = source.getSE().getRule();
+        if (seRule == null) {
+            rule = "";
+        } else {
+            rule = seRule;
+        }
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -72,7 +80,7 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         ScheduleElement se = new ScheduleElement();
-        se = se.parseDateString(dateTime);
+        se = se.parseDateString(dateTime, rule);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new TaskBuilder()
                 .setName(this.name)

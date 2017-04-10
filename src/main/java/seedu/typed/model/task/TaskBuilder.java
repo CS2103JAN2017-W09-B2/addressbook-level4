@@ -67,27 +67,28 @@ public class TaskBuilder {
     }
     //@@author
 
+    //@@author A0139379M
     public TaskBuilder setSE(ScheduleElement se) {
         this.se = se;
         return this;
     }
     public TaskBuilder setDeadline(DateTime date) {
-        this.se = ScheduleElement.makeDeadline(date);
+        this.se = new ScheduleElement(date);
         return this;
     }
 
     public TaskBuilder setDeadline(LocalDateTime date) {
-        this.se = ScheduleElement.makeDeadline(new DateTime(date));
+        this.se = new ScheduleElement(new DateTime(date));
         return this;
     }
 
     public TaskBuilder setEvent(DateTime startDate, DateTime endDate) {
-        this.se = ScheduleElement.makeEvent(startDate, endDate);
+        this.se = new ScheduleElement(startDate, endDate);
         return this;
     }
 
     public TaskBuilder setEvent(LocalDateTime startDate, LocalDateTime endDate) {
-        this.se = ScheduleElement.makeEvent(new DateTime(startDate), new DateTime(endDate));
+        this.se = new ScheduleElement(new DateTime(startDate), new DateTime(endDate));
         return this;
     }
 
@@ -98,6 +99,7 @@ public class TaskBuilder {
     }
     //@@author
 
+    //@@author A0139379M
     public TaskBuilder isCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
         return this;

@@ -8,6 +8,7 @@ import java.lang.reflect.Modifier;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -361,6 +362,7 @@ public class TestUtil {
         for (int i = 0; i < listOfTasks.size(); i++) {
             System.out.println(listOfTasks.get(i));
         }
+        listOfTasks.sort(DateTimeComparator);
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
@@ -395,4 +397,13 @@ public class TestUtil {
 
         return collect.toArray(new Tag[split.length]);
     }
+
+    private static Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
+
+        @Override
+        public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+            return (o1.getSE().compareTo(o2.getSE()));
+        }
+
+    };
 }

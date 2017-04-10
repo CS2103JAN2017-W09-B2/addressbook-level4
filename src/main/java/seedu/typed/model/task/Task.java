@@ -4,7 +4,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
 import seedu.typed.model.tag.UniqueTagList;
 import seedu.typed.schedule.ScheduleElement;
-
+//author A0139379M
 /**
  * Represents a Task in the task manager. Guarantees: details are present and
  * not null, field values are validated.
@@ -28,10 +28,10 @@ public class Task implements ReadOnlyTask {
         assert name != null;
         if (startDate != null && endDate != null) {
             // both startDate, endDate not null => event
-            this.se = ScheduleElement.makeEvent(startDate, endDate);
+            this.se = new ScheduleElement(startDate, endDate);
         } else if (date != null) {
             // date not null => deadline
-            this.se = ScheduleElement.makeDeadline(date);
+            this.se = new ScheduleElement(date);
         } else {
             // all nulls => floating task
             this.se = ScheduleElement.makeFloating();
@@ -42,6 +42,15 @@ public class Task implements ReadOnlyTask {
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Constructor meant for TaskBuilder to use
+     *
+     * @param name
+     * @param notes
+     * @param se
+     * @param tags
+     * @param isCompleted
+     */
     public Task(Name name, Notes notes, ScheduleElement se, UniqueTagList tags, boolean isCompleted) {
         this.name = name;
         this.notes = notes;
