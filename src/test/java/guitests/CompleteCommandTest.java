@@ -1,8 +1,8 @@
 package guitests;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
