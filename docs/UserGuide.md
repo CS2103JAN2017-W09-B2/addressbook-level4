@@ -79,9 +79,9 @@ Format: `add TITLE`
 Format: `add TITLE by DATE`
 
 > `add TITLE by DATE` adds your task along with its due date. <br>
-> DATE takes the format DD/MM/YYYY HH:MM, but is tolerant of other date formats as described in **[3.16 Acceptable Date and Time Formats](#acceptable-date-and-time-formats)**.
-> If DATE is not specified, Typed will automatically assume the date to be today.
-> If TIME is not specified, Typed will automatically set it to be 23:59.
+> DATE takes the format DD/MM/YYYY HH:MM, but is tolerant of other date formats as described in **[3.16 Acceptable Date and Time Formats](#acceptable-date-and-time-formats)**. <br>
+> If DATE is not specified, Typed will automatically assume the date to be today. <br>
+> If TIME is not specified, Typed will automatically set it to be 23:59. 
 
 *e.g. add lose 10 kg by 14/02/2014 14:00* <br>
 
@@ -200,7 +200,7 @@ Format: `find KEYWORD ..`
 > `find KEYWORD ..` finds all your tasks containing KEYWORD in their title. <br>
 > Fuzzy find is used to include similar words, e.g. `Sara` will match `Cara`. <br>
 > The search is not case sensitive, e.g `boss` will match `Boss`. <br>
-> The order of the keywords does not matter, e.g. `Hans Bo` will match `Bo Hans`. <br>
+> The order of the keywords does not matter, e.g. `boss work` will give the same results as `work boss`. <br>
 > Tasks or events matching at least one keyword will be returned (i.e. `OR` search), e.g. `Expo` will match `IT Expo`. <br>
 
 *e.g. find John: returns `email Jonni in finance`* <br>
@@ -223,7 +223,7 @@ Format: `find #TAG ..`
 Format: `delete INDEX`
 
 > `delete INDEX` removes a task identified by INDEX. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. delete 2* <br>
 
@@ -233,7 +233,7 @@ Format: `delete INDEX to INDEX`
 Format: `delete INDEX - INDEX`
 
 > `delete INDEX to INDEX` removes a range of tasks identified by INDEX. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. delete 2 to 8* <br>
 
