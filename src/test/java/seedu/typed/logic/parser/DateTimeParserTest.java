@@ -21,13 +21,9 @@ public class DateTimeParserTest {
     String dateNaturalShort;
     String dateNaturalLong;
     String dateNaturalSentence;
+    String dateNaturalSentenceFormal;
     String dateTmrShort;
     String dateTmrLong;
-    String invalidTime;
-    String time24Format;
-    String time12FormatLong;
-    String time12FormatShort;
-    String timeNatural;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -40,13 +36,9 @@ public class DateTimeParserTest {
         dateNaturalShort = "22 dec";
         dateNaturalLong = "22 december 2017";
         dateNaturalSentence = "the 22nd of december";
+        dateNaturalSentenceFormal = "22nd day of dec";
         dateTmrShort = "tmr";
         dateTmrLong = "tomorrow";
-        invalidTime = "20hr";
-        time24Format = "2000"; // the standard
-        time12FormatLong = "0800pm";
-        time12FormatShort = "8pm";
-        timeNatural = "night";
     }
 
     @After
@@ -57,13 +49,9 @@ public class DateTimeParserTest {
         dateNaturalShort = null;
         dateNaturalLong = null;
         dateNaturalSentence = null;
+        dateNaturalSentenceFormal = null;
         dateTmrShort = null;
         dateTmrLong = null;
-        invalidTime = null;
-        time24Format = null;
-        time12FormatLong = null;
-        time12FormatShort = null;
-        timeNatural = null;
     }
 
     private void assertExceptionThrown() {
@@ -111,48 +99,17 @@ public class DateTimeParserTest {
     }
 
     @Test
+    public void parsingNaturalDates_dateNaturalSentenceFormal_equals() throws IllegalValueException {
+        DateTime dateTimeNaturalSentenceFormal = DateTimeParser.getDateTimeFromString(dateNaturalSentenceFormal);
+        isDateEqual(genStandardDate(), dateTimeNaturalSentenceFormal);
+    }
+
+    @Test
     public void parsingNaturalDates_dateTomorrowShorthands_equals() throws IllegalValueException {
         DateTime dateTimeTmrShort = DateTimeParser.getDateTimeFromString(dateTmrShort);
         DateTime dateTimeTmrLong = DateTimeParser.getDateTimeFromString(dateTmrLong);
         isDateEqual(dateTimeTmrShort, dateTimeTmrLong);
     }
-
-    // ----------------------------------------------------------------------------------------
-
-    private DateTime genStandardTime() throws IllegalValueException {
-        return DateTimeParser.getDateTimeFromString(time24Format);
-    }
-
-    /*
-    private void isTimeEqual(DateTime dt, DateTime dt2) {
-        assertEquals(dt, dt2);
-    }
-
-    @Test
-    public void parsingNaturalDates_invalidTime_illegalValueExceptionThrown() throws IllegalValueException {
-        assertExceptionThrown("");
-        DateTimeParser.getDateTimeFromString(invalidTime);
-    }
-
-    @Test
-    public void parsingNaturalTimes_time12FormatShort_equals() throws IllegalValueException {
-        DateTime dateTime12FormatShort = DateTimeParser.getDateTimeFromString(time12FormatShort);
-        assertEquals(genStandardTime(), dateTime12FormatShort);
-    }
-
-    @Test
-    public void parsingNaturalTimes_time12FormatLong_equals() throws IllegalValueException {
-        DateTime dateTime12FormatLong = DateTimeParser.getDateTimeFromString(time12FormatLong);
-        assertEquals(genStandardTime(), dateTime12FormatLong);
-    }
-
-    @Test
-    public void parsingNaturalTimes_timeNaturalTime_equals() throws IllegalValueException {
-        DateTime dateTimeNatural = DateTimeParser.getDateTimeFromString(timeNatural);
-        assertEquals(genStandardTime(), dateTimeNatural);
-    }
-
-    */
 
 }
 //@@author
