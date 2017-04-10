@@ -1,7 +1,8 @@
 package guitests;
 
-import org.junit.Test;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import java.util.ArrayList;
 import seedu.typed.commons.exceptions.IllegalValueException;
