@@ -14,9 +14,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private ScheduleElement se;
-    //@@author A0141094M
     private Notes notes;
-    //@@author
     private UniqueTagList tags;
     private boolean isCompleted;
 
@@ -30,9 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.se = taskToCopy.getSE();
-        //@@author A0141094M
         this.notes = taskToCopy.getNotes();
-        //@@author
         this.tags = taskToCopy.getTags();
     }
 
@@ -96,7 +92,6 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().getValue() + " ");
         sb.append("by " + se.getDate().toString() + " ");
-        //sb.append(se.toString());
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
