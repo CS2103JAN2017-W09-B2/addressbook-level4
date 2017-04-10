@@ -422,15 +422,15 @@ Precise Dates | Natural Dates | Relative Dates
 12/22/2017 | 22 December 2017 | Today
 12/22/17 | 22 Dec 2017 | Tomorrow
 12/22 | Dec 22 | Tmr
-- | the 22nd of Dec | Yesterday
-- | - | Next Monday
+ | | the 22nd of Dec | Yesterday
+ | | 22nd day of Dec | Next Monday
 
 Precise Times | Natural Times | Relative Times
 -------- | :-------- | :--------
 08:00 | 8am | Morning (8am)
 1200 | 12.00pm | Afternoon (12pm)
-1900h | - | Evening (7pm)
-- | - | Night (8pm)
+1900h | 7:00pm | Evening (7pm)
+20.00 | | Night (8pm)
 
 ## 4. Command Summary
 
