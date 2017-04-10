@@ -1,7 +1,5 @@
 package seedu.typed.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.logic.commands.exceptions.CommandException;
@@ -71,7 +69,7 @@ public class CompleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        ArrayList<Integer> listOfIndices = new ArrayList<Integer>();
+
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (startIndex == -1) {

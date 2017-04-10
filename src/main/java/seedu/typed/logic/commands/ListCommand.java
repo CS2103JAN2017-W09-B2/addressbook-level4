@@ -2,7 +2,6 @@
 package seedu.typed.logic.commands;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 
 /**
  * Lists all tasks in the task manager to the user.
@@ -32,7 +31,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(type);
-        session.updateUndoRedoStacks(CommandTypeUtil.TYPE_LIST_TASK, -1, null);
+        session.updateUndoRedoStacks(COMMAND_WORD_LIST, -1, null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

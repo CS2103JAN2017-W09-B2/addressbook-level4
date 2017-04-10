@@ -5,7 +5,6 @@ import seedu.typed.commons.core.Messages;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.events.ui.JumpToListRequestEvent;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.logic.commands.util.CommandTypeUtil;
 import seedu.typed.model.task.ReadOnlyTask;
 
 /**
@@ -39,7 +38,7 @@ public class SelectCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        session.updateUndoRedoStacks(CommandTypeUtil.TYPE_SELECT_TASK, -1, null);
+        session.updateUndoRedoStacks(COMMAND_WORD_SELECT, -1, null);
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
     }

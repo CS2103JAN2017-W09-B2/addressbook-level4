@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        taskManager.sort();
+        updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
 
@@ -174,7 +174,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTaskAt(int index) {
         taskManager.removeTaskAt(index);
-        updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
     }
     //@@author
