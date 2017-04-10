@@ -126,11 +126,13 @@ public class EditCommand extends Command {
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         ScheduleElement updatedSe;
 
+        DateTime nullDateTime = new DateTime();
+
         if (hasOnlyDeadlineField(editTaskDescriptor)) {
             updatedSe = new ScheduleElement(editTaskDescriptor.getDate().get(),
-                    taskToEdit.getSE().getStartDate(), taskToEdit.getSE().getEndDate());
+                    nullDateTime, nullDateTime);
         } else if (hasOnlyFromAndToFields(editTaskDescriptor)) {
-            updatedSe = new ScheduleElement(taskToEdit.getSE().getDate(),
+            updatedSe = new ScheduleElement(nullDateTime,
                     editTaskDescriptor.getFrom().get(), editTaskDescriptor.getTo().get());
         } else if (hasNoDeadlineAndNoFromToFields(editTaskDescriptor)) {
             updatedSe = taskToEdit.getSE();
@@ -167,6 +169,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
+        //private Optional<ScheduleElement> se = Optional.empty();
         private Optional<DateTime> date = Optional.empty();
         private Optional<DateTime> from = Optional.empty();
         private Optional<DateTime> to = Optional.empty();
@@ -178,6 +181,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
+            //this.se = toCopy.getSE();
             this.date = toCopy.getDate();
             this.from = toCopy.getFrom();
             this.to = toCopy.getTo();
