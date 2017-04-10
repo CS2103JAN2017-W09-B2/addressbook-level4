@@ -43,12 +43,8 @@ public class AddCommandTest extends TaskManagerGuiTest {
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
             throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(taskToAdd.getAddCommand());
-        System.out.println("there" + taskToAdd.getAddCommand().toString());
 
         // confirm the new card contains the right data
-        System.out.println("chckpt 1: " + taskToAdd.getName().getValue());
-        System.out.println("chckpt 2: " + taskListPanel.getTaskIndex(taskToAdd));
-        System.out.println("chckpt 3: " + taskListPanel.navigateToTask(taskToAdd.getName().getValue()));
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().getValue());
         assertMatching(taskToAdd, addedCard);
 
