@@ -347,10 +347,10 @@ Format: `finish all`
 
 Format: `import FILEPATH`
 
-> You can import the file to Typed! <br>
+> You can import data files to Typed! <br>
 > Imported file must be a XML file.
 
-*e.g. For Windows: import C:\Users\Public\Desktop\typed.xml*<br>
+*e.g. For Windows: import C:/Users/Username/Desktop/typed.xml*<br>
 *e.g. For MacOS: import /Users/(username)/Desktop/typed.xml*<br>
 
 
@@ -375,7 +375,6 @@ Format: `export FILEPATH`
 *e.g. For Windows: export C:/Users/(username)/Desktop/typed.xml*<br>
 *e.g. For MacOS: export /Users/(username)/Desktop/typed.xml*<br>
 
-
 ### 3.12. Saving Your Data
 
 #### 3.12.1. Saving Your Data to the Current File: 
@@ -393,10 +392,18 @@ Format: `save FILEPATH`
 *e.g. For Windows: save C:\Users\Public\Desktop\typed.xml*<br>
 *e.g. For MacOS: save /Users/(username)/Desktop/typed.xml*<br>
 
+### 3.13. Clearing All Data : `clear`
 
-### 3.13. Exiting *Typed*
+#### <a name="clear"></a>3.13.1. Clearing All Data : `clear`
 
-#### <a name="exit"></a>3.12.1. Exiting *Typed* : `exit`
+Format: `clear`
+Wipes out all your stored data in the current file. <br>
+
+*e.g. clear <br>
+
+### 3.14. Exiting *Typed*
+
+#### <a name="exit"></a>3.14.1. Exiting *Typed* : `exit`
 
 Format: `exit`
 
@@ -405,13 +412,13 @@ Format: `exit`
 
 *e.g. exit* <br>
 
-### 3.14. Command History
+### 3.15. Command History
 
 #### <a name="command-history">
 
-You may find this feature familiar if you are a command line user. Pressing <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> will allow you to toggle commands you have previously entered. 
+You may find this feature familiar if you are a command line user. Pressing <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> will allow you to toggle commands you have previously entered. <br>
 
-### 3.15. Acceptable Date and Time Formats
+### 3.16. Acceptable Date and Time Formats
 
 #### <a name="acceptable-date-and-time-formats">
 
@@ -451,6 +458,7 @@ Command | Format |
 `export` | [export FILENAME](#exportFilename) <br> [export FILEPATH](#exportFilepath) |
 `save` | [save FILEPATH](#saveFilepath) |
 `exit, quit, logout, bye` | [exit](#exit) |
+`clear, empty` | [clear](#clear) |
 
 ## 5. FAQ
 
