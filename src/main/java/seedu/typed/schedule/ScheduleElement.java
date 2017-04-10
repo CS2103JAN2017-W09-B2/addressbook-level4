@@ -265,10 +265,18 @@ public class ScheduleElement implements TimeExpression, Comparable<ScheduleEleme
 
     public static ScheduleElement makeEvent(DateTime startDate, DateTime endDate, String rule)
             throws IllegalValueException {
+        if (rule.equals("")) {
+            // if there's no recurrence
+            return new ScheduleElement(startDate, endDate);
+        }
         return new ScheduleElement(startDate, endDate, rule);
     }
 
     public static ScheduleElement makeDeadline(DateTime date, String rule) throws IllegalValueException {
+        if (rule.equals("")) {
+            // if there's no recurrence rule
+            return new ScheduleElement(date);
+        }
         return new ScheduleElement(date, rule);
     }
 
