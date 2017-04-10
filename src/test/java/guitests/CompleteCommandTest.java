@@ -1,11 +1,9 @@
 package guitests;
 
 import org.junit.Test;
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.CompleteCommand;
 import seedu.typed.testutil.TestTask;
