@@ -24,6 +24,7 @@ import seedu.typed.logic.commands.IncorrectCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.RedoCommand;
 import seedu.typed.logic.commands.SaveCommand;
+import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.UndoCommand;
 
 /**
@@ -100,9 +101,9 @@ public class Parser {
         if (isSaveCommand(commandWord)) {
             return new SaveCommandParser().parse(args);
         }
-        /*if (isSelectCommand(commandWord)) {
+        if (isSelectCommand(commandWord)) {
             return new SelectCommandParser().parse(args);
-        }*/
+        }
         if (isUndoCommand(commandWord)) {
             return new UndoCommandParser().parse(args);
         }
@@ -136,9 +137,9 @@ public class Parser {
         return commandWord.equals(UndoCommand.COMMAND_WORD_UNDO);
     }
 
-    /*private boolean isSelectCommand(String commandWord) {
+    private boolean isSelectCommand(String commandWord) {
         return commandWord.equals(SelectCommand.COMMAND_WORD_SELECT);
-    }*/
+    }
 
     private boolean isSaveCommand(String commandWord) {
         return commandWord.equals(SaveCommand.COMMAND_WORD_SAVE);

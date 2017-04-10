@@ -398,7 +398,7 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
-    private static Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
+    private static final Comparator<ReadOnlyTask> DateTimeComparator = new Comparator<ReadOnlyTask>() {
 
         @Override
         public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {

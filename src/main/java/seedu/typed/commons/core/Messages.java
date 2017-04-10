@@ -18,19 +18,19 @@ public class Messages {
     public static final String MESSAGE_EXPORT_SAVE_ERROR = "Unable to export to the location.";
     public static final String MESSAGE_EXPORT_DUPLICATE = "There already exists a file with the same filename.\n"
             + "Please use a different filename.";
-    public static final String MESSAGE_EXPORT_USAGE = ExportCommand.EXPORT_COMMAND_WORD
+    public static final String MESSAGE_EXPORT_USAGE = ExportCommand.COMMAND_WORD_EXPORT
             + ": Exports the task manager to the location specified, or as a new name.\n"
-            + "Example: " + ExportCommand.EXPORT_COMMAND_WORD + " C:/Users/(username)/Desktop/typed.xml";
-    public static final String MESSAGE_IMPORT_USAGE = ImportCommand.IMPORT_COMMAND_WORD
+            + "Example: " + ExportCommand.COMMAND_WORD_EXPORT + " C:/Users/(username)/Desktop/typed.xml";
+    public static final String MESSAGE_IMPORT_USAGE = ImportCommand.COMMAND_WORD_IMPORT
             + ": Imports the given task manager.\n"
-            + "Example: " + ImportCommand.IMPORT_COMMAND_WORD
+            + "Example: " + ImportCommand.COMMAND_WORD_IMPORT
             + " C:/Users/(username)/Desktop/typed.xml";
     public static final String MESSAGE_IMPORT_SUCCESS = "Task manager imported! \n"
             + "Source: %1$s";
-    public static final String MESSAGE_SAVE_USAGE = SaveCommand.SAVE_COMMAND_WORD
+    public static final String MESSAGE_SAVE_USAGE = SaveCommand.COMMAND_WORD_SAVE
             + ": Changes the storage location"
             + " and saves at the new location.\n"
-            + "Example: " + SaveCommand.SAVE_COMMAND_WORD
+            + "Example: " + SaveCommand.COMMAND_WORD_SAVE
             + " C:/Users/(username)/Desktop/typed.xml";
     public static final String MESSAGE_SAVE_SUCCESS = "Storage location changed! \n"
             + "New location: %1$s";
