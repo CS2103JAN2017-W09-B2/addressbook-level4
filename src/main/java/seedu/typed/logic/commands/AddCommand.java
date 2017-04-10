@@ -106,7 +106,7 @@ public class AddCommand extends Command {
         } catch (DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException tnfe) {
-            assert false: "Task added must be found!";
+            assert false : "Task added must be found!";
 
             String name = toAdd.getName().toString();
             throw new CommandException(String.format(MESSAGE_SUCCESS, name));

@@ -72,7 +72,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Meet Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertFindEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -140,7 +140,26 @@ public class EditCommandTest extends TaskManagerGuiTest {
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
+
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
+
+    private void assertFindEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
+            String detailsToEdit, TestTask editedTask)
+                    throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+
+        // confirm the new card contains the right data
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().getValue());
+        assertMatching(editedTask, editedCard);
+
+        // confirm the list now contains all previous tasks plus the task with
+        // updated details
+        TestTask[] currExpectedTasksList = {editedTask};
+
+        assertTrue(taskListPanel.isListMatching(currExpectedTasksList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+    }
+
 }

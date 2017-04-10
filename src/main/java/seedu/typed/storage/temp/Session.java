@@ -1,11 +1,9 @@
 package seedu.typed.storage.temp;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Stack;
 
 import seedu.typed.commons.util.Triple;
-import seedu.typed.logic.commands.util.HistoryUtil;
 import seedu.typed.logic.commands.util.UndoRedoUtil;
 
 //@@author A0143853A
@@ -16,16 +14,17 @@ import seedu.typed.logic.commands.util.UndoRedoUtil;
  */
 
 public class Session {
-    private HistoryUtil history;
+
     private Stack<Triple<String, Integer, Object>> undoStack;
     private Stack<Triple<String, Integer, Object>> redoStack;
 
     public Session() {
-        this.history = new HistoryUtil();
+        // this.history = new HistoryUtil();
         this.undoStack = new Stack<Triple<String, Integer, Object>>();
         this.redoStack = new Stack<Triple<String, Integer, Object>>();
     }
 
+    /*
     public void updateAllCommandsHistory(String command) {
         history.addCommand(command);
     }
@@ -51,7 +50,7 @@ public class Session {
     }
     public void clearHistory() {
         history.clear();
-    }
+    }*/
 
     public Stack<Triple<String, Integer, Object>> getUndoStack() {
         return undoStack;

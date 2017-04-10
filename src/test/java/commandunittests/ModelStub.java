@@ -3,6 +3,7 @@ package commandunittests;
 import java.time.Month;
 import java.util.Set;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.typed.commons.core.UnmodifiableObservableList;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.ModelManager;
@@ -17,6 +18,7 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelStub extends ModelManager {
 
     private TaskManager taskManager;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
@@ -25,7 +27,13 @@ public class ModelStub extends ModelManager {
     }
 
     public ModelStub() throws IllegalValueException {
-        this.taskManager = new TaskManager();
+        taskManager = new TaskManager();
+        filteredTasks = new FilteredList<ReadOnlyTask>(taskManager.getTaskList());
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     public void addTestTask() {
@@ -50,12 +58,6 @@ public class ModelStub extends ModelManager {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override

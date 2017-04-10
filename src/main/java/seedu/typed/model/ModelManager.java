@@ -29,9 +29,9 @@ public class ModelManager extends ComponentManager implements Model {
     private TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
-    //private Expression currentExpression;
+    // private Expression currentExpression;
     private Expression defaultExpression = new Negation(new CompletedQualifer());
-    //private Expression doneExpression = new PredicateExpression(new CompletedQualifer());
+    // private Expression doneExpression = new PredicateExpression(new CompletedQualifer());
 
 
     // =========== ModelManager Constructors =======================
@@ -109,8 +109,8 @@ public class ModelManager extends ComponentManager implements Model {
     public int getNumberUncompletedFloatingTasks() {
         return taskManager.getNumberUncompletedFloatingTasks();
     }
-    //@@author A0143853A
 
+    //@@author A0143853A
     @Override
     public int getNumberOverdue() {
         return taskManager.getNumberOverdue();
@@ -146,25 +146,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    @Override
-    public synchronized void addTasksForUndo(ArrayList<Pair<Integer, Task>> list)
-            throws DuplicateTaskException {
-        for (int curr = 0; curr < list.size(); curr++) {
-            Pair<Integer, Task> indexAndTask = list.get(curr);
-            int index = indexAndTask.getFirst();
-            Task task = indexAndTask.getSecond();
-            taskManager.addTask(index, task);
-        }
-        updateFilteredListToShowDefault();
-        indicateTaskManagerChanged();
-    }
     //@@author
 
     // =========== ModelManager Delete Tasks =======================
     // =============================================================
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target)
+            throws TaskNotFoundException {
         taskManager.removeTask(target);
         updateFilteredListToShowDefault();
         indicateTaskManagerChanged();
@@ -313,6 +302,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        // updateFilteredListToShowDefault();
         taskManager.sort();
         indicateTaskManagerChanged();
     }

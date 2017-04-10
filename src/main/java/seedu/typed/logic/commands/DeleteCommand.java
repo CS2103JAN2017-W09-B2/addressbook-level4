@@ -79,9 +79,9 @@ public class DeleteCommand extends Command {
             model.deleteTasks(startIndex, endIndex);
             session.updateUndoRedoStacks(COMMAND_WORD_DELETE, -1, oldTaskManager);
         } catch (TaskNotFoundException tnfe) {
-            assert false: "The target task(s) cannot be missing!";
+            assert false : "The target task(s) cannot be missing!";
         } catch (IllegalValueException ive) {
-            assert false: "The task manager must be able to be reset!";
+            assert false : "The task manager must be able to be reset!";
         }
 
         return commandResultBasedOnNumberOfTasks(numOfTasksToDelete, firstTaskName);

@@ -10,7 +10,8 @@ public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Task name should not contain `#` or `+`, "
-            + "and should not be blank";
+            + "should not be blank "
+            + "and should contain at least one alphanumeric.";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Punct}&&[^\\+\\#]]*[\\p{Alnum}]+[\\p{Graph} "
             + "&&[^\\+\\#]]*";
 

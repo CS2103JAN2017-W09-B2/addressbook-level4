@@ -27,7 +27,8 @@ import seedu.typed.model.task.UniqueTaskList.TaskNotFoundException;
  * .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
-    private static final String DUPLICATE_TASK_WARNING = "Task Manager should not have duplicate tasks";
+    private static final String DUPLICATE_TASK_WARNING = "Task Manager should not have duplicate tasks!";
+    private static final String DUPLICATE_TAG_WARNING = "Task Manager should not have duplicate tags!";
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
@@ -78,8 +79,8 @@ public class TaskManager implements ReadOnlyTaskManager {
                 ReadOnlyTask toCopy = iterator.next();
                 addTask((Task) toCopy);
             }
-        } catch (DuplicateTaskException e) {
-            ;
+        } catch (DuplicateTaskException dte) {
+            assert false : "Task manager to copy from should not contain duplicate tasks.";
         }
         try {
             ObservableList<Tag> tagsToCopy = newData.getTagList();
@@ -88,8 +89,8 @@ public class TaskManager implements ReadOnlyTaskManager {
                 Tag toCopy = iterator.next();
                 addTag(toCopy);
             }
-        } catch (DuplicateTagException e) {
-            ;
+        } catch (DuplicateTagException dte) {
+            assert false : "Task manager to copy from should not contain duplicate tags.";
         }
         syncMasterTagListWith(tasks);
     }
@@ -119,9 +120,9 @@ public class TaskManager implements ReadOnlyTaskManager {
                 iterCount++;
             }
         } catch (DuplicateTaskException e) {
-            ;
+            assert false : "Task manager to copy from should not contain duplicate tasks.";
         } catch (IllegalValueException ive) {
-            ;
+            assert false : "Task manager to copy from should not contain illegal task values.";
         }
         try {
             int listCount = 0;
@@ -143,7 +144,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 iterCount++;
             }
         } catch (DuplicateTagException e) {
-            ;
+            assert false : "Task manager to copy from should not contain duplicate tags.";
         }
         syncMasterTagListWith(tasks);
     }
@@ -159,7 +160,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : DUPLICATE_TASK_WARNING;
+            assert false : DUPLICATE_TAG_WARNING;
         }
         syncMasterTagListWith(tasks);
     }

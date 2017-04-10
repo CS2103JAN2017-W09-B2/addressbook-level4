@@ -148,8 +148,7 @@ public class RedoCommand extends Command {
                 break;
 
             case ClearCommand.COMMAND_WORD_CLEAR:
-                TaskManager currentTaskManager = new TaskManager();
-                currentTaskManager.copyData(model.getTaskManager());
+                TaskManager currentTaskManager = new TaskManager(model.getTaskManager());
                 model.resetData((ReadOnlyTaskManager) change);
                 toPush.setFirst(ClearCommand.COMMAND_WORD_UNCLEAR);
                 toPush.setThird(currentTaskManager);

@@ -55,6 +55,27 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
+    public void undo_allCommands_success()
+            throws IllegalArgumentException, IllegalValueException {
+        TestTask taskToAdd = td.ida;
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand("delete 2");
+        commandBox.runCommand("clear");
+        assertUndoAllSuccess();
+    }
+
+    @Test
+    public void undo_multipleCommandsPartially_success()
+            throws IllegalArgumentException, IllegalValueException {
+        TestTask taskToAdd = td.ida;
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand("delete 2");
+
+        assertUndoPartialSuccess(3);
+    }
+
+
+    @Test
     public void undo_noPreviousValidCommand_failure()
             throws IllegalArgumentException, IllegalValueException {
         assertUndoFailure();
@@ -72,12 +93,24 @@ public class UndoCommandTest extends TaskManagerGuiTest {
             throws IllegalArgumentException, IllegalValueException {
         assert n > 0;
 
-        for (int count = 0; count < n; count++) {
-            commandBox.runCommand("undo");
-            assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
-        }
+        commandBox.runCommand("undo " + n);
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(UndoCommand.MESSAGE_MULTIPLE_SUCCESS, n));
+    }
+
+    private void assertUndoAllSuccess()
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("undo all");
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(UndoCommand.MESSAGE_ALL_SUCCESS);
+    }
+
+    private void assertUndoPartialSuccess(int n)
+        throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("undo " + n);
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(UndoCommand.MESSAGE_PARTIAL_SUCCESS, n - 1));
     }
 
     private void assertUndoFailure()

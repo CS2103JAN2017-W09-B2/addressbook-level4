@@ -79,11 +79,39 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("delete 1");
         commandBox.runCommand("clear");
 
-        commandBox.runCommand("undo");
-        commandBox.runCommand("undo");
-        commandBox.runCommand("undo");
+        commandBox.runCommand("undo 3");
 
         assertMultipleRedosSuccess(3, expectedList);
+    }
+
+    @Test
+    public void redo_multipleUndoneCommandsPartially_success()
+            throws IllegalArgumentException, IllegalValueException {
+        TestTask[] expectedList = {};
+        TestTask taskToAdd = td.hoon;
+
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand("clear");
+
+        commandBox.runCommand("undo all");
+
+        assertRedoPartialSuccess(3, expectedList);
+    }
+
+
+    @Test
+    public void redo_allUndoneCommands_success()
+            throws IllegalArgumentException, IllegalValueException {
+        TestTask[] expectedList = {};
+        TestTask taskToAdd = td.hoon;
+
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand("delete 1");
+        commandBox.runCommand("clear");
+
+        commandBox.runCommand("undo all");
+
+        assertRedoAllSuccess(expectedList);
     }
 
     @Test
@@ -113,16 +141,28 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
     }
 
+    private void assertRedoPartialSuccess(int n, TestTask[] expectedList)
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("redo " + n);
+        assertTrue(taskListPanel.isListMatching(expectedList));
+        assertResultMessage(String.format(RedoCommand.MESSAGE_PARTIAL_SUCCESS, n - 1));
+    }
+
     private void assertMultipleRedosSuccess(int n, TestTask[] expectedList)
             throws IllegalArgumentException, IllegalValueException {
         assert n > 0;
 
-        for (int count = 0; count < n; count++) {
-            commandBox.runCommand("redo");
-            assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
-        }
-
+        commandBox.runCommand("redo " + n);
         assertTrue(taskListPanel.isListMatching(expectedList));
+        assertResultMessage(String.format(RedoCommand.MESSAGE_MULTIPLE_SUCCESS, n));
+    }
+
+    private void assertRedoAllSuccess(TestTask[] expectedList)
+            throws IllegalArgumentException, IllegalValueException {
+
+        commandBox.runCommand("redo all");
+        assertTrue(taskListPanel.isListMatching(expectedList));
+        assertResultMessage(RedoCommand.MESSAGE_ALL_SUCCESS);
     }
 
     private void assertRedoFailure(TestTask[] tasksList)

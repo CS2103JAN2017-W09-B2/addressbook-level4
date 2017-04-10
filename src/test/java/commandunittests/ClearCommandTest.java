@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.logic.commands.ClearCommand;
 import seedu.typed.logic.commands.CommandResult;
 import seedu.typed.logic.commands.exceptions.CommandException;
 //@@author A0139379M
@@ -48,11 +49,11 @@ public class ClearCommandTest {
 
     @Test
     public void execute_clearDirtyTaskManager_success() throws CommandException {
-        assertEquals(dirtyClear.execute(), new CommandResult("Task manager has been cleared!"));
+        assertEquals(dirtyClear.execute(), new CommandResult(ClearCommand.MESSAGE_SUCCESS));
     }
 
     @Test
     public void execute_clearEmptyTaskManager_success() throws CommandException {
-        assertEquals(cleanClear.execute(), new CommandResult("Task manager has been cleared!"));
+        assertEquals(cleanClear.execute(), new CommandResult(ClearCommand.MESSAGE_SUCCESS));
     }
 }

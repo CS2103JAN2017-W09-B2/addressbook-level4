@@ -75,17 +75,6 @@ public interface Model {
             throws DuplicateTaskException, IllegalValueException;
 
     //@@author A0143853A
-    /** TODO Change comments
-     * Updates the task located at {@code filteredTaskListIndex} with
-     * {@code editedTask}.
-     *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code filteredTaskListIndex} < 0 or >= the size of the
-     *             task list.
-     */
     void updateTaskForUndoRedo(int index, ReadOnlyTask editedTask)
             throws DuplicateTaskException, IllegalValueException;
     //@@author
@@ -166,9 +155,6 @@ public interface Model {
 
     void completeTasksAtForRedo(ArrayList<Integer> list)
             throws DuplicateTaskException, IllegalValueException;
-
-    void addTasksForUndo(ArrayList<Pair<Integer, Task>> list)
-            throws DuplicateTaskException;
 
     void deleteTasksForRedo(ArrayList<Pair<Integer, Task>> list)
             throws DuplicateTaskException;
