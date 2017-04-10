@@ -18,6 +18,11 @@ import java.time.temporal.ChronoUnit;
  */
 public class DateTime {
 
+    //@@author A0141094M
+    private static final String SINGLE_SPACE_DELIMITER = " ";
+    private static final String DISPLAY_DATE_TIME_FORMAT = "EEEE, MMM dd, yyyy HH:mm";
+    //@@author
+
     private static final long LONG_ONE = (long) 1.0;
 
     private final LocalDateTime localDateTime;
@@ -209,10 +214,9 @@ public class DateTime {
     @Override
     public String toString() {
         if (localDateTime ==  null) {
-            return " ";
-        } else {
-            return localDateTime.format(DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm"));
+            return SINGLE_SPACE_DELIMITER;
         }
+        return localDateTime.format(DateTimeFormatter.ofPattern(DISPLAY_DATE_TIME_FORMAT));
     }
 
     public boolean isAfterNow() {

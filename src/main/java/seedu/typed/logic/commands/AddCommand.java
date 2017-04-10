@@ -38,7 +38,32 @@ public class AddCommand extends Command {
 
     //@@author A0141094M
     /**
-     * Creates an AddCommand using raw values.
+     * Creates an AddCommand using given values, without recurrence.
+     *
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
+     */
+    public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
+            LocalDateTime to, Set<String> tags) throws IllegalValueException {
+        ScheduleElement se;
+        if (date == null && from != null && to != null) {
+            se = new ScheduleElement(new DateTime(from), new DateTime(to));
+        } else if (date != null && from == null && to == null) {
+            se = new ScheduleElement(new DateTime(date));
+        } else {
+            se = new ScheduleElement();
+        }
+        this.toAdd = new TaskBuilder()
+                         .setName(name)
+                         .setNotes(notes)
+                         .setSE(se)
+                         .setTags(tags)
+                         .build();
+    }
+    //@@author
+
+    /**
+     * Creates an AddCommand with given values, with recurrence.
      *
      * @throws IllegalValueException
      *             if any of the raw values are invalid
@@ -62,25 +87,6 @@ public class AddCommand extends Command {
                          .setTags(tags)
                          .build();
     }
-
-    public AddCommand(String name, String notes, LocalDateTime date, LocalDateTime from,
-            LocalDateTime to, Set<String> tags) throws IllegalValueException {
-        ScheduleElement se;
-        if (date == null && from != null && to != null) {
-            se = new ScheduleElement(new DateTime(from), new DateTime(to));
-        } else if (date != null && from == null && to == null) {
-            se = new ScheduleElement(new DateTime(date));
-        } else {
-            se = new ScheduleElement();
-        }
-        this.toAdd = new TaskBuilder()
-                         .setName(name)
-                         .setNotes(notes)
-                         .setSE(se)
-                         .setTags(tags)
-                         .build();
-    }
-    //@@author
 
     //@@author A0143853A
     /**

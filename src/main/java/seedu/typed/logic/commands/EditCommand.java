@@ -129,9 +129,12 @@ public class EditCommand extends Command {
         ScheduleElement updatedSe;
 
         //current implementation only supports changing deadlines and adding deadlines to floating
-        if (taskToEdit.isDeadline() || taskToEdit.isFloating()) {
+        if (hasOnlyDeadlineField(editTaskDescriptor)) {
             updatedSe = new ScheduleElement(editTaskDescriptor.getDate().get(),
                     taskToEdit.getSE().getStartDate(), taskToEdit.getSE().getEndDate());
+        } else if (hasOnlyFromAndToFields(editTaskDescriptor)
+                || hasNoDeadlineAndNoFromToFields(editTaskDescriptor)) {
+            updatedSe = taskToEdit.getSE();
         } else {
             throw new IllegalValueException(MESSAGE_EDIT_TASK_FAILURE);
         }
@@ -142,6 +145,21 @@ public class EditCommand extends Command {
                 .setTags(updatedTags)
                 .isCompleted(taskToEdit.getIsCompleted())
                 .build();
+    }
+
+    private static boolean hasOnlyFromAndToFields(EditTaskDescriptor edt) {
+        return !edt.getDate().isPresent()
+                && edt.getFrom().isPresent() && edt.getTo().isPresent();
+    }
+
+    private static boolean hasOnlyDeadlineField(EditTaskDescriptor edt) {
+        return edt.getDate().isPresent()
+                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
+    }
+
+    private static boolean hasNoDeadlineAndNoFromToFields(EditTaskDescriptor edt) {
+        return !edt.getDate().isPresent()
+                && !edt.getFrom().isPresent() && !edt.getTo().isPresent();
     }
 
     /**

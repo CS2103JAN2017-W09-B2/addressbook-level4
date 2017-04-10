@@ -8,8 +8,8 @@ Hello from the creators of **Typed**! We like to call ourselves Typedwriters. We
 <img src="images/pyxyyy.jpg" width="150"><br>
 Role: Chief Technical(ly Not An) Officer (CTO), aka Chief **Typed** Officer <br>
 Responsibilities: Team Lead, Deliverables & Deadlines, Testing <br>
-Component: Logic
-Features implemented: PowerFind, AddCommand Parser, Natural Language Processing, Notes
+Component: Logic <br>
+Features implemented: Natural Language Processing, Power Find, Add, Notes
 
 -----
 
@@ -17,7 +17,7 @@ Features implemented: PowerFind, AddCommand Parser, Natural Language Processing,
 <img src="images/yongsiang94.jpg" width="150"><br>
 Role: Director of First Impressions <br>
 Responsibilities: Documentation, Design <br>
-Component: GUI
+Component: GUI <br>
 Features implemented: Save, Export, Import, Progress Circle, Quotes Generator 
 
 -----
@@ -26,7 +26,7 @@ Features implemented: Save, Export, Import, Progress Circle, Quotes Generator
 <img src="images/ley94.jpg" width="150"><br>
 Role: Director of Back End <br>
 Responsibilities: Integration <br>
-Component: Storage
+Component: Storage <br>
 Features implemented: Undo, Redo, Delete, Util for Range of Indices, Up and Down Keys
 
 -----
@@ -35,7 +35,7 @@ Features implemented: Undo, Redo, Delete, Util for Range of Indices, Up and Down
 <img src="images/sharkey1314.jpg" width="150"><br>
 Role: Director of Unrequited Love<br>
 Responsibilities: Code Quality, Scheduling & Tracking <br>
-Component: Model
+Component: Model <br>
 Features implemented: Recurring Tasks, Complete, Command Unit Tests, Sorting of List of Tasks
 
 -----

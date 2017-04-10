@@ -79,27 +79,28 @@ Format: `add TITLE`
 Format: `add TITLE by DATE`
 
 > `add TITLE by DATE` adds your task along with its due date. <br>
-> DATE takes the format DD/MM/YYYY.
+> DATE takes the format DD/MM/YYYY HH:MM, but is tolerant of other date formats as described in **[3.16 Acceptable Date and Time Formats](#acceptable-date-and-time-formats)**. <br>
+> If DATE is not specified, Typed will automatically assume the date to be today. <br>
+> If TIME is not specified, Typed will automatically set it to be 23:59. 
 
-*e.g. add lose 10 kg by 14/02/2014* <br>
+*e.g. add lose 10 kg by 14/02/2014 14:00* <br>
 
 #### <a name="addTitleByOn"></a>3.2.3. Adding a Task with Occurrence Date: `add TITLE on DATE`
 
 Format: `add TITLE on DATE`
 
 > `add TITLE on DATE` adds your task along with the date it is happening on. <br>
-> DATE takes the format DD/MM/YYYY.
 
 *e.g. add Open Day on 10/02/2014* <br>
 
-#### <a name="addRecurring"></a>3.2.4. Adding a Recurring Task: `add TITLE every FREQUENCY`
+#### <a name="addRecurring"></a>3.2.4. Adding a Recurring Task: `add TITLE WITH DATE every FREQUENCY`
 
-Format: `add TITLE every FREQUENCY`
+Format: `add TITLE WITH DATE every FREQUENCY`
 
-> Note: Support for this has not been implemented. <br>
-> `add TITLE every FREQUENCY` adds an automatically recurring task according to the specified FREQUENCY. <br>
-> You may indicate either `day`, `month` or `year` when specifying FREQUENCY. <br>
-> The recurrence will be calculated beginning from the day you enter the task unless otherwise specified.
+> `add TITLE WITH DEADLINE every FREQUENCY` adds an automatically recurring task according to the specified FREQUENCY. <br>
+> You may indicate either `day`, `week`, `month` or `year` when specifying FREQUENCY. <br>
+> `WITH DATE` is taken to indicate either `by DATE` or `on DATE`. <br>
+> The recurrence is calculated based on the `DATE` provided. <br>
 
 *e.g. add boss' birthday on 9th apr every year* <br>
 
@@ -111,7 +112,7 @@ Format: `add TITLE from DATE to DATE`
 
 > `add TITLE from DATE to DATE` adds your task that is happening over days.
 
-*e.g. add company retreat in Malaysia from 01/01/2017 to 05/01/2017* <br>
+*e.g. add company retreat in Malaysia from 01/01/2017 2pm to 05/01/2017 4pm* <br>
 
 #### <a name="addTaskTag"></a>3.2.6. Adding a Task with Tags: `add TITLE #TAG ..`
 
@@ -137,13 +138,12 @@ Format: `list`
 
 *e.g. list* <br>
 
-#### <a name="listType"></a>3.2.2. Listing Tasks By Type : `list TYPE`
+#### <a name="listType"></a>3.3.2. Listing Tasks By Type : `list TYPE`
 
 Format: `list TYPE`
 
-> Note: Support for this has not been implemented. <br>
-> `list TYPE` shows you your tasks and events sorted by TYPE. <br>
-> Valid formats for TYPE include timed, untimed, done, undone and all.
+> `list TYPE` shows you your tasks and events filtered by TYPE. <br>
+> Valid formats for TYPE include done and undone.
 
 *e.g. list done* <br>
 
@@ -157,7 +157,7 @@ Format: `list TYPE`
 Format: `edit INDEX NEW_TITLE `
 
 > `edit INDEX NEW_TITLE` changes the title of the task specified by INDEX. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. edit 1 buy green apples* <br>
 
@@ -166,7 +166,7 @@ Format: `edit INDEX NEW_TITLE `
 Format: `edit INDEX by DATE `
 
 > `edit INDEX by DATE` changes the deadline of the task specified by INDEX. <br> 
-> If you would like to remove a deadline from a task, simply enter `edit INDEX by `. <br>
+> Currently, we do not support removing a task with a specified date, i.e. *edit 1 by* is not enabled.
 
 *e.g. edit 1 by 05/05/2017* <br>
 *e.g. edit 1 by* <br>
@@ -187,7 +187,6 @@ Format: `edit INDEX [TITLE] [by DATE] [#TAG] .. `
 
 > `edit INDEX [TITLE] [by DATE] [#TAG] .. ` updates the specified fields with new values, if any. <br> 
 > You should provide minimally one of the optional fields when using this command format. <br>
-> Currently, we do not support removing a task with a specified date, i.e. *edit 1 by* is not enabled.
 
 *e.g. edit 1 buy groceries by 05/05/2017* <br>
 *e.g. edit 1 buy groceries #* <br> 
@@ -201,18 +200,17 @@ Format: `find KEYWORD ..`
 > `find KEYWORD ..` finds all your tasks containing KEYWORD in their title. <br>
 > Fuzzy find is used to include similar words, e.g. `Sara` will match `Cara`. <br>
 > The search is not case sensitive, e.g `boss` will match `Boss`. <br>
-> The order of the keywords does not matter, e.g. `Hans Bo` will match `Bo Hans`. <br>
+> The order of the keywords does not matter, e.g. `boss work` will give the same results as `work boss`. <br>
 > Tasks or events matching at least one keyword will be returned (i.e. `OR` search), e.g. `Expo` will match `IT Expo`. <br>
 
-*e.g. find Jonny finance* <br>
+*e.g. find John: returns `email Jonni in finance`* <br>
+
 
 #### <a name="findTag"></a>3.5.2. Find a Task or Event by Tag : `find #TAG ..`
 
 Format: `find #TAG ..`
 
 > `find #TAG ..` finds all your tasks tagged with #TAG. <br>
-> Fuzzy find is used to include similar words, e.g. `#work` will match `#werk`. <br>
-> The search is not case sensitive, e.g `#boss` will match `#Boss`. <br>
 > The order of the tags does not matter, e.g. `#work #urgent` will return the same results as `#urgent #work`. <br>
 > Tasks or events matching at least one tag will be returned (i.e. `OR` search), e.g. `#work` will match a task that is tagged with `#work #it`. <br>
 
@@ -225,7 +223,7 @@ Format: `find #TAG ..`
 Format: `delete INDEX`
 
 > `delete INDEX` removes a task identified by INDEX. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. delete 2* <br>
 
@@ -235,7 +233,7 @@ Format: `delete INDEX to INDEX`
 Format: `delete INDEX - INDEX`
 
 > `delete INDEX to INDEX` removes a range of tasks identified by INDEX. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. delete 2 to 8* <br>
 
@@ -243,7 +241,6 @@ Format: `delete INDEX - INDEX`
 
 Format: `delete all` 
 
-> Note: Support for this has not been implemented. <br>
 > `delete all` removes all stored tasks in the current view. <br>
 
 *e.g. delete all* <br>
@@ -310,32 +307,31 @@ Format: `redo all`
 *e.g. redo all* <br>
 
 
-### 3.9. Finishing Tasks
+### 3.9. Marking Tasks as Finished
 
-#### <a name="completeOne"></a>3.9.1. Finishing One Task : `finish INDEX `
+#### <a name="completeOne"></a>3.9.1. Marking One Task as Finished : `finish INDEX `
 
 Format: `finish INDEX`
 
 > `finish INDEX` marks a task identified by INDEX as completed. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. finish 2* <br>
 
-#### <a name="completeRange"></a>3.9.2. Finishing Multiple Tasks : `finish INDEX to INDEX `
+#### <a name="completeRange"></a>3.9.2. Marking Multiple Tasks as Finished : `finish INDEX to INDEX `
 
 Format: `finish INDEX to INDEX`
+Format: `finish INDEX - INDEX`
 
-> Note: Support for this has not been implemented. <br>
 > `finish INDEX to INDEX` marks a range of tasks identified by INDEX as done. <br>
-> INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
+> INDEX refers to the index number shown on your *Typed* screen. <br>
 
 *e.g. finish 2 to 8* <br>
 
-#### <a name="completeAll"></a>3.9.3. Finishing All Tasks : `finish all `
+#### <a name="completeAll"></a>3.9.3. Marking All Tasks as Finished : `finish all `
 
 Format: `finish all` 
 
-> Note: Support for this has not been implemented. <br>
 > `finish all` marks all undone tasks as done. <br>
 
 *e.g. finish all* <br>
