@@ -2,12 +2,10 @@ package guitests.guihandles;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import edu.emory.mathcs.backport.java.util.Collections;
 import guitests.GuiRobot;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
