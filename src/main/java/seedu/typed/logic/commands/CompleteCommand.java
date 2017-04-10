@@ -81,15 +81,16 @@ public class CompleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-
+        CommandResult commandResult = new CommandResult("");
         try {
             TaskManager oldTaskManager = new TaskManager(model.getTaskManager());
+            commandResult = commandResultBasedOnIndices(startIndex, endIndex);
             model.completeTasks(startIndex, endIndex);
             session.updateUndoRedoStacks(COMMAND_WORD_COMPLETE, INVALID_INDEX, oldTaskManager);
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }
-        return commandResultBasedOnIndices(startIndex, endIndex);
+        return commandResult;
     }
     //@@author
 

@@ -49,7 +49,7 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     public void execute_invalidIndex_error() {
         int invalidIndex = 0;
         commandBox.runCommand("finish " + invalidIndex);
-        assertResultMessage("Invalid command format! " + "\n" + String.format(CompleteCommand.MESSAGE_USAGE));
+        assertResultMessage("Invalid command format!" + "\n" + String.format(CompleteCommand.MESSAGE_USAGE));
     }
 
     private void assertCompleteSuccess(int startIndex, int endIndex)
