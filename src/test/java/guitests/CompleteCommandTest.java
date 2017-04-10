@@ -1,7 +1,15 @@
 package guitests;
 
-import seedu.typed.testutil.TestTask;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+import seedu.typed.commons.exceptions.IllegalValueException;
+import seedu.typed.logic.commands.CompleteCommand;
+import seedu.typed.testutil.TestTask;
+//@@author A0139379M
 public class CompleteCommandTest extends TaskManagerGuiTest {
     // GUI not ready as parser not in place
     // The list of tasks in the task list panel is expected to match this list.
@@ -17,15 +25,86 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     // 8) Complete a list of invalid tasks with invalid bounds throw exception
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
-    /*private void assertCompleteSuccess(int startIndex, int endIndex, TestTask completedTask) {
-        commandBox.runCommand("finish ");
+    @Test
+    public void completeCommand_oneIndex_success()
+            throws IllegalArgumentException, IllegalValueException {
+        // finish one item
+        int targetIndex = 1;
+        expectedTasksList[0].setIsCompleted(true);
+        assertCompleteSuccess(targetIndex, targetIndex);
+    }
 
-        // Checks if the new card contains completed task
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(completedTask.getName().getValue());
-        assertMatching(completedTask, editedCard);
+    @Test
+    public void completeCommand_rangeOfIndex_success()
+            throws IllegalArgumentException, IllegalValueException {
+        int startIndex = 1;
+        int endIndex = 3;
+        for (int index = startIndex; index <= endIndex; index++) {
+            expectedTasksList[index - 1].setIsCompleted(true);
+        }
+        assertCompleteSuccess(startIndex, endIndex);
+    }
 
-        // Checks the list contains all previous tasks
-        // assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        // assertResultMessage(String.format(CompleteCommand.MESSAGE_COMPLETE_TASK_SUCCESS));
-    }*/
+    @Test
+    public void execute_invalidIndex_error() {
+        int invalidIndex = 0;
+        commandBox.runCommand("finish " + invalidIndex);
+        assertResultMessage("Invalid command format! " + "\n" + String.format(CompleteCommand.MESSAGE_USAGE));
+    }
+
+    private void assertCompleteSuccess(int startIndex, int endIndex)
+            throws IllegalArgumentException, IllegalValueException {
+        StringBuilder command = new StringBuilder();
+        String result = "";
+        command.append("finish ").append(startIndex);
+        if (startIndex != endIndex) {
+            command.append(" to " + endIndex);
+            result = result + (endIndex - startIndex + 1);
+        } else {
+            result = result + expectedTasksList[startIndex - 1].getName();
+        }
+        commandBox.runCommand(command.toString());
+        TestTask[] filteredList = filterOutCompleted(expectedTasksList);
+
+        // Checks the list contains all tasks without completed tasks
+        assertTrue(taskListPanel.isListMatching(filteredList));
+        if (startIndex == endIndex) {
+            assertResultMessage(String.format(CompleteCommand.MESSAGE_COMPLETED_TASK_SUCCESS, result));
+        } else {
+            int numCompleted = Integer.parseInt(result);
+            assertResultMessage(String.format(CompleteCommand.MESSAGE_COMPLETED_TASKS_SUCCESS, numCompleted));
+        }
+    }
+
+    /**
+     * Gets the list of uncompleted tasks
+     *
+     * @param tasks
+     * @return TestTask[] of uncompleted tasks
+     */
+    private TestTask[] filterOutCompleted(TestTask[] tasks) {
+        int count = 0;
+        ArrayList<TestTask> filteredList = new ArrayList<>();
+        for (int i = 0; i < tasks.length; i++) {
+            if (!tasks[i].getIsCompleted()) {
+                filteredList.add(tasks[i]);
+                count++;
+            }
+        }
+        TestTask[] filteredArray = new TestTask[count];
+        for (int i = 0; i < count; i++) {
+            filteredArray[i] = filteredList.get(i);
+        }
+        return filteredArray;
+    }
+
+
+
+
+
+
+
+
+
+
 }

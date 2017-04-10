@@ -10,10 +10,10 @@ package seedu.typed.logic.commands.util;
  *
  */
 public enum Frequency {
-    DAY("done"),
-    WEEK("all"),
-    MONTH("tasks"),
-    YEAR("events");
+    DAY("day"),
+    WEEK("week"),
+    MONTH("month"),
+    YEAR("year");
 
     private String frequency;
 

@@ -3,7 +3,7 @@
 package seedu.typed.logic.parser;
 
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.typed.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.typed.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_EVERY;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_NOTES;
@@ -38,40 +38,30 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         try {
-            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_DATE, PREFIX_ON,
+            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NOTES, PREFIX_BY, PREFIX_ON,
                     PREFIX_FROM, PREFIX_TO, PREFIX_EVERY, PREFIX_TAG);
             argsTokenizer.tokenize(args);
 
             String name = argsTokenizer.getPreamble().get();
             String notes = getNotes(argsTokenizer);
-            String deadline = getDeadline(argsTokenizer);
-            String startString = getFieldValue(argsTokenizer, PREFIX_FROM);
-            String endString = getFieldValue(argsTokenizer, PREFIX_TO);
             String every = getFieldValue(argsTokenizer, PREFIX_EVERY);
             Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
-            LocalDateTime deadlineDateTime = DateTimeParser.getLocalDateTimeFromString(deadline);
-            LocalDateTime startDateTime = DateTimeParser.getLocalDateTimeFromString(startString);
-            LocalDateTime endDateTime = DateTimeParser.getLocalDateTimeFromString(endString);
 
-            deadlineDateTime = setTimeToEndOfDay(deadline, deadlineDateTime);
-            startDateTime = setTimeToStartOfDay(startString, startDateTime);
-            startDateTime = setTimeToNowIfStartTimeHasPassed(startDateTime);
-            endDateTime = setTimeToEndOfDay(endString, endDateTime);
-
-            if (startString != null && endString != null) {
-                if (startDateTime.isAfter(endDateTime)) {
-                    return new IncorrectCommand(STARTDATE_AFTER_ENDDATE_ERROR_MESSAGE);
-                    //endDateTime = endDateTime.plusDays(7); // cheap hack to be changed
-                }
+            String[] dates = getAllDates(argsTokenizer);
+            LocalDateTime[] dateTimes = getAllDateTimes(dates);
+            dateTimes = checkDatesWrapper(dates, dateTimes);
+            if (dateTimes[1] != null && dateTimes[2] != null && dateTimes[1].isAfter(dateTimes[2])) {
+                return new IncorrectCommand(STARTDATE_AFTER_ENDDATE_ERROR_MESSAGE);
             }
 
             if (hasBothByAndOn(argsTokenizer) || isBothDeadlineAndEvent(argsTokenizer)) {
                 return new IncorrectCommand(getIncorrectAddMessage());
             }
-            if (isRecurrent(every)) {
-                return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags, every);
+            if ((isDeadline(argsTokenizer) || isEvent(argsTokenizer)) && isValidRecurrence(every)) {
+                return new AddCommand(name, notes, dateTimes[0], dateTimes[1], dateTimes[2], tags, every);
             }
-            return new AddCommand(name, notes, deadlineDateTime, startDateTime, endDateTime, tags);
+            return new AddCommand(name, notes, dateTimes[0], dateTimes[1], dateTimes[2], tags);
+
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(getIncorrectAddMessage());
         } catch (IllegalValueException ive) {
@@ -79,48 +69,72 @@ public class AddCommandParser {
         }
     }
 
-    /**
-     * @param every
-     * @return
-     */
-    private boolean isRecurrent(String every) {
-        return every != null;
+    private LocalDateTime[] checkDatesWrapper(String[] dates, LocalDateTime[] dateTimes)
+            throws IllegalValueException {
+        dateTimes = checkDeadlineWrapper(dates, dateTimes);
+        dateTimes = checkEventWrapper(dates, dateTimes);
+        return dateTimes;
     }
 
-    /**
-     * @param startString
-     * @param startDateTime
-     * @return
-     * @throws IllegalValueException
-     */
-    private LocalDateTime setTimeToNowIfStartTimeHasPassed(LocalDateTime startDateTime)
+    private LocalDateTime[] checkEventWrapper(String[] dates, LocalDateTime[] dateTimes)
             throws IllegalValueException {
-        if (startDateTime != null && startDateTime.isBefore(LocalDateTime.now())) {
-            startDateTime = LocalDateTime.now();
+        String start = dates[1];
+        String end = dates[2];
+        LocalDateTime startDateTime = dateTimes[1];
+        LocalDateTime endDateTime = dateTimes[2];
+        if (startDateTime == null || endDateTime == null) {
+            return dateTimes;
         }
-        return startDateTime;
+        if (DateTimeParser.isDateInferred(start) || DateTimeParser.isDateInferred(end)) {
+            if (startDateTime.isAfter(endDateTime)) {
+                dateTimes[1] = startDateTime.plusWeeks(1);
+            }
+        }
+        if (DateTimeParser.isTimeInferred(start)) {
+            dateTimes[1] = startDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
+        }
+        if (DateTimeParser.isTimeInferred(end)) {
+            dateTimes[2] = endDateTime.withHour(23).withMinute(59).withSecond(59).withNano(59);
+        }
+        return dateTimes;
     }
 
-    /**
-     * @param dateString
-     * @param dateLdt
-     * @return
-     * @throws IllegalValueException
-     */
-    private LocalDateTime setTimeToEndOfDay(String dateString, LocalDateTime dateLdt)
+    private LocalDateTime[] checkDeadlineWrapper(String[] dates, LocalDateTime[] dateTimes)
             throws IllegalValueException {
-        if (dateString != null && DateTimeParser.isTimeInferred(dateString)) {
-            dateLdt = dateLdt.withHour(23).withMinute(59).withSecond(59).withNano(59);
+        String deadline = dates[0];
+        LocalDateTime deadlineDateTime = dateTimes[0];
+        if (deadlineDateTime != null && DateTimeParser.isTimeInferred(deadline)) {
+            dateTimes[0] = deadlineDateTime.withHour(23).withMinute(59).withSecond(59)
+                    .withNano(59);
         }
-        return dateLdt;
+        return dateTimes;
     }
 
-    private LocalDateTime setTimeToStartOfDay(String dateString, LocalDateTime dateLdt)
+    private String[] getAllDates(ArgumentTokenizer argsTokenizer)
             throws IllegalValueException {
-        if (dateString != null && DateTimeParser.isTimeInferred(dateString)) {
-            dateLdt = dateLdt.withHour(0).withMinute(0).withSecond(0).withNano(0);
+        assert argsTokenizer != null;
+        String[] dates = new String[3];
+        dates[0] = getDeadline(argsTokenizer);
+        dates[1] = getFieldValue(argsTokenizer, PREFIX_FROM);
+        dates[2] = getFieldValue(argsTokenizer, PREFIX_TO);
+        return dates;
+    }
+
+    private LocalDateTime[] getAllDateTimes(String[] dates)
+            throws IllegalValueException {
+        assert dates != null;
+        LocalDateTime[] dateTimes = new LocalDateTime[3];
+        for (int i = 0; i < dates.length; i++) {
+            dateTimes[i] = DateTimeParser.getLocalDateTimeFromString(dates[i]);
         }
-        return dateLdt;
+        return dateTimes;
+    }
+
+    private boolean isValidRecurrence(String every) {
+        if (every != null) {
+            return every.matches("day|week|month|year");
+        }
+        return false;
     }
 
     private String getFieldValue(ArgumentTokenizer argsTokenizer, Prefix prefix) {
@@ -131,7 +145,7 @@ public class AddCommandParser {
     }
 
     private String getDeadline(ArgumentTokenizer argsTokenizer) {
-        String byValue = getFieldValue(argsTokenizer, PREFIX_DATE);
+        String byValue = getFieldValue(argsTokenizer, PREFIX_BY);
         String onValue = getFieldValue(argsTokenizer, PREFIX_ON);
         if (byValue != null) {
             return byValue;
@@ -158,12 +172,12 @@ public class AddCommandParser {
     }
 
     private boolean isDeadline(ArgumentTokenizer argsTokenizer) {
-        return isFieldPresent(argsTokenizer, PREFIX_DATE)
+        return isFieldPresent(argsTokenizer, PREFIX_BY)
                 || isFieldPresent(argsTokenizer, PREFIX_ON);
     }
 
     private boolean hasBothByAndOn(ArgumentTokenizer argsTokenizer) {
-        return isFieldPresent(argsTokenizer, PREFIX_DATE)
+        return isFieldPresent(argsTokenizer, PREFIX_BY)
                 && isFieldPresent(argsTokenizer, PREFIX_ON);
     }
 

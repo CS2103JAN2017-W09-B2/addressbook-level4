@@ -232,8 +232,8 @@ Format: `delete INDEX`
 #### <a name="deleteRange"></a>3.6.2. Deleting Multiple Tasks : `delete INDEX to INDEX `
 
 Format: `delete INDEX to INDEX`
+Format: `delete INDEX - INDEX`
 
-> Note: Support for this has not been implemented. <br>
 > `delete INDEX to INDEX` removes a range of tasks identified by INDEX. <br>
 > INDEX is a positive integer referring to the index number shown on your *Typed* screen. <br>
 
@@ -244,7 +244,7 @@ Format: `delete INDEX to INDEX`
 Format: `delete all` 
 
 > Note: Support for this has not been implemented. <br>
-> `delete all` removes all stored tasks. <br>
+> `delete all` removes all stored tasks in the current view. <br>
 
 *e.g. delete all* <br>
 
@@ -372,7 +372,7 @@ Format: `export FILEPATH`
 > You can export the file to the directory you want! <br>
 > Exported file will be saved as a XML file. <br>
 
-*e.g. For Windows: export C:\Users\Public\Desktop\typed.xml*<br>
+*e.g. For Windows: export C:/Users/(username)/Desktop/typed.xml*<br>
 *e.g. For MacOS: export /Users/(username)/Desktop/typed.xml*<br>
 
 
@@ -405,24 +405,52 @@ Format: `exit`
 
 *e.g. exit* <br>
 
+### 3.14. Command History
+
+#### <a name="command-history">
+
+You may find this feature familiar if you are a command line user. Pressing <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> will allow you to toggle commands you have previously entered. 
+
+### 3.15. Acceptable Date and Time Formats
+
+#### <a name="acceptable-date-and-time-formats">
+
+While we offer support for relative date formats such as `next friday`, this may occasionally be ambiguous. For foolproof support, we recommend using precise dates and natural dates. Precise dates use the American date format (MM/DD/YYYY).
+
+Precise Dates | Natural Dates | Relative Dates
+-------- | :-------- | :--------
+12/22/2017 | 22 December 2017 | Today
+12/22/17 | 22 Dec 2017 | Tomorrow
+12/22 | Dec 22 | Tmr
+- | the 22nd of Dec | Yesterday
+- | - | Next Monday
+
+Precise Times | Natural Times | Relative Times
+-------- | :-------- | :--------
+08:00 | 8am | Morning (8am)
+1200 | 12.00pm | Afternoon (12pm)
+1900h | - | Evening (7pm)
+- | - | Night (8pm)
 
 ## 4. Command Summary
 
+We support alternative keywords for most of our commands, to make your experience with _Typed_ more intuitive and efficient. For example, try `do homework` instead of `add homework`.  
+
 Command | Format |
 -------- | :-------- |
-`help` | [help](#help) |
-`add` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE on DATE](#addTitleByOn) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addTaskDuration) <br> [add TASK #TAG ..](#addTaskTag)|
-`list` | [list](#list) <br> [list TYPE](#listType)|
-`edit` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
-`find` | [find KEYWORD ..](#findKeyword) <br> [find #TAG ..](#findTag) |
-`delete` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
+`help, sos, man` | [help](#help) |
+`add, do, create, update` | [add TITLE](#addTitle) <br> [add TITLE by DATE](#addTitleDate) <br> [add TITLE on DATE](#addTitleByOn) <br> [add TITLE every FREQUENCY](#addRecurring) <br> [add TITLE from DATE to DATE](#addTaskDuration) <br> [add TASK #TAG ..](#addTaskTag)|
+`list, filter, display, show, ls` | [list](#list) <br> [list TYPE](#listType)|
+`edit, update, change` | [edit INDEX NEW_TITLE](#editName) <br> [edit INDEX by DATE](#editDate) <br> [edit INDEX #TAG ..](#editTag) <br> [edit INDEX \[TITLE\] \[DATE\] \[#TAG\] ..](#editMultiple) |
+`find, search, query` | [find KEYWORD ..](#findKeyword) <br> [find #TAG ..](#findTag) |
+`delete, del, remove, rm` | [delete INDEX](#deleteIndex) <br> [delete INDEX to INDEX](#deleteRange) <br> [delete all](#deleteAll) |
 `undo` | [undo](#undoOne) <br> [undo NUMBER](#undoMultiple) <br> [undoAll](#undoAll) |
 `redo` | [redo](#redoOne) <br> [redo NUMBER](#redoMultiple) <br> [redoAll](#redoAll) |
-`finish` | [finish INDEX](#completeOne) <br> [finish INDEX to INDEX](#completeRange) <br> [finish all](#completeAll) |
-`import` | [import FILEPATH](#import) |
+`finish, complete, done, check, mark, end` | [finish INDEX](#completeOne) <br> [finish INDEX to INDEX](#completeRange) <br> [finish all](#completeAll) |
+`import, open, load` | [import FILEPATH](#import) |
 `export` | [export FILENAME](#exportFilename) <br> [export FILEPATH](#exportFilepath) |
 `save` | [save FILEPATH](#saveFilepath) |
-`exit` | [exit](#exit) |
+`exit, quit, logout, bye` | [exit](#exit) |
 
 ## 5. FAQ
 
