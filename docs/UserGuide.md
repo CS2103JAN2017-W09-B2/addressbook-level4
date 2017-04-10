@@ -425,7 +425,7 @@ You may find this feature familiar if you are a command line user. Pressing <kbd
 
 While we offer support for relative date formats such as `next friday`, this may occasionally be ambiguous. For foolproof support, we recommend using precise dates and natural dates. Precise dates use the American date format (MM/DD/YYYY).
 
-Precise Dates | Natural Dates | Relative Dates |
+|Precise Dates | Natural Dates | Relative Dates |
 |-------- | :-------- | :-------- |
 |12/22/2017 | 22 December 2017 | Today |
 |12/22/17 | 22 Dec 2017 | Tomorrow |
@@ -433,7 +433,7 @@ Precise Dates | Natural Dates | Relative Dates |
 | | the 22nd of Dec | Yesterday |
 | | 22nd day of Dec | Next Monday |
 
-Precise Times | Natural Times | Relative Times |
+|Precise Times | Natural Times | Relative Times |
 |-------- | :-------- | :-------- |
 |08:00 | 8am | Morning (8am) |
 |1200 | 12.00pm | Afternoon (12pm) |
