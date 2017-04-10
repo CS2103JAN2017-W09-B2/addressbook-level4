@@ -13,7 +13,7 @@ public class CliSyntax {
     /* Prefix definitions */
     //@@author A0141094M
     public static final Prefix PREFIX_NOTES = new Prefix(" + ");
-    public static final Prefix PREFIX_DATE = new Prefix(" by ");
+    public static final Prefix PREFIX_BY = new Prefix(" by ");
     public static final Prefix PREFIX_ON = new Prefix(" on ");
     public static final Prefix PREFIX_FROM = new Prefix(" from ");
     public static final Prefix PREFIX_TO = new Prefix(" to ");

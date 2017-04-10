@@ -7,7 +7,6 @@ import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.typed.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.typed.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +37,7 @@ import seedu.typed.logic.commands.HelpCommand;
 import seedu.typed.logic.commands.ListCommand;
 import seedu.typed.logic.commands.SelectCommand;
 import seedu.typed.logic.commands.exceptions.CommandException;
+import seedu.typed.logic.parser.DateTimeParser;
 import seedu.typed.model.Model;
 import seedu.typed.model.ModelManager;
 import seedu.typed.model.ReadOnlyTaskManager;
@@ -430,12 +430,13 @@ public class LogicManagerTest {
         //@@author A0141094M
         Task adam() throws Exception {
             Name name = new Name("Meet Adam Brown");
-            DateTime date = DateTime.getDateTime(2011, Month.NOVEMBER, 11, 0, 0);
-            Notes notes = new Notes("");
+            DateTime date = DateTimeParser.getDateTimeFromString("4 apr night");
+            Notes notes = new Notes("notes here");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new TaskBuilder().setName(name).setDeadline(date)
+            ScheduleElement se = new ScheduleElement(date);
+            return new TaskBuilder().setName(name).setSE(se)
                     .setNotes(notes).setTags(tags).build();
         }
 
@@ -449,11 +450,12 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            DateTime seedDate = DateTime.getDateTime(2020, Month.JANUARY, seed, 0, 0);
+            DateTime seedDate = DateTimeParser.getDateTimeFromString("4 apr night");
+            ScheduleElement se = new ScheduleElement(seedDate);
             return new TaskBuilder()
                     .setName("Task " + seed)
-                    .setDeadline(seedDate)
-                    .setNotes("")
+                    .setSE(se)
+                    .setNotes("notes here")
                     .addTags("tag" + seed)
                     .addTags("tag" + (seed + 1))
                     .build();
@@ -466,7 +468,6 @@ public class LogicManagerTest {
             cmd.append("add ");
             cmd.append(task.getName().toString());
             cmd.append(" by ").append(se.getDate());
-            //cmd.append(se.toString());
             UniqueTagList tags = task.getTags();
             for (Tag t : tags) {
                 cmd.append(" #").append(t.tagName);
@@ -553,10 +554,12 @@ public class LogicManagerTest {
          * @author
          */
         Task generateTaskWithName(String name) throws Exception {
+            DateTime deadline = DateTimeParser.getDateTimeFromString("4 apr night");
+            ScheduleElement se = new ScheduleElement(deadline);
             return new TaskBuilder()
                     .setName(name)
-                    .setDeadline(DateTime.getDateTime(2011, Month.NOVEMBER, 11, 0, 0))
-                    .setNotes("")
+                    .setSE(se)
+                    .setNotes("notes here")
                     .addTags("tag")
                     .build();
         }
