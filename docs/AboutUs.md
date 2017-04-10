@@ -9,7 +9,7 @@ Hello from the creators of **Typed**! We like to call ourselves Typedwriters. We
 Role: Chief Technical(ly Not An) Officer (CTO), aka Chief **Typed** Officer <br>
 Responsibilities: Team Lead, Deliverables & Deadlines, Testing <br>
 Component: Logic <br>
-Features implemented: PowerFind, AddCommand Parser, Natural Language Processing, Notes
+Features implemented: Natural Language Processing, Power Find, Add, Notes
 
 -----
 
