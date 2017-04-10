@@ -487,7 +487,7 @@ public class ModelManager extends ComponentManager implements Model {
             return qualifier.toString();
         }
     }
-    //@@author A01393793M
+    //@@author A0139379M
     private class Negation implements Expression {
         private final Qualifier qualifier;
 
