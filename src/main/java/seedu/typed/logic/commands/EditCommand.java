@@ -68,7 +68,7 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (listIndexOutOfBounds(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -82,7 +82,6 @@ public class EditCommand extends Command {
         } catch (IllegalValueException e) {
             throw new CommandException(MESSAGE_EDIT_TASK_FAILURE);
         }
-
 
         try {
             //@@author A0143853A
@@ -104,6 +103,14 @@ public class EditCommand extends Command {
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+    }
+
+    /**
+     * @param lastShownList
+     * @return
+     */
+    private boolean listIndexOutOfBounds(List<ReadOnlyTask> lastShownList) {
+        return filteredTaskListIndex >= lastShownList.size();
     }
 
     //@@author A0141094M
@@ -185,22 +192,30 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyPresent(this.name, this.date, this.from, this.to, this.notes, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
-            assert name != null;
-
-            this.name = name;
+        public ScheduleElement getSE() {
+            DateTime deadline = date.orElse(null);
+            DateTime startDateTime = from.orElse(null);
+            DateTime endDateTime = to.orElse(null);
+            return new ScheduleElement(deadline, startDateTime, endDateTime);
         }
 
+        public void setName(Optional<Name> name) {
+            assert name != null;
+            this.name = name;
+        }
         public Optional<Name> getName() {
             return name;
         }
 
-        public void setDate(Optional<DateTime> date) {
-            assert date != null;
-
-            this.date = date;
+        public void setSE(Optional<ScheduleElement> se) {
+            assert se != null;
+            //this.se = se;
         }
 
+        public void setDate(Optional<DateTime> date) {
+            assert date != null;
+            this.date = date;
+        }
         public Optional<DateTime> getDate() {
             return date;
         }
@@ -209,7 +224,6 @@ public class EditCommand extends Command {
             assert from != null;
             this.from = from;
         }
-
         public Optional<DateTime> getFrom() {
             return from;
         }
@@ -218,16 +232,8 @@ public class EditCommand extends Command {
             assert to != null;
             this.to = to;
         }
-
         public Optional<DateTime> getTo() {
             return to;
-        }
-
-        public ScheduleElement getSE() {
-            DateTime deadline = date.orElse(null);
-            DateTime startDateTime = from.orElse(null);
-            DateTime endDateTime = to.orElse(null);
-            return new ScheduleElement(deadline, startDateTime, endDateTime);
         }
 
         public void setNotes(Optional<Notes> notes) {
