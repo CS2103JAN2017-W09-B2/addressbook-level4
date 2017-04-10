@@ -138,7 +138,7 @@ Format: `list`
 
 *e.g. list* <br>
 
-#### <a name="listType"></a>3.2.2. Listing Tasks By Type : `list TYPE`
+#### <a name="listType"></a>3.3.2. Listing Tasks By Type : `list TYPE`
 
 Format: `list TYPE`
 
