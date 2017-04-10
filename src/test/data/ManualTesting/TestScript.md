@@ -2,21 +2,21 @@
 
 You can find the sample data at `SampleData.xml` in the same folder as this document. We will be referring to events as tasks with a start date and end date, deadlines as tasks with just a date and floating tasks as tasks with no dates.
 
-_Typed_ offers multiple command keywords so that users can choose whichever keyword feels more natural to them. In our manual testing, we will specify the different keywords for the command. However, we will stick to one for the actual demonstration.
+_Typed_ offers multiple command keywords so that users can choose whichever keyword more natural to them. In our manual testing, we will specify the different keywords for the command. However, we will stick to one for the actual demonstration.
 
-In _Typed_, the default view is every uncompleted tasks sorted by their due dates. Events are compared using their starting date and floating tasks are, by default having no dates to compare, at the bottom of the list.
+In _Typed_, the default view is the list of all uncompleted tasks sorted by their due dates. Events are compared using their starting dates and floating tasks are, by default having no dates to compare, at the bottom of the list.
 
 ## Importing Sample Data
 
 To start doing manual scripted testing, follow these steps:
 
 1. Download `typed.jar` from our [releases](https://github.com/CS2103JAN2017-W09-B2/main/releases).
-2. Copy `typed.jar` in a directory that would be the home directory for _Typed_
+2. Copy `typed.jar` in a directory that would be the home directory for _Typed_.
 3. Double-click on `typed.jar`. You should have Java version `1.8.0_60` or later on your device - otherwise, download it [here](https://java.com/en/download/help/download_options.xml). You will notice that a `./data` folder would be created in the home directory for _Typed_ you chose.
 4. Download `SampleData.xml` [UPDATE LINK](?) - this is our sample data file of more than 50 to-dos.
 5. Copy `SampleData.xml` into the newly created `./data` folder in the home directory.
-4. Switch back to _Typed_, type `>> import ./data/SampleData.xml` and hit <kbd>Enter</kbd>.
-5. You have just used the `import` command to import our sample to-do list into _Typed_! You will see a list of tasks on the right panel and the our Progress Bar on the left panel.
+6. Switch back to _Typed_, type `>> import ./data/SampleData.xml` and hit <kbd>Enter</kbd>.
+7. You have just used the `import` command to import our sample to-do list into _Typed_! You will see a list of tasks on the right panel and the our Progress Circle on the left panel.
 
 For more details on how _Typed_ works, visit our [user guide](https://github.com/CS2103JAN2017-W09-B2/main/blob/master/docs/UserGuide.md).
 
@@ -32,7 +32,7 @@ To search through this list of tasks, you can use the `find` command:
 
 Command to type | What should happen |
 ------- | :--------------
-`>> find life` | All tasks containing or similar to "life" will appear. We try to sort them based on how close they are to what the users intended to find.
+`>> find life` | All tasks containing words close to or the same as "life" will appear. We try to sort them based on how close they are to what the users intended to find.
 `>> find #life` | Only tasks, completed or uncompleted, with tag of "life" will be showed. This is an exact find so tag of "lif" will not be showed.
 `>> find 2103 jeffrey` | All tasks containing or similar to either "2103" or "jeffrey" will appear. Currently it will be sorted based on the dates they are due.
 
@@ -126,7 +126,7 @@ Command to type | What should happen |
 
 ## Redoing: `redo` command
 
-Multiple `>> redo` can be used in succcession, only limited in your current session, which ends when you close the application.
+Multiple `>> redo` can be used in succession, only limited in your current session, which ends when you close the application.
 
 Command to type | What should happen |
 ------- | :--------------
