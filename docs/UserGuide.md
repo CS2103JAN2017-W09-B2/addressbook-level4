@@ -347,8 +347,8 @@ Format: `finish all`
 
 Format: `import FILEPATH`
 
-> You can import data files to Typed! <br>
-> Imported file must be a XML file.
+> You can load data files into Typed. <br>
+> Imported file must be an XML file.
 
 *e.g. For Windows: import C:/Users/Username/Desktop/typed.xml*<br>
 *e.g. For MacOS: import /Users/(username)/Desktop/typed.xml*<br>
@@ -360,8 +360,8 @@ Format: `import FILEPATH`
 
 Format: `export FILENAME`
 
-> You can export the file to the same working directory you are on! <br>
-> Exported file will be saved as a XML file. <br>
+> You can export your data to the current directory your working copy is located in. <br>
+> Exported file will be saved as an XML file. <br>
 
 *e.g. export typed.xml* <br>
 
@@ -369,8 +369,8 @@ Format: `export FILENAME`
 
 Format: `export FILEPATH`
 
-> You can export the file to the directory you want! <br>
-> Exported file will be saved as a XML file. <br>
+> You can export your current data to any directory you want. <br>
+> Exported file will be saved as an XML file. <br>
 
 *e.g. For Windows: export C:/Users/(username)/Desktop/typed.xml*<br>
 *e.g. For MacOS: export /Users/(username)/Desktop/typed.xml*<br>
@@ -386,10 +386,10 @@ Format: `export FILEPATH`
 Format: `save FILEPATH`
 
 > `save FILEPATH` saves all your data to a new file specified by FILEPATH. <br>
-> The file will be saved as a XML file.
+> The file will be saved as an XML file.
 > Unlike [Export](#export), changes made to the task manager after `save FILEDIRECTORY` will be updated on that file and not the default file directory.<br> 
 
-*e.g. For Windows: save C:\Users\Public\Desktop\typed.xml*<br>
+*e.g. For Windows: save C:/Users/(username)/Desktop/typed.xml*<br>
 *e.g. For MacOS: save /Users/(username)/Desktop/typed.xml*<br>
 
 ### 3.13. Clearing All Data : `clear`
@@ -397,7 +397,8 @@ Format: `save FILEPATH`
 #### <a name="clear"></a>3.13.1. Clearing All Data : `clear`
 
 Format: `clear`
-Wipes out all your stored data in the current file. <br>
+
+> Wipes out all your stored data in the current file. <br>
 
 *e.g. clear <br>
 
